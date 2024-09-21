@@ -1,0 +1,111 @@
+import MenuCard from './MenuCard'
+import SectionHeader from './SectionHeader'
+import { useKeenSlider } from 'keen-slider/react'
+import 'keen-slider/keen-slider.min.css'
+import { Box, Button } from '@mui/material'
+export default function OurMenu() {
+  const [sliderRef, instanceRef] = useKeenSlider({
+    breakpoints: {
+      '(min-width: 400px)': {
+        slides: { perView: 2, spacing: 5 }
+      },
+      '(min-width: 1000px)': {
+        slides: { perView: 5, spacing: 10 }
+      }
+    },
+    slides: { perView: 1 }
+  })
+  return (
+    <>
+      <Box
+        component={'div'}
+        sx={{
+          width: '85%',
+          margin: '0px auto'
+        }}
+      >
+        <SectionHeader title='Our Menu' />
+        <Box sx={{ padding: '20px' }} />
+        <div ref={sliderRef} className='keen-slider'>
+          <MenuCard
+            day={'MONDAY'}
+            options={[
+              'Pesto Chicken Tenders',
+              'Puddings',
+              'Pesto Chicken Tenders',
+              'Puddings',
+              'Pesto Chicken Tenders',
+              'Puddings'
+            ]}
+            color={'#FF9C70'}
+          />
+          <MenuCard
+            day={'TUESDAY'}
+            options={[
+              'Pesto Chicken Tenders',
+              'Puddings',
+              'Pesto Chicken Tenders',
+              'Puddings',
+              'Pesto Chicken Tenders',
+              'Puddings'
+            ]}
+            color={'#FEAD71'}
+          />
+          <MenuCard
+            day={'WEDNESDAY'}
+            options={[
+              'Pesto Chicken Tenders',
+              'Puddings',
+              'Pesto Chicken Tenders',
+              'Puddings',
+              'Pesto Chicken Tenders',
+              'Puddings'
+            ]}
+            color={'#78BFBE'}
+          />
+          <MenuCard
+            day={'THURSDAY'}
+            options={[
+              'Pesto Chicken Tenders',
+              'Puddings',
+              'Pesto Chicken Tenders',
+              'Puddings',
+              'Pesto Chicken Tenders',
+              'Puddings'
+            ]}
+            color={'#93E855'}
+          />
+          <MenuCard
+            day={'FRIDAY'}
+            options={[
+              'Pesto Chicken Tenders',
+              'Puddings',
+              'Pesto Chicken Tenders',
+              'Puddings',
+              'Pesto Chicken Tenders',
+              'Puddings'
+            ]}
+            color={'#A0C982'}
+          />
+        </div>
+        <Box sx={{ padding: '20px' }} />
+
+        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+          <Button
+            variant='contained'
+            sx={{
+              backgroundColor: '#F56700',
+              color: '#000000',
+              borderRadius: '80px',
+              p: { xs: '10px 15px', md: '15px 50px' },
+              fontWeight: 'bold',
+              fontFamily: 'DM Sans'
+            }}
+          >
+            ORDER NOW
+          </Button>
+        </Box>
+      </Box>
+    </>
+  )
+}
