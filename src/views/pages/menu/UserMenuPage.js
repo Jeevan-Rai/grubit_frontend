@@ -310,6 +310,7 @@ export default function UserMenuPage() {
                     //   {day.dayName}: {day.date.toLocaleDateString()}
                     // </Typography>
                     <DayButton
+                      key={index}
                       day={formatDate(day.date.toLocaleDateString())}
                       active={selectedDate === day.date.toLocaleDateString()}
                       onClick={() => {
@@ -359,7 +360,7 @@ export default function UserMenuPage() {
               >
                 {menuItems?.map((item, index) => {
                   return (
-                    <Grid item xs={12} md={3}>
+                    <Grid item xs={12} md={3} key={index}>
                       <FoodItemCard week={selectedWeek} date={selectedDate} item={item} type={orderCategory} />
                     </Grid>
                   )

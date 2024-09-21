@@ -164,7 +164,7 @@ const MakeYourOwnCollapsibleForm = ({ item, type, date, week, setOpen }) => {
           <Grid container spacing={5}>
             {item?.options?.map((primary, index) => {
               return (
-                <Grid item xs={12} sm={6}>
+                <Grid item xs={12} key={index} sm={6}>
                   <BoxWrapper
                     onClick={() =>
                       setOrderDetails({

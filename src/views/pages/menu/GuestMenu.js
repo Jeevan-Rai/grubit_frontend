@@ -316,6 +316,7 @@ export default function GuestMenu() {
                     <DayButton
                       day={formatDate(day.date.toLocaleDateString())}
                       active={selectedDate === day.date.toLocaleDateString()}
+                      key={index}
                       onClick={() => {
                         setSelectedDate(day.date.toLocaleDateString()), setSelectedDay(day.dayName)
                       }}
@@ -363,7 +364,7 @@ export default function GuestMenu() {
               >
                 {menuItems?.map((item, index) => {
                   return (
-                    <Grid item xs={12} md={3}>
+                    <Grid item xs={12} md={3} key={index}>
                       <FoodItemCard week={selectedWeek} date={selectedDate} item={item} type={orderCategory} />
                     </Grid>
                   )

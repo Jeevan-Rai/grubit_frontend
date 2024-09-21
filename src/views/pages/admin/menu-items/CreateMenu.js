@@ -348,7 +348,7 @@ const CreateMenu = () => {
                           {...field}
                           aria-describedby='validation-basic-first-name'
                           sx={errors.wednesday ? { color: 'error.main' } : null}
-                          checked={false}
+                          defaultValue={false}
                         />
                       </Box>
                     )}

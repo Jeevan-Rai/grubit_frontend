@@ -6,23 +6,9 @@ import TableHead from '@mui/material/TableHead'
 import TableBody from '@mui/material/TableBody'
 import TableCell from '@mui/material/TableCell'
 import TableContainer from '@mui/material/TableContainer'
-import Chip from 'src/@core/components/mui/chip'
-import Link from 'next/link'
-
-// ** MUI Imports
-import Box from '@mui/material/Box'
-import Tooltip from '@mui/material/Tooltip'
-import IconButton from '@mui/material/IconButton'
-import OptionsMenu from 'src/@core/components/option-menu'
-// ** Icon Imports
-import Icon from 'src/@core/components/icon'
 import WarningDialog from 'src/views/components/dialogs/WarningDialog'
-import { useEffect, useState } from 'react'
-import Pagination from '@mui/material/Pagination'
-import Stack from '@mui/material/Stack'
+import { useState } from 'react'
 import { CardHeader } from '@mui/material'
-import { useRouter } from 'next/router'
-import { getOrderDetails } from 'src/helpers/orderHelper'
 
 const createData = (name, calories, fat, carbs, protein) => {
   return { name, calories, fat, carbs, protein }

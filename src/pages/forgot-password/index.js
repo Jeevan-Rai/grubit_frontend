@@ -17,9 +17,6 @@ import Icon from 'src/@core/components/icon'
 // ** Layout Import
 import BlankLayout from 'src/@core/layouts/BlankLayout'
 
-// ** Demo Imports
-import FooterIllustrationsV2 from 'src/views/pages/auth/FooterIllustrationsV2'
-
 // Styled Components
 const ForgotPasswordIllustration = styled('img')(({ theme }) => ({
   zIndex: 2,
@@ -82,7 +79,6 @@ const ForgotPassword = () => {
             alt='forgot-password-illustration'
             src={`/images/pages/auth-v2-forgot-password-illustration-${theme.palette.mode}.png`}
           />
-          <FooterIllustrationsV2 />
         </Box>
       ) : null}
       <RightWrapper>

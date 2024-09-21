@@ -35,6 +35,7 @@ export default function MenuCard({ day, options, color }) {
           return (
             <Typography
               component={'span'}
+              key={'option-' + option.id}
               sx={{
                 backgroundColor: 'White',
                 color: '#000000',

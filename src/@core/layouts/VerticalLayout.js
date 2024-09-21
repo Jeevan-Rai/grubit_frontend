@@ -45,20 +45,16 @@ const ContentWrapper = styled('main')(({ theme }) => ({
 }))
 
 const VerticalLayout = props => {
-  // ** Props
   const { hidden, settings, children, scrollToTop, footerProps, contentHeightFixed, verticalLayoutProps } = props
   const AppbarHidden = useMediaQuery(theme => theme.breakpoints.down('md'))
-  // ** Vars
   const { skin, navHidden, contentWidth } = settings
+
   const navigationBorderWidth = skin === 'bordered' ? 1 : 0
+
   const { navigationSize, disableCustomizer, collapsedNavigationSize } = themeConfig
   const navWidth = navigationSize
   const collapsedNavWidth = collapsedNavigationSize
-
-  // ** States
   const [navVisible, setNavVisible] = useState(false)
-
-  // ** Toggle Functions
   const toggleNavVisibility = () => setNavVisible(!navVisible)
 
   return (
