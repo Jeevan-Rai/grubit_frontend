@@ -10,7 +10,7 @@ import Dialog from '@mui/material/Dialog'
 import DialogContentText from '@mui/material/DialogContentText'
 import { Box, Grid, Typography } from '@mui/material'
 
-const FoodCardModal = ({ open, setOpen }) => {
+const FoodCardModal = ({ open, setOpen, item, addItem }) => {
   // ** States
 
   const [scroll, setScroll] = useState('body')
@@ -58,7 +58,7 @@ const FoodCardModal = ({ open, setOpen }) => {
                   marginBottom: '0.5em'
                 }}
               >
-                Chicken Shawarma
+                {item?.name}
               </Typography>
               <Grid container>
                 <Grid item xs={6} md={3}>
@@ -66,8 +66,8 @@ const FoodCardModal = ({ open, setOpen }) => {
                     <Box component={'img'} src='/images/icon/fire.png' />
 
                     <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-                      <Typography variant='h6'>Calorie</Typography>
-                      <Typography variant='body2'>250</Typography>
+                      <Typography variant='h6'>Calories</Typography>
+                      <Typography variant='body2'>{item.calories}</Typography>
                     </Box>
                   </Box>
                 </Grid>
@@ -76,8 +76,8 @@ const FoodCardModal = ({ open, setOpen }) => {
                     <Box component={'img'} src='/images/icon/fire.png' />
 
                     <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-                      <Typography variant='h6'>Calorie</Typography>
-                      <Typography variant='body2'>250</Typography>
+                      <Typography variant='h6'>Protiens</Typography>
+                      <Typography variant='body2'>{item.protiens}</Typography>
                     </Box>
                   </Box>
                 </Grid>
@@ -86,8 +86,8 @@ const FoodCardModal = ({ open, setOpen }) => {
                     <Box component={'img'} src='/images/icon/fire.png' />
 
                     <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-                      <Typography variant='h6'>Calorie</Typography>
-                      <Typography variant='body2'>250</Typography>
+                      <Typography variant='h6'>Carbs</Typography>
+                      <Typography variant='body2'>{item.carbs}</Typography>
                     </Box>
                   </Box>
                 </Grid>
@@ -96,8 +96,8 @@ const FoodCardModal = ({ open, setOpen }) => {
                     <Box component={'img'} src='/images/icon/fire.png' />
 
                     <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-                      <Typography variant='h6'>Calorie</Typography>
-                      <Typography variant='body2'>250</Typography>
+                      <Typography variant='h6'>Fat</Typography>
+                      <Typography variant='body2'>{item.fat}</Typography>
                     </Box>
                   </Box>
                 </Grid>
@@ -125,14 +125,7 @@ const FoodCardModal = ({ open, setOpen }) => {
                   textAlign: 'justify'
                 }}
               >
-                chicken thigh, tortilla wrap (fortified wheat flour (wheat Flour, calcium carbonate, iron, niacin,
-                thiamin), water, rapeseed oil, acidity regulator (E296), raising agents (E500), sugar, salt.) (GLUTEN),
-                basmati rice, water, rapeseed oil, salt, oil, red onion, cucumber, tomato ketchup, shallot, coriander,
-                gluten free soy sauce (water, SOY beans, salt, Spirit Vinegar) (SOYA), lemon juice, tomatoes, sriracha,
-                water, salt, garlic puree, vinegar, ginger paste (SULPHITES), lime juice, caster sugar, parsley, ground
-                cumin, turmeric, green chilli, ground coriander, black pepper, garlic paste, all purpose seasoning
-                (CELERY, MUSTARD), ground cardamom, ground cinnamon, nutmeg, chilli powder, beetroot powder, Aleppo
-                Pepper, black onion seeds
+                {item?.details}
               </Typography>
 
               <Typography
@@ -164,6 +157,7 @@ const FoodCardModal = ({ open, setOpen }) => {
                       backgroundColor: '#FD5B29'
                     }
                   }}
+                  onClick={addItem}
                 >
                   Add Item
                 </Button>

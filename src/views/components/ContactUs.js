@@ -22,7 +22,7 @@ export default function ContactUs() {
   } = useForm()
   return (
     <>
-      <Grid container sx={{ width: { xs: '90%', md: '75%' }, margin: '0px auto' }}>
+      <Grid container sx={{ width: { xs: '90%', md: '75%' }, margin: '0px auto' }} id='contact'>
         <Grid item xs={12} sm={6} md={6} sx={{}}>
           <SectionHeader title='CONTACT US' align='left' />
           <Typography

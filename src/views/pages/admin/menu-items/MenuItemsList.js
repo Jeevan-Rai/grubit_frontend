@@ -27,11 +27,11 @@ const createData = (name, calories, fat, carbs, protein, status) => {
   return { name, calories, fat, carbs, protein, status }
 }
 
-const MenuItemsList = () => {
+const MenuItemsList = ({ search }) => {
   const [open, setOpen] = useState(false)
   const [itemId, setItemId] = useState('')
   const [page, setPage] = useState(1)
-  const [search, setSearch] = useState('')
+
   const [limit, setLimit] = useState(10)
   const [loading, setLoading] = useState(10)
   const [menuItems, setMenuItems] = useState([])

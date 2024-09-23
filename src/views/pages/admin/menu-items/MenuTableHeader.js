@@ -8,11 +8,18 @@ import CustomTextField from 'src/@core/components/mui/text-field'
 // ** Icon Imports
 import Icon from 'src/@core/components/icon'
 import Link from 'next/link'
-
+import throttle from 'lodash/throttle'
+import { useCallback } from 'react'
 const MenuTableHeader = props => {
   // ** Props
-  const { handleFilter, toggle, value } = props
+  const { handleFilter, toggle, value, search, setSearch } = props
 
+  const throttledSearch = useCallback(
+    throttle(query => {
+      setSearch(query)
+    }, 1000),
+    []
+  )
   return (
     <Box
       sx={{
@@ -30,7 +37,7 @@ const MenuTableHeader = props => {
         value={value}
         sx={{ mr: 4 }}
         placeholder='Search product'
-        onChange={e => handleFilter(e.target.value)}
+        onChange={e => throttledSearch(e.target.value)}
       />
       <Box sx={{ rowGap: 2, display: 'flex', flexWrap: 'wrap', alignItems: 'center' }}>
         <Link href={'/admin/menu-items/create'}>

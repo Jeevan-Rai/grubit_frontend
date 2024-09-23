@@ -42,38 +42,40 @@ const EditMenu = () => {
     defaultValues: {
       itemName: menuItem?.name,
       category: menuItem?.categoryType,
-      price: 44,
-      calories: 444,
-      protien: 444,
-      carb: 444,
-      fat: 444,
-      details: 'details',
-      monday: false,
-      tuesday: false,
-      wednesday: false,
-      thursday: false,
-      friday: false,
-      saturday: false,
-      sunday: false,
+      price: menuItem?.price,
+      calories: menuItem?.calories,
+      protien: menuItem?.protien,
+      carb: menuItem?.carbs,
+      fat: menuItem?.fat,
+      details: menuItem?.details,
+      monday: menuItem?.monday,
+      tuesday: menuItem?.tuesday,
+      wednesday: menuItem?.wednesday,
+      thursday: menuItem?.thursday,
+      friday: menuItem?.friday,
+      saturday: menuItem?.saturday,
+      sunday: menuItem?.sunday,
+      status: menuItem?.status,
       primary: menuItem.options,
       topping: menuItem.toppings
     },
     values: {
       itemName: menuItem?.name,
       category: menuItem?.categoryType,
-      price: 44,
-      calories: 444,
-      protien: 444,
-      carb: 444,
-      fat: 444,
-      details: 'details',
-      monday: false,
-      tuesday: false,
-      wednesday: false,
-      thursday: false,
-      friday: false,
-      saturday: false,
-      sunday: false,
+      price: menuItem?.price,
+      calories: menuItem?.calories,
+      protien: menuItem?.protien,
+      carb: menuItem?.carbs,
+      fat: menuItem?.fat,
+      details: menuItem?.details,
+      monday: menuItem?.monday,
+      tuesday: menuItem?.tuesday,
+      wednesday: menuItem?.wednesday,
+      thursday: menuItem?.thursday,
+      friday: menuItem?.friday,
+      saturday: menuItem?.saturday,
+      sunday: menuItem?.sunday,
+      status: menuItem?.status,
       primary: menuItem.options,
       topping: menuItem.toppings
     }
@@ -118,8 +120,7 @@ const EditMenu = () => {
       formData.append('friday', data.friday)
       formData.append('saturday', data.saturday)
       formData.append('sunday', data.sunday)
-
-      console.log(data)
+      formData.append('status', data.status)
 
       if (data.primary) {
         data.primary.forEach((item, index) => {
@@ -140,6 +141,8 @@ const EditMenu = () => {
         formData.append('file', data.file[0])
       }
       let response = await updateMenu(formData, id)
+      toast.success('Item updated successfully')
+      router.replace('/admin/menu-items')
     } catch (error) {
       console.error('Error uploading file:', error)
       toast.error(error.message)
@@ -153,8 +156,8 @@ const EditMenu = () => {
   }
 
   useEffect(() => {
-    fetchMenuItem()
-  }, [])
+    if (id) fetchMenuItem()
+  }, [id])
 
   // Pre-fill the form with existing values
   useEffect(() => {
@@ -358,6 +361,7 @@ const EditMenu = () => {
                           {...field}
                           aria-describedby='validation-basic-first-name'
                           sx={errors.monday ? { color: 'error.main' } : null}
+                          checked={field?.value}
                         />
                       </Box>
                     )}
@@ -377,6 +381,7 @@ const EditMenu = () => {
                           {...field}
                           aria-describedby='validation-basic-first-name'
                           sx={errors.tuesday ? { color: 'error.main' } : null}
+                          checked={field?.value}
                         />
                       </Box>
                     )}
@@ -395,6 +400,7 @@ const EditMenu = () => {
                           {...field}
                           aria-describedby='validation-basic-first-name'
                           sx={errors.wednesday ? { color: 'error.main' } : null}
+                          checked={field?.value}
                         />
                       </Box>
                     )}
@@ -413,6 +419,7 @@ const EditMenu = () => {
                           {...field}
                           aria-describedby='validation-basic-first-name'
                           sx={errors.thursday ? { color: 'error.main' } : null}
+                          checked={field?.value}
                         />
                       </Box>
                     )}
@@ -431,6 +438,7 @@ const EditMenu = () => {
                           {...field}
                           aria-describedby='validation-basic-first-name'
                           sx={errors.friday ? { color: 'error.main' } : null}
+                          checked={field?.value}
                         />
                       </Box>
                     )}
@@ -449,6 +457,7 @@ const EditMenu = () => {
                           {...field}
                           aria-describedby='validation-basic-first-name'
                           sx={errors.saturday ? { color: 'error.main' } : null}
+                          checked={field?.value}
                         />
                       </Box>
                     )}
@@ -467,6 +476,7 @@ const EditMenu = () => {
                           {...field}
                           aria-describedby='validation-basic-first-name'
                           sx={errors.sunday ? { color: 'error.main' } : null}
+                          checked={field?.value}
                         />
                       </Box>
                     )}
@@ -485,7 +495,7 @@ const EditMenu = () => {
                           {...field}
                           aria-describedby='validation-basic-first-name'
                           sx={errors.status ? { color: 'error.main' } : null}
-                          defaultChecked
+                          checked={field?.value}
                         />{' '}
                         <br />
                         <small style={{ fontWeight: '400' }}>

@@ -314,13 +314,13 @@ const LoginPage = () => {
                   justifyContent: 'space-between'
                 }}
               >
-                <FormControlLabel
+                {/* <FormControlLabel
                   label='Remember Me'
                   control={<Checkbox checked={rememberMe} onChange={e => setRememberMe(e.target.checked)} />}
-                />
-                <Typography component={LinkStyled} href='/forgot-password'>
+                /> */}
+                {/* <Typography component={LinkStyled} href='/forgot-password'>
                   Forgot Password?
-                </Typography>
+                </Typography> */}
               </Box>
               <Button fullWidth type='submit' variant='contained' sx={{ mb: 4 }}>
                 Login

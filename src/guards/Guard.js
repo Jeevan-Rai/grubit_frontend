@@ -28,7 +28,11 @@ const Guard = ({ children, allowedRoles }) => {
 
   // If not allowed to access, prevent rendering
   if (!user || (allowedRoles && !allowedRoles.includes(user?.role))) {
-    return null
+    return (
+      <>
+        <Spinner />
+      </>
+    )
   }
 
   return <>{children}</>

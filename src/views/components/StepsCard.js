@@ -21,7 +21,7 @@ export default function StepCard({ step, title, description, Icon }) {
             <Icon />
             <Box>
               <Typography sx={{ fontFamily: 'DM sans', fontSize: '15px', fontWeight: '700', textAlign: 'center' }}>
-                STEP 1
+                {step}
               </Typography>
               <Typography
                 sx={{
@@ -33,7 +33,7 @@ export default function StepCard({ step, title, description, Icon }) {
                   margin: '0.5em 0px'
                 }}
               >
-                Select
+                {title}
               </Typography>
               <Typography
                 sx={{
@@ -44,7 +44,7 @@ export default function StepCard({ step, title, description, Icon }) {
                   fontWeight: '500'
                 }}
               >
-                Choose your meal from our carefully crafted menu
+                {description}
               </Typography>
             </Box>
           </Card>

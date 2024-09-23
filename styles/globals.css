@@ -22,3 +22,7 @@ code:not([class*='language-']):after {
 code[class*='language-'] {
   padding: 0;
 }
+
+.MuiButton-root.MuiButton-contained:hover {
+  background-color: 'red !important';
+}

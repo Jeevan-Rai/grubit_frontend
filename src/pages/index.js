@@ -22,7 +22,7 @@ const Home = () => {
       <HowItWorks />
       <Box sx={{ padding: '30px' }} />
       <Testimonials />
-      <Box sx={{ padding: '30px' }} />
+      <Box sx={{ padding: '30px' }} id='about' />
       <AboutUs />
       <Box sx={{ padding: '30px' }} />
       <WhyChooseUs />
@@ -30,7 +30,7 @@ const Home = () => {
       <OurPhilosophy />
       <Box sx={{ padding: '30px' }} />
       <TrainStation />
-      <Box sx={{ padding: '30px' }} />
+      <Box sx={{ padding: '30px' }} id='contact' />
       <ContactUs />
       <Box sx={{ padding: '30px' }} />
       <UserFooter />

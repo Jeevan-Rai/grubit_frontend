@@ -3,6 +3,7 @@ import SectionHeader from './SectionHeader'
 import { useKeenSlider } from 'keen-slider/react'
 import 'keen-slider/keen-slider.min.css'
 import { Box, Button } from '@mui/material'
+import Link from 'next/link'
 export default function OurMenu() {
   const [sliderRef, instanceRef] = useKeenSlider({
     breakpoints: {
@@ -93,6 +94,8 @@ export default function OurMenu() {
         <Box sx={{ display: 'flex', justifyContent: 'center' }}>
           <Button
             variant='contained'
+            component={Link}
+            href='/menu'
             sx={{
               backgroundColor: '#F56700',
               color: '#000000',
@@ -105,6 +108,7 @@ export default function OurMenu() {
             ORDER NOW
           </Button>
         </Box>
+        <Box sx={{ padding: '20px' }} />
       </Box>
     </>
   )

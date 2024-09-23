@@ -85,15 +85,27 @@ const RegisterPage = () => {
       setType('success')
       setTitle('Verify your email ✉️')
       setMessage(
-        'Account activation link sent to your email address: johndoe@gmail.com Please follow the link inside to continue.'
+        `Account activation link sent to your email address: ${data.email} Please follow the link inside to continue.`
       )
       setOpen(true)
-      reset()
+      reset({
+        firstName: '',
+        lastName: '',
+        addressLineOne: '',
+        addressLineTwo: '',
+        email: '',
+        cityName: '',
+        postCode: '',
+        phoneNumber: '',
+        password: '',
+        confirmPassword: ''
+      })
     } catch (error) {
       setType('error')
       setTitle('Oops!')
       setMessage(errors.message)
       setOpen(true)
+      reset({})
     }
   }
   console.log(errors)
@@ -447,7 +459,7 @@ const RegisterPage = () => {
                   Reset
                 </Button>
                 <Button type='submit' sx={{ mr: 2 }} variant='contained'>
-                  Next
+                  Register
                 </Button>
               </CardActions>
             </form>

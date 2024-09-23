@@ -44,10 +44,11 @@ function getDatesOfWeekInMonth(weekNum, month, year) {
   let currentDay = new Date(firstDayOfMonth)
   while (currentDay <= lastDayOfMonth) {
     if (getWeekOfMonth(currentDay) === weekNum) {
-      dates.push({
-        date: new Date(currentDay),
-        dayName: currentDay.toLocaleString('en-US', { weekday: 'long' })
-      })
+      if (new Date(currentDay).getTime() > new Date().getTime())
+        dates.push({
+          date: new Date(currentDay),
+          dayName: currentDay.toLocaleString('en-US', { weekday: 'long' })
+        })
     }
     currentDay.setDate(currentDay.getDate() + 1)
   }

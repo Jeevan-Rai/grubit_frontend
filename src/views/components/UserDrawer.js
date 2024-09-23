@@ -8,6 +8,7 @@ import ListItem from '@mui/material/ListItem'
 import ListItemButton from '@mui/material/ListItemButton'
 import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemText from '@mui/material/ListItemText'
+import Link from 'next/link'
 
 export default function UserDrawer({ open, setOpen, pages }) {
   const toggleDrawer = newOpen => () => {
@@ -15,13 +16,19 @@ export default function UserDrawer({ open, setOpen, pages }) {
   }
 
   const DrawerList = (
-    <Box sx={{ width: 250 }} role='presentation' onClick={toggleDrawer(false)}>
+    <Box sx={{ width: 250 }} role='presentation'>
       <List>
         {pages.map((text, index) => (
           <ListItem key={text} disablePadding>
             <ListItemButton>
               {/* <ListItemIcon>{index % 2 === 0 ? 'inbox' : 'mail'}</ListItemIcon> */}
-              <ListItemText sx={{ fontFamily: 'Dm Sans' }} primary={text} />
+              <Link
+                component={Link}
+                href={text.path}
+                sx={{ fontFamily: 'Dm Sans', textDecoration: 'none !important', color: '#000000' }}
+              >
+                {text.name}
+              </Link>
             </ListItemButton>
           </ListItem>
         ))}

@@ -19,7 +19,7 @@ const GlobalStyles = theme => {
       right: '0 !important',
       left: 'auto !important',
       '&:hover, &:focus, &.ps--clicking': {
-        backgroundColor: theme.palette.mode === 'light' ? '#F1F0F5 !important' : '#393D55 !important'
+        backgroundColor: theme.palette.mode === 'light' ? '#096A5F !important' : '#096A5F !important'
       },
       '& .ps__thumb-y': {
         right: '3px !important',

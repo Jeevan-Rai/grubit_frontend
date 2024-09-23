@@ -5,7 +5,7 @@ import SectionHeader from './SectionHeader'
 export default function AboutUs() {
   return (
     <>
-      <Grid container sx={{ width: { xs: '90%', md: '75%' }, margin: '0px auto' }}>
+      <Grid container sx={{ width: { xs: '90%', md: '75%' }, margin: '0px auto' }} id='about'>
         <Grid item xs={12} sm={6} md={5} sx={{ display: { xs: 'none', md: 'block' } }}>
           <Box
             component={'img'}

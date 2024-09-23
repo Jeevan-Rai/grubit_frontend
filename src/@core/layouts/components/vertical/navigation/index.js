@@ -80,7 +80,25 @@ const Navigation = props => {
   }
 
   // ** Create new theme for the navigation menu when mode is `semi-dark`
-  let darkTheme = createTheme(themeOptions(settings, 'dark'))
+  let darkTheme = createTheme({
+    ...themeOptions(settings, 'dark'),
+    components: {
+      MuiButton: {
+        styleOverrides: {
+          root: {
+            '&:hover': {
+              backgroundColor: '#1565c0' // General hover for all buttons
+            }
+          },
+          contained: {
+            '&:hover': {
+              backgroundColor: '#003c8f' // Hover for contained variant
+            }
+          }
+        }
+      }
+    }
+  })
 
   // ** Set responsive font sizes to true
   if (themeConfig.responsiveFontSizes) {

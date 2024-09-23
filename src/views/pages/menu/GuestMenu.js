@@ -6,8 +6,9 @@ import FoodItemCard from 'src/views/components/FoodItemCard'
 import UserFooterLight from 'src/views/components/UserFooterLight'
 import Usernavbar from 'src/views/components/UserNavbar'
 import { fetchFoodItems, formatDate, generateWeeksForMonth, getCurrentWeekNumber } from 'src/helpers/menuHelper'
+import Link from 'next/link'
 
-const WeekButton = ({ week, active = false, onClick }) => {
+const WeekButton = ({ week, active = false, onClick, currentWeekNumber }) => {
   return (
     <>
       {' '}
@@ -24,8 +25,9 @@ const WeekButton = ({ week, active = false, onClick }) => {
           }
         }}
         onClick={onClick}
+        disabled={currentWeekNumber > week}
       >
-        {week}
+        Week {week}
       </Button>
     </>
   )
@@ -173,7 +175,6 @@ export default function GuestMenu() {
 
   const weeks = generateWeeksForMonth(month, year)
   const currentWeekNumber = getCurrentWeekNumber(month, year) - 1
-  console.log(currentWeekNumber)
 
   const [currentSlide, setCurrentSlide] = useState(0)
   const [loaded, setLoaded] = useState(false)
@@ -258,9 +259,10 @@ export default function GuestMenu() {
                 {weeks.map((week, index) => (
                   <WeekButton
                     key={index}
-                    week={`Week ${week.weekNumber}`}
+                    week={week.weekNumber}
                     active={selectedWeek === week.weekNumber}
                     onClick={e => handleTabChange(e, week.weekNumber)}
+                    currentWeekNumber={currentWeekNumber}
                   ></WeekButton>
                 ))}
 
@@ -372,6 +374,25 @@ export default function GuestMenu() {
               </Grid>
             </Grid>
           </Grid>
+          <Box sx={{ padding: { xs: '10px', md: '30px' } }} />
+
+          <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+            <Button
+              component={Link}
+              href='/cart'
+              variant='contained'
+              sx={{
+                backgroundColor: '#F56700',
+                color: '#000000',
+                borderRadius: '80px',
+                p: { xs: '10px 15px', md: '15px 50px' },
+                fontWeight: 'bold',
+                fontFamily: 'DM Sans'
+              }}
+            >
+              ORDER NOW
+            </Button>
+          </Box>
         </Box>
       </Box>
       <Box sx={{ padding: { xs: '10px', md: '30px' } }} />

@@ -10,10 +10,10 @@ import Button from '@mui/material/Button'
 import { useForm, Controller } from 'react-hook-form'
 import { Box } from '@mui/material'
 
-export default function ImageUpload({ register, reset }) {
+export default function ImageUpload({ register }) {
   const [imgSrc, setImgSrc] = useState('/images/avatars/15.png')
   const hiddenInputRef = useRef()
-  const { ref: registerRef, ...rest } = register('file')
+  // const { ref: registerRef, ...rest } = register('file')
   const ImgStyled = styled('img')(({ theme }) => ({
     width: 100,
     height: 100,
@@ -39,15 +39,15 @@ export default function ImageUpload({ register, reset }) {
   }))
 
   const handleInputImageChange = event => {
-    reset({ file: event.target.files[0] })
     const file = event.target.files[0]
+
     const urlImage = URL.createObjectURL(file)
 
     setImgSrc(urlImage)
   }
 
   const handleInputImageReset = () => {
-    reset({ file: null })
+    setInputValue('')
     setImgSrc('/images/avatars/15.png')
   }
   return (
@@ -61,10 +61,9 @@ export default function ImageUpload({ register, reset }) {
               <input
                 hidden
                 type='file'
-                {...rest}
+                {...register('file')}
                 onChange={handleInputImageChange}
                 ref={e => {
-                  registerRef(e)
                   hiddenInputRef.current = e
                 }}
                 accept='image/png, image/jpeg'

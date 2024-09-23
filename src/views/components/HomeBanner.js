@@ -1,4 +1,5 @@
 import { Box, Button, Typography } from '@mui/material'
+import Link from 'next/link'
 
 export default function HomeBanner() {
   return (
@@ -45,6 +46,8 @@ export default function HomeBanner() {
           </Typography>
           <Button
             variant='contained'
+            component={Link}
+            href='/menu'
             sx={{
               backgroundColor: '#F56700',
               color: '#000000',

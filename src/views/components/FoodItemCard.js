@@ -187,7 +187,15 @@ export default function FoodItemCard({ type = 'weekly', week, date, item }) {
           </Box>
         </Card>
       </CardContent>
-      <FoodCardModal open={open} setOpen={setOpen} />
+      <FoodCardModal
+        open={open}
+        setOpen={setOpen}
+        item={item}
+        addItem={() => {
+          type !== 'weekly' ? setOpenMakeYourOwnForm(true) : handleIncrease(type, week, date, item)
+          setOpen(false)
+        }}
+      />
       <MakeYourOwnForm
         open={openMakeYourOwnForm}
         setOpen={setOpenMakeYourOwnForm}

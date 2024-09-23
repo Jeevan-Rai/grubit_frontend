@@ -17,6 +17,7 @@ import UserLayout from 'src/layouts/UserLayout'
 
 import MenuItemsList from 'src/views/pages/admin/menu-items/MenuItemsList'
 import MenuTableHeader from 'src/views/pages/admin/menu-items/MenuTableHeader'
+import { useState } from 'react'
 
 const LinkStyled = styled(Link)(({ theme }) => ({
   textDecoration: 'none',
@@ -24,6 +25,7 @@ const LinkStyled = styled(Link)(({ theme }) => ({
 }))
 
 const MenuItems = () => {
+  const [search, setSearch] = useState('')
   return (
     <Grid container spacing={6}>
       <PageHeader
@@ -40,8 +42,8 @@ const MenuItems = () => {
       <Grid item xs={12}>
         <Card>
           <CardHeader title='All Menu Items' />
-          <MenuTableHeader />
-          <MenuItemsList />
+          <MenuTableHeader search={search} setSearch={setSearch} />
+          <MenuItemsList search={search} />
         </Card>
       </Grid>
     </Grid>

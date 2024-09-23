@@ -17,7 +17,12 @@ import Link from 'next/link'
 import UserDrawer from './UserDrawer'
 import { useRouter } from 'next/router'
 
-const pages = ['Home', 'Menu', 'Testimonial', 'About Us']
+const pages = [
+  { name: 'Home', path: '/' },
+  { name: 'Menu', path: '/menu' },
+  { name: 'About Us', path: '#about', type: 'scroll' },
+  { name: 'Contact', path: '#contact', type: 'scroll' }
+]
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout']
 
 function Usernavbar() {
@@ -38,6 +43,16 @@ function Usernavbar() {
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null)
+  }
+
+  const scrollToSection = path => {
+    let element = document.querySelector(path)
+    if (element) {
+      element?.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start' // Can be 'start', 'center', 'end', 'nearest'
+      })
+    }
   }
 
   const handleCloseUserMenu = () => {
@@ -118,7 +133,7 @@ function Usernavbar() {
               </svg>
             </Typography>
 
-            <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' }, marginRight: '15px' }}>
+            <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' }, marginRight: '15px', color: '#000000' }}>
               <Icon onClick={() => setOpen(true)} icon='tabler:menu-2' fontSize={30} />
 
               <Menu
@@ -139,7 +154,9 @@ function Usernavbar() {
               >
                 {pages.map(page => (
                   <MenuItem key={page} onClick={handleCloseNavMenu}>
-                    <Typography sx={{ textAlign: 'center', fontFamily: 'DM sans' }}>{page}</Typography>
+                    <Typography component={Link} href={page.path} sx={{ textAlign: 'center', fontFamily: 'DM sans' }}>
+                      {page.name}
+                    </Typography>
                   </MenuItem>
                 ))}
               </Menu>
@@ -189,7 +206,9 @@ function Usernavbar() {
               {pages.map(page => (
                 <Button
                   key={page}
-                  onClick={handleCloseNavMenu}
+                  component={Link}
+                  href={page.path}
+                  onClick={() => page.type == 'scroll' && scrollToSection(page.path)}
                   sx={{
                     my: 2,
                     color: appBarStatus || router.pathname != '/' ? '#F56700' : '#FFFFFF',
@@ -197,7 +216,7 @@ function Usernavbar() {
                     fontFamily: 'DM sans'
                   }}
                 >
-                  {page}
+                  {page.name}
                 </Button>
               ))}
             </Box>
@@ -247,8 +266,11 @@ function Usernavbar() {
                     borderRadius: '37px',
                     p: '10px 20px',
                     '&:hover': {
-                      backgroundColor: '#ffffff', // Change the background color on hover
-                      transform: 'scale(1.05)' // Scale the button on hover
+                      //   backgroundColor: '#ffffff', // Change the background color on hover
+                      //   transform: 'scale(1.05)' // Scale the button on hover
+
+                      color: '#000000',
+                      border: '#000000'
                     }
                   }}
                 >

@@ -86,6 +86,7 @@ const CreateMenu = () => {
       formData.append('friday', data.friday)
       formData.append('saturday', data.saturday)
       formData.append('sunday', data.sunday)
+      formData.append('status', data.status)
 
       console.log(data)
 
@@ -99,15 +100,13 @@ const CreateMenu = () => {
           formData.append(`topping[${index}]`, item.value)
         })
       }
-      console.log(data.file && data.file.length > 0)
-      console.log(data.file.length)
 
-      if (data.file && data.file.length > 0) {
-        console.log('inside file')
-
-        formData.append('file', data.file[0])
+      if (data.file) {
+        formData.append('image', data.file)
       }
-      let response = await createMenu({ formData })
+      let response = await createMenu(formData)
+      toast.success('Item Created')
+      router.replace('/admin/menu-items')
     } catch (error) {
       console.error('Error uploading file:', error)
       toast.error(error.message)
@@ -125,7 +124,7 @@ const CreateMenu = () => {
     <Card>
       <CardHeader title='Item Details' />
       <form onSubmit={handleSubmit(onSubmit)} encType='multipart/form-data'>
-        <ImageUpload register={register} />
+        <ImageUpload register={register} reset={reset} />
         <CardContent>
           <Grid container spacing={5}>
             <Grid item xs={12} sm={6}>
@@ -436,6 +435,7 @@ const CreateMenu = () => {
                     name='status'
                     control={control}
                     rules={{ required: true }}
+                    defaultValue={false}
                     render={({ field }) => (
                       <Box>
                         Is the Item Available Now?
@@ -443,7 +443,6 @@ const CreateMenu = () => {
                           {...field}
                           aria-describedby='validation-basic-first-name'
                           sx={errors.status ? { color: 'error.main' } : null}
-                          defaultChecked
                         />{' '}
                         <br />
                         <small style={{ fontWeight: '400' }}>
