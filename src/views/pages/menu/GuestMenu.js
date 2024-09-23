@@ -181,9 +181,11 @@ export default function GuestMenu() {
   const [orderCategory, setOrderCategory] = useState('weekly')
   const [selectedWeek, setSelectedWeek] = useState(currentWeekNumber)
   const [selectedDate, setSelectedDate] = useState(new Date().toLocaleDateString())
-  const [selectedDay, setSelectedDay] = useState(
-    new Intl.DateTimeFormat('en-US', { weekday: 'long' }).format(new Date())
-  )
+  const today = new Date()
+  const tomorrow = new Date(today)
+  tomorrow.setDate(today.getDate() + 1)
+
+  const [selectedDay, setSelectedDay] = useState(new Intl.DateTimeFormat('en-US', { weekday: 'long' }).format(tomorrow))
   const [menuItems, setMenuItems] = useState([])
 
   const handleTabChange = (event, newValue) => {
@@ -304,7 +306,7 @@ export default function GuestMenu() {
                 </Grid>
               </Grid>
             </Grid>
-            <Grid item xs={12} md={3}>
+            <Grid item xs={12} md={3} minHeight={'20rem'}>
               <Typography sx={{ fontFamily: 'DM Sans', fontWeight: '700', color: '#5D586C', fontSize: '18px' }}>
                 Days of the Week
               </Typography>
@@ -371,6 +373,8 @@ export default function GuestMenu() {
                     </Grid>
                   )
                 })}
+
+                {menuItems.length == 0 && <> No Items available for selected date</>}
               </Grid>
             </Grid>
           </Grid>

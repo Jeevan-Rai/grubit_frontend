@@ -31,6 +31,7 @@ import { hexToRGBA } from 'src/@core/utils/hex-to-rgba'
 import 'cleave.js/dist/addons/cleave-phone.us'
 import axiosInstance from 'src/helpers/axiosInstance'
 import { useRouter } from 'next/router'
+import toast from 'react-hot-toast'
 
 // ** Styled Components
 const TwoStepsIllustration = styled('img')(({ theme }) => ({
@@ -166,11 +167,14 @@ const TwoStepsV2 = ({}) => {
   const onSubmit = async data => {
     try {
       let otp = data.val1 + data.val2 + data.val3 + data.val4 + data.val5 + data.val6
-      console.log(token)
-
       let response = await axiosInstance.post('/auth/verify', { token, otp })
+      if (response.status === 200) {
+        toast.success('User verification successfull')
+        router.replace('/login')
+      }
+      toast.error('User verification failed')
     } catch (error) {
-      console.log(error)
+      toast.error('User verification failed')
     }
   }
 
