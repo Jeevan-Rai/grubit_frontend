@@ -6,6 +6,14 @@ export const registerUser = async data => {
   return (data = axiosInstance.post(`${BASE_URL}/auth/register`, data))
 }
 
+export const updateUser = async data => {
+  return (data = axiosInstance.put(`${BASE_URL}/auth/update-profile`, data))
+}
+
+export const updatePassword = async data => {
+  return (data = axiosInstance.put(`${BASE_URL}/auth/update-password`, data))
+}
+
 export const getCustomers = async ({ page, search, limit }) => {
   return await axiosInstance.get(`/auth/customers?page=${page}&search=${search}&limit=${limit}`)
 }

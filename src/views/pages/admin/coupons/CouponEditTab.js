@@ -43,6 +43,7 @@ const TabList = styled(MuiTabList)(({ theme }) => ({
 }))
 export default function CouponEditTab() {
   let router = useRouter()
+  const { id } = router.query
   const activeTab = router.pathname.includes('edit') ? 'details' : 'redeemers'
 
   return (
@@ -54,13 +55,13 @@ export default function CouponEditTab() {
               <TabList variant='scrollable' scrollButtons='auto' aria-label='customized tabs example'>
                 <Tab
                   component={Link}
-                  href={'/admin/coupons/6/edit'}
+                  href={`/admin/coupons/${id}/edit`}
                   value='details'
                   label={<Box sx={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>Details</Box>}
                 />{' '}
                 <Tab
                   component={Link}
-                  href={'/admin/coupons/9/redeemers'}
+                  href={`/admin/coupons/${id}/redeemers`}
                   value='redeemers'
                   label={<Box sx={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>Redeemers</Box>}
                 />

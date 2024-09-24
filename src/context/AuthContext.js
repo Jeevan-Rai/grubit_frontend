@@ -50,8 +50,9 @@ const AuthProvider = ({ children }) => {
             localStorage.removeItem('accessToken')
             setUser(null)
             setLoading(false)
+            const returnUrl = router.query.returnUrl
             if (authConfig.onTokenExpiration === 'logout' && !router.pathname.includes('login')) {
-              router.replace('/login')
+              router.replace('/login?returnUrl=' + returnUrl)
             }
           })
       } else {

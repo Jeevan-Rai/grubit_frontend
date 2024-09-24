@@ -12,6 +12,8 @@ import Guard from 'src/guards/Guard'
 import UserLayout from 'src/layouts/UserLayout'
 import LocationTableHeader from 'src/views/pages/admin/pickup-locations/LocationTableHeader'
 import LocationList from 'src/views/pages/admin/pickup-locations/LocationList'
+import { useEffect, useState } from 'react'
+import { getStations } from 'src/helpers/stationHelper'
 
 const LinkStyled = styled(Link)(({ theme }) => ({
   textDecoration: 'none',
@@ -19,6 +21,41 @@ const LinkStyled = styled(Link)(({ theme }) => ({
 }))
 
 const PickupLocation = () => {
+  const [open, setOpen] = useState(false)
+  const [itemId, setItemId] = useState('')
+  const [page, setPage] = useState(1)
+  const [search, setSearch] = useState('')
+  const [status, setStatus] = useState('')
+  const [date, setDate] = useState(null)
+  const [limit, setLimit] = useState(10)
+  const [loading, setLoading] = useState(10)
+  const [stations, setStations] = useState([])
+
+  const handleChange = (event, value) => {
+    setPage(value)
+  }
+
+  const onDelete = async () => {
+    try {
+      let response = await deleteStation(itemId)
+      fetchMenuItems()
+      setOpen(false)
+    } catch (error) {}
+  }
+
+  let fetchStations = async () => {
+    try {
+      let response = await getStations({ page, search, limit, date, status })
+      setStations(response.data)
+      console.log(response.data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  useEffect(() => {
+    fetchStations()
+  }, [page, search, date, status])
   return (
     <Grid container spacing={6}>
       <PageHeader
@@ -35,8 +72,15 @@ const PickupLocation = () => {
       <Grid item xs={12}>
         <Card>
           <CardHeader title='Search Filter' />
-          <LocationTableHeader />
-          <LocationList />
+          <LocationTableHeader setSearch={setSearch} date={date} setDate={setDate} setStatus={setStatus} />
+          <LocationList
+            stations={stations}
+            onDelete={onDelete}
+            handleChange={handleChange}
+            setItemId={setItemId}
+            setOpen={setOpen}
+            open={open}
+          />
         </Card>
       </Grid>
     </Grid>

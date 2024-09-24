@@ -8,8 +8,8 @@ export const getOrderHistory = async ({ page, search, limit }) => {
   return await axiosInstance.get(`/order/history?page=${page}&search=${search}&limit=${limit}`)
 }
 
-export const getOrders = async ({ page, search, limit }) => {
-  return await axiosInstance.get(`/order?page=${page}&search=${search}&limit=${limit}`)
+export const getOrders = async ({ page, search, limit, date }) => {
+  return await axiosInstance.get(`/order?page=${page}&search=${search}&limit=${limit}&date=${date}`)
 }
 
 export const getOrderDetails = async id => {

@@ -35,7 +35,7 @@ const rows = [
   createData('Gingerbread', 356, 16.0, 49, 3.9)
 ]
 
-const CouponRedeemers = () => {
+const CouponRedeemers = ({ setPage, customers }) => {
   const [open, setOpen] = useState(false)
   const [type, setType] = useState('')
   const [title, setTitle] = useState('')
@@ -63,7 +63,7 @@ const CouponRedeemers = () => {
   }
 
   const handleChange = (event, value) => {
-    console.log(event, value)
+    setPage(value)
   }
   return (
     <TableContainer component={Paper}>
@@ -77,7 +77,7 @@ const CouponRedeemers = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map(row => (
+          {customers?.customers?.map(row => (
             <TableRow
               key={row.name}
               sx={{
@@ -98,7 +98,7 @@ const CouponRedeemers = () => {
       </Table>
       <Stack spacing={2} sx={{ padding: '2em' }}>
         <Pagination
-          count={10}
+          count={customers?.totalPages}
           shape='rounded'
           onChange={handleChange}
           sx={{

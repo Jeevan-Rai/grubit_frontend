@@ -8,8 +8,8 @@ import Usernavbar from 'src/views/components/UserNavbar'
 import { fetchFoodItems, formatDate, generateWeeksForMonth, getCurrentWeekNumber } from 'src/helpers/menuHelper'
 import Link from 'next/link'
 import { useOrder } from 'src/context/OrderContext'
-import toast from 'react-hot-toast'
 import { useRouter } from 'next/router'
+import toast from 'react-hot-toast'
 
 const WeekButton = ({ week, active = false, onClick, currentWeekNumber }) => {
   return (
@@ -174,17 +174,18 @@ const ItemTypeButton = ({ type, active = false, Icon, onClick }) => {
 
 export default function GuestMenu() {
   const year = new Date().getFullYear() // Use current year
-  const month = new Date().getMonth() + 1 // Use current month
+  const month = new Date().getMonth() // Use current month
 
   const weeks = generateWeeksForMonth(month, year)
   const currentWeekNumber = getCurrentWeekNumber(month, year)
-  const router = useRouter()
+
   const [currentSlide, setCurrentSlide] = useState(0)
+  const router = useRouter()
   const [loaded, setLoaded] = useState(false)
+  const { orders } = useOrder()
   const [orderCategory, setOrderCategory] = useState('weekly')
   const [selectedWeek, setSelectedWeek] = useState(currentWeekNumber)
   const [selectedDate, setSelectedDate] = useState(new Date().toLocaleDateString())
-  const { orders } = useOrder()
   const today = new Date()
   const tomorrow = new Date(today)
   tomorrow.setDate(today.getDate() + 1)
@@ -193,14 +194,12 @@ export default function GuestMenu() {
   const [menuItems, setMenuItems] = useState([])
 
   const handleTabChange = (event, newValue) => {
-    console.log(newValue)
-
     setSelectedWeek(newValue)
     const date1 = new Date(selectedDate)
-    const date2 = new Date(weeks[newValue - 1]?.dates[0].date.toLocaleDateString())
+    const date2 = new Date(weeks[newValue]?.dates[0].date.toLocaleDateString())
     setSelectedDate(new Date().toLocaleDateString())
     if (date2.getTime() > date1.getTime()) {
-      setSelectedDate(weeks[newValue - 1]?.dates[0].date.toLocaleDateString())
+      setSelectedDate(weeks[newValue]?.dates[0].date.toLocaleDateString())
     }
   }
 
@@ -319,7 +318,7 @@ export default function GuestMenu() {
               <Box sx={{ padding: '10px' }} />
               <div ref={sliderRef} className='keen-slider'>
                 {selectedWeek !== null &&
-                  weeks[selectedWeek - 1]?.dates.map((day, index) => (
+                  weeks[selectedWeek]?.dates.map((day, index) => (
                     // <Typography key={index}>
                     //   {day.dayName}: {day.date.toLocaleDateString()}
                     // </Typography>
@@ -388,6 +387,9 @@ export default function GuestMenu() {
 
           <Box sx={{ display: 'flex', justifyContent: 'center' }}>
             <Button
+              onClick={() => {
+                orders?.totalPrice > 0 ? router.replace('/cart') : toast.error('Please add atleast one 1 to cart')
+              }}
               variant='contained'
               sx={{
                 backgroundColor: '#F56700',
@@ -396,9 +398,6 @@ export default function GuestMenu() {
                 p: { xs: '10px 15px', md: '15px 50px' },
                 fontWeight: 'bold',
                 fontFamily: 'DM Sans'
-              }}
-              onClick={() => {
-                orders.totalPrice > 0 ? router.replace('/cart') : toast.error('Please add aleast one item to cart')
               }}
             >
               ORDER NOW
@@ -410,4 +409,7 @@ export default function GuestMenu() {
       <UserFooterLight />
     </>
   )
+}
+GuestMenu.getLayout = function getLayout(page) {
+  return <>{page}</>
 }

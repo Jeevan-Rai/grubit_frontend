@@ -20,8 +20,8 @@ import { useRouter } from 'next/router'
 const pages = [
   { name: 'Home', path: '/' },
   { name: 'Menu', path: '/menu' },
-  { name: 'About Us', path: '#about', type: 'scroll' },
-  { name: 'Contact', path: '#contact', type: 'scroll' }
+  { name: 'About Us', path: '/#about', type: 'scroll' },
+  { name: 'Contact', path: '/#contact', type: 'scroll' }
 ]
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout']
 
@@ -46,13 +46,13 @@ function Usernavbar() {
   }
 
   const scrollToSection = path => {
-    let element = document.querySelector(path)
-    if (element) {
-      element?.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start' // Can be 'start', 'center', 'end', 'nearest'
-      })
-    }
+    // let element = document.querySelector(path)
+    // if (element) {
+    //   element?.scrollIntoView({
+    //     behavior: 'smooth',
+    //     block: 'start' // Can be 'start', 'center', 'end', 'nearest'
+    //   })
+    // }
   }
 
   const handleCloseUserMenu = () => {
@@ -97,7 +97,7 @@ function Usernavbar() {
               variant='h6'
               noWrap
               component='a'
-              href='#app-bar-with-responsive-menu'
+              href='/'
               sx={{
                 mr: 2,
                 display: { xs: 'none', md: 'flex' },

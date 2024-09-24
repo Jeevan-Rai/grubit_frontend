@@ -11,7 +11,9 @@ const RedirectIfAuthenticated = ({ children }) => {
   useEffect(() => {
     if (!loading && user) {
       // If the user is authenticated, redirect to dashboard or any protected route
-      user.role === 'admin' ? router.push('/admin/dashboard') : router.push('/')
+      // user.role === 'admin' ? router.push('/admin/dashboard') : router.push('/')
+      const returnUrl = router.query.returnUrl
+      returnUrl && returnUrl !== '/' ? returnUrl : user.role == 'admin' ? '/admin/dashboard' : '/'
     }
   }, [loading, user])
 

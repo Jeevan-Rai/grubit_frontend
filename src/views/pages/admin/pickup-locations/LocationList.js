@@ -27,49 +27,16 @@ const createData = (name, calories, fat, carbs, protein) => {
 
 const rows = [createData('Baker Street', '53 Street, Oxford Road, London, 556677', '07/08/2024', 24, 4.0)]
 
-const LocationList = () => {
-  const [open, setOpen] = useState(false)
-  const [itemId, setItemId] = useState('')
-  const [page, setPage] = useState(1)
-  const [search, setSearch] = useState('')
-  const [limit, setLimit] = useState(10)
-  const [loading, setLoading] = useState(10)
-  const [stations, setStations] = useState([])
-
-  const handleChange = (event, value) => {
-    setPage(value)
-  }
-
-  const onDelete = async () => {
-    try {
-      let response = await deleteStation(itemId)
-      fetchMenuItems()
-      setOpen(false)
-    } catch (error) {}
-  }
-
-  let fetchStations = async () => {
-    try {
-      let response = await getStations({ page, search, limit })
-      setStations(response.data)
-      console.log(response.data)
-    } catch (error) {
-      console.log(error)
-    }
-  }
-
-  useEffect(() => {
-    fetchStations()
-  }, [page, search])
+const LocationList = ({ stations, onDelete, handleChange, setItemId, open, setOpen }) => {
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label='simple table'>
         <TableHead>
           <TableRow>
             <TableCell>Location Name</TableCell>
-            <TableCell align='right'>Additional Info</TableCell>
-            <TableCell align='right'>Added On</TableCell>
-            <TableCell align='right'>Status</TableCell>
+            <TableCell align='left'>Additional Info</TableCell>
+            <TableCell align='left'>Added On</TableCell>
+            <TableCell align='left'>Status</TableCell>
             <TableCell align='center'>ACTIONS</TableCell>
           </TableRow>
         </TableHead>
@@ -86,9 +53,10 @@ const LocationList = () => {
               <TableCell component='th' scope='row'>
                 {row.name}
               </TableCell>
-              <TableCell align='right'>{row.details}</TableCell>
-              <TableCell align='right'>{row.status}</TableCell>
-              <TableCell align='right'>
+              <TableCell align='left'>{row.details}</TableCell>
+              <TableCell align='left'>{new Date(row.createdAt).toDateString()}</TableCell>
+
+              <TableCell align='left'>
                 <Chip
                   rounded
                   size='small'

@@ -23,20 +23,31 @@ import { createOrder } from 'src/helpers/orderHelper'
 import { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 import { useRouter } from 'next/router'
+import WarningDialog from './dialogs/WarningDialog'
 
 export default function CartPricingDetailsCard() {
   let router = useRouter()
-  const { orders, removeItemFromOrder, applyCoupon } = useOrder()
+  const { orders, removeItemFromOrder, applyCoupon, removeCoupon } = useOrder()
   const [couponCode, setCouponCode] = useState('')
   const breakpointMD = useMediaQuery(theme => theme.breakpoints.between('sm', 'lg'))
+  const [open, setOpen] = useState()
 
   const proceedToPayment = async () => {
     if (!orders.pickupLocation) {
       toast.error('Please select a pickup location')
       return
     }
-    let orderResponse = await createOrder(orders)
-    router.replace(orderResponse.data.url)
+
+    setOpen(true)
+  }
+
+  let successCallback = async () => {
+    try {
+      let orderResponse = await createOrder(orders)
+      router.replace(orderResponse.data.url)
+    } catch (error) {
+      toast.error(error.response.data.error || 'Something went wrong while creating the Order')
+    }
   }
 
   const handleApplyCoupon = () => {
@@ -61,10 +72,24 @@ export default function CartPricingDetailsCard() {
                 placeholder='Enter Promo Code'
                 value={couponCode}
               />
+              {!orders.couponCode && (
+                <Button variant='tonal' onClick={handleApplyCoupon}>
+                  Apply
+                </Button>
+              )}
 
-              <Button variant='tonal' onClick={handleApplyCoupon}>
-                Apply
-              </Button>
+              {orders.couponCode && (
+                <Button
+                  variant='outlined'
+                  color='error'
+                  onClick={() => {
+                    removeCoupon()
+                    setCouponCode('')
+                  }}
+                >
+                  Remove
+                </Button>
+              )}
             </Box>
           </CardContent>
           <Divider sx={{ my: '0 !important' }} />
@@ -142,6 +167,13 @@ export default function CartPricingDetailsCard() {
           Proceed to payment
         </Button>
       </Box>
+      <WarningDialog
+        title={'Confirm Train Station'}
+        message={`Are you sure you want to proceed with ${orders?.pickupLocation?.name} as your confirmed train station for meal pickups?`}
+        open={open}
+        setOpen={setOpen}
+        successCallback={successCallback}
+      />
     </>
   )
 }

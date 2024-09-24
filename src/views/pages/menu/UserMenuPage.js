@@ -17,7 +17,7 @@ const LinkStyled = styled(Link)(({ theme }) => ({
   color: theme.palette.primary.main
 }))
 
-const WeekButton = ({ week, active = false, onClick }) => {
+const WeekButton = ({ week, active = false, onClick, currentWeekNumber }) => {
   return (
     <>
       {' '}
@@ -34,8 +34,9 @@ const WeekButton = ({ week, active = false, onClick }) => {
           }
         }}
         onClick={onClick}
+        disabled={currentWeekNumber > week}
       >
-        {week}
+        Week {week}
       </Button>
     </>
   )
@@ -179,29 +180,32 @@ const ItemTypeButton = ({ type, active = false, Icon, onClick }) => {
 
 export default function UserMenuPage() {
   const year = new Date().getFullYear() // Use current year
-  const month = new Date().getMonth() // Use current month
+  const month = new Date().getMonth() + 1 // Use current month
 
   const weeks = generateWeeksForMonth(month, year)
-  const currentWeekNumber = getCurrentWeekNumber(month, year) - 1
-  console.log(currentWeekNumber)
+  const currentWeekNumber = getCurrentWeekNumber(month, year)
 
   const [currentSlide, setCurrentSlide] = useState(0)
   const [loaded, setLoaded] = useState(false)
   const [orderCategory, setOrderCategory] = useState('weekly')
   const [selectedWeek, setSelectedWeek] = useState(currentWeekNumber)
   const [selectedDate, setSelectedDate] = useState(new Date().toLocaleDateString())
-  const [selectedDay, setSelectedDay] = useState(
-    new Intl.DateTimeFormat('en-US', { weekday: 'long' }).format(new Date())
-  )
+  const today = new Date()
+  const tomorrow = new Date(today)
+  tomorrow.setDate(today.getDate() + 1)
+
+  const [selectedDay, setSelectedDay] = useState(new Intl.DateTimeFormat('en-US', { weekday: 'long' }).format(tomorrow))
   const [menuItems, setMenuItems] = useState([])
 
   const handleTabChange = (event, newValue) => {
+    console.log(newValue)
+
     setSelectedWeek(newValue)
     const date1 = new Date(selectedDate)
-    const date2 = new Date(weeks[newValue]?.dates[0].date.toLocaleDateString())
+    const date2 = new Date(weeks[newValue - 1]?.dates[0].date.toLocaleDateString())
     setSelectedDate(new Date().toLocaleDateString())
     if (date2.getTime() > date1.getTime()) {
-      setSelectedDate(weeks[newValue]?.dates[0].date.toLocaleDateString())
+      setSelectedDate(weeks[newValue - 1]?.dates[0].date.toLocaleDateString())
     }
   }
 
@@ -254,14 +258,13 @@ export default function UserMenuPage() {
                 {weeks.map((week, index) => {
                   {
                     return (
-                      week.dates.length > 0 && (
-                        <WeekButton
-                          key={index}
-                          week={`Week ${week.weekNumber}`}
-                          active={selectedWeek === week.weekNumber}
-                          onClick={e => handleTabChange(e, week.weekNumber)}
-                        ></WeekButton>
-                      )
+                      <WeekButton
+                        key={index}
+                        week={week.weekNumber}
+                        active={selectedWeek === week.weekNumber}
+                        onClick={e => handleTabChange(e, week.weekNumber)}
+                        currentWeekNumber={currentWeekNumber}
+                      ></WeekButton>
                     )
                   }
                 })}
@@ -305,7 +308,7 @@ export default function UserMenuPage() {
               <Box sx={{ padding: '10px' }} />
               <div ref={sliderRef} className='keen-slider'>
                 {selectedWeek !== null &&
-                  weeks[selectedWeek]?.dates.map((day, index) => (
+                  weeks[selectedWeek - 1]?.dates.map((day, index) => (
                     // <Typography key={index}>
                     //   {day.dayName}: {day.date.toLocaleDateString()}
                     // </Typography>

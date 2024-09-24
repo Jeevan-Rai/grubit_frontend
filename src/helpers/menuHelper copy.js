@@ -1,31 +1,27 @@
 import axiosInstance from './axiosInstance'
 
-export const createStation = async data => {
-  return await axiosInstance.post('/station', data)
+export const createMenu = async data => {
+  return await axiosInstance.post('/menu', data)
 }
 
-export const getStations = async ({ page, search, limit, date, status }) => {
-  return await axiosInstance.get(`/station?page=${page}&search=${search}&limit=${limit}&date=${date}&status=${status}`)
+export const getMenuItems = async ({ page, search, limit }) => {
+  return await axiosInstance.get(`/menu?page=${page}&search=${search}&limit=${limit}`)
 }
 
-export const getStationsList = async () => {
-  return await axiosInstance.get(`/station/list`)
+export const getMenuItem = async ({ id }) => {
+  return await axiosInstance.get(`/menu/${id}`)
 }
 
-export const getStation = async ({ id }) => {
-  return await axiosInstance.get(`/station/${id}`)
+export const updateMenu = async (data, id) => {
+  return await axiosInstance.put(`/menu/${id}`, data)
 }
 
-export const updateStation = async (data, id) => {
-  return await axiosInstance.put(`/station/${id}`, data)
-}
-
-export const deleteStation = async id => {
-  return await axiosInstance.delete(`/station/${id}`)
+export const deleteMenu = async id => {
+  return await axiosInstance.delete(`/menu/${id}`)
 }
 
 export const fetchFoodItems = async (day, category) => {
-  return await axiosInstance.post(`/station/getByDay`, { day, category })
+  return await axiosInstance.post(`/menu/getByDay`, { day, category })
 }
 
 function getWeekOfMonth(date) {
@@ -48,10 +44,11 @@ function getDatesOfWeekInMonth(weekNum, month, year) {
   let currentDay = new Date(firstDayOfMonth)
   while (currentDay <= lastDayOfMonth) {
     if (getWeekOfMonth(currentDay) === weekNum) {
-      dates.push({
-        date: new Date(currentDay),
-        dayName: currentDay.toLocaleString('en-US', { weekday: 'long' })
-      })
+      if (new Date(currentDay).getTime() > new Date().getTime())
+        dates.push({
+          date: new Date(currentDay),
+          dayName: currentDay.toLocaleString('en-US', { weekday: 'long' })
+        })
     }
     currentDay.setDate(currentDay.getDate() + 1)
   }

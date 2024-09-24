@@ -37,9 +37,15 @@ const EditLocation = () => {
     register,
     watch
   } = useForm({
+    defaultValues: {
+      name: station.name,
+      details: station.details,
+      status: station.status
+    },
     values: {
       name: station.name,
-      details: station.details
+      details: station.details,
+      status: station.status
     }
   })
 
@@ -122,7 +128,8 @@ const EditLocation = () => {
               <Controller
                 name='status'
                 control={control}
-                rules={{ required: true }}
+                rules={{ required: false }}
+                defaultValue={false}
                 render={({ field }) => (
                   <Box>
                     Is the Location Available?
@@ -130,7 +137,7 @@ const EditLocation = () => {
                       {...field}
                       aria-describedby='validation-basic-first-name'
                       sx={errors.status ? { color: 'error.main' } : null}
-                      defaultChecked
+                      checked={field?.value}
                     />{' '}
                     <br />
                   </Box>

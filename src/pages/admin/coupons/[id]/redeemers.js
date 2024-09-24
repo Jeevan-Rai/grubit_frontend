@@ -17,6 +17,9 @@ import OrderTableHeader from 'src/views/pages/admin/orders/OrderTableHeader'
 import CouponRedeemers from 'src/views/pages/admin/coupons/CouponRedeemers'
 import RedeemerTableHeader from 'src/views/pages/admin/coupons/RedeemerTableHeader'
 import CouponEditTab from 'src/views/pages/admin/coupons/CouponEditTab'
+import { useEffect, useState } from 'react'
+import { getRedeemers } from 'src/helpers/couponHelper'
+import { useRouter } from 'next/router'
 
 const LinkStyled = styled(Link)(({ theme }) => ({
   textDecoration: 'none',
@@ -24,6 +27,32 @@ const LinkStyled = styled(Link)(({ theme }) => ({
 }))
 
 const CouponRedeemersPage = () => {
+  const router = useRouter()
+  const { id } = router.query
+  const [open, setOpen] = useState(false)
+  const [itemId, setItemId] = useState('')
+  const [page, setPage] = useState(1)
+  const [search, setSearch] = useState('')
+  const [limit, setLimit] = useState(10)
+  const [customers, setCustomers] = useState([])
+
+  const handleChange = (event, value) => {
+    console.log(event, value)
+  }
+
+  let fetchCustomers = async () => {
+    try {
+      let response = await getRedeemers({ page, search, limit, id })
+      setCustomers(response.data)
+      console.log(response.data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  useEffect(() => {
+    fetchCustomers()
+  }, [page, search])
   return (
     <Grid container spacing={6}>
       <PageHeader
@@ -39,8 +68,8 @@ const CouponRedeemersPage = () => {
       <CouponEditTab />
       <Grid item xs={12}>
         <Card>
-          <RedeemerTableHeader title='Search Filter' />
-          <CouponRedeemers />
+          <RedeemerTableHeader title='Search Filter' setSearch={setSearch} />
+          <CouponRedeemers customers={customers} setPage={setPage} />
         </Card>
       </Grid>
     </Grid>

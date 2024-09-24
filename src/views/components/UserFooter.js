@@ -68,6 +68,8 @@ export default function UserFooter() {
             <Grid xs={12} md={6} sx={{ marginTop: { xs: '0', md: '16rem' } }}>
               <Box sx={{ display: 'flex', justifyContent: { xs: 'center', md: 'end' } }}>
                 <Button
+                  component={Link}
+                  href='/menu'
                   variant='contained'
                   sx={{
                     backgroundColor: '#F56700',
@@ -241,45 +243,47 @@ export default function UserFooter() {
 
               <Box sx={{ marginTop: '1.5em' }}>
                 <Typography
+                  component={Link}
+                  href={'/menu'}
                   sx={{
+                    display: 'block',
                     color: '#0A5247',
                     padding: '0.25em',
                     fontWeight: '400',
                     fontFamily: 'DM Sans',
-                    fontSize: '18px'
+                    fontSize: '18px',
+                    textDecoration: 'none'
                   }}
                 >
                   Order Now
                 </Typography>
                 <Typography
+                  component={Link}
+                  href={'#testimonials'}
                   sx={{
+                    display: 'block',
                     color: '#0A5247',
                     padding: '0.25em',
                     fontWeight: '400',
                     fontFamily: 'DM Sans',
-                    fontSize: '18px'
-                  }}
-                >
-                  Create New Menu
-                </Typography>
-                <Typography
-                  sx={{
-                    color: '#0A5247',
-                    padding: '0.25em',
-                    fontWeight: '400',
-                    fontFamily: 'DM Sans',
-                    fontSize: '18px'
+                    fontSize: '18px',
+                    textDecoration: 'none'
                   }}
                 >
                   Testimonials
                 </Typography>
+
                 <Typography
+                  component={Link}
+                  href={'/#about'}
                   sx={{
+                    display: 'block',
                     color: '#0A5247',
                     padding: '0.25em',
                     fontWeight: '400',
                     fontFamily: 'DM Sans',
-                    fontSize: '18px'
+                    fontSize: '18px',
+                    textDecoration: 'none'
                   }}
                 >
                   About us

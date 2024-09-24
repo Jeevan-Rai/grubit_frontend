@@ -14,6 +14,7 @@ import UserLayout from 'src/layouts/UserLayout'
 import CreateCoupon from 'src/views/pages/admin/coupons/CreateCoupon'
 import CouponEditTab from 'src/views/pages/admin/coupons/CouponEditTab'
 import EditCoupon from 'src/views/pages/admin/coupons/EditCoupon'
+import { useEffect, useState } from 'react'
 
 const LinkStyled = styled(Link)(({ theme }) => ({
   textDecoration: 'none',

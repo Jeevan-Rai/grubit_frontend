@@ -8,6 +8,10 @@ export const getCouponItems = async ({ page, search, limit }) => {
   return await axiosInstance.get(`/coupons?page=${page}&search=${search}&limit=${limit}`)
 }
 
+export const getRedeemers = async ({ page, search, limit, id }) => {
+  return await axiosInstance.get(`/coupons/redeemers/${id}?page=${page}&search=${search}&limit=${limit}`)
+}
+
 export const getCouponItem = async ({ id }) => {
   return await axiosInstance.get(`/coupons/${id}`)
 }

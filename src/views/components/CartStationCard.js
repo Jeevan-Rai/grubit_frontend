@@ -28,7 +28,7 @@ export default function CartStationCard() {
 
   const [stations, setStations] = useState([])
   const [selectedStation, setSelectedStation] = useState(null)
-  const { setPickupLocation } = useOrder()
+  const { setPickupLocation, orders } = useOrder()
 
   const handleChange = e => {
     let value = e.target.value
@@ -64,7 +64,8 @@ export default function CartStationCard() {
             select
             fullWidth
             label={'Train Station'}
-            value={selectedStation?.id}
+            value={orders?.pickupLocation?.id}
+            defaultValue={orders?.pickupLocation?.id}
           >
             <MenuItem value={''}>Select Station</MenuItem>
             {stations?.map((row, index) => {
@@ -83,7 +84,7 @@ export default function CartStationCard() {
             fullWidth
             label={'Train Station'}
             disabled
-            defaultValue={selectedStation?.details}
+            defaultValue={orders?.pickupLocation?.details || ''}
           />
           <Divider sx={{ my: '2em !important' }} />
         </CardContent>

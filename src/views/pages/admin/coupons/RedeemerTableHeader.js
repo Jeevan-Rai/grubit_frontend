@@ -11,7 +11,7 @@ import { Grid } from '@mui/material'
 
 const RedeemerTableHeader = props => {
   // ** Props
-  const { handleFilter, toggle, value } = props
+  const { setSearch } = props
 
   return (
     <Box
@@ -28,11 +28,10 @@ const RedeemerTableHeader = props => {
     >
       <Grid item xs={12} sm={6}>
         <CustomTextField
-          value={value}
           fullWidth
           sx={{ mr: 4 }}
           placeholder='Search product'
-          onChange={e => handleFilter(e.target.value)}
+          onChange={e => setSearch(e.target.value)}
         />
       </Grid>
     </Box>

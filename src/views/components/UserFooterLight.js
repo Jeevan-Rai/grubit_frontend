@@ -170,45 +170,47 @@ export default function UserFooterLight() {
 
             <Box sx={{ marginTop: '1.5em' }}>
               <Typography
+                component={Link}
+                href={'/menu'}
                 sx={{
+                  display: 'block',
                   color: '#0A5247',
                   padding: '0.25em',
                   fontWeight: '400',
                   fontFamily: 'DM Sans',
-                  fontSize: '18px'
+                  fontSize: '18px',
+                  textDecoration: 'none'
                 }}
               >
                 Order Now
               </Typography>
+
               <Typography
+                component={Link}
+                href={'/#testimonials'}
                 sx={{
+                  display: 'block',
                   color: '#0A5247',
                   padding: '0.25em',
                   fontWeight: '400',
                   fontFamily: 'DM Sans',
-                  fontSize: '18px'
-                }}
-              >
-                Create New Menu
-              </Typography>
-              <Typography
-                sx={{
-                  color: '#0A5247',
-                  padding: '0.25em',
-                  fontWeight: '400',
-                  fontFamily: 'DM Sans',
-                  fontSize: '18px'
+                  fontSize: '18px',
+                  textDecoration: 'none'
                 }}
               >
                 Testimonials
               </Typography>
               <Typography
+                component={Link}
+                href={'/#about'}
                 sx={{
+                  display: 'block',
                   color: '#0A5247',
                   padding: '0.25em',
                   fontWeight: '400',
                   fontFamily: 'DM Sans',
-                  fontSize: '18px'
+                  fontSize: '18px',
+                  textDecoration: 'none'
                 }}
               >
                 About us

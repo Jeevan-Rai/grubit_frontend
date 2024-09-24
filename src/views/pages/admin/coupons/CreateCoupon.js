@@ -146,8 +146,8 @@ const CreateCoupon = () => {
                     aria-describedby='validation-basic-first-name'
                     {...(errors.category && { helperText: 'This field is required' })}
                   >
-                    <MenuItem value='weekly'>Weekly</MenuItem>
-                    <MenuItem value='make-your-own'>Make Your Own</MenuItem>
+                    <MenuItem value='general'>General</MenuItem>
+                    <MenuItem value='first-time'>First Time</MenuItem>
                   </CustomTextField>
                 )}
               />

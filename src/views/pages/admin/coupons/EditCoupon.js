@@ -38,12 +38,21 @@ const EditCoupon = () => {
     reset,
     register,
     watch
-  } = useForm()
+  } = useForm({
+    defaultValues: {
+      ...coupon,
+      validFrom: coupon?.validFrom ? new Date(coupon?.validFrom) : new Date(),
+      validTill: coupon?.validTill ? new Date(coupon?.validTill) : new Date(),
+      category: coupon?.itemType
+    }
+  })
 
   // Handle Password
   const onSubmit = async data => {
     // Create a FormData object to send files
     console.log('submitted')
+    console.log(data)
+
     try {
       const formData = {}
       for (const key in data) {
@@ -53,7 +62,7 @@ const EditCoupon = () => {
       }
 
       let response = await updateCoupon(formData, id)
-      toast.success('Coupon created successfully')
+      toast.success('Coupon updated successfully')
       router.replace('/admin/coupons')
     } catch (error) {
       console.log(error)
@@ -63,6 +72,12 @@ const EditCoupon = () => {
   const fetchCoupon = async () => {
     const response = await getCouponItem({ id })
     setCoupon(response.data)
+    console.log({
+      ...response.data,
+      validFrom: new Date(response.data.validFrom),
+      validTill: new Date(response.data.validTill),
+      category: response.data.itemType
+    })
 
     reset({
       ...response.data,
@@ -137,6 +152,7 @@ const EditCoupon = () => {
                     error={Boolean(errors.category)}
                     aria-describedby='validation-basic-first-name'
                     {...(errors.category && { helperText: 'This field is required' })}
+                    defaultValue={value}
                   >
                     <MenuItem value='Percentage'>Percentage</MenuItem>
                     <MenuItem value='Flat'>Flat</MenuItem>
@@ -160,9 +176,10 @@ const EditCoupon = () => {
                     error={Boolean(errors.category)}
                     aria-describedby='validation-basic-first-name'
                     {...(errors.category && { helperText: 'This field is required' })}
+                    defaultValue={value}
                   >
-                    <MenuItem value='weekly'>Weekly</MenuItem>
-                    <MenuItem value='make-your-own'>Make Your Own</MenuItem>
+                    <MenuItem value='general'>General</MenuItem>
+                    <MenuItem value='first-time'>First Time</MenuItem>
                   </CustomTextField>
                 )}
               />
@@ -319,7 +336,7 @@ const EditCoupon = () => {
               <Controller
                 name='couponStatus'
                 control={control}
-                rules={{ required: true }}
+                rules={{ required: false }}
                 render={({ field }) => (
                   <Box>
                     Is the Coupon Available Now?
@@ -327,6 +344,7 @@ const EditCoupon = () => {
                       {...field}
                       aria-describedby='validation-basic-first-name'
                       sx={errors.couponStatus ? { color: 'error.main' } : null}
+                      checked={field?.value}
                     />{' '}
                     <br />
                     <small style={{ fontWeight: '400' }}>

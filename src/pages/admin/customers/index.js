@@ -15,6 +15,9 @@ import PageHeader from 'src/@core/components/page-header'
 import Guard from 'src/guards/Guard'
 import UserLayout from 'src/layouts/UserLayout'
 import CustomerList from 'src/views/pages/admin/customers/CustomerList'
+import CustomerTableHeader from 'src/views/pages/admin/customers/CustomerTableHeader'
+import { useEffect, useState } from 'react'
+import { getCustomers } from 'src/helpers/authHelpers'
 
 const LinkStyled = styled(Link)(({ theme }) => ({
   textDecoration: 'none',
@@ -22,6 +25,30 @@ const LinkStyled = styled(Link)(({ theme }) => ({
 }))
 
 const Customers = () => {
+  const [open, setOpen] = useState(false)
+  const [itemId, setItemId] = useState('')
+  const [page, setPage] = useState(1)
+  const [search, setSearch] = useState('')
+  const [limit, setLimit] = useState(10)
+  const [customers, setCustomers] = useState([])
+
+  const handleChange = (event, value) => {
+    console.log(event, value)
+  }
+
+  let fetchCustomers = async () => {
+    try {
+      let response = await getCustomers({ page, search, limit })
+      setCustomers(response.data)
+      console.log(response.data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  useEffect(() => {
+    fetchCustomers()
+  }, [page, search])
   return (
     <Grid container spacing={6}>
       <PageHeader
@@ -37,8 +64,9 @@ const Customers = () => {
 
       <Grid item xs={12}>
         <Card>
-          {/* <CardHeader title='Search Filter' /> */}
-          <CustomerList />
+          <CardHeader title='Search Filter' />
+          <CustomerTableHeader setSearch={setSearch} />
+          <CustomerList customers={customers} handleChange={handleChange} />
         </Card>
       </Grid>
     </Grid>

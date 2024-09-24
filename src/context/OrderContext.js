@@ -10,13 +10,14 @@ const ORDER_STORAGE_KEY = 'orderData'
 
 // Provider Component
 export const OrderProvider = ({ children }) => {
-  const [orders, setOrders] = useState({
+  const defaultState = {
     weekly: {},
     'make-your-own': {},
     pickupLocation: '',
     totalPrice: 0,
     couponDiscount: 0
-  })
+  }
+  const [orders, setOrders] = useState(defaultState)
 
   // Load order from localStorage when the app loads
   useEffect(() => {
@@ -144,6 +145,31 @@ export const OrderProvider = ({ children }) => {
     // })
   }
 
+  const removeCoupon = async () => {
+    try {
+      setOrders(prevOrders => {
+        console.log(prevOrders.totalPrice)
+
+        return {
+          ...prevOrders,
+          couponCode: '',
+          couponDiscount: 0,
+          totalPrice: prevOrders.totalPrice,
+          discountedPrice: prevOrders.totalPrice
+        }
+        // return { ...prevOrders, couponDiscount: discount, totalPrice: prevOrders.totalPrice - discount }
+      })
+    } catch (error) {
+      console.log(error)
+      toast.error(error.response.data.error)
+    }
+
+    // setOrders(prevOrders => {
+    //   return { ...prevOrders, couponCode: couponCode, totalPrice: prevOrders.totalPrice - couponCode }
+    //   // return { ...prevOrders, couponDiscount: discount, totalPrice: prevOrders.totalPrice - discount }
+    // })
+  }
+
   // Function to increase/decrease quantity
   const updateItemQuantity = (category, week, date, itemId, newQuantity) => {
     setOrders(prevOrders => {
@@ -231,6 +257,10 @@ export const OrderProvider = ({ children }) => {
     })
   }
 
+  const clearCart = () => {
+    setOrders(defaultState)
+  }
+
   return (
     <OrderContext.Provider
       value={{
@@ -240,7 +270,8 @@ export const OrderProvider = ({ children }) => {
         findItemQuantity,
         removeItemFromOrder,
         setPickupLocation,
-        applyCoupon
+        applyCoupon,
+        removeCoupon
       }}
     >
       {children}

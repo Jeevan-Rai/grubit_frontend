@@ -7,11 +7,17 @@ import CustomTextField from 'src/@core/components/mui/text-field'
 
 // ** Icon Imports
 import Icon from 'src/@core/components/icon'
-import { Grid } from '@mui/material'
+import { Grid, MenuItem, Typography } from '@mui/material'
+import ReactDatePicker from 'react-datepicker'
+import DatePickerWrapper from 'src/@core/styles/libs/react-datepicker'
+import { forwardRef } from 'react'
 
-const OrderTableHeader = props => {
+const CustomInput = forwardRef((props, ref, label) => {
+  return <CustomTextField fullWidth {...props} inputRef={ref} label={props.label} autoComplete='off' />
+})
+
+const OrderTableHeader = ({ setSearch, setDate, date }) => {
   // ** Props
-  const { handleFilter, toggle, value } = props
 
   return (
     <Box
@@ -26,14 +32,29 @@ const OrderTableHeader = props => {
         justifyContent: 'space-between'
       }}
     >
-      <Grid item xs={12} sm={6}>
-        <CustomTextField
-          value={value}
-          fullWidth
-          sx={{ mr: 4 }}
-          placeholder='Search product'
-          onChange={e => handleFilter(e.target.value)}
-        />
+      <Typography>Search Filter</Typography>
+      <Grid container spacing={2} alignItems='center'>
+        <Grid item xs={12} sm={4}>
+          <CustomTextField
+            fullWidth
+            sx={{ mr: 4 }}
+            placeholder='Search pickup location'
+            onChange={e => setSearch(e.target.value)}
+          />
+        </Grid>
+        <Grid item xs={12} sm={4}>
+          <>
+            <DatePickerWrapper>
+              <ReactDatePicker
+                selected={date != null ? new Date(date) : false}
+                id='basic-input'
+                onChange={date => setDate(date)}
+                placeholderText='Filter by order date'
+                customInput={<CustomInput label='' />}
+              />
+            </DatePickerWrapper>
+          </>
+        </Grid>
       </Grid>
     </Box>
   )

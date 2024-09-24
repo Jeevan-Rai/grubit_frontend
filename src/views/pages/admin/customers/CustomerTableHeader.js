@@ -11,7 +11,7 @@ import { Grid } from '@mui/material'
 
 const CustomerTableHeader = props => {
   // ** Props
-  const { handleFilter, toggle, value } = props
+  const { setSearch } = props
 
   return (
     <Box
@@ -27,13 +27,7 @@ const CustomerTableHeader = props => {
       }}
     >
       <Grid item xs={12} sm={6}>
-        <CustomTextField
-          value={value}
-          fullWidth
-          sx={{ mr: 4 }}
-          placeholder='Search product'
-          onChange={e => handleFilter(e.target.value)}
-        />
+        <CustomTextField fullWidth sx={{ mr: 4 }} placeholder='Search user' onChange={e => setSearch(e.target.value)} />
       </Grid>
     </Box>
   )

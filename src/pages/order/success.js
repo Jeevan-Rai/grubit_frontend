@@ -24,6 +24,7 @@ import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { getOrderPaymentDetails } from 'src/helpers/orderHelper'
 import toast from 'react-hot-toast'
+import { useOrder } from 'src/context/OrderContext'
 
 const StyledList = styled(List)(({ theme }) => ({
   padding: 0,
@@ -86,6 +87,7 @@ const OrderSuccess = () => {
   const router = useRouter()
   let { session_id } = router.query
   const [order, setOrder] = useState(null)
+  const { clearCart } = useOrder()
 
   const fetchPaymentDetails = async () => {
     try {
@@ -94,6 +96,7 @@ const OrderSuccess = () => {
       if (response.data.message === 'Paymet details are already saved') {
         toast.success('Order places successfully')
       }
+      clearCart()
     } catch (error) {
       if (error.response.data.error === 'Paymet details are already saved') {
         toast.success('Order places successfully')

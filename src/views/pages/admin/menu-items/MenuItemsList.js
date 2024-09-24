@@ -67,11 +67,11 @@ const MenuItemsList = ({ search }) => {
         <TableHead>
           <TableRow>
             <TableCell>Food Item</TableCell>
-            <TableCell align='right'>Category</TableCell>
-            <TableCell align='right'>Calories</TableCell>
-            <TableCell align='right'>Price</TableCell>
-            <TableCell align='right'>Sales</TableCell>
-            <TableCell align='right'>Status</TableCell>
+            <TableCell align='left'>Category</TableCell>
+            <TableCell align='left'>Calories</TableCell>
+            <TableCell align='left'>Price</TableCell>
+            <TableCell align='left'>Sales</TableCell>
+            <TableCell align='left'>Status</TableCell>
             <TableCell align='center'>ACTIONS</TableCell>
           </TableRow>
         </TableHead>
@@ -88,11 +88,11 @@ const MenuItemsList = ({ search }) => {
               <TableCell component='th' scope='row'>
                 {row.name}
               </TableCell>
-              <TableCell align='right'>{row.categoryType}</TableCell>
-              <TableCell align='right'>{row.calories}</TableCell>
-              <TableCell align='right'>{row.price}</TableCell>
-              <TableCell align='right'>{row.protein}</TableCell>
-              <TableCell align='right'>
+              <TableCell align='left'>{row.categoryType}</TableCell>
+              <TableCell align='left'>{row.calories}</TableCell>
+              <TableCell align='left'>{row.price}</TableCell>
+              <TableCell align='left'>0</TableCell>
+              <TableCell align='left'>
                 <Chip
                   rounded
                   size='small'

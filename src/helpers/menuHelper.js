@@ -32,39 +32,56 @@ function getWeekOfMonth(date) {
 }
 
 // Function to get the dates of a specific week in a month
-function getDatesOfWeekInMonth(weekNum, month, year) {
-  const firstDayOfMonth = new Date(year, month, 1)
+function getDatesOfWeekInMonth(weekNumber, month, year) {
+  const firstDayOfMonth = new Date(year, month - 1, 1)
   const lastDayOfMonth = new Date(year, month + 1, 0)
+  const todaysDate = new Date()
+  console.log(weekNumber)
 
-  // const firstDayOfMonth = new Date(year, month, 1).getDay() // Day of the week for the 1st of the month (0 = Sunday, 1 = Monday, ..., 6 = Saturday)
-  // const daysInMonth = new Date(year, month + 1, 0).getDate()
+  // Get the day of the week for the first day of the month (0 = Sunday, 6 = Saturday)
+  const firstDayWeekday = firstDayOfMonth.getDay()
 
-  const dates = []
+  // Initialize an array to store the dates of the week
+  const weekDates = []
 
-  let currentDay = new Date(firstDayOfMonth)
-  while (currentDay <= lastDayOfMonth) {
-    if (getWeekOfMonth(currentDay) === weekNum) {
-      if (new Date(currentDay).getTime() > new Date().getTime())
-        dates.push({
-          date: new Date(currentDay),
-          dayName: currentDay.toLocaleString('en-US', { weekday: 'long' })
-        })
-    }
-    currentDay.setDate(currentDay.getDate() + 1)
+  // Calculate the start date for the given week
+  let startDate
+  if (weekNumber === 1) {
+    // For the first week, the start date is the first day of the month
+    startDate = firstDayOfMonth
+  } else {
+    // For subsequent weeks, calculate the start date based on the first week's end
+    const daysFromFirstDay = 7 * (weekNumber - 1) - firstDayWeekday
+    startDate = new Date(year, month - 1, 1 + daysFromFirstDay)
   }
 
-  return dates
+  // Loop through the 7 days of the week and push them into the array
+  for (let i = 0; i < 7; i++) {
+    const currentDate = new Date(startDate)
+    currentDate.setDate(startDate.getDate() + i)
+
+    // Check if the current date is within the given month
+    if (currentDate.getMonth() === month - 1 && todaysDate.getTime() < currentDate.getTime()) {
+      weekDates.push({
+        date: currentDate,
+        dayName: currentDate.toLocaleString('en-US', { weekday: 'long' })
+      })
+    }
+  }
+
+  return weekDates
 }
 
 // Function to generate weeks for a month
 export const generateWeeksForMonth = (month, year) => {
-  const firstDayOfMonth = new Date(year, month, 1)
+  const firstDayOfMonth = new Date(year, month - 1, 1)
   const lastDayOfMonth = new Date(year, month + 1, 0)
 
   const weeks = []
   let weekNum = getWeekOfMonth(firstDayOfMonth)
+  console.log(firstDayOfMonth, weekNum, month, year)
 
-  while (weekNum <= getWeekOfMonth(lastDayOfMonth)) {
+  while (weekNum < getWeekOfMonth(lastDayOfMonth)) {
     weeks.push({
       weekNumber: weekNum,
       dates: getDatesOfWeekInMonth(weekNum, month, year)

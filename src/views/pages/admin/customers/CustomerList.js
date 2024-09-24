@@ -35,43 +35,18 @@ const rows = [
   createData('Jamal Kerrod', 'Marge.Jacobson@gmail.com', '+44 7412 345678', '07/03/2024', '09/08/2024', 'InActive')
 ]
 
-const CustomerList = () => {
-  const [open, setOpen] = useState(false)
-  const [itemId, setItemId] = useState('')
-  const [page, setPage] = useState(1)
-  const [search, setSearch] = useState('')
-  const [limit, setLimit] = useState(10)
-  const [customers, setCustomers] = useState([])
-
-  const handleChange = (event, value) => {
-    console.log(event, value)
-  }
-
-  let fetchCustomers = async () => {
-    try {
-      let response = await getCustomers({ page, search, limit })
-      setCustomers(response.data)
-      console.log(response.data)
-    } catch (error) {
-      console.log(error)
-    }
-  }
-
-  useEffect(() => {
-    fetchCustomers()
-  }, [page, search])
-
+const CustomerList = ({ customers, handleChange, setOpen }) => {
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label='simple table'>
         <TableHead>
           <TableRow>
             <TableCell>User</TableCell>
-            <TableCell align='right'>Email</TableCell>
-            <TableCell align='right'>Phone</TableCell>
-            <TableCell align='right'>Acc Created On</TableCell>
-            <TableCell align='right'>Last Order On</TableCell>
-            <TableCell align='right'>Status</TableCell>
+            <TableCell align='left'>Email</TableCell>
+            <TableCell align='left'>Phone</TableCell>
+            <TableCell align='left'>Acc Created On</TableCell>
+            <TableCell align='left'>Last Order On</TableCell>
+            <TableCell align='left'>Status</TableCell>
             <TableCell align='center'>ACTIONS</TableCell>
           </TableRow>
         </TableHead>
@@ -88,17 +63,17 @@ const CustomerList = () => {
               <TableCell component='th' scope='row'>
                 {row.firstName} {row.lastName}
               </TableCell>
-              <TableCell align='right'>{row.email}</TableCell>
-              <TableCell align='right'>{row.phoneNumber}</TableCell>
-              <TableCell align='right'>{new Date(row.createdAt).toLocaleString()}</TableCell>
-              <TableCell align='right'>{new Date(row.createdAt).toLocaleString()}</TableCell>
-              <TableCell align='right'>
+              <TableCell align='left'>{row.email}</TableCell>
+              <TableCell align='left'>{row.phoneNumber}</TableCell>
+              <TableCell align='left'>{new Date(row.createdAt).toLocaleString()}</TableCell>
+              <TableCell align='left'>{new Date(row.createdAt).toLocaleString()}</TableCell>
+              <TableCell align='left'>
                 <Chip
                   rounded
                   size='small'
                   skin='light'
-                  color={row.status === 'Active' ? 'primary' : 'warning'}
-                  label={row.status}
+                  color={row.verificationStatus ? 'primary' : 'error'}
+                  label={row.verificationStatus ? 'Verified' : 'Unverified'}
                   sx={{ '& .MuiChip-label': { textTransform: 'capitalize' } }}
                 />
               </TableCell>
@@ -152,13 +127,13 @@ const CustomerList = () => {
           }}
         />
       </Stack>
-      <WarningDialog
+      {/* <WarningDialog
         open={open}
         page={1}
         title={'Are you sure'}
         message={'This will delete everything'}
         setOpen={setOpen}
-      />
+      /> */}
     </TableContainer>
   )
 }
