@@ -42,6 +42,17 @@ const MUITableCell = styled(TableCell)(({ theme }) => ({
   paddingBottom: `${theme.spacing(1)} !important`
 }))
 
+const groupByWeek = items => {
+  const grouped = {}
+  items?.forEach(item => {
+    if (!grouped[item.week]) {
+      grouped[item.week] = []
+    }
+    grouped[item.week].push(item)
+  })
+  return grouped
+}
+
 const InvoicePrint = () => {
   const router = useRouter()
 
@@ -69,9 +80,9 @@ const InvoicePrint = () => {
           setError(true)
         })
   }, [id])
-  if (data) {
-    const { invoice, paymentDetails } = data
 
+  let groupedItems = groupByWeek(data?.items)
+  if (data) {
     return (
       <Box sx={{ p: 12, pb: 6 }}>
         <Grid container>
@@ -158,9 +169,9 @@ const InvoicePrint = () => {
                   />
                 </svg>
 
-                <Typography variant='h4' sx={{ ml: 2.5, fontWeight: 700, lineHeight: '24px' }}>
+                {/* <Typography variant='h4' sx={{ ml: 2.5, fontWeight: 700, lineHeight: '24px' }}>
                   {themeConfig.templateName}
-                </Typography>
+                </Typography> */}
               </Box>
               <div>
                 <Typography sx={{ mb: 1, color: 'text.secondary' }}>Brixton street London </Typography>
@@ -174,7 +185,7 @@ const InvoicePrint = () => {
           <Grid item xs={4}>
             <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: { sm: 'flex-end', xs: 'flex-start' } }}>
               <Typography variant='h4' sx={{ mb: 2 }}>
-                {`Invoice #${invoice.id}`}
+                {`Invoice #${data.id}`}
               </Typography>
               <Box sx={{ mb: 2, display: 'flex' }}>
                 <Typography sx={{ mr: 3, color: 'text.secondary' }}>Date:</Typography>
@@ -183,7 +194,7 @@ const InvoicePrint = () => {
               <Box sx={{ display: 'flex' }}>
                 <Typography sx={{ mr: 3, color: 'text.secondary' }}>Order date:</Typography>
                 <Typography sx={{ fontWeight: 600, color: 'text.secondary' }}>
-                  {new Date(invoice.createdAt).toLocaleString()}
+                  {new Date(data.createdAt).toLocaleString()}
                 </Typography>
               </Box>
             </Box>
@@ -197,14 +208,16 @@ const InvoicePrint = () => {
             <Typography variant='h6' sx={{ mb: 3.5, fontWeight: 600 }}>
               Invoice To:
             </Typography>
-            <Typography sx={{ mb: 2, color: 'text.secondary' }}>{invoice?.user.name}</Typography>
-            {/* <Typography sx={{ mb: 2, color: 'text.secondary' }}>{invoice?.company}</Typography> */}
-            <Typography sx={{ mb: 2, color: 'text.secondary' }}>{invoice?.addressOne}</Typography>
-            <Typography sx={{ mb: 2, color: 'text.secondary' }}>{invoice?.addressTwo}</Typography>
-            <Typography sx={{ mb: 2, color: 'text.secondary' }}>{invoice?.email}</Typography>
-            <Typography sx={{ mb: 2, color: 'text.secondary' }}>{invoice?.phone}</Typography>
+            <Typography sx={{ mb: 2, color: 'text.secondary' }}>
+              {data?.user.firstName} {data?.user.lastName}
+            </Typography>
+            {/* <Typography sx={{ mb: 2, color: 'text.secondary' }}>{data?.company}</Typography> */}
+            <Typography sx={{ mb: 2, color: 'text.secondary' }}>{data?.user?.addressOne}</Typography>
+            <Typography sx={{ mb: 2, color: 'text.secondary' }}>{data?.user?.addressTwo}</Typography>
+            <Typography sx={{ mb: 2, color: 'text.secondary' }}>{data?.user?.email}</Typography>
+            <Typography sx={{ mb: 2, color: 'text.secondary' }}>{data?.user?.phoneNumber}</Typography>
           </Grid>
-          <Grid item xs={5} md={4}>
+          {/* <Grid item xs={5} md={4}>
             <Typography variant='h6' sx={{ mb: 3.5, fontWeight: 600 }}>
               Bill To:
             </Typography>
@@ -213,28 +226,28 @@ const InvoicePrint = () => {
                 <TableRow>
                   <MUITableCell sx={{ color: 'text.secondary' }}>Total Due:</MUITableCell>
                   <MUITableCell sx={{ fontWeight: 500, color: 'text.secondary' }}>
-                    {paymentDetails.totalDue}
+                    {data?.payment?.totalDue}
                   </MUITableCell>
                 </TableRow>
                 <TableRow>
                   <MUITableCell sx={{ color: 'text.secondary' }}>Bank name:</MUITableCell>
-                  <MUITableCell sx={{ color: 'text.secondary' }}>{paymentDetails.bankName}</MUITableCell>
+                  <MUITableCell sx={{ color: 'text.secondary' }}>{data?.payment?.bankName}</MUITableCell>
                 </TableRow>
                 <TableRow>
                   <MUITableCell sx={{ color: 'text.secondary' }}>Country:</MUITableCell>
-                  <MUITableCell sx={{ color: 'text.secondary' }}>{paymentDetails.country}</MUITableCell>
+                  <MUITableCell sx={{ color: 'text.secondary' }}>{data?.payment?.country}</MUITableCell>
                 </TableRow>
                 <TableRow>
                   <MUITableCell sx={{ color: 'text.secondary' }}>IBAN:</MUITableCell>
-                  <MUITableCell sx={{ color: 'text.secondary' }}>{paymentDetails.iban}</MUITableCell>
+                  <MUITableCell sx={{ color: 'text.secondary' }}>{data?.payment?.iban}</MUITableCell>
                 </TableRow>
                 <TableRow>
                   <MUITableCell sx={{ color: 'text.secondary' }}>SWIFT code:</MUITableCell>
-                  <MUITableCell sx={{ color: 'text.secondary' }}>{paymentDetails.swiftCode}</MUITableCell>
+                  <MUITableCell sx={{ color: 'text.secondary' }}>{data?.payment?.swiftCode}</MUITableCell>
                 </TableRow>
               </TableBody>
             </Table>
-          </Grid>
+          </Grid> */}
         </Grid>
 
         <Divider sx={{ mt: theme => `${theme.spacing(6)} !important`, mb: '0 !important' }} />
@@ -242,87 +255,121 @@ const InvoicePrint = () => {
         <Table sx={{ mb: 6 }}>
           <TableHead>
             <TableRow>
-              <TableCell>Item</TableCell>
-              <TableCell>Description</TableCell>
-              <TableCell>hours</TableCell>
-              <TableCell>qty</TableCell>
-              <TableCell>Total</TableCell>
+              <TableCell>Week</TableCell>
+              <TableCell align='left'>Date</TableCell>
+              <TableCell align='left'>Item</TableCell>
+              <TableCell align='left'>Category</TableCell>
+              <TableCell align='left'>Qty</TableCell>
+              <TableCell align='left'>Price</TableCell>
             </TableRow>
           </TableHead>
-          <TableBody
-            sx={{
-              '& .MuiTableCell-root': {
-                py: `${theme.spacing(2.5)} !important`,
-                fontSize: theme.typography.body1.fontSize
-              }
-            }}
-          >
-            <TableRow>
-              <TableCell>Premium Branding Package</TableCell>
-              <TableCell>Branding & Promotion</TableCell>
-              <TableCell>48</TableCell>
-              <TableCell>1</TableCell>
-              <TableCell>$32</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell>Social Media</TableCell>
-              <TableCell>Social media templates</TableCell>
-              <TableCell>42</TableCell>
-              <TableCell>1</TableCell>
-              <TableCell>$28</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell>Web Design</TableCell>
-              <TableCell>Web designing package</TableCell>
-              <TableCell>46</TableCell>
-              <TableCell>1</TableCell>
-              <TableCell>$24</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell>SEO</TableCell>
-              <TableCell>Search engine optimization</TableCell>
-              <TableCell>40</TableCell>
-              <TableCell>1</TableCell>
-              <TableCell>$22</TableCell>
-            </TableRow>
+          <TableBody>
+            {Object?.keys(groupedItems).map((week, index) => {
+              const weekItems = groupedItems[week]
+              return weekItems.map((item, idx) => (
+                <TableRow key={item.id}>
+                  {/* Row span for the first item of each week */}
+                  {idx === 0 && <TableCell rowSpan={weekItems.length}>Week {week}</TableCell>}
+                  <TableCell align='left'>
+                    {new Date(item.date).toLocaleDateString('en-GB', {
+                      weekday: 'long' // "Wednesday"
+                    })}
+                    <br />
+                    {new Date(item.date).toLocaleDateString('en-GB', {
+                      // "Wednesday"
+                      day: 'numeric', // "10"
+                      month: 'short', // "May"
+                      year: 'numeric' // "2024"
+                    })}
+                  </TableCell>
+                  <TableCell align='left' sx={{ fontFamily: 'DM Sans', fontWeight: '600' }}>
+                    {item.name}
+                  </TableCell>
+                  <TableCell align='left'>{item.type}</TableCell>
+                  <TableCell align='left'>{item.quantity}</TableCell>
+                  <TableCell
+                    align='left'
+                    sx={{ fontFamily: 'DM Sans', color: '#0A5247 !important', fontWeight: '900' }}
+                  >
+                    £{item.price * item.quantity}
+                  </TableCell>
+                </TableRow>
+              ))
+            })}
+            {/* {order?.items?.map((row, index) => {
+            return (
+              <TableRow
+                key={row.name}
+                sx={{
+                  '&:last-of-type td, &:last-of-type th': {
+                    border: 0
+                  }
+                }}
+              >
+                <TableCell component='th' scope='row'>
+                  Week {row.week}
+                </TableCell>
+
+                <TableCell align='left'>{row.date}</TableCell>
+                <TableCell align='left'>{row.name}</TableCell>
+                <TableCell align='left'>{row.type}</TableCell>
+                <TableCell align='left'>{row.quantity}</TableCell>
+                <TableCell align='left' sx={{ fontFamily: 'DM Sans', color: '#0A5247 !important', fontWeight: '900' }}>
+                  £{row.price * row.quantity}
+                </TableCell>
+                <TableCell align='left'>
+                  <Chip
+                    rounded
+                    size='small'
+                    skin='light'
+                    color={'primary'}
+                    label={'Available'}
+                    sx={{ '& .MuiChip-label': { textTransform: 'capitalize' } }}
+                  />
+                </TableCell>
+              </TableRow>
+            )
+          })} */}
           </TableBody>
         </Table>
 
         <Grid container>
           <Grid item xs={8} sm={7} lg={9}>
-            <Box sx={{ mb: 2, display: 'flex', alignItems: 'center' }}>
+            {/* <Box sx={{ mb: 2, display: 'flex', alignItems: 'center' }}>
               <Typography sx={{ mr: 2, fontWeight: 500, color: 'text.secondary' }}>Salesperson:</Typography>
               <Typography sx={{ color: 'text.secondary' }}>Tommy Shelby</Typography>
             </Box>
 
-            <Typography sx={{ color: 'text.secondary' }}>Thanks for your business</Typography>
+            <Typography sx={{ color: 'text.secondary' }}>Thanks for your business</Typography> */}
           </Grid>
           <Grid item xs={4} sm={5} lg={3}>
             <CalcWrapper>
               <Typography sx={{ color: 'text.secondary' }}>Subtotal:</Typography>
-              <Typography sx={{ fontWeight: 500, color: 'text.secondary' }}>$1800</Typography>
+              <Typography sx={{ fontWeight: 500, color: 'text.secondary' }}>{data?.totalPrice}</Typography>
             </CalcWrapper>
             <CalcWrapper>
               <Typography sx={{ color: 'text.secondary' }}>Discount:</Typography>
-              <Typography sx={{ fontWeight: 500, color: 'text.secondary' }}>$28</Typography>
+              <Typography sx={{ fontWeight: 500, color: 'text.secondary' }}>{data?.discountAmount}</Typography>
             </CalcWrapper>
-            <CalcWrapper>
+            {/* <CalcWrapper>
               <Typography sx={{ color: 'text.secondary' }}>Tax:</Typography>
               <Typography sx={{ fontWeight: 500, color: 'text.secondary' }}>21%</Typography>
-            </CalcWrapper>
+            </CalcWrapper> */}
             <Divider />
             <CalcWrapper>
               <Typography sx={{ color: 'text.secondary' }}>Total:</Typography>
-              <Typography sx={{ fontWeight: 500, color: 'text.secondary' }}>$1690</Typography>
+              <Typography sx={{ fontWeight: 500, color: 'text.secondary' }}>
+                {data?.totalPrice - data?.discountAmount}
+              </Typography>
             </CalcWrapper>
           </Grid>
         </Grid>
 
         <Divider sx={{ my: `${theme.spacing(6)} !important` }} />
-        <Typography sx={{ color: 'text.secondary' }}>
+        {/* <Typography sx={{ color: 'text.secondary' }}>
           <strong>Note:</strong> It was a pleasure working with you and your team. We hope you will keep us in mind for
           future freelance projects. Thank You!
-        </Typography>
+        </Typography> */}
       </Box>
     )
   } else if (error) {
