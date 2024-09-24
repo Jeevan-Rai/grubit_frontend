@@ -103,7 +103,7 @@ const OrderList = ({ orders, handleChange }) => {
               <TableCell sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%' }}>
                 <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%' }}>
                   <Tooltip title='Print'>
-                    <IconButton size='small' component={Link} href={`/order-history/${row.id}/view`}>
+                    <IconButton size='small' component={Link} href={`/admin/orders/${row.id}/print`}>
                       <svg width={22} height={22} viewBox='0 0 22 22' fill='none' xmlns='http://www.w3.org/2000/svg'>
                         <path
                           d='M15.5833 15.5833H17.4167C18.4292 15.5833 19.25 14.7625 19.25 13.75V10.0833C19.25 9.07081 18.4292 8.25 17.4167 8.25H4.58333C3.57081 8.25 2.75 9.07081 2.75 10.0833V13.75C2.75 14.7625 3.57081 15.5833 4.58333 15.5833H6.41667'
@@ -162,7 +162,7 @@ const OrderList = ({ orders, handleChange }) => {
                     </IconButton>
                   </Tooltip>
                   <Tooltip title='View'>
-                    <IconButton size='small' component={Link} href={`/order-history/${row.id}/view`}>
+                    <IconButton size='small' component={Link} href={`/admin/orders/${row.id}/view`}>
                       <svg width='22' height='22' viewBox='0 0 22 22' fill='none' xmlns='http://www.w3.org/2000/svg'>
                         <circle
                           cx='11.0003'
