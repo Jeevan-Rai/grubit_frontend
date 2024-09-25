@@ -197,8 +197,14 @@ const OrderList = ({ orders, handleChange, fetchOrders }) => {
 
                   {row?.deliveryStatus == 'Successful' && (
                     <Tooltip title='Mark Processing'>
-                      <IconButton size='small' component={Link} href={`/admin/orders/${row.id}/print`}>
-                        <Icon icon={'tabler:close'} />
+                      <IconButton
+                        color='text.error !important'
+                        onClick={() => {
+                          handleStatus(row.id)
+                        }}
+                        size='small'
+                      >
+                        <Icon icon={'tabler:x'} color='warning !important' fontSize={20} />
                       </IconButton>
                     </Tooltip>
                   )}
