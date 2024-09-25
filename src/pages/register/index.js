@@ -105,7 +105,7 @@ const RegisterPage = () => {
     } catch (error) {
       setType('error')
       setTitle('Oops!')
-      setMessage(errors.message)
+      setMessage('Something went wrong')
       setOpen(true)
       reset({})
     }
@@ -259,14 +259,14 @@ const RegisterPage = () => {
                   </Grid>
                   <Grid item xs={12} sm={6}>
                     <Controller
-                      name='Last Name'
+                      name='lastName'
                       control={control}
                       rules={{ required: true }}
                       render={({ field: { value, onChange } }) => (
                         <CustomTextField
                           fullWidth
                           value={value}
-                          label='lastName'
+                          label='Last Name'
                           onChange={onChange}
                           placeholder='Enter last name'
                           error={Boolean(errors.lastName)}
