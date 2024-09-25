@@ -21,7 +21,7 @@ export const getCouponDiscountByCart = async cart => {
 }
 
 export const changeOrder = async data => {
-  return await axiosInstance.post(`/status/update`, data)
+  return await axiosInstance.post(`/order/status/update`, data)
 }
 
 export const getOrderPaymentDetails = async sessionId => {
