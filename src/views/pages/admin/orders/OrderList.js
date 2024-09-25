@@ -22,7 +22,7 @@ import Pagination from '@mui/material/Pagination'
 import Stack from '@mui/material/Stack'
 import Iconify from '@iconify/iconify'
 import MessageDialog from 'src/views/components/dialogs/MessageDialog'
-import { getOrders } from 'src/helpers/orderHelper'
+import { changeOrder, getOrders } from 'src/helpers/orderHelper'
 
 const createData = (name, calories, fat, carbs, protein, status) => {
   return { name, calories, fat, carbs, protein, status }
@@ -60,6 +60,10 @@ const OrderList = ({ orders, handleChange }) => {
     setMessage('Are you sure you want to delete ?')
   }
 
+  const changeOrderStatus = () => {
+    changeOrder({ id: itemId })
+  }
+
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label='simple table'>
@@ -95,8 +99,8 @@ const OrderList = ({ orders, handleChange }) => {
                   rounded
                   size='small'
                   skin='light'
-                  color={'primary'}
-                  label={'Available'}
+                  color={row?.deliveryStatus == 'Processing' ? 'warning' : 'primary'}
+                  label={row?.deliveryStatus}
                   sx={{ '& .MuiChip-label': { textTransform: 'capitalize' } }}
                 />
               </TableCell>
@@ -161,6 +165,31 @@ const OrderList = ({ orders, handleChange }) => {
                       </svg>
                     </IconButton>
                   </Tooltip>
+
+                  {row?.deliveryStatus == 'Processing' && (
+                    <Tooltip title='Mark Successful'>
+                      <IconButton size='small' onClick={() => handleStatus()}>
+                        <svg width={17} height={12} viewBox='0 0 17 12' fill='none' xmlns='http://www.w3.org/2000/svg'>
+                          <path
+                            d='M1.58301 5.99984L6.16634 10.5832L15.333 1.4165'
+                            stroke='#6F6B7D'
+                            strokeWidth={2}
+                            strokeLinecap='round'
+                            strokeLinejoin='round'
+                          />
+                        </svg>
+                      </IconButton>
+                    </Tooltip>
+                  )}
+
+                  {row?.deliveryStatus == 'Successful' && (
+                    <Tooltip title='Mark Processing'>
+                      <IconButton size='small' component={Link} href={`/admin/orders/${row.id}/print`}>
+                        <Icon icon={'tabler:close'} />
+                      </IconButton>
+                    </Tooltip>
+                  )}
+
                   <Tooltip title='View'>
                     <IconButton size='small' component={Link} href={`/admin/orders/${row.id}/view`}>
                       <svg width='22' height='22' viewBox='0 0 22 22' fill='none' xmlns='http://www.w3.org/2000/svg'>
@@ -239,7 +268,14 @@ const OrderList = ({ orders, handleChange }) => {
           }}
         />
       </Stack>
-      <MessageDialog type={type} open={open} title={title} message={message} setOpen={setOpen} />
+      {/* <MessageDialog type={type} open={open} title={title} message={message} setOpen={setOpen}  /> */}
+      <WarningDialog
+        open={open}
+        title={title}
+        message={message}
+        setOpen={setOpen}
+        successCallback={() => changeOrderStatus()}
+      />
     </TableContainer>
   )
 }

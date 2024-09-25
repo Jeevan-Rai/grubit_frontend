@@ -276,7 +276,8 @@ export const OrderProvider = ({ children }) => {
         removeItemFromOrder,
         setPickupLocation,
         applyCoupon,
-        removeCoupon
+        removeCoupon,
+        clearCart
       }}
     >
       {children}
