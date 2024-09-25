@@ -65,7 +65,13 @@ const Orders = () => {
       <Grid item xs={12}>
         <Card>
           <OrderTableHeader title='Search Filter' setSearch={setSearch} date={date} setDate={setDate} />
-          <OrderList orders={orders} handleChange={handleChange} />
+          <OrderList
+            orders={orders}
+            handleChange={handleChange}
+            fetchOrders={fetchOrders}
+            setPage={setPage}
+            page={page}
+          />
         </Card>
       </Grid>
     </Grid>

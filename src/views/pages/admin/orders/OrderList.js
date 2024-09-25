@@ -23,6 +23,7 @@ import Stack from '@mui/material/Stack'
 import Iconify from '@iconify/iconify'
 import MessageDialog from 'src/views/components/dialogs/MessageDialog'
 import { changeOrder, getOrders } from 'src/helpers/orderHelper'
+import toast from 'react-hot-toast'
 
 const createData = (name, calories, fat, carbs, protein, status) => {
   return { name, calories, fat, carbs, protein, status }
@@ -33,7 +34,7 @@ const rows = [
   createData('#5089', 'Jamal Kerrod ', 'Waterloo', '07/08/2024', 'Chicken Tikka', 'Processsing')
 ]
 
-const OrderList = ({ orders, handleChange }) => {
+const OrderList = ({ orders, handleChange, fetchOrders }) => {
   const [open, setOpen] = useState(false)
   const [type, setType] = useState('')
   const [title, setTitle] = useState('')
@@ -60,8 +61,14 @@ const OrderList = ({ orders, handleChange }) => {
     setMessage('Are you sure you want to delete ?')
   }
 
-  const changeOrderStatus = () => {
-    changeOrder({ id: itemId })
+  const changeOrderStatus = async () => {
+    try {
+      await changeOrder({ id: itemId })
+      fetchOrders()
+      setOpen(false)
+    } catch (error) {
+      toast.error('Something went wrong')
+    }
   }
 
   return (
