@@ -47,7 +47,8 @@ const OrderList = ({ orders, handleChange, fetchOrders }) => {
     setMessage('Printed Successfully')
   }
 
-  const handleStatus = () => {
+  const handleStatus = id => {
+    setItemId(id)
     setOpen(true)
     setType('warning')
     setTitle('Change Status ')
@@ -175,7 +176,12 @@ const OrderList = ({ orders, handleChange, fetchOrders }) => {
 
                   {row?.deliveryStatus == 'Processing' && (
                     <Tooltip title='Mark Successful'>
-                      <IconButton size='small' onClick={() => handleStatus()}>
+                      <IconButton
+                        size='small'
+                        onClick={() => {
+                          handleStatus(row.id)
+                        }}
+                      >
                         <svg width={17} height={12} viewBox='0 0 17 12' fill='none' xmlns='http://www.w3.org/2000/svg'>
                           <path
                             d='M1.58301 5.99984L6.16634 10.5832L15.333 1.4165'
