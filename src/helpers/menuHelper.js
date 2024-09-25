@@ -102,7 +102,7 @@ export const formatDate = dateString => {
   const date = new Date(dateString)
 
   // Get the day name (e.g., Tuesday)
-  const dayName = new Intl.DateTimeFormat('en-US', { weekday: 'long' }).format(date)
+  const dayName = date.toLocaleString('en-US', { weekday: 'long' })
 
   // Get the day of the month with ordinal (e.g., 9th, 1st)
   const dayOfMonth = date.getDate()
@@ -113,7 +113,7 @@ export const formatDate = dateString => {
   }
 
   // Get the month name (e.g., Aug)
-  const monthName = new Intl.DateTimeFormat('en-US', { month: 'short' }).format(date)
+  const monthName = date.toLocaleString('en-US', { month: 'short' })
 
   // Combine into the desired format
   return `${dayName} (${ordinal(dayOfMonth)} ${monthName})`

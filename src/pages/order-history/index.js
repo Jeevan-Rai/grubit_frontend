@@ -17,6 +17,8 @@ import OrderTableHeader from 'src/views/pages/admin/orders/OrderTableHeader'
 import OrderList from 'src/views/pages/admin/orders/OrderList'
 import MainUserLayout from 'src/layouts/MainUserLayout'
 import OrderHistoryList from 'src/views/pages/admin/orders/OrderHistoryList'
+import { getOrderHistory } from 'src/helpers/orderHelper'
+import { useEffect, useState } from 'react'
 
 const LinkStyled = styled(Link)(({ theme }) => ({
   textDecoration: 'none',
@@ -24,6 +26,35 @@ const LinkStyled = styled(Link)(({ theme }) => ({
 }))
 
 const Customers = () => {
+  const [open, setOpen] = useState(false)
+  const [type, setType] = useState('')
+  const [title, setTitle] = useState('')
+  const [message, setMessage] = useState('')
+  const [itemId, setItemId] = useState('')
+  const [page, setPage] = useState(1)
+  const [search, setSearch] = useState('')
+  const [date, setDate] = useState(null)
+  const [limit, setLimit] = useState(10)
+  const [loading, setLoading] = useState(10)
+  const [orders, setOrders] = useState([])
+
+  const handleChange = (event, value) => {
+    setPage(value)
+  }
+
+  let fetchOrders = async () => {
+    try {
+      let response = await getOrderHistory({ page, search, limit, date })
+      setOrders(response.data)
+      console.log(response.data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  useEffect(() => {
+    fetchOrders()
+  }, [page, search, date])
   return (
     <Grid container spacing={6}>
       <PageHeader
@@ -39,8 +70,14 @@ const Customers = () => {
 
       <Grid item xs={12}>
         <Card>
-          <OrderTableHeader title='Search Filter' />
-          <OrderHistoryList />
+          <OrderTableHeader title='Search Filter' setSearch={setSearch} date={date} setDate={setDate} />
+          <OrderHistoryList
+            orders={orders}
+            handleChange={handleChange}
+            fetchOrders={fetchOrders}
+            setPage={setPage}
+            page={page}
+          />
         </Card>
       </Grid>
     </Grid>

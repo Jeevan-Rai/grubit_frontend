@@ -194,7 +194,7 @@ export default function UserMenuPage() {
   const tomorrow = new Date(today)
   tomorrow.setDate(today.getDate() + 1)
 
-  const [selectedDay, setSelectedDay] = useState(new Intl.DateTimeFormat('en-US', { weekday: 'long' }).format(tomorrow))
+  const [selectedDay, setSelectedDay] = useState(tomorrow.toLocaleString('en-US', { weekday: 'long' }))
   const [menuItems, setMenuItems] = useState([])
 
   const handleTabChange = (event, newValue) => {

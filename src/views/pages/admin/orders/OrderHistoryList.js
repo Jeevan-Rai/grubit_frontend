@@ -33,36 +33,7 @@ const rows = [
   createData('#5089', 'Jamal Kerrod ', 'Waterloo', '07/08/2024', 'Chicken Tikka', 'Processsing')
 ]
 
-const OrderHistoryList = () => {
-  const [open, setOpen] = useState(false)
-  const [type, setType] = useState('')
-  const [title, setTitle] = useState('')
-  const [message, setMessage] = useState('')
-  const [itemId, setItemId] = useState('')
-  const [page, setPage] = useState(1)
-  const [search, setSearch] = useState('')
-  const [limit, setLimit] = useState(10)
-  const [loading, setLoading] = useState(10)
-  const [orders, setOrders] = useState([])
-
-  const handleChange = (event, value) => {
-    setPage(value)
-  }
-
-  let fetchOrders = async () => {
-    try {
-      let response = await getOrderHistory({ page, search, limit })
-      setOrders(response.data)
-      console.log(response.data)
-    } catch (error) {
-      console.log(error)
-    }
-  }
-
-  useEffect(() => {
-    fetchOrders()
-  }, [page, search])
-
+const OrderHistoryList = ({ orders, handleChange, fetchOrders }) => {
   const handlePrint = () => {
     setOpen(true)
     setType('success')
@@ -90,10 +61,10 @@ const OrderHistoryList = () => {
         <TableHead>
           <TableRow>
             <TableCell>ID</TableCell>
-            <TableCell align='right'>Pickup Location</TableCell>
-            <TableCell align='right'>Booking Date</TableCell>
-            <TableCell align='right'>Total</TableCell>
-            <TableCell align='right'>Status</TableCell>
+            <TableCell align='left'>Pickup Location</TableCell>
+            <TableCell align='left'>Booking Date</TableCell>
+            <TableCell align='left'>Total</TableCell>
+            <TableCell align='left'>Status</TableCell>
             <TableCell align='center'>ACTIONS</TableCell>
           </TableRow>
         </TableHead>
@@ -110,17 +81,27 @@ const OrderHistoryList = () => {
               <TableCell component='th' scope='row'>
                 #{row.id}
               </TableCell>
-              <TableCell align='right'>{row?.station?.name}</TableCell>
-              <TableCell align='right'>{row.createdAt}</TableCell>
-              <TableCell align='right'>{row.totalPrice}</TableCell>
+              <TableCell align='left'>{row?.station?.name}</TableCell>
+              <TableCell align='left'>{row.createdAt}</TableCell>
+              <TableCell align='left'>{row.totalPrice}</TableCell>
 
-              <TableCell align='right'>
+              <TableCell align='left'>
                 <Chip
                   rounded
                   size='small'
                   skin='light'
-                  color={'primary'}
-                  label={'Available'}
+                  color={
+                    row.deliveryStatus === 'Processing'
+                      ? 'warning'
+                      : row.deliveryStatus === 'Successful'
+                      ? 'primary'
+                      : 'error'
+                  }
+                  label={
+                    row.deliveryStatus === 'Processing' || row.deliveryStatus === 'Successful'
+                      ? row.deliveryStatus
+                      : 'Payment Pending'
+                  }
                   sx={{ '& .MuiChip-label': { textTransform: 'capitalize' } }}
                 />
               </TableCell>
@@ -204,7 +185,7 @@ const OrderHistoryList = () => {
           }}
         />
       </Stack>
-      <MessageDialog type={type} open={open} title={title} message={message} setOpen={setOpen} />
+      {/* <MessageDialog type={type} open={open} title={title} message={message} setOpen={setOpen} /> */}
     </TableContainer>
   )
 }

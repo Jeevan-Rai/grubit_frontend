@@ -77,7 +77,7 @@ export default function ContactUs() {
                           value={value}
                           label={<Label name={'Name'} />}
                           onChange={onChange}
-                          placeholder='Enter Coupon Name'
+                          placeholder='Enter your Name'
                           error={Boolean(errors.name)}
                           aria-describedby='validation-basic-first-name'
                           {...(errors.name && { helperText: 'This field is required' })}
@@ -96,7 +96,7 @@ export default function ContactUs() {
                           value={value}
                           label={<Label name={'Email'} />}
                           onChange={onChange}
-                          placeholder='Enter Coupon Name'
+                          placeholder='Enter your email'
                           error={Boolean(errors.name)}
                           aria-describedby='validation-basic-first-name'
                           {...(errors.name && { helperText: 'This field is required' })}
@@ -115,7 +115,7 @@ export default function ContactUs() {
                           value={value}
                           label={<Label name={'Phone Number'} />}
                           onChange={onChange}
-                          placeholder='Enter Coupon Name'
+                          placeholder='Enter phone number'
                           error={Boolean(errors.name)}
                           aria-describedby='validation-basic-first-name'
                           {...(errors.name && { helperText: 'This field is required' })}
@@ -146,7 +146,7 @@ export default function ContactUs() {
                   </Grid>
                   <Grid item xs={12} sm={12}>
                     <Button fullWidth type='submit' variant='contained' sx={{ mb: 4, backgroundColor: '#F56700' }}>
-                      Login
+                      Submit
                     </Button>
                   </Grid>
                 </Grid>

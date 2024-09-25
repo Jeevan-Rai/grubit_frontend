@@ -5,6 +5,7 @@ export default function Testimonials() {
   return (
     <>
       <Box
+        id='testimonials'
         sx={{
           width: '100%',
           minHeight: '85vh',

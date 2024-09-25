@@ -225,7 +225,7 @@ function Usernavbar() {
                 <>
                   <Tooltip title='Open settings'>
                     <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                      <Avatar alt='Remy Sharp' src='/static/images/avatar/2.jpg' />
+                      <Avatar alt={user?.firstName} src='/static/images/avatar/2.jpg' />
                     </IconButton>
                   </Tooltip>
                   <Menu
@@ -244,6 +244,9 @@ function Usernavbar() {
                     open={Boolean(anchorElUser)}
                     onClose={handleCloseUserMenu}
                   >
+                    <MenuItem component={Link} href='/account'>
+                      <Typography sx={{ textAlign: 'center' }}>Account</Typography>
+                    </MenuItem>
                     <MenuItem component={Link} href='/cart'>
                       <Typography sx={{ textAlign: 'center' }}>Cart</Typography>
                     </MenuItem>

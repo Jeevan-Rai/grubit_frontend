@@ -154,7 +154,7 @@ const OrderSuccess = () => {
                 <Typography component='span' sx={{ fontWeight: 500, color: 'text.secondary' }}>
                   Time placed:
                 </Typography>{' '}
-                {new Date(order?.createdAt).toLocaleTimeString()}
+                {new Date(order?.createdAt).toLocaleString()}
               </Typography>
             </Box>
           </Box>
@@ -194,6 +194,8 @@ const OrderSuccess = () => {
                 </Box>
                 <Typography variant='h6'>Payment Details</Typography>
               </Box>
+              <Typography sx={{ mb: 4, fontWeight: 500 }}>Total Price: {order?.totalPrice}</Typography>
+              <Typography sx={{ mb: 4, fontWeight: 500 }}>Paid Amount: {order?.discountAmount}</Typography>
               <Typography sx={{ mb: 4, fontWeight: 500 }}>Paid Amount: {order?.payment?.amountTotal}</Typography>
               {/* <Typography>Standard Delivery</Typography>
               <Typography>(Normally 3-4 business days)</Typography> */}

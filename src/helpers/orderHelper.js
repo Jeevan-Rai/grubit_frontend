@@ -4,8 +4,8 @@ export const createOrder = async orderData => {
   return await axiosInstance.post('/order/create-order', orderData)
 }
 
-export const getOrderHistory = async ({ page, search, limit }) => {
-  return await axiosInstance.get(`/order/history?page=${page}&search=${search}&limit=${limit}`)
+export const getOrderHistory = async ({ page, search, limit, date }) => {
+  return await axiosInstance.get(`/order/history?page=${page}&search=${search}&limit=${limit}&date=${date}`)
 }
 
 export const getOrders = async ({ page, search, limit, date }) => {

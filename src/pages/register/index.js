@@ -259,7 +259,7 @@ const RegisterPage = () => {
                   </Grid>
                   <Grid item xs={12} sm={6}>
                     <Controller
-                      name='lastName'
+                      name='Last Name'
                       control={control}
                       rules={{ required: true }}
                       render={({ field: { value, onChange } }) => (
