@@ -232,11 +232,16 @@ export const OrderProvider = ({ children }) => {
         .map(order => {
           if (order.date === date) {
             const updatedItems = order.Items.filter(item => item.id !== itemId)
+            console.log(updatedItems)
+
             return { ...order, Items: updatedItems }
           }
+
           return order
         })
         .filter(order => order.Items.length > 0) // Remove empty dates
+
+      console.log(updatedWeekOrders, itemId, week)
 
       const updatedOrders = {
         ...prevOrders,

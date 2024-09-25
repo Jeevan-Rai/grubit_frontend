@@ -6,12 +6,20 @@ export const registerUser = async data => {
   return (data = axiosInstance.post(`${BASE_URL}/auth/register`, data))
 }
 
+export const forgotPassword = async data => {
+  return (data = axiosInstance.post(`${BASE_URL}/auth/forgot-password`, data))
+}
+
 export const updateUser = async data => {
   return (data = axiosInstance.put(`${BASE_URL}/auth/update-profile`, data))
 }
 
 export const updatePassword = async data => {
   return (data = axiosInstance.put(`${BASE_URL}/auth/update-password`, data))
+}
+
+export const updateForgotPassword = async data => {
+  return (data = axiosInstance.put(`${BASE_URL}/auth/forgot-password/update`, data))
 }
 
 export const getCustomers = async ({ page, search, limit }) => {

@@ -43,6 +43,9 @@ import BlankLayout from 'src/@core/layouts/BlankLayout'
 
 import RedirectIfAuthenticated from 'src/guards/RedirectIfAuthenticated'
 import { borderRadius } from '@mui/system'
+import { forgotPassword } from 'src/helpers/authHelpers'
+import toast from 'react-hot-toast'
+import MessageDialog from 'src/views/components/dialogs/MessageDialog'
 
 // ** Styled Components
 const LoginIllustration = styled('img')(({ theme }) => ({
@@ -92,7 +95,7 @@ const defaultValues = {
   email: 'admin@grubit.com'
 }
 
-const LoginPage = () => {
+const ForgotPassword = () => {
   const [rememberMe, setRememberMe] = useState(true)
   const [showPassword, setShowPassword] = useState(false)
 
@@ -102,7 +105,10 @@ const LoginPage = () => {
   const bgColors = useBgColor()
   const { settings } = useSettings()
   const hidden = useMediaQuery(theme.breakpoints.down('md'))
-
+  const [open, setOpen] = useState(false)
+  const [type, setType] = useState(false)
+  const [title, setTitle] = useState(false)
+  const [message, setMessage] = useState(false)
   // ** Vars
   const { skin } = settings
 
@@ -117,14 +123,27 @@ const LoginPage = () => {
     resolver: yupResolver(schema)
   })
 
-  const onSubmit = data => {
-    const { email, password } = data
-    auth.login({ email, password, rememberMe }, () => {
-      setError('email', {
-        type: 'manual',
-        message: 'Email or Password is invalid'
-      })
-    })
+  const onSubmit = async data => {
+    try {
+      const { email, password } = data
+      const response = await forgotPassword({ email })
+
+      if (response.status === 200) {
+        setType('success')
+        setTitle('Verify your email ✉️')
+        setMessage(
+          `We sent a verification code to your email address : ${data.email}.  Please follow the link inside to continue.`
+        )
+        setOpen(true)
+        reset({
+          email: ''
+        })
+      } else {
+        toast.error(response?.data?.message)
+      }
+    } catch (error) {
+      toast.error(error?.response?.data?.message)
+    }
   }
   const imageSource = skin === 'bordered' ? 'auth-v2-login-illustration-bordered' : 'auth-v2-login-illustration'
 
@@ -237,10 +256,10 @@ const LoginPage = () => {
             </Box>
             <Box sx={{ my: 2 }}>
               <Typography variant='h3' sx={{ mb: 1.5 }}>
-                {`Welcome to ${themeConfig.templateName}! 👋🏻`}
+                Forgot Password? 🔒
               </Typography>
               <Typography sx={{ color: 'text.secondary' }}>
-                Please sign in to your account and start the nourishing journey
+                Enter your email, and we'll send you instructions to reset your password
               </Typography>
             </Box>
             {/* <Alert icon={false} sx={{ py: 3, mb: 6, ...bgColors.primaryLight, '& .MuiAlert-message': { p: 0 } }}>
@@ -272,39 +291,6 @@ const LoginPage = () => {
                   )}
                 />
               </Box>
-              <Box sx={{ mb: 1.5 }}>
-                <Controller
-                  name='password'
-                  control={control}
-                  rules={{ required: true }}
-                  render={({ field: { value, onChange, onBlur } }) => (
-                    <CustomTextField
-                      fullWidth
-                      value={value}
-                      onBlur={onBlur}
-                      label='Password'
-                      onChange={onChange}
-                      id='auth-login-v2-password'
-                      error={Boolean(errors.password)}
-                      {...(errors.password && { helperText: errors.password.message })}
-                      type={showPassword ? 'text' : 'password'}
-                      InputProps={{
-                        endAdornment: (
-                          <InputAdornment position='end'>
-                            <IconButton
-                              edge='end'
-                              onMouseDown={e => e.preventDefault()}
-                              onClick={() => setShowPassword(!showPassword)}
-                            >
-                              <Icon fontSize='1.25rem' icon={showPassword ? 'tabler:eye' : 'tabler:eye-off'} />
-                            </IconButton>
-                          </InputAdornment>
-                        )
-                      }}
-                    />
-                  )}
-                />
-              </Box>
               <Box
                 sx={{
                   mb: 1.75,
@@ -318,30 +304,41 @@ const LoginPage = () => {
                   label='Remember Me'
                   control={<Checkbox checked={rememberMe} onChange={e => setRememberMe(e.target.checked)} />}
                 /> */}
-                <Typography component={LinkStyled} href='/auth/forgot-password'>
+                {/* <Typography component={LinkStyled} href='/forgot-password'>
                   Forgot Password?
-                </Typography>
+                </Typography> */}
               </Box>
-              <Button fullWidth type='submit' variant='contained' sx={{ mb: 4 }}>
-                Login
+              <Button fullWidth type='submit' variant='contained' sx={{ mb: 4, backgroundColor: '#F56700' }}>
+                Verify Account
               </Button>
-              <Box sx={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', justifyContent: 'center' }}>
-                <Typography sx={{ color: 'text.secondary', mr: 2 }}>New on our platform?</Typography>
-                <Typography href='/register' component={LinkStyled}>
-                  Create an account
-                </Typography>
-              </Box>
+              <Button
+                fullWidth
+                component={Link}
+                href={'/login'}
+                variant='contained'
+                sx={{
+                  mb: 4,
+                  backgroundColor: 'transparent',
+                  color: 'text.primary',
+                  '&:hover': {
+                    backgroundColor: 'transparent'
+                  }
+                }}
+              >
+                Cancel
+              </Button>
             </form>
           </Box>
         </Box>
       </RightWrapper>
+      <MessageDialog type={type} open={open} setOpen={setOpen} title={title} message={message} />
     </Box>
   )
 }
-LoginPage.getLayout = page => (
+ForgotPassword.getLayout = page => (
   <RedirectIfAuthenticated>
     <BlankLayout>{page}</BlankLayout>
   </RedirectIfAuthenticated>
 )
 
-export default LoginPage
+export default ForgotPassword

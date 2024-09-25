@@ -59,7 +59,7 @@ const CouponRedeemersPage = () => {
         title={
           <Typography variant='h4'>
             <LinkStyled href='https://mui.com/material-ui/react-table/' target='_blank'>
-              Customers List
+              Redeemers
             </LinkStyled>
           </Typography>
         }

@@ -2,7 +2,7 @@ const userNavItems = () => {
   return [
     {
       title: 'Account',
-      path: '#',
+      path: '/account',
       icon: 'tabler:chart-bar'
     },
     {

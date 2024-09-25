@@ -177,7 +177,7 @@ export default function GuestMenu() {
   const month = new Date().getMonth() + 1 // Use current month
 
   const weeks = generateWeeksForMonth(month, year)
-  const currentWeekNumber = getCurrentWeekNumber(month, year)
+  const currentWeekNumber = getCurrentWeekNumber(month, year) - 1
   const router = useRouter()
   const [currentSlide, setCurrentSlide] = useState(0)
   const [loaded, setLoaded] = useState(false)

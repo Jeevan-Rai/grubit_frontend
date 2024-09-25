@@ -96,7 +96,14 @@ const CartOrderDetails = () => {
                 <TableCell>{item.category}</TableCell>
                 <TableCell>{item.quantity || '-'}</TableCell>
                 <TableCell>{item.price || '-'}</TableCell>
-                <TableCell align='left' sx={{ color: 'red !important' }}>
+                <TableCell
+                  align='left'
+                  onClick={() => {
+                    setOpen(true),
+                      setItemToDelete({ category: item.category, week: 1, date: day.date, itemId: item.id })
+                  }}
+                  sx={{ color: 'red !important' }}
+                >
                   <Icon icon={'tabler:trash'} />
                 </TableCell>
               </TableRow>
@@ -118,7 +125,14 @@ const CartOrderDetails = () => {
                 <TableCell>{item.category}</TableCell>
                 <TableCell>{item.quantity || '-'}</TableCell>
                 <TableCell>{item.price || '-'}</TableCell>
-                <TableCell align='left' sx={{ color: 'red !important' }}>
+                <TableCell
+                  align='left'
+                  onClick={() => {
+                    setOpen(true),
+                      setItemToDelete({ category: item.category, week: 2, date: day.date, itemId: item.id })
+                  }}
+                  sx={{ color: 'red !important' }}
+                >
                   <Icon icon={'tabler:trash'} />
                 </TableCell>
               </TableRow>
@@ -169,7 +183,14 @@ const CartOrderDetails = () => {
                 <TableCell>{item.category}</TableCell>
                 <TableCell>{item.quantity || '-'}</TableCell>
                 <TableCell>{item.price || '-'}</TableCell>
-                <TableCell align='left' sx={{ color: 'red !important' }}>
+                <TableCell
+                  align='left'
+                  onClick={() => {
+                    setOpen(true),
+                      setItemToDelete({ category: item.category, week: 4, date: day.date, itemId: item.id })
+                  }}
+                  sx={{ color: 'red !important' }}
+                >
                   <Icon icon={'tabler:trash'} />
                 </TableCell>
               </TableRow>
@@ -191,7 +212,14 @@ const CartOrderDetails = () => {
                 <TableCell>{item.category}</TableCell>
                 <TableCell>{item.quantity || '-'}</TableCell>
                 <TableCell>{item.price || '-'}</TableCell>
-                <TableCell align='left' sx={{ color: 'red !important' }}>
+                <TableCell
+                  align='left'
+                  onClick={() => {
+                    setOpen(true),
+                      setItemToDelete({ category: item.category, week: 5, date: day.date, itemId: item.id })
+                  }}
+                  sx={{ color: 'red !important' }}
+                >
                   <Icon icon={'tabler:trash'} />
                 </TableCell>
               </TableRow>

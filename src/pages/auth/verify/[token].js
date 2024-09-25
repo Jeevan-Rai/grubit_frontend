@@ -171,8 +171,9 @@ const TwoStepsV2 = ({}) => {
       if (response.status === 200) {
         toast.success('User verification successfull')
         router.replace('/login')
+      } else {
+        toast.error('User verification failed')
       }
-      toast.error('User verification failed')
     } catch (error) {
       toast.error('User verification failed')
     }

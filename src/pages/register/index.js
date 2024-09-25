@@ -34,7 +34,8 @@ import themeConfig from 'src/configs/themeConfig'
 import BlankLayout from 'src/@core/layouts/BlankLayout'
 
 import RedirectIfAuthenticated from 'src/guards/RedirectIfAuthenticated'
-import { CardActions, CardContent, Grid, MenuItem } from '@mui/material'
+import { CardActions, CardContent, Grid, IconButton, InputAdornment, MenuItem } from '@mui/material'
+import Icon from 'src/@core/components/icon'
 import { registerUser } from 'src/helpers/authHelpers'
 import MessageDialog from 'src/views/components/dialogs/MessageDialog'
 
@@ -53,6 +54,7 @@ const defaultValues = {
 const RegisterPage = () => {
   const [rememberMe, setRememberMe] = useState(true)
   const [showPassword, setShowPassword] = useState(false)
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false)
   const [open, setOpen] = useState(false)
   const [type, setType] = useState(false)
   const [title, setTitle] = useState(false)
@@ -411,7 +413,7 @@ const RegisterPage = () => {
                       name='password'
                       control={control}
                       rules={{ required: true }}
-                      render={({ field: { value, onChange } }) => (
+                      render={({ field: { value, onChange, onBlur } }) => (
                         <CustomTextField
                           fullWidth
                           value={value}
@@ -421,6 +423,20 @@ const RegisterPage = () => {
                           error={Boolean(errors.password)}
                           aria-describedby='validation-basic-first-name'
                           {...(errors.password && { helperText: 'This field is required' })}
+                          type={showPassword ? 'text' : 'password'}
+                          InputProps={{
+                            endAdornment: (
+                              <InputAdornment position='end'>
+                                <IconButton
+                                  edge='end'
+                                  onMouseDown={e => e.preventDefault()}
+                                  onClick={() => setShowPassword(!showPassword)}
+                                >
+                                  <Icon fontSize='1.25rem' icon={showPassword ? 'tabler:eye' : 'tabler:eye-off'} />
+                                </IconButton>
+                              </InputAdornment>
+                            )
+                          }}
                         />
                       )}
                     />
@@ -444,6 +460,23 @@ const RegisterPage = () => {
                           error={Boolean(errors.confirmPassword)}
                           aria-describedby='validation-basic-first-name'
                           {...(errors.confirmPassword && { helperText: errors.confirmPassword.message })}
+                          type={showConfirmPassword ? 'text' : 'password'}
+                          InputProps={{
+                            endAdornment: (
+                              <InputAdornment position='end'>
+                                <IconButton
+                                  edge='end'
+                                  onMouseDown={e => e.preventDefault()}
+                                  onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                                >
+                                  <Icon
+                                    fontSize='1.25rem'
+                                    icon={showConfirmPassword ? 'tabler:eye' : 'tabler:eye-off'}
+                                  />
+                                </IconButton>
+                              </InputAdornment>
+                            )
+                          }}
                         />
                       )}
                     />

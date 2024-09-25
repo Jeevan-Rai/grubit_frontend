@@ -43,6 +43,10 @@ import BlankLayout from 'src/@core/layouts/BlankLayout'
 
 import RedirectIfAuthenticated from 'src/guards/RedirectIfAuthenticated'
 import { borderRadius } from '@mui/system'
+import { forgotPassword, updateForgotPassword } from 'src/helpers/authHelpers'
+import toast from 'react-hot-toast'
+import MessageDialog from 'src/views/components/dialogs/MessageDialog'
+import { useRouter } from 'next/router'
 
 // ** Styled Components
 const LoginIllustration = styled('img')(({ theme }) => ({
@@ -92,17 +96,22 @@ const defaultValues = {
   email: 'admin@grubit.com'
 }
 
-const LoginPage = () => {
+const ForgotPassword = () => {
   const [rememberMe, setRememberMe] = useState(true)
   const [showPassword, setShowPassword] = useState(false)
-
+  const router = useRouter()
+  const { token } = router.query
   // ** Hooks
   const auth = useAuth()
   const theme = useTheme()
   const bgColors = useBgColor()
   const { settings } = useSettings()
   const hidden = useMediaQuery(theme.breakpoints.down('md'))
-
+  const [open, setOpen] = useState(false)
+  const [type, setType] = useState(false)
+  const [title, setTitle] = useState(false)
+  const [message, setMessage] = useState(false)
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false)
   // ** Vars
   const { skin } = settings
 
@@ -110,21 +119,28 @@ const LoginPage = () => {
     control,
     setError,
     handleSubmit,
+    watch,
     formState: { errors }
   } = useForm({
     defaultValues,
     mode: 'onBlur',
     resolver: yupResolver(schema)
   })
+  const password = watch('password', '')
+  const onSubmit = async data => {
+    try {
+      const { password, confirmPassword } = data
+      const response = await updateForgotPassword({ password, confirmPassword, token })
 
-  const onSubmit = data => {
-    const { email, password } = data
-    auth.login({ email, password, rememberMe }, () => {
-      setError('email', {
-        type: 'manual',
-        message: 'Email or Password is invalid'
-      })
-    })
+      if (response.status === 200) {
+        toast.success('Password updated successfully')
+        router.replace('/login')
+      } else {
+        toast.error(response?.data?.message)
+      }
+    } catch (error) {
+      toast.error(error?.response?.data?.message)
+    }
   }
   const imageSource = skin === 'bordered' ? 'auth-v2-login-illustration-bordered' : 'auth-v2-login-illustration'
 
@@ -237,10 +253,10 @@ const LoginPage = () => {
             </Box>
             <Box sx={{ my: 2 }}>
               <Typography variant='h3' sx={{ mb: 1.5 }}>
-                {`Welcome to ${themeConfig.templateName}! 👋🏻`}
+                Verified!
               </Typography>
               <Typography sx={{ color: 'text.secondary' }}>
-                Please sign in to your account and start the nourishing journey
+                Please provide a new password to access you account
               </Typography>
             </Box>
             {/* <Alert icon={false} sx={{ py: 3, mb: 6, ...bgColors.primaryLight, '& .MuiAlert-message': { p: 0 } }}>
@@ -254,26 +270,6 @@ const LoginPage = () => {
             <form noValidate autoComplete='off' onSubmit={handleSubmit(onSubmit)}>
               <Box sx={{ mb: 4 }}>
                 <Controller
-                  name='email'
-                  control={control}
-                  rules={{ required: true }}
-                  render={({ field: { value, onChange, onBlur } }) => (
-                    <CustomTextField
-                      fullWidth
-                      autoFocus
-                      label='Email'
-                      value={value}
-                      onBlur={onBlur}
-                      onChange={onChange}
-                      placeholder='admin@vuexy.com'
-                      error={Boolean(errors.email)}
-                      {...(errors.email && { helperText: errors.email.message })}
-                    />
-                  )}
-                />
-              </Box>
-              <Box sx={{ mb: 1.5 }}>
-                <Controller
                   name='password'
                   control={control}
                   rules={{ required: true }}
@@ -281,12 +277,12 @@ const LoginPage = () => {
                     <CustomTextField
                       fullWidth
                       value={value}
-                      onBlur={onBlur}
                       label='Password'
                       onChange={onChange}
-                      id='auth-login-v2-password'
+                      placeholder='Enter Password'
                       error={Boolean(errors.password)}
-                      {...(errors.password && { helperText: errors.password.message })}
+                      aria-describedby='validation-basic-first-name'
+                      {...(errors.password && { helperText: 'This field is required' })}
                       type={showPassword ? 'text' : 'password'}
                       InputProps={{
                         endAdornment: (
@@ -297,6 +293,42 @@ const LoginPage = () => {
                               onClick={() => setShowPassword(!showPassword)}
                             >
                               <Icon fontSize='1.25rem' icon={showPassword ? 'tabler:eye' : 'tabler:eye-off'} />
+                            </IconButton>
+                          </InputAdornment>
+                        )
+                      }}
+                    />
+                  )}
+                />
+              </Box>
+              <Box sx={{ mb: 4 }}>
+                <Controller
+                  name='confirmPassword'
+                  control={control}
+                  rules={{
+                    required: 'This field is required',
+                    validate: value => value === password || 'Passwords do not match'
+                  }}
+                  render={({ field: { value, onChange } }) => (
+                    <CustomTextField
+                      fullWidth
+                      value={value}
+                      label='Confirm Password'
+                      onChange={onChange}
+                      placeholder='Enter Post Code'
+                      error={Boolean(errors.confirmPassword)}
+                      aria-describedby='validation-basic-first-name'
+                      {...(errors.confirmPassword && { helperText: errors.confirmPassword.message })}
+                      type={showConfirmPassword ? 'text' : 'password'}
+                      InputProps={{
+                        endAdornment: (
+                          <InputAdornment position='end'>
+                            <IconButton
+                              edge='end'
+                              onMouseDown={e => e.preventDefault()}
+                              onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                            >
+                              <Icon fontSize='1.25rem' icon={showConfirmPassword ? 'tabler:eye' : 'tabler:eye-off'} />
                             </IconButton>
                           </InputAdornment>
                         )
@@ -318,30 +350,41 @@ const LoginPage = () => {
                   label='Remember Me'
                   control={<Checkbox checked={rememberMe} onChange={e => setRememberMe(e.target.checked)} />}
                 /> */}
-                <Typography component={LinkStyled} href='/auth/forgot-password'>
+                {/* <Typography component={LinkStyled} href='/forgot-password'>
                   Forgot Password?
-                </Typography>
+                </Typography> */}
               </Box>
-              <Button fullWidth type='submit' variant='contained' sx={{ mb: 4 }}>
-                Login
+              <Button fullWidth type='submit' variant='contained' sx={{ mb: 4, backgroundColor: '#F56700' }}>
+                Verify Account
               </Button>
-              <Box sx={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', justifyContent: 'center' }}>
-                <Typography sx={{ color: 'text.secondary', mr: 2 }}>New on our platform?</Typography>
-                <Typography href='/register' component={LinkStyled}>
-                  Create an account
-                </Typography>
-              </Box>
+              <Button
+                fullWidth
+                component={Link}
+                href={'/login'}
+                variant='contained'
+                sx={{
+                  mb: 4,
+                  backgroundColor: 'transparent',
+                  color: 'text.primary',
+                  '&:hover': {
+                    backgroundColor: 'transparent'
+                  }
+                }}
+              >
+                Cancel
+              </Button>
             </form>
           </Box>
         </Box>
       </RightWrapper>
+      <MessageDialog type={type} open={open} setOpen={setOpen} title={title} message={message} />
     </Box>
   )
 }
-LoginPage.getLayout = page => (
+ForgotPassword.getLayout = page => (
   <RedirectIfAuthenticated>
     <BlankLayout>{page}</BlankLayout>
   </RedirectIfAuthenticated>
 )
 
-export default LoginPage
+export default ForgotPassword

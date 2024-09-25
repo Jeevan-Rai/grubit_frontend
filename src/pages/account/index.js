@@ -119,7 +119,7 @@ const AccountPage = () => {
         title={
           <Typography variant='h4'>
             <LinkStyled href='https://mui.com/material-ui/react-table/' target='_blank'>
-              Add Menu Items
+              Account
             </LinkStyled>
           </Typography>
         }

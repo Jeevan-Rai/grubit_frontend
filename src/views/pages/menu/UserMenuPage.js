@@ -183,7 +183,7 @@ export default function UserMenuPage() {
   const month = new Date().getMonth() + 1 // Use current month
 
   const weeks = generateWeeksForMonth(month, year)
-  const currentWeekNumber = getCurrentWeekNumber(month, year)
+  const currentWeekNumber = getCurrentWeekNumber(month, year) - 1
 
   const [currentSlide, setCurrentSlide] = useState(0)
   const [loaded, setLoaded] = useState(false)

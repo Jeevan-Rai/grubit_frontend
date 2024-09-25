@@ -43,7 +43,8 @@ const EditCoupon = () => {
       ...coupon,
       validFrom: coupon?.validFrom ? new Date(coupon?.validFrom) : new Date(),
       validTill: coupon?.validTill ? new Date(coupon?.validTill) : new Date(),
-      category: coupon?.itemType
+      category: coupon?.itemType,
+      discountType: coupon?.discountType
     }
   })
 
@@ -141,18 +142,19 @@ const EditCoupon = () => {
                 name='discountType'
                 control={control}
                 rules={{ required: true }}
-                render={({ field: { value, onChange } }) => (
+                render={({ field }) => (
                   <CustomTextField
+                    {...field}
                     select
                     fullWidth
-                    value={value}
-                    label='Coupon Type'
-                    onChange={onChange}
+                    // value={value}
+                    label={'Coupon Type '}
+                    // onChange={onChange}
                     placeholder='Enter Coupon Type'
                     error={Boolean(errors.category)}
                     aria-describedby='validation-basic-first-name'
                     {...(errors.category && { helperText: 'This field is required' })}
-                    defaultValue={value}
+                    // defaultValue={value}
                   >
                     <MenuItem value='Percentage'>Percentage</MenuItem>
                     <MenuItem value='Flat'>Flat</MenuItem>

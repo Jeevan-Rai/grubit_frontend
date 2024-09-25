@@ -38,7 +38,7 @@ const PickupLocation = () => {
       <Grid item xs={12}>
         <Card>
           <CardHeader title='Discount Coupons' />
-          <CouponTableHeader />
+          {/* <CouponTableHeader /> */}
           <CouponList />
         </Card>
       </Grid>
