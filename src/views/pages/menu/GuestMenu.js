@@ -10,6 +10,7 @@ import Link from 'next/link'
 import { useOrder } from 'src/context/OrderContext'
 import toast from 'react-hot-toast'
 import { useRouter } from 'next/router'
+import { getWeekOfMonth } from 'date-fns'
 
 const WeekButton = ({ week, active = false, onClick, currentWeekNumber }) => {
   return (
@@ -177,7 +178,7 @@ export default function GuestMenu() {
   const month = new Date().getMonth() + 1 // Use current month
 
   const weeks = generateWeeksForMonth(month, year)
-  const currentWeekNumber = getCurrentWeekNumber(month, year) - 1
+  const currentWeekNumber = getWeekOfMonth(new Date())
   const router = useRouter()
   const [currentSlide, setCurrentSlide] = useState(0)
   const [loaded, setLoaded] = useState(false)

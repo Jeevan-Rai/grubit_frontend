@@ -1,23 +1,4 @@
 import axiosInstance from './axiosInstance'
-import {
-  getDate,
-  getDay,
-  startOfMonth,
-  addDays,
-  differenceInCalendarWeeks,
-  format,
-  endOfMonth,
-  getWeeksInMonth,
-  eachDayOfInterval,
-  getMonth,
-  getWeek,
-  isAfter,
-  isToday,
-  getHours,
-  isSameDay,
-  isLastDayOfMonth,
-  isBefore
-} from 'date-fns'
 
 export const createMenu = async data => {
   return await axiosInstance.post('/menu', data)
@@ -44,59 +25,98 @@ export const fetchFoodItems = async (day, category) => {
 }
 
 function getWeekOfMonth(date) {
-  const firstDayOfMonth = startOfMonth(date)
-  return differenceInCalendarWeeks(date, firstDayOfMonth) + 1
+  const adjustedDate = date.getDate() + date.getDay()
+
+  const prefixes = ['0', '1', '2', '3', '4', '5']
+  return parseInt(prefixes[0 | (adjustedDate / 7)]) + 1
 }
 
 // Function to get the dates of a specific week in a month
-const getDatesOfWeekInMonth = (weekNumber, month, year) => {
-  const firstDayOfMonth = startOfMonth(new Date(year, month - 1))
-  const lastDayOfMonth = endOfMonth(firstDayOfMonth)
-  const startDate = addDays(firstDayOfMonth, (weekNumber - 1) * 7 - firstDayOfMonth.getDay())
+function getDatesOfWeekInMonth(weekNumber, month, year) {
+  const firstDayOfMonth = new Date(year, month - 1, 1)
+  const lastDayOfMonth = new Date(year, month + 1, 0)
   const todaysDate = new Date()
+  console.log(weekNumber)
 
-  const weekDates = Array.from({ length: 7 }, (_, i) => addDays(startDate, i))
-    .filter(date => {
-      if (isSameDay(date, todaysDate)) {
-        // Only include today's date if it's before 4 PM
-        return getHours(new Date()) < 16
-      }
+  // Get the day of the week for the first day of the month (0 = Sunday, 6 = Saturday)
+  const firstDayWeekday = firstDayOfMonth.getDay()
 
-      // Include future dates only
-      return isAfter(date, todaysDate) && isBefore(date, lastDayOfMonth)
-    })
-    .map(date => ({
-      date,
-      dayName: date.toLocaleString('en-US', { weekday: 'long' })
-    }))
+  // Initialize an array to store the dates of the week
+  const weekDates = []
+
+  // Calculate the start date for the given week
+  let startDate
+  if (weekNumber === 1) {
+    // For the first week, the start date is the first day of the month
+    startDate = firstDayOfMonth
+  } else {
+    // For subsequent weeks, calculate the start date based on the first week's end
+    const daysFromFirstDay = 7 * (weekNumber - 1) - firstDayWeekday
+    startDate = new Date(year, month - 1, 1 + daysFromFirstDay)
+  }
+
+  // Loop through the 7 days of the week and push them into the array
+  for (let i = 0; i < 7; i++) {
+    const currentDate = new Date(startDate)
+    currentDate.setDate(startDate.getDate() + i)
+
+    // Check if the current date is within the given month
+    if (currentDate.getMonth() === month - 1 && todaysDate.getTime() < currentDate.getTime()) {
+      weekDates.push({
+        date: currentDate,
+        dayName: currentDate.toLocaleString('en-US', { weekday: 'long' })
+      })
+    }
+  }
 
   return weekDates
 }
 
-// Function to generate weeks for a month while only including today's and future dates
+// Function to generate weeks for a month
 export const generateWeeksForMonth = (month, year) => {
-  const firstDayOfMonth = startOfMonth(new Date(year, month - 1))
-  const totalWeeks = getWeeksInMonth(firstDayOfMonth)
+  const firstDayOfMonth = new Date(year, month - 1, 1)
+  const lastDayOfMonth = new Date(year, month + 1, 0)
 
-  return Array.from({ length: totalWeeks }, (_, weekNum) => ({
-    weekNumber: weekNum + 1,
-    dates: getDatesOfWeekInMonth(weekNum + 1, month, year)
-  })) // Filter out weeks with no valid dates
+  const weeks = []
+  let weekNum = getWeekOfMonth(firstDayOfMonth)
+  console.log(firstDayOfMonth, weekNum, month, year)
+
+  while (weekNum < getWeekOfMonth(lastDayOfMonth)) {
+    weeks.push({
+      weekNumber: weekNum,
+      dates: getDatesOfWeekInMonth(weekNum, month, year)
+    })
+    weekNum++
+  }
+
+  return weeks
 }
 
 export const getCurrentWeekNumber = (month, year) => {
   const today = new Date()
-  return getWeek(today)
+  return getWeekOfMonth(today)
 }
 
 export const formatDate = dateString => {
+  // Convert the string to a Date object
   const date = new Date(dateString)
 
-  const dayName = format(date, 'EEEE')
-  const dayOfMonth = format(date, 'do')
-  const monthName = format(date, 'MMM')
+  // Get the day name (e.g., Tuesday)
+  const dayName = date.toLocaleString('en-US', { weekday: 'long' })
 
-  return `${dayName} (${dayOfMonth} ${monthName})`
+  // Get the day of the month with ordinal (e.g., 9th, 1st)
+  const dayOfMonth = date.getDate()
+  const ordinal = n => {
+    const s = ['th', 'st', 'nd', 'rd']
+    const v = n % 100
+    return n + (s[(v - 20) % 10] || s[v] || s[0])
+  }
+
+  // Get the month name (e.g., Aug)
+  const monthName = date.toLocaleString('en-US', { month: 'short' })
+
+  // Combine into the desired format
+  return `${dayName} (${ordinal(dayOfMonth)} ${monthName})`
 }
 
 // export const combineWeeklyAndMakeYourOwn = (weekly, makeYourOwn) => {
