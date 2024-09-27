@@ -13,7 +13,7 @@ import UserLayout from 'src/layouts/UserLayout'
 import LocationTableHeader from 'src/views/pages/admin/pickup-locations/LocationTableHeader'
 import LocationList from 'src/views/pages/admin/pickup-locations/LocationList'
 import { useEffect, useState } from 'react'
-import { getStations } from 'src/helpers/stationHelper'
+import { getStations , deleteStation } from 'src/helpers/stationHelper'
 
 const LinkStyled = styled(Link)(({ theme }) => ({
   textDecoration: 'none',
@@ -38,7 +38,7 @@ const PickupLocation = () => {
   const onDelete = async () => {
     try {
       let response = await deleteStation(itemId)
-      fetchMenuItems()
+      fetchStations()
       setOpen(false)
     } catch (error) {}
   }

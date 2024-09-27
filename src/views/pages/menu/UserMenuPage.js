@@ -12,6 +12,9 @@ import MainUserLayout from 'src/layouts/MainUserLayout'
 import PageHeader from 'src/@core/components/page-header'
 import Link from 'next/link'
 import { set } from 'nprogress'
+import { getWeekOfMonth } from 'date-fns'
+import { useRouter } from 'next/router'
+import { useOrder } from 'src/context/OrderContext'
 const LinkStyled = styled(Link)(({ theme }) => ({
   textDecoration: 'none',
   color: theme.palette.primary.main
@@ -183,13 +186,14 @@ export default function UserMenuPage() {
   const month = new Date().getMonth() + 1 // Use current month
 
   const weeks = generateWeeksForMonth(month, year)
-  const currentWeekNumber = getCurrentWeekNumber(month, year) - 1
-
+  const currentWeekNumber = getWeekOfMonth(new Date())
+  const router = useRouter()
   const [currentSlide, setCurrentSlide] = useState(0)
   const [loaded, setLoaded] = useState(false)
   const [orderCategory, setOrderCategory] = useState('weekly')
   const [selectedWeek, setSelectedWeek] = useState(currentWeekNumber)
   const [selectedDate, setSelectedDate] = useState(new Date().toLocaleDateString())
+  const { orders } = useOrder()
   const today = new Date()
   const tomorrow = new Date(today)
   tomorrow.setDate(today.getDate() + 1)
@@ -208,6 +212,8 @@ export default function UserMenuPage() {
       setSelectedDate(weeks[newValue - 1]?.dates[0].date.toLocaleDateString())
     }
   }
+
+ 
 
   const [sliderRef, instanceRef] = useKeenSlider({
     breakpoints: {

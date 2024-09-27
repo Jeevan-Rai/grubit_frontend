@@ -340,6 +340,7 @@ const CreateMenu = () => {
                     name='wednesday'
                     control={control}
                     rules={{ required: false }}
+                    defaultValue={false}
                     render={({ field }) => (
                       <Box>
                         Wednesday
@@ -347,7 +348,6 @@ const CreateMenu = () => {
                           {...field}
                           aria-describedby='validation-basic-first-name'
                           sx={errors.wednesday ? { color: 'error.main' } : null}
-                          defaultValue={false}
                         />
                       </Box>
                     )}
@@ -430,28 +430,7 @@ const CreateMenu = () => {
                   />
                   {errors.monday && <span>This field is required</span>}
                 </Grid>
-                <Grid item xs={12} sx={{ fontWeight: '800', fontSize: '18px' }}>
-                  <Controller
-                    name='status'
-                    control={control}
-                    rules={{ required: true }}
-                    defaultValue={false}
-                    render={({ field }) => (
-                      <Box>
-                        Is the Item Available Now?
-                        <Switch
-                          {...field}
-                          aria-describedby='validation-basic-first-name'
-                          sx={errors.status ? { color: 'error.main' } : null}
-                        />{' '}
-                        <br />
-                        <small style={{ fontWeight: '400' }}>
-                          (Turning this off will automatically turn off the item respectively for all days)
-                        </small>
-                      </Box>
-                    )}
-                  />
-                </Grid>
+                
               </>
             )}
 
@@ -579,6 +558,30 @@ const CreateMenu = () => {
                 </Grid>
               </>
             )}
+
+<Grid item xs={12} sx={{ fontWeight: '800', fontSize: '18px' }}>
+                  <Controller
+                    name='status'
+                    control={control}
+                    rules={{ required: false }}
+                    defaultValue={false}
+                    render={({ field }) => (
+                      <Box>
+                        Is the Item Available Now?
+                        <Switch
+                          {...field}
+                          aria-describedby='validation-basic-first-name'
+                          sx={errors.status ? { color: 'error.main' } : null}
+                          checked={field?.value}
+                        />{' '}
+                        <br />
+                        <small style={{ fontWeight: '400' }}>
+                          (Turning this off will automatically turn off the item respectively for all days)
+                        </small>
+                      </Box>
+                    )}
+                  />
+                </Grid>
           </Grid>
         </CardContent>
         <CardActions>

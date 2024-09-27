@@ -95,7 +95,7 @@ const CartOrderDetails = () => {
                 <TableCell>{item.name || item.dish?.name}</TableCell>
                 <TableCell>{item.category}</TableCell>
                 <TableCell>{item.quantity || '-'}</TableCell>
-                <TableCell>{item.price || '-'}</TableCell>
+                <TableCell>{'£'+ Number(item.price).toFixed(2) || '-'}</TableCell>
                 <TableCell
                   align='left'
                   onClick={() => {
@@ -124,7 +124,7 @@ const CartOrderDetails = () => {
                 <TableCell>{item.name || item.dish?.name}</TableCell>
                 <TableCell>{item.category}</TableCell>
                 <TableCell>{item.quantity || '-'}</TableCell>
-                <TableCell>{item.price || '-'}</TableCell>
+                <TableCell>{'£'+ Number(item.price).toFixed(2) || '-'}</TableCell>
                 <TableCell
                   align='left'
                   onClick={() => {
@@ -153,7 +153,7 @@ const CartOrderDetails = () => {
                 <TableCell>{item.name || item.dish?.name}</TableCell>
                 <TableCell>{item.category}</TableCell>
                 <TableCell>{item.quantity || '-'}</TableCell>
-                <TableCell>{item.price || '-'}</TableCell>
+                <TableCell>{'£'+ Number(item.price).toFixed(2) || '-'}</TableCell>
                 <TableCell
                   align='left'
                   onClick={() => {
@@ -182,7 +182,7 @@ const CartOrderDetails = () => {
                 <TableCell>{item.name || item.dish?.name}</TableCell>
                 <TableCell>{item.category}</TableCell>
                 <TableCell>{item.quantity || '-'}</TableCell>
-                <TableCell>{item.price || '-'}</TableCell>
+                <TableCell>{'£'+ Number(item.price).toFixed(2) || '-'}</TableCell>
                 <TableCell
                   align='left'
                   onClick={() => {
@@ -211,7 +211,7 @@ const CartOrderDetails = () => {
                 <TableCell>{item.name || item.dish?.name}</TableCell>
                 <TableCell>{item.category}</TableCell>
                 <TableCell>{item.quantity || '-'}</TableCell>
-                <TableCell>{item.price || '-'}</TableCell>
+                <TableCell>{'£'+ Number(item.price).toFixed(2) || '-'}</TableCell>
                 <TableCell
                   align='left'
                   onClick={() => {

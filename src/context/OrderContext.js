@@ -31,6 +31,7 @@ export const OrderProvider = ({ children }) => {
   useEffect(() => {
     if (Object.keys(orders).length > 0) {
       localStorage.setItem(ORDER_STORAGE_KEY, JSON.stringify(orders))
+  
     }
   }, [orders])
 
@@ -148,8 +149,6 @@ export const OrderProvider = ({ children }) => {
   const removeCoupon = async () => {
     try {
       setOrders(prevOrders => {
-        console.log(prevOrders.totalPrice)
-
         return {
           ...prevOrders,
           couponCode: '',
@@ -223,7 +222,8 @@ export const OrderProvider = ({ children }) => {
     return null
   }
 
-  const removeItemFromOrder = (category, week, date, itemId) => {
+  const removeItemFromOrder = async(category, week, date, itemId) => {
+    
     setOrders(prevOrders => {
       const categoryOrders = prevOrders[category]
       const weekOrders = categoryOrders[week] || []
@@ -240,8 +240,7 @@ export const OrderProvider = ({ children }) => {
           return order
         })
         .filter(order => order.Items.length > 0) // Remove empty dates
-
-      console.log(updatedWeekOrders, itemId, week)
+        
 
       const updatedOrders = {
         ...prevOrders,
@@ -254,6 +253,7 @@ export const OrderProvider = ({ children }) => {
       const newTotal = calculateTotal(updatedOrders)
       return { ...updatedOrders, totalPrice: newTotal }
     })
+    removeCoupon()
   }
 
   const setPickupLocation = location => {

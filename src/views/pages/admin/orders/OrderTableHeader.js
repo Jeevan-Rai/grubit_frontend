@@ -38,7 +38,7 @@ const OrderTableHeader = ({ setSearch, setDate, date }) => {
           <CustomTextField
             fullWidth
             sx={{ mr: 4 }}
-            placeholder='Search pickup location'
+            placeholder=''
             onChange={e => setSearch(e.target.value)}
           />
         </Grid>

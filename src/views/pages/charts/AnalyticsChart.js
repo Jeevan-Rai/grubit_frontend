@@ -1,73 +1,211 @@
+// ** React Imports
+import { forwardRef, useEffect, useState } from 'react'
+
 // ** MUI Imports
 import Card from '@mui/material/Card'
 import CardHeader from '@mui/material/CardHeader'
 import CardContent from '@mui/material/CardContent'
-
+import InputAdornment from '@mui/material/InputAdornment'
+import CustomTextField from 'src/@core/components/mui/text-field'
+// ** Custom Component Import
+import DatePickerWrapper from 'src/@core/styles/libs/react-datepicker'
 // ** Third Party Imports
-import { PolarArea } from 'react-chartjs-2'
+import format from 'date-fns/format'
+import { Bar } from 'react-chartjs-2'
+import DatePicker from 'react-datepicker'
 
-// ** Custom Components Imports
-import OptionsMenu from 'src/@core/components/option-menu'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
+import { MenuItem } from '@mui/material'
+
+
+function categorizeByDate(orders) {
+  const categorizedOrders = {};
+
+    orders.forEach(order => {
+        // Extract the date from the createdAt property
+        const date = new Date(order.createdAt).toISOString().split('T')[0]; // Format: YYYY-MM-DD
+        
+        // Initialize the date entry if it doesn't exist
+        if (!categorizedOrders[date]) {
+            categorizedOrders[date] = 0;
+        }
+        
+        // Increment the count for this date
+        categorizedOrders[date]++;
+    });
+
+    // Convert the object into an array of objects
+    return Object.keys(categorizedOrders).map(date => ({
+        date,
+        count: categorizedOrders[date]
+    }));
+}
+
+function categorizeRevenueByDate(orders) {
+  const categorizedOrders = {};
+
+    orders.forEach(order => {
+        // Extract the date from the createdAt property
+        const date = new Date(order.createdAt).toISOString().split('T')[0]; // Format: YYYY-MM-DD
+        
+        // Initialize the date entry if it doesn't exist
+        if (!categorizedOrders[date]) {
+            categorizedOrders[date] = 0;
+        }
+        
+        // Increment the count for this date
+        categorizedOrders[date] += order.amountTotal;
+    });
+
+    // Convert the object into an array of objects
+    return Object.keys(categorizedOrders).map(date => ({
+        date,
+        count: categorizedOrders[date]
+    }));
+}
 
 const AnalyticsChart = props => {
   // ** Props
-  const { info, grey, green, yellow, primary, warning, legendColor } = props
+  const { yellow, labelColor, borderColor , chartData } = props
+
+  // ** States
+  const [endDate, setEndDate] = useState(null)
+  const [startDate, setStartDate] = useState(null)
+  const [category , setCategory] = useState('revenue');
+  const [labels , setLabels] = useState([]);
+  const [dataSet , setDataSet] = useState([]);
+
+  useEffect(()=>{
+    if(chartData){
+      if(category == 'revenue'){
+        let categorized = categorizeRevenueByDate(chartData?.revenue?.revenues)
+        let Labels =  categorized?.map(element=>new Date(element?.date).toLocaleDateString());
+        setLabels(Labels);
+        let amount =  categorized?.map(element=>element?.count);        
+         setDataSet(amount)
+      }
+
+      if(category == 'order'){
+
+        let categorized = categorizeByDate(chartData?.orders);
+        console.log(categorized);
+        
+        let Labels =  categorized?.map(element=>new Date(element?.date).toLocaleDateString());
+        setLabels(Labels);
+        let amount =  categorized?.map(element=>element?.count);        
+         setDataSet(amount)
+       }
+
+       if(category == 'user'){
+        let categorized = categorizeByDate(chartData?.users);
+        console.log(categorized);
+        
+        let Labels =  categorized?.map(element=>new Date(element?.date).toLocaleDateString());
+        setLabels(Labels);
+        let amount =  categorized?.map(element=>element?.count);        
+         setDataSet(amount)
+       }
+    }
+  },[chartData , category])
 
   const options = {
     responsive: true,
     maintainAspectRatio: false,
     animation: { duration: 500 },
-    layout: {
-      padding: {
-        top: -5,
-        bottom: -45
-      }
-    },
     scales: {
-      r: {
-        grid: { display: false },
-        ticks: { display: false }
+      x: {
+        grid: {
+          color: borderColor
+        },
+        ticks: { color: labelColor }
+      },
+      y: {
+        min: 0,
+        grid: {
+          color: borderColor
+        },
+        ticks: {
+          stepSize: 100,
+          color: labelColor
+        }
       }
     },
     plugins: {
-      legend: {
-        position: 'right',
-        labels: {
-          padding: 25,
-          boxWidth: 9,
-          color: legendColor,
-          usePointStyle: true
-        }
-      }
+      legend: { display: false }
     }
   }
 
   const data = {
-    labels: ['Africa', 'Asia', 'Europe', 'America', 'Antarctica', 'Australia'],
+    labels: labels,
     datasets: [
       {
-        borderWidth: 0,
-        label: 'Population (millions)',
-        data: [19, 17.5, 15, 13.5, 11, 9],
-        backgroundColor: [primary, yellow, warning, info, grey, green]
+        maxBarThickness: 15,
+        backgroundColor: yellow,
+        borderColor: 'transparent',
+        borderRadius: { topRight: 15, topLeft: 15 },
+        data: dataSet
       }
     ]
+  }
+
+
+
+  const CustomInput = forwardRef(({ ...props }, ref) => {
+    const startDate = props.start !== null ? format(props.start, 'MM/dd/yyyy') : ''
+    const endDate = props.end !== null ? ` - ${format(props.end, 'MM/dd/yyyy')}` : null
+    const value = `${startDate}${endDate !== null ? endDate : ''}`
+
+    return (
+      <CustomTextField
+        {...props}
+        value={value}
+        inputRef={ref}
+        InputProps={{
+          startAdornment: (
+            <InputAdornment position='start'>
+              <Icon fontSize='1.25rem' icon='tabler:calendar-event' />
+            </InputAdornment>
+          ),
+          endAdornment: (
+            <InputAdornment position='end'>
+              <Icon fontSize='1.25rem' icon='tabler:chevron-down' />
+            </InputAdornment>
+          )
+        }}
+      />
+    )
+  })
+
+  const handleOnChange = (value) => {
+    setCategory(value)
   }
 
   return (
     <Card>
       <CardHeader
-        title='Average Skills'
-        action={
-          <OptionsMenu
-            iconProps={{ fontSize: 20 }}
-            options={['Refresh', 'Edit', 'Share']}
-            iconButtonProps={{ size: 'small', className: 'card-more-options', sx: { color: 'text.secondary' } }}
-          />
+        title='Latest Statistics'
+        sx={{
+          flexDirection: ['column', 'row'],
+          alignItems: ['flex-start', 'center'],
+          '& .MuiCardHeader-action': { mb: 0 },
+          '& .MuiCardHeader-content': { mb: [2, 0] }
+        }}
+        action = {
+          <CustomTextField select placeholder={'Select a category'} onChange={(e)=>handleOnChange(e.target.value)}>
+
+          <MenuItem value="revenue">Revenue</MenuItem>
+          <MenuItem value="order">Order</MenuItem>
+          <MenuItem value="user">User</MenuItem>
+        </CustomTextField>
         }
-      />
+       
+      >
+        
+      </CardHeader>
       <CardContent>
-        <PolarArea data={data} height={350} options={options} />
+        
+        <Bar data={data} height={400} options={options} />
       </CardContent>
     </Card>
   )

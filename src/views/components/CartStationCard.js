@@ -82,7 +82,7 @@ export default function CartStationCard() {
             multiline
             rows={6}
             fullWidth
-            label={'Train Station'}
+            label={'Address'}
             disabled
             defaultValue={orders?.pickupLocation?.details || ''}
           />

@@ -17,7 +17,7 @@ import OptionsMenu from 'src/@core/components/option-menu'
 // ** Icon Imports
 import Icon from 'src/@core/components/icon'
 import WarningDialog from 'src/views/components/dialogs/WarningDialog'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Pagination from '@mui/material/Pagination'
 import Stack from '@mui/material/Stack'
 import Iconify from '@iconify/iconify'
@@ -34,18 +34,36 @@ const rows = [
   createData('#5089', 'Jamal Kerrod ', 'Waterloo', '07/08/2024', 'Chicken Tikka', 'Processsing')
 ]
 
-const OrderList = ({ orders, handleChange, fetchOrders }) => {
+
+
+
+const OrderItemList = ({ orders, handleChange, fetchOrders }) => {
   const [open, setOpen] = useState(false)
   const [type, setType] = useState('')
   const [title, setTitle] = useState('')
   const [message, setMessage] = useState('')
   const [itemId, setItemId] = useState('')
+  const tableRef = useRef();
+  // const handlePrint = () => {
+  //   setOpen(true)
+  //   setType('success')
+  //   setTitle('Print Order')
+  //   setMessage('Printed Successfully')
+  // }
+
   const handlePrint = () => {
-    setOpen(true)
-    setType('success')
-    setTitle('Print Order')
-    setMessage('Printed Successfully')
-  }
+    const printContents = tableRef.current.outerHTML; // Get the table HTML
+    const originalContents = document.body.innerHTML; // Store the current page's HTML
+
+    // Replace the body content with the table
+    document.body.innerHTML = printContents;
+
+    // Trigger the print dialog
+    window.print();
+
+    // Restore the original content
+    document.body.innerHTML = originalContents;
+  };
 
   const handleStatus = id => {
     setItemId(id)
@@ -65,6 +83,7 @@ const OrderList = ({ orders, handleChange, fetchOrders }) => {
   const changeOrderStatus = async () => {
     try {
       await changeOrder({ id: itemId })
+      
       fetchOrders()
       setOpen(false)
     } catch (error) {
@@ -74,20 +93,29 @@ const OrderList = ({ orders, handleChange, fetchOrders }) => {
 
   return (
     <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650 }} aria-label='simple table'>
+      <button onClick={handlePrint}>Print Table</button>
+      <Table ref={tableRef} sx={{ minWidth: 650 }} aria-label='simple table'>
         <TableHead>
           <TableRow>
             <TableCell>ID</TableCell>
+            <TableCell>Name</TableCell>
             <TableCell align='left'>Pickup Location</TableCell>
-            <TableCell align='left'>Booking Date</TableCell>
+            <TableCell align='left'>Pickup Date</TableCell>
+            <TableCell align='left'>Type</TableCell>
+            <TableCell align='left'>Primary Option</TableCell>
+            <TableCell align='left'>Toppings</TableCell>
+            <TableCell align='left'>Quantity</TableCell>
             <TableCell align='left'>Total</TableCell>
             <TableCell align='left'>Status</TableCell>
-            <TableCell align='center'>ACTIONS</TableCell>
+            {/* <TableCell align='center'>ACTIONS</TableCell> */}
           </TableRow>
         </TableHead>
         <TableBody>
-          {orders?.orders?.map(row => (
-            <TableRow
+          {orders?.orderswithPagination?.map((row,idx) => {
+            console.log(row);
+            
+            return row?.map((item,idx)=>{
+              return <TableRow
               key={row.name}
               sx={{
                 '&:last-of-type td, &:last-of-type th': {
@@ -95,12 +123,20 @@ const OrderList = ({ orders, handleChange, fetchOrders }) => {
                 }
               }}
             >
-              <TableCell component='th' scope='row'>
-                #{row.id}
-              </TableCell>
-              <TableCell align='left'>{row?.station?.name}</TableCell>
-              <TableCell align='left'>{new Date(row.createdAt).toLocaleDateString()}</TableCell>
-              <TableCell align='left'>{row.totalPrice}</TableCell>
+              {idx === 0 && <TableCell rowSpan={row.length}>#{item.orderId}</TableCell>}
+              <TableCell align='left'>{item?.name}</TableCell>
+              <TableCell align='left'>{item?.order?.station?.name}</TableCell>
+              <TableCell align='left'>{new Date(item.date).toLocaleDateString()}</TableCell>
+              <TableCell align='left'>{item.type}</TableCell>
+              <TableCell align='left'>{item?.primaryOption || 'N/A'}</TableCell>
+              <TableCell align='left'>{item?.toppings.length > 0 ? item?.toppings?.map(topping=>{
+                return <Typography>
+                  {topping.name}
+                </Typography>
+              }) : 'N/A'}</TableCell>
+              <TableCell align='left'>{item.quantity}</TableCell>
+              <TableCell align='left'>{(Number(item.price) * Number(item.quantity)).toFixed(2)}</TableCell>
+    
 
               <TableCell align='left'>
                 <Chip
@@ -108,21 +144,21 @@ const OrderList = ({ orders, handleChange, fetchOrders }) => {
                   size='small'
                   skin='light'
                   color={
-                    row?.deliveryStatus === 'Processing'
+                    item.order.deliveryStatus === 'Processing'
                       ? 'warning'
-                      : row?.deliveryStatus === 'Successful'
+                      : item.order.deliveryStatus === 'Successful'
                       ? 'primary'
                       : 'error'
                   }
                   label={
-                    row?.deliveryStatus === 'Processing' || row?.deliveryStatus === 'Successful'
-                      ? row?.deliveryStatus
+                    item.order.deliveryStatus === 'Processing' || item.order.deliveryStatus === 'Successful'
+                      ? item.order.deliveryStatus
                       : 'Payment Pending'
                   }
                   sx={{ '& .MuiChip-label': { textTransform: 'capitalize' } }}
                 />
               </TableCell>
-              <TableCell sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%' }}>
+              {/* <TableCell sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%' }}>
                 <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%' }}>
                   <Tooltip title='Print'>
                     <IconButton size='small' component={Link} href={`/admin/orders/${row.id}/print`}>
@@ -260,9 +296,12 @@ const OrderList = ({ orders, handleChange, fetchOrders }) => {
                     </IconButton>
                   </Tooltip>
                 </Box>
-              </TableCell>
+              </TableCell> */}
             </TableRow>
-          ))}
+            })
+
+            
+          })}
         </TableBody>
       </Table>
       <Stack spacing={2} sx={{ padding: '2em' }}>
@@ -309,4 +348,4 @@ const OrderList = ({ orders, handleChange, fetchOrders }) => {
   )
 }
 
-export default OrderList
+export default OrderItemList

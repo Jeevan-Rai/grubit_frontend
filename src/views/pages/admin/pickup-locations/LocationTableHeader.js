@@ -11,6 +11,7 @@ import { Grid, MenuItem, Typography } from '@mui/material'
 import ReactDatePicker from 'react-datepicker'
 import DatePickerWrapper from 'src/@core/styles/libs/react-datepicker'
 import { forwardRef } from 'react'
+import Link from 'next/link'
 
 const CustomInput = forwardRef((props, ref, label) => {
   return <CustomTextField fullWidth {...props} inputRef={ref} label={props.label} autoComplete='off' />
@@ -33,7 +34,7 @@ const LocationTableHeader = ({ setSearch, setDate, date, setStatus }) => {
       }}
     >
       <Grid container spacing={2} alignItems='center'>
-        <Grid item xs={12} sm={4}>
+        <Grid item xs={12} sm={3}>
           <CustomTextField
             fullWidth
             sx={{ mr: 4 }}
@@ -41,7 +42,7 @@ const LocationTableHeader = ({ setSearch, setDate, date, setStatus }) => {
             onChange={e => setSearch(e.target.value)}
           />
         </Grid>
-        <Grid item xs={12} sm={4}>
+        <Grid item xs={12} sm={3}>
           <>
             <DatePickerWrapper>
               <ReactDatePicker
@@ -54,7 +55,7 @@ const LocationTableHeader = ({ setSearch, setDate, date, setStatus }) => {
             </DatePickerWrapper>
           </>
         </Grid>
-        <Grid item xs={12} sm={4}>
+        <Grid item xs={12} sm={3}>
           <CustomTextField
             select
             fullWidth
@@ -69,6 +70,14 @@ const LocationTableHeader = ({ setSearch, setDate, date, setStatus }) => {
             <MenuItem value={true}>Active</MenuItem>
             <MenuItem value={false}>Inactive</MenuItem>
           </CustomTextField>
+        </Grid>
+        <Grid item xs={12} sm={3}>
+        <Link href={'/admin/pickup-locations/create'}>
+          <Button fullWidth variant='contained' sx={{ '& svg': { mr: 2 } }}>
+            <Icon fontSize='1.125rem' icon='tabler:plus' />
+            Add Location
+          </Button>
+        </Link>
         </Grid>
       </Grid>
     </Box>

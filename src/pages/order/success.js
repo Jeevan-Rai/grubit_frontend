@@ -194,9 +194,9 @@ const OrderSuccess = () => {
                 </Box>
                 <Typography variant='h6'>Payment Details</Typography>
               </Box>
-              <Typography sx={{ mb: 4, fontWeight: 500 }}>Total Price: {order?.totalPrice}</Typography>
-              <Typography sx={{ mb: 4, fontWeight: 500 }}>Paid Amount: {order?.discountAmount}</Typography>
-              <Typography sx={{ mb: 4, fontWeight: 500 }}>Paid Amount: {order?.payment?.amountTotal}</Typography>
+              <Typography sx={{ mb: 4, fontWeight: 500 }}>Total Price: £{order?.totalPrice}</Typography>
+              <Typography sx={{ mb: 4, fontWeight: 500 }}>Discount Amount: £{order?.discountAmount}</Typography>
+              <Typography sx={{ mb: 4, fontWeight: 500 }}>Paid Amount: £{order?.payment?.amountTotal}</Typography>
               {/* <Typography>Standard Delivery</Typography>
               <Typography>(Normally 3-4 business days)</Typography> */}
             </ListItem>

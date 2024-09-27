@@ -15,6 +15,7 @@ import Guard from 'src/guards/Guard'
 import UserLayout from 'src/layouts/UserLayout'
 import CouponTableHeader from 'src/views/pages/admin/coupons/CouponTableHeader'
 import CouponList from 'src/views/pages/admin/coupons/CouponList'
+import { useEffect, useState } from 'react'
 
 const LinkStyled = styled(Link)(({ theme }) => ({
   textDecoration: 'none',
@@ -22,6 +23,27 @@ const LinkStyled = styled(Link)(({ theme }) => ({
 }))
 
 const PickupLocation = () => {
+  const [open, setOpen] = useState(false)
+  const [page, setPage] = useState(1)
+  const [search, setSearch] = useState('')
+  const [start, setStart] = useState('')
+  const [end, setEnd] = useState('')
+  const [limit, setLimit] = useState(10)
+  const [coupons, setCoupons] = useState([])
+  
+
+  let fetchCoupons = async () => {
+    try {
+      let response = await getCouponItems({ page, search, limit })
+      setCoupons(response.data)
+      console.log(response.data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+  useEffect(() => {
+    fetchCoupons()
+  }, [page, search])
   return (
     <Grid container spacing={6}>
       <PageHeader
@@ -38,8 +60,8 @@ const PickupLocation = () => {
       <Grid item xs={12}>
         <Card>
           <CardHeader title='Discount Coupons' />
-          {/* <CouponTableHeader /> */}
-          <CouponList />
+          <CouponTableHeader search={search} start={start} end={end}/>
+          <CouponList coupons={coupons} open={open} setOpen={setOpen} page={page} fetchCoupons={fetchCoupons} setPage={setPage} />
         </Card>
       </Grid>
     </Grid>

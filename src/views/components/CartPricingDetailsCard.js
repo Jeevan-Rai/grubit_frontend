@@ -109,7 +109,7 @@ export default function CartPricingDetailsCard() {
                 }}
               >
                 <Typography>Bag Total</Typography>
-                <Typography sx={{ color: 'text.secondary' }}>{orders.totalPrice}</Typography>
+                <Typography sx={{ color: 'text.secondary' }}>£{orders.totalPrice}</Typography>
               </Box>
               <Box
                 sx={{
@@ -127,7 +127,7 @@ export default function CartPricingDetailsCard() {
                   onClick={e => e.preventDefault()}
                   sx={{ color: 'primary.main', textDecoration: 'none' }}
                 >
-                  {orders?.couponDiscount}
+                  £{orders?.couponDiscount}
                 </Typography>
               </Box>
               <Box
@@ -141,7 +141,7 @@ export default function CartPricingDetailsCard() {
                 }}
               >
                 <Typography>Order Total</Typography>
-                <Typography sx={{ color: 'text.secondary' }}>{orders?.discountedPrice}</Typography>
+                <Typography sx={{ color: 'text.secondary' }}>£{orders?.discountedPrice}</Typography>
               </Box>
             </Box>
           </CardContent>
@@ -157,7 +157,7 @@ export default function CartPricingDetailsCard() {
               }}
             >
               <Typography sx={{ fontWeight: 500 }}>Total</Typography>
-              <Typography sx={{ fontWeight: 500 }}>{orders?.discountedPrice}</Typography>
+              <Typography sx={{ fontWeight: 500 }}>£{orders?.discountedPrice || orders.totalPrice}</Typography>
             </Box>
           </CardContent>
         </Box>

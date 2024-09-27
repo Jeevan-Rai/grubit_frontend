@@ -134,7 +134,7 @@ const CreateLocation = () => {
               <Controller
                 name='status'
                 control={control}
-                rules={{ required: true }}
+                rules={{ required: false }}
                 render={({ field }) => (
                   <Box>
                     Is the Location Available?
@@ -142,7 +142,7 @@ const CreateLocation = () => {
                       {...field}
                       aria-describedby='validation-basic-first-name'
                       sx={errors.status ? { color: 'error.main' } : null}
-                      defaultChecked
+                      checked={field?.value}
                     />{' '}
                     <br />
                   </Box>

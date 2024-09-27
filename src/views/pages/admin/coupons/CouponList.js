@@ -28,30 +28,16 @@ const createData = (name, calories, fat, carbs, protein, toDate) => {
 
 const rows = [createData('FLASH25', 'FLASH25OFF', 'General', 24, '07/08/2024', '07/09/2024')]
 
-const CouponList = () => {
-  const [open, setOpen] = useState(false)
-  const [page, setPage] = useState(1)
-  const [search, setSearch] = useState('')
+const CouponList = ({coupons , setOpen, open , fetchCoupons , setPage}) => {
+  
+
   const [itemId, setItemId] = useState('')
-  const [limit, setLimit] = useState(10)
-  const [coupons, setCoupons] = useState([])
+
   const handleChange = (event, value) => {
-    console.log(event, value)
+    setPage(value)
   }
 
-  let fetchCoupons = async () => {
-    try {
-      let response = await getCouponItems({ page, search, limit })
-      setCoupons(response.data)
-      console.log(response.data)
-    } catch (error) {
-      console.log(error)
-    }
-  }
-
-  useEffect(() => {
-    fetchCoupons()
-  }, [page, search])
+  
 
   const onDelete = async () => {
     try {

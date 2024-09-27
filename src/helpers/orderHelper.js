@@ -12,6 +12,10 @@ export const getOrders = async ({ page, search, limit, date }) => {
   return await axiosInstance.get(`/order?page=${page}&search=${search}&limit=${limit}&date=${date}`)
 }
 
+export const getOrderItems = async ({ page, search, limit, date }) => {
+  return await axiosInstance.post(`/order/items?page=${page}&search=${search}&limit=${limit}&date=${date}`)
+}
+
 export const getOrderDetails = async id => {
   return await axiosInstance.get(`/order/${id}`)
 }

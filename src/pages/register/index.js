@@ -105,9 +105,8 @@ const RegisterPage = () => {
     } catch (error) {
       setType('error')
       setTitle('Oops!')
-      setMessage('Something went wrong')
+      setMessage(error?.response?.data?.message || 'Something went wrong')
       setOpen(true)
-      reset({})
     }
   }
   console.log(errors)
@@ -488,9 +487,9 @@ const RegisterPage = () => {
                 </Grid>
               </CardContent>
               <CardActions sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                <Button type='reset' color='secondary' variant='tonal'>
+               {/* <Button type='reset' color='secondary' variant='tonal'>
                   Reset
-                </Button>
+                </Button> */}
                 <Button type='submit' sx={{ mr: 2 }} variant='contained'>
                   Register
                 </Button>
