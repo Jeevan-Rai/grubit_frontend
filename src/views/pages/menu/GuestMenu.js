@@ -198,10 +198,10 @@ export default function GuestMenu() {
 
     setSelectedWeek(newValue)
     const date1 = new Date(selectedDate)
-    const date2 = new Date(weeks[newValue - 1]?.dates[0].date.toLocaleDateString())
+    const date2 = new Date(weeks[newValue - 1]?.dates[0]?.date.toLocaleDateString())
     setSelectedDate(new Date().toLocaleDateString())
     if (date2.getTime() > date1.getTime()) {
-      setSelectedDate(weeks[newValue - 1]?.dates[0].date.toLocaleDateString())
+      setSelectedDate(weeks[newValue - 1]?.dates[0]?.date.toLocaleDateString())
     }
   }
 
@@ -325,8 +325,16 @@ export default function GuestMenu() {
                     //   {day.dayName}: {day.date.toLocaleDateString()}
                     // </Typography>
                     <DayButton
-                      day={formatDate(day.date.toLocaleDateString())}
-                      active={selectedDate === day.date.toLocaleDateString()}
+                      day={formatDate(day.date.toLocaleDateString('en-GB', {
+  day: '2-digit',
+  month: '2-digit',
+  year: 'numeric',
+}))}
+                      active={selectedDate === day.date.toLocaleDateString('en-GB', {
+  day: '2-digit',
+  month: '2-digit',
+  year: 'numeric',
+})}
                       key={index}
                       onClick={() => {
                         setSelectedDate(day.date.toLocaleDateString()), setSelectedDay(day.dayName)

@@ -17,8 +17,11 @@ import {
   isSameDay,
   isLastDayOfMonth,
   isBefore,
-  parse 
+  parse
 } from 'date-fns'
+
+
+
 
 export const createMenu = async data => {
   return await axiosInstance.post('/menu', data)
@@ -91,10 +94,8 @@ export const getCurrentWeekNumber = (month, year) => {
 }
 
 export const formatDate = dateString => {
-  const date = new Date(dateString) 
-  // const  date= format(new Date(dateString), "EEEE d MMM, h:mm aaaa");
-  // const date = parse(dateString, 'dd/MM/yyyy', new Date());
-  alert(dateString);
+  // let date = parse(dateString, 'dd/MM/yyyy', new Date())
+  let date = parse(dateString, 'dd/MM/yyyy', new Date())
   const dayName = format(date, 'EEEE')
   const dayOfMonth = format(date, 'do')
   const monthName = format(date, 'MMM')
