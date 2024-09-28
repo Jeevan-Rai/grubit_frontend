@@ -273,7 +273,7 @@ const OrderItemList = ({ orders, handleChange, fetchOrders }) => {
               <TableCell align='left'>{item.type}</TableCell>
               <TableCell align='left'>{item?.primaryOption?.primaryOption?.name || 'N/A'}</TableCell>
               <TableCell align='left'>{item?.toppings.length > 0 ? item?.toppings?.map(topping=>{
-                return <Typography component={ListItem} sx={{fontSize:"12px",color:"primary"}}>
+                return <Typography key={'toping'+topping.id} component={ListItem} sx={{fontSize:"12px",color:"primary"}}>
                   {topping?.topping?.name}
                 </Typography>
               }) : 'N/A'}</TableCell>
