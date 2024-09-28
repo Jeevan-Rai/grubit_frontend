@@ -8,7 +8,7 @@ import TableCell from '@mui/material/TableCell'
 import TableContainer from '@mui/material/TableContainer'
 import Chip from 'src/@core/components/mui/chip'
 import Link from 'next/link'
-
+import Typography from '@mui/material/Typography'
 // ** MUI Imports
 import Box from '@mui/material/Box'
 import Tooltip from '@mui/material/Tooltip'
@@ -24,6 +24,10 @@ import Iconify from '@iconify/iconify'
 import MessageDialog from 'src/views/components/dialogs/MessageDialog'
 import { changeOrder, getOrders } from 'src/helpers/orderHelper'
 import toast from 'react-hot-toast'
+import { useRouter } from 'next/router'
+import { useAuth } from 'src/hooks/useAuth'
+import FallbackSpinner from 'src/@core/components/spinner'
+import { ListItem } from '@mui/material'
 
 const createData = (name, calories, fat, carbs, protein, status) => {
   return { name, calories, fat, carbs, protein, status }
@@ -41,9 +45,12 @@ const OrderItemList = ({ orders, handleChange, fetchOrders }) => {
   const [open, setOpen] = useState(false)
   const [type, setType] = useState('')
   const [title, setTitle] = useState('')
+  const [display, setdisplay] = useState("none")
   const [message, setMessage] = useState('')
   const [itemId, setItemId] = useState('')
   const tableRef = useRef();
+  const router = useRouter()
+  const {loading , setLoading} = useAuth()
   // const handlePrint = () => {
   //   setOpen(true)
   //   setType('success')
@@ -52,17 +59,21 @@ const OrderItemList = ({ orders, handleChange, fetchOrders }) => {
   // }
 
   const handlePrint = () => {
-    const printContents = tableRef.current.outerHTML; // Get the table HTML
-    const originalContents = document.body.innerHTML; // Store the current page's HTML
+    
+        const printContents = tableRef.current.outerHTML; // Get the table HTML
+       const originalContents = document.body.innerHTML; // Store the current page's HTML
+   
+       // Replace the body content with the table
+       document.body.innerHTML = printContents;
+   
+       // Trigger the print dialog
+       window.print();
+   
+       // Restore the original content
+       document.body.innerHTML = originalContents;
+      setLoading(true);
+       router.reload()
 
-    // Replace the body content with the table
-    document.body.innerHTML = printContents;
-
-    // Trigger the print dialog
-    window.print();
-
-    // Restore the original content
-    document.body.innerHTML = originalContents;
   };
 
   const handleStatus = id => {
@@ -91,10 +102,66 @@ const OrderItemList = ({ orders, handleChange, fetchOrders }) => {
     }
   }
 
-  return (
+  return ( loading ? <FallbackSpinner /> :
     <TableContainer component={Paper}>
-      <button onClick={handlePrint}>Print Table</button>
-      <Table ref={tableRef} sx={{ minWidth: 650 }} aria-label='simple table'>
+      <IconButton onClick={handlePrint} variant="tontal" sx={{fontSize:"13px" ,fontFamily:"DM Sans" , fontWeight:"600" ,borderRadius:"10px", border:"1px solid gray",marginLeft:"2rem"}} > <svg width={22} height={22} viewBox='0 0 22 22' fill='none' xmlns='http://www.w3.org/2000/svg'>
+                        <path
+                          d='M15.5833 15.5833H17.4167C18.4292 15.5833 19.25 14.7625 19.25 13.75V10.0833C19.25 9.07081 18.4292 8.25 17.4167 8.25H4.58333C3.57081 8.25 2.75 9.07081 2.75 10.0833V13.75C2.75 14.7625 3.57081 15.5833 4.58333 15.5833H6.41667'
+                          stroke='#4B465C'
+                          strokeWidth='1.5'
+                          strokeLinecap='round'
+                          strokeLinejoin='round'
+                        />
+                        <path
+                          d='M15.5833 15.5833H17.4167C18.4292 15.5833 19.25 14.7625 19.25 13.75V10.0833C19.25 9.07081 18.4292 8.25 17.4167 8.25H4.58333C3.57081 8.25 2.75 9.07081 2.75 10.0833V13.75C2.75 14.7625 3.57081 15.5833 4.58333 15.5833H6.41667'
+                          stroke='white'
+                          strokeOpacity='0.2'
+                          strokeWidth='1.5'
+                          strokeLinecap='round'
+                          strokeLinejoin='round'
+                        />
+                        <path
+                          d='M15.5837 8.25V4.58333C15.5837 3.57081 14.7628 2.75 13.7503 2.75H8.25033C7.2378 2.75 6.41699 3.57081 6.41699 4.58333V8.25'
+                          stroke='#4B465C'
+                          strokeWidth='1.5'
+                          strokeLinecap='round'
+                          strokeLinejoin='round'
+                        />
+                        <path
+                          d='M15.5837 8.25V4.58333C15.5837 3.57081 14.7628 2.75 13.7503 2.75H8.25033C7.2378 2.75 6.41699 3.57081 6.41699 4.58333V8.25'
+                          stroke='white'
+                          strokeOpacity='0.2'
+                          strokeWidth='1.5'
+                          strokeLinecap='round'
+                          strokeLinejoin='round'
+                        />
+                        <rect
+                          x='6.41699'
+                          y='11.9165'
+                          width='9.16667'
+                          height='7.33333'
+                          rx={2}
+                          stroke='#4B465C'
+                          strokeWidth='1.5'
+                          strokeLinecap='round'
+                          strokeLinejoin='round'
+                        />
+                        <rect
+                          x='6.41699'
+                          y='11.9165'
+                          width='9.16667'
+                          height='7.33333'
+                          rx={2}
+                          stroke='white'
+                          strokeOpacity='0.2'
+                          strokeWidth='1.5'
+                          strokeLinecap='round'
+                          strokeLinejoin='round'
+                        />
+      </svg>
+      Print Table</IconButton>
+ 
+      {/* <Table  sx={{ minWidth: 650 }} aria-label='simple table'>
         <TableHead>
           <TableRow>
             <TableCell>ID</TableCell>
@@ -107,7 +174,7 @@ const OrderItemList = ({ orders, handleChange, fetchOrders }) => {
             <TableCell align='left'>Quantity</TableCell>
             <TableCell align='left'>Total</TableCell>
             <TableCell align='left'>Status</TableCell>
-            {/* <TableCell align='center'>ACTIONS</TableCell> */}
+
           </TableRow>
         </TableHead>
         <TableBody>
@@ -128,10 +195,86 @@ const OrderItemList = ({ orders, handleChange, fetchOrders }) => {
               <TableCell align='left'>{item?.order?.station?.name}</TableCell>
               <TableCell align='left'>{new Date(item.date).toLocaleDateString()}</TableCell>
               <TableCell align='left'>{item.type}</TableCell>
-              <TableCell align='left'>{item?.primaryOption || 'N/A'}</TableCell>
+              <TableCell align='left'>{item?.primaryOption?.primaryOption?.name || 'N/A'}</TableCell>
               <TableCell align='left'>{item?.toppings.length > 0 ? item?.toppings?.map(topping=>{
                 return <Typography>
                   {topping.name}
+                </Typography>
+              }) : 'N/A'}</TableCell>
+              <TableCell align='left'>{item.quantity}</TableCell>
+              <TableCell align='left'>{(Number(item.price) * Number(item.quantity)).toFixed(2)}</TableCell>
+    
+
+              <TableCell align='left'>
+                <Chip
+                  rounded
+                  size='small'
+                  skin='light'
+                  color={
+                    item.order.deliveryStatus === 'Processing'
+                      ? 'warning'
+                      : item.order.deliveryStatus === 'Successful'
+                      ? 'primary'
+                      : 'error'
+                  }
+                  label={
+                    item.order.deliveryStatus === 'Processing' || item.order.deliveryStatus === 'Successful'
+                      ? item.order.deliveryStatus
+                      : 'Payment Pending'
+                  }
+                  sx={{ '& .MuiChip-label': { textTransform: 'capitalize' } }}
+                />
+              </TableCell>
+          
+            </TableRow>
+            })
+
+            
+          })}
+        </TableBody>
+      </Table> */}
+
+
+
+
+      <Table ref={tableRef}  aria-label='simple table'>
+        <TableHead>
+          <TableRow>
+            <TableCell>ID</TableCell>
+            <TableCell>Name</TableCell>
+            <TableCell align='left'>Pickup Location</TableCell>
+            <TableCell align='left'>Pickup Date</TableCell>
+            <TableCell align='left'>Type</TableCell>
+            <TableCell align='left'>Primary Option</TableCell>
+            <TableCell align='left'>Toppings</TableCell>
+            <TableCell align='left'>Quantity</TableCell>
+            <TableCell align='left'>Total</TableCell>
+            <TableCell align='left'>Status</TableCell>
+            {/* <TableCell align='center'>ACTIONS</TableCell> */}
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {orders?.orders?.map((row,idx) => {
+            console.log(row);
+            
+            return row?.map((item,idx)=>{
+              return <TableRow
+              key={row.name}
+              sx={{
+                '&:last-of-type td, &:last-of-type th': {
+                  border: 0
+                }
+              }}
+            >
+              {idx === 0 && <TableCell rowSpan={row.length}>#{item.orderId}</TableCell>}
+              <TableCell align='left'>{item?.name}</TableCell>
+              <TableCell align='left'>{item?.order?.station?.name}</TableCell>
+              <TableCell align='left'>{new Date(item.date).toLocaleDateString()}</TableCell>
+              <TableCell align='left'>{item.type}</TableCell>
+              <TableCell align='left'>{item?.primaryOption?.primaryOption?.name || 'N/A'}</TableCell>
+              <TableCell align='left'>{item?.toppings.length > 0 ? item?.toppings?.map(topping=>{
+                return <Typography component={ListItem} sx={{fontSize:"12px",color:"primary"}}>
+                  {topping?.topping?.name}
                 </Typography>
               }) : 'N/A'}</TableCell>
               <TableCell align='left'>{item.quantity}</TableCell>
@@ -304,8 +447,14 @@ const OrderItemList = ({ orders, handleChange, fetchOrders }) => {
           })}
         </TableBody>
       </Table>
+
+
+
+
+
+
       <Stack spacing={2} sx={{ padding: '2em' }}>
-        <Pagination
+        {/* <Pagination
           count={orders?.totalPages}
           shape='rounded'
           onChange={handleChange}
@@ -334,7 +483,7 @@ const OrderItemList = ({ orders, handleChange, fetchOrders }) => {
               justifyContent: 'end'
             }
           }}
-        />
+        /> */}
       </Stack>
       {/* <MessageDialog type={type} open={open} title={title} message={message} setOpen={setOpen}  /> */}
       <WarningDialog

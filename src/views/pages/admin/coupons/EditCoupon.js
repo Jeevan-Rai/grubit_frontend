@@ -43,8 +43,7 @@ const EditCoupon = () => {
       ...coupon,
       validFrom: coupon?.validFrom ? new Date(coupon?.validFrom) : new Date(),
       validTill: coupon?.validTill ? new Date(coupon?.validTill) : new Date(),
-      category: coupon?.itemType,
-      discountType: coupon?.discountType
+      category: coupon?.itemType
     }
   })
 
@@ -133,35 +132,12 @@ const EditCoupon = () => {
                     {...(errors.code && { helperText: 'This field is required' })}
                     id='form-layouts-separator-select'
                     defaultValue=''
+                    disabled
                   ></CustomTextField>
                 )}
               />
             </Grid>
-            <Grid item xs={12} sm={6}>
-              <Controller
-                name='discountType'
-                control={control}
-                rules={{ required: true }}
-                render={({ field }) => (
-                  <CustomTextField
-                    {...field}
-                    select
-                    fullWidth
-                    // value={value}
-                    label={'Coupon Type '}
-                    // onChange={onChange}
-                    placeholder='Enter Coupon Type'
-                    error={Boolean(errors.category)}
-                    aria-describedby='validation-basic-first-name'
-                    {...(errors.category && { helperText: 'This field is required' })}
-                    // defaultValue={value}
-                  >
-                    <MenuItem value='Percentage'>Percentage</MenuItem>
-                    <MenuItem value='Flat'>Flat</MenuItem>
-                  </CustomTextField>
-                )}
-              />
-            </Grid>
+      
             <Grid item xs={12} sm={6}>
               <Controller
                 name='category'

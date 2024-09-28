@@ -16,6 +16,7 @@ import UserLayout from 'src/layouts/UserLayout'
 import CouponTableHeader from 'src/views/pages/admin/coupons/CouponTableHeader'
 import CouponList from 'src/views/pages/admin/coupons/CouponList'
 import { useEffect, useState } from 'react'
+import { deleteCoupon, getCouponItems } from 'src/helpers/couponHelper'
 
 const LinkStyled = styled(Link)(({ theme }) => ({
   textDecoration: 'none',
@@ -26,15 +27,15 @@ const PickupLocation = () => {
   const [open, setOpen] = useState(false)
   const [page, setPage] = useState(1)
   const [search, setSearch] = useState('')
-  const [start, setStart] = useState('')
-  const [end, setEnd] = useState('')
+  const [start, setStart] = useState(null)
+  const [end, setEnd] = useState(null)
   const [limit, setLimit] = useState(10)
   const [coupons, setCoupons] = useState([])
   
 
   let fetchCoupons = async () => {
     try {
-      let response = await getCouponItems({ page, search, limit })
+      let response = await getCouponItems({ page, search, start , end , limit })
       setCoupons(response.data)
       console.log(response.data)
     } catch (error) {
@@ -43,7 +44,7 @@ const PickupLocation = () => {
   }
   useEffect(() => {
     fetchCoupons()
-  }, [page, search])
+  }, [page, search , start , end])
   return (
     <Grid container spacing={6}>
       <PageHeader
@@ -60,7 +61,7 @@ const PickupLocation = () => {
       <Grid item xs={12}>
         <Card>
           <CardHeader title='Discount Coupons' />
-          <CouponTableHeader search={search} start={start} end={end}/>
+          <CouponTableHeader setSearch={setSearch} start={start} end={end} setStart={setStart} setEnd={setEnd}/>
           <CouponList coupons={coupons} open={open} setOpen={setOpen} page={page} fetchCoupons={fetchCoupons} setPage={setPage} />
         </Card>
       </Grid>

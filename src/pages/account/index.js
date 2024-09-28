@@ -192,8 +192,11 @@ const AccountPage = () => {
                         error={Boolean(errors.email)}
                         aria-describedby='validation-basic-first-name'
                         {...(errors.email && { helperText: errors.email.message })}
+                        disabled
                       />
                     )}
+
+                    
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
@@ -308,11 +311,9 @@ const AccountPage = () => {
             </CardContent>
             <CardActions sx={{ display: 'flex', justifyContent: 'space-between' }}>
               <Button type='submit' sx={{ mr: 2, backgroundColor: '#FD5B29' }} variant='contained'>
-                Register
+                Update
               </Button>
-              <Button type='reset' color='secondary' variant='tonal'>
-                Reset
-              </Button>
+  
             </CardActions>
           </form>
         </Card>
@@ -371,9 +372,7 @@ const AccountPage = () => {
               <Button type='submit' sx={{ mr: 2, backgroundColor: '#FD5B29' }} variant='contained'>
                 Update Password
               </Button>
-              <Button type='reset' color='secondary' variant='tonal'>
-                Reset
-              </Button>
+ 
             </CardActions>
           </form>
         </Card>

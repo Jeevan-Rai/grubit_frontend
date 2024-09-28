@@ -37,7 +37,11 @@ const CreateCoupon = () => {
     reset,
     register,
     watch
-  } = useForm()
+  } = useForm({
+    defaultValues:{
+      couponStatus:false
+    }
+  })
 
   console.log(errors)
 
@@ -46,6 +50,8 @@ const CreateCoupon = () => {
     // Create a FormData object to send files
     console.log('submitted')
     try {
+      console.log(data);
+      
       const formData = {}
       for (const key in data) {
         if (data.hasOwnProperty(key)) {
@@ -106,7 +112,7 @@ const CreateCoupon = () => {
                 )}
               />
             </Grid>
-            <Grid item xs={12} sm={6}>
+            {/* <Grid item xs={12} sm={6}>
               <Controller
                 name='discountType'
                 control={control}
@@ -128,7 +134,7 @@ const CreateCoupon = () => {
                   </CustomTextField>
                 )}
               />
-            </Grid>
+            </Grid> */}
             <Grid item xs={12} sm={6}>
               <Controller
                 name='category'
@@ -304,7 +310,7 @@ const CreateCoupon = () => {
               <Controller
                 name='couponStatus'
                 control={control}
-                rules={{ required: true }}
+                rules={{ required: false }}
                 render={({ field }) => (
                   <Box>
                     Is the Coupon Available Now?
@@ -312,7 +318,7 @@ const CreateCoupon = () => {
                       {...field}
                       aria-describedby='validation-basic-first-name'
                       sx={errors.couponStatus ? { color: 'error.main' } : null}
-                      defaultChecked
+                      checked={field?.value}
                     />{' '}
                     <br />
                     <small style={{ fontWeight: '400' }}>

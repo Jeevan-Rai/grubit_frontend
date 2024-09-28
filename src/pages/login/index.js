@@ -43,6 +43,7 @@ import BlankLayout from 'src/@core/layouts/BlankLayout'
 
 import RedirectIfAuthenticated from 'src/guards/RedirectIfAuthenticated'
 import { borderRadius } from '@mui/system'
+import { useRouter } from 'next/router'
 
 // ** Styled Components
 const LoginIllustration = styled('img')(({ theme }) => ({
@@ -95,7 +96,8 @@ const defaultValues = {
 const LoginPage = () => {
   const [rememberMe, setRememberMe] = useState(true)
   const [showPassword, setShowPassword] = useState(false)
-
+  const router= useRouter();
+  const {returnUrl} = router.query;
   // ** Hooks
   const auth = useAuth()
   const theme = useTheme()
@@ -327,7 +329,7 @@ const LoginPage = () => {
               </Button>
               <Box sx={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', justifyContent: 'center' }}>
                 <Typography sx={{ color: 'text.secondary', mr: 2 }}>New on our platform?</Typography>
-                <Typography href='/register' component={LinkStyled}>
+                <Typography href={`/register${returnUrl ? `?returnUrl=${returnUrl}` : ''}`} component={LinkStyled}>
                   Create an account
                 </Typography>
               </Box>

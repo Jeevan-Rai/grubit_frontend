@@ -16,6 +16,11 @@ const navigation = () => {
       icon: 'tabler:list'
     },
     {
+      title: 'Daily Orders',
+      path: '/admin/orders/items',
+      icon: 'tabler:calendar-event'
+    },
+    {
       title: 'Orders',
       path: '/admin/orders',
       icon: 'tabler:shopping-cart'

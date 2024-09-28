@@ -38,6 +38,7 @@ import { CardActions, CardContent, Grid, IconButton, InputAdornment, MenuItem } 
 import Icon from 'src/@core/components/icon'
 import { registerUser } from 'src/helpers/authHelpers'
 import MessageDialog from 'src/views/components/dialogs/MessageDialog'
+import { useRouter } from 'next/router'
 
 // ** Styled Components
 
@@ -59,7 +60,8 @@ const RegisterPage = () => {
   const [type, setType] = useState(false)
   const [title, setTitle] = useState(false)
   const [message, setMessage] = useState(false)
-
+  const router= useRouter();
+  const {returnUrl} = router.query;
   // ** Hooks
   const auth = useAuth()
   const theme = useTheme()
@@ -84,24 +86,30 @@ const RegisterPage = () => {
 
       let user = await registerUser(data)
 
-      setType('success')
-      setTitle('Verify your email ✉️')
-      setMessage(
-        `Account activation link sent to your email address: ${data.email} Please follow the link inside to continue.`
-      )
-      setOpen(true)
-      reset({
-        firstName: '',
-        lastName: '',
-        addressLineOne: '',
-        addressLineTwo: '',
-        email: '',
-        cityName: '',
-        postCode: '',
-        phoneNumber: '',
-        password: '',
-        confirmPassword: ''
-      })
+      if(user.status === 201){
+        setType('success')
+        setTitle('Verify your email ✉️')
+        setMessage(
+          `Account activation link sent to your email address: ${data.email} Please follow the link inside to continue.`
+        )
+        setOpen(true)
+        reset({
+          firstName: '',
+          lastName: '',
+          addressLineOne: '',
+          addressLineTwo: '',
+          email: '',
+          cityName: '',
+          postCode: '',
+          phoneNumber: '',
+          password: '',
+          confirmPassword: ''
+        })
+
+        router.replace(user?.data?.url)
+      }
+
+     
     } catch (error) {
       setType('error')
       setTitle('Oops!')

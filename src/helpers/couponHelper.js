@@ -4,8 +4,8 @@ export const createCoupon = async data => {
   return await axiosInstance.post('/coupons', data)
 }
 
-export const getCouponItems = async ({ page, search, limit }) => {
-  return await axiosInstance.get(`/coupons?page=${page}&search=${search}&limit=${limit}`)
+export const getCouponItems = async ({ page, search, start , end, limit }) => {
+  return await axiosInstance.get(`/coupons?page=${page}&search=${search}&limit=${limit}&start=${start}&end=${end}`)
 }
 
 export const getRedeemers = async ({ page, search, limit, id }) => {

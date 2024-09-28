@@ -68,9 +68,22 @@ export default function OrderHistoryCustomerDetails({ order }) {
                 justifyContent: 'space-between'
               }}
             >
+              <Typography>Discount Price</Typography>
+              <Typography sx={{ color: 'text.secondary' }}>{order?.discountAmount}</Typography>
+            </Box>
+            {/* <Box
+              sx={{
+                mb: 2,
+                gap: 2,
+                display: 'flex',
+                flexWrap: 'wrap',
+                alignItems: 'center',
+                justifyContent: 'space-between'
+              }}
+            >
               <Typography>Order Total</Typography>
               <Typography sx={{ color: 'text.secondary' }}>{order?.totalPrice}</Typography>
-            </Box>
+            </Box> */}
           </Box>
         </CardContent>
         <Divider sx={{ my: '0 !important' }} />
@@ -79,13 +92,13 @@ export default function OrderHistoryCustomerDetails({ order }) {
             sx={{ gap: 2, display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between' }}
           >
             <Typography sx={{ fontWeight: 500 }}>Total</Typography>
-            <Typography sx={{ fontWeight: 500 }}>{order?.totalPrice}</Typography>
+            <Typography sx={{ fontWeight: 500 }}>{Math.round(order?.payment?.amountSubtotal)}</Typography>
           </Box>
         </CardContent>
       </Box>
       <Box sx={{ display: 'flex', ...(breakpointMD ? { justifyContent: 'flex-end' } : {}) }}>
         <Button fullWidth={!breakpointMD} variant='contained' disabled>
-          Payment Complete
+          Payment {order?.payment?.status}
         </Button>
       </Box>
     </>

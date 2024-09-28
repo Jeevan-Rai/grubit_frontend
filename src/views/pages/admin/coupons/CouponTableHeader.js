@@ -4,15 +4,22 @@ import Button from '@mui/material/Button'
 
 // ** Custom Component Import
 import CustomTextField from 'src/@core/components/mui/text-field'
-
+import ReactDatePicker from 'react-datepicker'
+import DatePickerWrapper from 'src/@core/styles/libs/react-datepicker'
 // ** Icon Imports
 import Icon from 'src/@core/components/icon'
 import { Grid, MenuItem } from '@mui/material'
 import Link from 'next/link'
 
+import { forwardRef } from 'react'
+
+const CustomInput = forwardRef((props, ref, label) => {
+  return <CustomTextField fullWidth {...props} inputRef={ref} label={props.label} autoComplete='off' />
+})
+
 const CouponTableHeader = props => {
   // ** Props
-  const { handleFilter, toggle, value } = props
+  const { setStart , setEnd , setSearch , start , end } = props
 
   return (
     <Box
@@ -30,44 +37,41 @@ const CouponTableHeader = props => {
       <Grid container spacing={2} alignItems='center'>
         <Grid item xs={12} sm={3}>
           <CustomTextField
-            value={value}
+
             fullWidth
             sx={{ mr: 4 }}
-            placeholder='Search product'
-            onChange={e => handleFilter(e.target.value)}
+            placeholder='Search couon'
+            onChange={e => setSearch(e.target.value)}
           />
         </Grid>
         <Grid item xs={12} sm={3}>
-          <CustomTextField
-            select
-            value=''
-            fullWidth
-            sx={{ mr: 4 }}
-            placeholder='Search product'
-            onChange={e => handleFilter(e.target.value)}
-          >
-            {' '}
-            <MenuItem value='Weekly'>Weekly</MenuItem>
-            <MenuItem value='Make Your Own'>Make Your Own</MenuItem>
-          </CustomTextField>
+        {/* <>
+            <DatePickerWrapper>
+              <ReactDatePicker
+                selected={start != null ? new Date(start) : false}
+                id='basic-input'
+                onChange={date => setStart(date)}
+                placeholderText='Filter by order date'
+                customInput={<CustomInput label='' />}
+              />
+            </DatePickerWrapper>
+          </> */}
         </Grid>
         <Grid item xs={12} sm={3}>
-          <CustomTextField
-            select
-            value=''
-            fullWidth
-            sx={{ mr: 4 }}
-            placeholder='Search product'
-            onChange={e => handleFilter(e.target.value)}
-          >
-            {' '}
-            <MenuItem value='Weekly'>Weekly</MenuItem>
-            <MenuItem value='Make Your Own'>Make Your Own</MenuItem>
-          </CustomTextField>
+        {/* <>
+            <DatePickerWrapper>
+              <ReactDatePicker
+                selected={end != null ? new Date(end) : false}
+                id='basic-input'
+                onChange={date => setEnd(date)}
+                placeholderText='Filter by order date'
+                customInput={<CustomInput label='' />}
+              />
+            </DatePickerWrapper>
+          </> */}
         </Grid>
         <Grid item xs={12} sm={3}>
           <Button
-            onClick={toggle}
             fullWidth
             variant='contained'
             component={Link}
