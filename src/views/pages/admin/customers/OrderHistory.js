@@ -75,8 +75,18 @@ const OrderHistory = ({ userDetails, page, setPage }) => {
                   rounded
                   size='small'
                   skin='light'
-                  color={'primary'}
-                  label={'Available'}
+                  color={
+                    row.deliveryStatus === 'Processing'
+                      ? 'warning'
+                      : row.deliveryStatus === 'Successful'
+                      ? 'primary'
+                      : 'error'
+                  }
+                  label={
+                    row.deliveryStatus === 'Processing' || row.deliveryStatus === 'Successful'
+                      ? row.deliveryStatus
+                      : 'Payment Pending'
+                  }
                   sx={{ '& .MuiChip-label': { textTransform: 'capitalize' } }}
                 />
               </TableCell>
