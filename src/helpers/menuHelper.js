@@ -16,7 +16,8 @@ import {
   getHours,
   isSameDay,
   isLastDayOfMonth,
-  isBefore
+  isBefore,
+  parse 
 } from 'date-fns'
 
 export const createMenu = async data => {
@@ -90,8 +91,10 @@ export const getCurrentWeekNumber = (month, year) => {
 }
 
 export const formatDate = dateString => {
-  const date = new Date(dateString)
-
+  const date = new Date(dateString) 
+  // const  date= format(new Date(dateString), "EEEE d MMM, h:mm aaaa");
+  // const date = parse(dateString, 'dd/MM/yyyy', new Date());
+  alert(dateString);
   const dayName = format(date, 'EEEE')
   const dayOfMonth = format(date, 'do')
   const monthName = format(date, 'MMM')
