@@ -302,7 +302,7 @@ export default function UserMenuPage() {
                     type={'Create Your Own'}
                     Icon={''}
                     active={orderCategory === 'make-your-own'}
-                    onClick={() => setOrderCategory('make-you-own')}
+                    onClick={() => setOrderCategory('make-your-own')}
                   />
                 </Grid>
               </Grid>
