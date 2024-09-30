@@ -19,7 +19,7 @@ const LinkStyled = styled(Link)(({ theme }) => ({
   color: theme.palette.primary.main
 }))
 
-const CreateMenuItems = () => {
+const CreateCutomerPage = () => {
   return (
     <Grid container spacing={6}>
       <PageHeader
@@ -42,9 +42,9 @@ const CreateMenuItems = () => {
   )
 }
 
-CreateMenuItems.getLayout = page => (
+CreateCutomerPage.getLayout = page => (
   <Guard allowedRoles={['admin']}>
     <UserLayout>{page}</UserLayout>
   </Guard>
 )
-export default CreateMenuItems
+export default CreateCutomerPage

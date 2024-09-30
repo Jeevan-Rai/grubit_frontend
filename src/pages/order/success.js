@@ -83,7 +83,7 @@ const HorizontalList = styled(List)(({ theme }) => ({
   }
 }))
 
-const OrderSuccess = () => {
+const OrderSuccessPage = () => {
   const router = useRouter()
   let { session_id } = router.query
   const [order, setOrder] = useState(null)
@@ -211,4 +211,4 @@ const OrderSuccess = () => {
   )
 }
 
-export default OrderSuccess
+export default OrderSuccessPage
