@@ -44,7 +44,7 @@ const EditMenu = () => {
       category: menuItem?.categoryType,
       price: menuItem?.price,
       calories: menuItem?.calories,
-      protien: menuItem?.protien,
+      protien: menuItem?.proteins,
       carb: menuItem?.carbs,
       fat: menuItem?.fat,
       details: menuItem?.details,
@@ -64,7 +64,7 @@ const EditMenu = () => {
       category: menuItem?.categoryType,
       price: menuItem?.price,
       calories: menuItem?.calories,
-      protien: menuItem?.protien,
+      protien: menuItem?.proteins,
       carb: menuItem?.carbs,
       fat: menuItem?.fat,
       details: menuItem?.details,
@@ -105,11 +105,14 @@ const EditMenu = () => {
     try {
       const formData = new FormData()
 
+      console.log(data);
+      
+
       formData.append('itemName', data.itemName)
       formData.append('category', data.category)
       formData.append('price', data.price)
       formData.append('calories', data.calories)
-      formData.append('protien', data.proteins)
+      formData.append('protien', data.protien)
       formData.append('carb', data.carb)
       formData.append('fat', data.fat)
       formData.append('details', data.details)

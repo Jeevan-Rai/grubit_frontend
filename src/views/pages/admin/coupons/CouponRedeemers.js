@@ -77,23 +77,23 @@ const CouponRedeemers = ({ setPage, customers }) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {customers?.customers?.map(row => (
-            <TableRow
-              key={row.name}
-              sx={{
-                '&:last-of-type td, &:last-of-type th': {
-                  border: 0
-                }
-              }}
-            >
-              <TableCell component='th' scope='row'>
-                {row.name}
-              </TableCell>
-              <TableCell align='right'>{row.calories}</TableCell>
-              <TableCell align='right'>{row.fat}</TableCell>
-              <TableCell align='right'>${row.fat}</TableCell>
-            </TableRow>
-          ))}
+          {customers?.customers?.map(row => {
+            return <TableRow
+            key={row.id}
+            sx={{
+              '&:last-of-type td, &:last-of-type th': {
+                border: 0
+              }
+            }}
+          >
+            <TableCell component='th' scope='row'>
+              {row.user.email}
+            </TableCell>
+            <TableCell align='right'>{row.totalPrice}</TableCell>
+            <TableCell align='right'>{row.discountAmount}</TableCell>
+            <TableCell align='right'>{new Date(row.createdAt).toLocaleDateString()}</TableCell>
+          </TableRow>
+          })}
         </TableBody>
       </Table>
       <Stack spacing={2} sx={{ padding: '2em' }}>
