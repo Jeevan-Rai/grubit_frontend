@@ -96,7 +96,7 @@ const defaultValues = {
   email: 'admin@grubit.com'
 }
 
-const ForgotPassword = () => {
+const VerifyResetPasswordToken = () => {
   const [rememberMe, setRememberMe] = useState(true)
   const [showPassword, setShowPassword] = useState(false)
   const router = useRouter()
@@ -381,10 +381,10 @@ const ForgotPassword = () => {
     </Box>
   )
 }
-ForgotPassword.getLayout = page => (
+VerifyResetPasswordToken.getLayout = page => (
   <RedirectIfAuthenticated>
     <BlankLayout>{page}</BlankLayout>
   </RedirectIfAuthenticated>
 )
 
-export default ForgotPassword
+export default VerifyResetPasswordToken
