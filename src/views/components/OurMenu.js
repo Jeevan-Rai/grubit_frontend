@@ -65,6 +65,7 @@ export default function OurMenu() {
           {
             Object.keys(menu).map(day=>{
             return <MenuCard
+            key={day}
             day={day.toUpperCase()}
             options={[...menu[day]]}
             color={colors[day]}
