@@ -17,7 +17,7 @@ const LinkStyled = styled(Link)(({ theme }) => ({
   textDecoration: 'none',
   color: theme.palette.primary.main
 }))
-const CustomerView = ({ tab, invoiceData }) => {
+const OrderView = ({ tab, invoiceData }) => {
   const router = useRouter()
 
   const { id } = router.query
@@ -58,9 +58,9 @@ const CustomerView = ({ tab, invoiceData }) => {
     </Grid>
   )
 }
-CustomerView.getLayout = page => (
+OrderView.getLayout = page => (
   <Guard allowedRoles={['admin']}>
     <UserLayout>{page}</UserLayout>
   </Guard>
 )
-export default CustomerView
+export default OrderView
