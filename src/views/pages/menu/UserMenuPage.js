@@ -12,9 +12,9 @@ import MainUserLayout from 'src/layouts/MainUserLayout'
 import PageHeader from 'src/@core/components/page-header'
 import Link from 'next/link'
 import { set } from 'nprogress'
-import { getWeekOfMonth } from 'date-fns'
 import { useRouter } from 'next/router'
 import { useOrder } from 'src/context/OrderContext'
+import { getWeekOfMonth, isLastDayOfMonth } from 'date-fns'
 const LinkStyled = styled(Link)(({ theme }) => ({
   textDecoration: 'none',
   color: theme.palette.primary.main
@@ -183,16 +183,25 @@ const ItemTypeButton = ({ type, active = false, Icon, onClick }) => {
 
 export default function UserMenuPage() {
   const year = new Date().getFullYear() // Use current year
-  const month = new Date().getMonth() + 1 // Use current month
+  let month = new Date().getMonth() + 1 // Use current month
+
+  let lastDayOfCurrentMonth = isLastDayOfMonth(new Date())
+
+  console.log(lastDayOfCurrentMonth);
+  if(lastDayOfCurrentMonth) month = month + 1
+  
 
   const weeks = generateWeeksForMonth(month, year)
-  const currentWeekNumber = getWeekOfMonth(new Date())
+  let currentWeekNumber = getWeekOfMonth(new Date())
+  if(lastDayOfCurrentMonth) currentWeekNumber = 1;
+  console.log(weeks);
+  
   const router = useRouter()
   const [currentSlide, setCurrentSlide] = useState(0)
   const [loaded, setLoaded] = useState(false)
   const [orderCategory, setOrderCategory] = useState('weekly')
   const [selectedWeek, setSelectedWeek] = useState(currentWeekNumber)
-  const [selectedDate, setSelectedDate] = useState(new Date().toLocaleDateString('en-GB', {
+  const [selectedDate, setSelectedDate] = useState(weeks[currentWeekNumber - 1]?.dates[0]?.date.toLocaleDateString('en-GB', {
     day: '2-digit',
     month: '2-digit',
     year: 'numeric',

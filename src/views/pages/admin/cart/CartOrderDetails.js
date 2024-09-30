@@ -45,7 +45,7 @@ const CartOrderDetails = () => {
   const [itemToDelete, setItemToDelete] = useState({})
 
   useEffect(() => {
-    let combined = combineWeeklyAndMakeYourOwn(orders?.weekly, orders['make-your-own'])
+    let combined = combineWeeklyAndMakeYourOwn(orders?.weekly, orders['make-your-own'] , removeItemFromOrder)
     setCartItems(combined)
     console.log(combined)
   }, [orders])

@@ -1,3 +1,4 @@
+import { useOrder } from 'src/context/OrderContext'
 import axiosInstance from './axiosInstance'
 import {
   getDate,
@@ -131,7 +132,7 @@ export const formatDate = dateString => {
 //   return combined
 // }
 
-export const combineWeeklyAndMakeYourOwn = (weekly, makeYourOwn) => {
+export const combineWeeklyAndMakeYourOwn = (weekly, makeYourOwn ,removeItemFromOrder = null ) => {
   const result = {}
 
   // Helper function to merge items by week and date
@@ -139,6 +140,22 @@ export const combineWeeklyAndMakeYourOwn = (weekly, makeYourOwn) => {
     for (const week in source) {
       if (!result[week]) result[week] = []
       source[week].forEach(entry => {
+        const todaysDate = new Date();
+       let date =  parse(entry.date, 'dd/MM/yyyy', new Date())
+       console.log(entry);
+       
+       if (isSameDay(date, todaysDate)) {
+        // Only include today's date if it's before 4 PM
+       if(getHours(new Date()) > 16){
+        
+
+        entry.Items.map(item=>{
+          removeItemFromOrder(category,week,entry.date,item.id);
+        })
+        
+       }
+      }
+
         const existingDateEntry = result[week].find(e => e.date === entry.date)
         const formattedItems = entry.Items.map(item => ({
           ...item,
