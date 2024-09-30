@@ -12,6 +12,7 @@ export default function MenuCard({ day, options, color }) {
           alignItems: 'center',
           borderRadius: '30px',
           padding: '2em 1em',
+          margin:"0px 0.5em 0px 0.5em",
           gap: '1em'
         }}
         className='keen-slider__slide'
