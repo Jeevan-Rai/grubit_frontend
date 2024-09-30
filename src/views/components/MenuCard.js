@@ -5,7 +5,7 @@ export default function MenuCard({ day, options, color }) {
     <>
       <Box
         sx={{
-          backgroundColor: color,
+          backgroundColor: color.bg,
           display: 'flex',
           justifyContent: 'start',
           flexDirection: 'column',

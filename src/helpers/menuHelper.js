@@ -47,6 +47,10 @@ export const fetchFoodItems = async (day, category) => {
   return await axiosInstance.post(`/menu/getByDay`, { day, category })
 }
 
+export const fetchMenuItems = async () => {
+  return await axiosInstance.post(`/menu/getAllMenuItemsByDay`)
+}
+
 function getWeekOfMonth(date) {
   const firstDayOfMonth = startOfMonth(date)
   return differenceInCalendarWeeks(date, firstDayOfMonth) + 1

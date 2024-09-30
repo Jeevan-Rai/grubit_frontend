@@ -184,7 +184,11 @@ export default function GuestMenu() {
   const [loaded, setLoaded] = useState(false)
   const [orderCategory, setOrderCategory] = useState('weekly')
   const [selectedWeek, setSelectedWeek] = useState(currentWeekNumber)
-  const [selectedDate, setSelectedDate] = useState(new Date().toLocaleDateString())
+  const [selectedDate, setSelectedDate] = useState(new Date().toLocaleDateString('en-GB', {
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric',
+  }))
   const { orders } = useOrder()
   const today = new Date()
   const tomorrow = new Date(today)
@@ -232,6 +236,7 @@ export default function GuestMenu() {
     fetchMenuItems(selectedDay, orderCategory)
   }, [selectedDay, orderCategory])
 
+  console.log(selectedDate)
   return (
     <>
       <Usernavbar />

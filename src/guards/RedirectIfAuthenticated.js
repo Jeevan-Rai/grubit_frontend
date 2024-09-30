@@ -13,7 +13,7 @@ const RedirectIfAuthenticated = ({ children }) => {
       // If the user is authenticated, redirect to dashboard or any protected route
       // user.role === 'admin' ? router.push('/admin/dashboard') : router.push('/')
       const returnUrl = router.query.returnUrl
-      returnUrl && returnUrl !== '/' ? returnUrl : user.role == 'admin' ? '/admin/dashboard' : '/'
+      returnUrl && returnUrl !== '/' ? returnUrl : user.role == 'admin' ? '/admin/dashboard' : '/account'
     }
   }, [loading, user])
 

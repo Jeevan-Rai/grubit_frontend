@@ -174,14 +174,19 @@ const MakeYourOwnCollapsibleForm = ({ item, type, date, week, setOpen }) => {
                       })
                     }
                     sx={
-                      orderDetails?.dish?.name === primary.name
+                      orderDetails?.dish?.name === primary.name 
                         ? {
-                            borderColor: '#FD2929',
-                            background: '#FFDBDB',
+                            borderColor: primary.type === 'non-veg' ? 'text.error' : 'text.primary',
+                            background: primary.type === 'non-veg' ? '#FD2929' : '#489114',
                             padding: '1em 1em 0.5em 1em',
                             borderRadius: '10px !important'
                           }
-                        : {}
+                        : {
+                          borderColor: primary.type === 'non-veg' ? 'text.error' : 'text.primary',
+                          background: primary.type == 'non-veg' ? '#FFDBDB' : '#EAFFDB',
+                          padding: '1em 1em 0.5em 1em',
+                          borderRadius: '10px !important'
+                        }
                     }
                   >
                     <Radio
@@ -189,7 +194,8 @@ const MakeYourOwnCollapsibleForm = ({ item, type, date, week, setOpen }) => {
                       checked={orderDetails?.dish?.name === primary.name}
                       name='primary'
                       inputProps={{ 'aria-label': 'Standard Delivery' }}
-                      color='error'
+                      color={orderDetails?.dish?.name === primary.name ?  "secondary" : 'primary'}
+                      
                       sx={{
                         mr: 2,
                         ml: -2.5,
@@ -204,10 +210,11 @@ const MakeYourOwnCollapsibleForm = ({ item, type, date, week, setOpen }) => {
                             fontWeight: 500,
                             display: 'flex',
                             justifyContent: 'space-between',
-                            alignItems: 'center'
+                            alignItems: 'center',
+                            color: orderDetails?.dish?.name === primary.name ? "#ffffff" : '#000000'
                           }}
                         >
-                          {primary.name}
+                          {primary.name} 
                         </Typography>
                       </Box>
                     </Box>

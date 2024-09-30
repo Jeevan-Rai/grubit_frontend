@@ -75,7 +75,7 @@ const AuthProvider = ({ children }) => {
         params.rememberMe ? window.localStorage.setItem('userData', JSON.stringify(response.data.userData)) : null
 
         const redirectURL =
-          returnUrl && returnUrl !== '/' ? returnUrl : response.data.userData.role == 'admin' ? '/admin/dashboard' : '/'
+          returnUrl && returnUrl !== '/' ? returnUrl : response.data.userData.role == 'admin' ? '/admin/dashboard' : '/account'
 
         router.replace(redirectURL)
       })

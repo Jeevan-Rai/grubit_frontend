@@ -192,7 +192,11 @@ export default function UserMenuPage() {
   const [loaded, setLoaded] = useState(false)
   const [orderCategory, setOrderCategory] = useState('weekly')
   const [selectedWeek, setSelectedWeek] = useState(currentWeekNumber)
-  const [selectedDate, setSelectedDate] = useState(new Date().toLocaleDateString())
+  const [selectedDate, setSelectedDate] = useState(new Date().toLocaleDateString('en-GB', {
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric',
+  }))
   const { orders } = useOrder()
   const today = new Date()
   const tomorrow = new Date(today)
@@ -319,9 +323,17 @@ export default function UserMenuPage() {
                     //   {day.dayName}: {day.date.toLocaleDateString()}
                     // </Typography>
                     <DayButton
+                      day={formatDate(day.date.toLocaleDateString('en-GB', {
+  day: '2-digit',
+  month: '2-digit',
+  year: 'numeric',
+}))}
+                      active={selectedDate === day.date.toLocaleDateString('en-GB', {
+  day: '2-digit',
+  month: '2-digit',
+  year: 'numeric',
+})}
                       key={index}
-                      day={formatDate(day.date.toLocaleDateString())}
-                      active={selectedDate === day.date.toLocaleDateString()}
                       onClick={() => {
                         setSelectedDate(day.date.toLocaleDateString()), setSelectedDay(day.dayName)
                       }}

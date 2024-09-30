@@ -6,6 +6,10 @@ export const registerUser = async data => {
   return (data = axiosInstance.post(`/auth/register`, data))
 }
 
+export const resendOTP = async token => {
+  return (data = axiosInstance.post(`/auth/register/${token}`, data))
+}
+
 export const forgotPassword = async data => {
   return (data = axiosInstance.post(`/auth/forgot-password`, data))
 }

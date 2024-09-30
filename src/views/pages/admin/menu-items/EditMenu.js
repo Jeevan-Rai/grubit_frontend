@@ -126,12 +126,15 @@ const EditMenu = () => {
         data.primary.forEach((item, index) => {
           if(item.id != undefined) formData.append(`primary[${index}][id]`, item.id)          
           formData.append(`primary[${index}][value]`, item.value)
+          formData.append(`primary[${index}][type]`, item.type)
         })
       }
       if (data.topping) {
         data.topping.forEach((item, index) => {
           if(item.id != undefined) formData.append(`topping[${index}][id]`, item.id)
           formData.append(`topping[${index}][value]`, item.value)
+          formData.append(`topping[${index}][type]`, item.type)
+
         })
       }
       console.log(data.file && data.file.length > 0)
@@ -504,13 +507,14 @@ const EditMenu = () => {
                     <>
                       <Grid item xs={12} sm={6} key={field.id}>
                       <Controller
-sx={{display:"none"}}
+
                           name={`primary.${index}.id`}
                           control={control}
                           rules={{ required: false }}
                           render={({ field: { value, onChange } }) => (
                             <Box sx={{ display: 'flex', alignItems: 'center', gap: '1em' }}>
                               <CustomTextField
+                              sx={{display:"none"}}
                                 fullWidth
                                 value={value}
                                 label={`Option ${index + 1}`}
@@ -521,17 +525,47 @@ sx={{display:"none"}}
                                 {...(errors.primary && { helperText: 'This field is required' })}
                                 defaultValues={value}
                               />
-                              <Box sx={{ marginTop: '1.5em' }} onClick={() => removePrimaryField(index)}>
+                              
+                            </Box>
+                          )}
+                        />
+                        <Controller
+                          name={`primary.${index}.type`}
+                          control={control}
+                          rules={{ required: false }}
+                          
+                          render={({ field: { value, onChange } }) => (
+                            <Box sx={{ display: 'flex', alignItems: 'center', gap: '1em'  }}>
+                              <CustomTextField
+                                select
+                                fullWidth
+                                value={value}
+                                label={`Primary Option ${index + 1} Type`}
+                                onChange={onChange}
+                                placeholder='Enter option name'
+                                error={Boolean(errors.primary)}
+                                aria-describedby='validation-basic-first-name'
+                                defaultValue={value}
+                                {...(errors.primary && { helperText: 'This field is required' })}
+                              >
+
+                                <MenuItem value={"veg"}>Veg</MenuItem>
+                                <MenuItem value={"non-veg"}>Non Veg</MenuItem>
+                                <MenuItem value={"vegan"}>Vegan</MenuItem>
+
+                              </CustomTextField>
+                              {/* <Box sx={{ marginTop: '1.5em' }} onClick={() => removePrimaryField(index)}>
                                 <Icon
                                   fontSize='1.125rem'
                                   icon='tabler:trash'
                                   color='text.primary'
                                   sx={{ color: 'text.primary' }}
                                 />
-                              </Box>
+                              </Box> */}
                             </Box>
                           )}
                         />
+                        <Box sx={{height:'0.5em'}} />
                         <Controller
                           name={`primary.${index}.value`}
                           control={control}
@@ -615,17 +649,47 @@ render={({ field: { value, onChange } }) => (
       {...(errors.topping && { helperText: 'This field is required' })}
       defaultValues={value}
     />
-    <Box sx={{ marginTop: '1.5em' }} onClick={() => removePrimaryField(index)}>
-      <Icon
-        fontSize='1.125rem'
-        icon='tabler:trash'
-        color='text.topping'
-        sx={{ color: 'text.topping' }}
-      />
-    </Box>
+  
   </Box>
 )}
 />
+<Controller
+                          name={`topping.${index}.type`}
+                          control={control}
+                          rules={{ required: false }}
+                          
+                          render={({ field: { value, onChange } }) => (
+                            <Box sx={{ display: 'flex', alignItems: 'center', gap: '1em'  }}>
+                              <CustomTextField
+                                select
+                                fullWidth
+                                value={value}
+                                label={`Topping ${index + 1} Type`}
+                                onChange={onChange}
+                                placeholder='Enter option name'
+                                error={Boolean(errors.primary)}
+                                defaultValue={value}
+                                aria-describedby='validation-basic-first-name'
+                                {...(errors.primary && { helperText: 'This field is required' })}
+                              >
+
+                                <MenuItem value={"veg"}>Veg</MenuItem>
+                                <MenuItem value={"non-veg"}>Non Veg</MenuItem>
+                                <MenuItem value={"vegan"}>Vegan</MenuItem>
+
+                              </CustomTextField>
+                              {/* <Box sx={{ marginTop: '1.5em' }} onClick={() => removePrimaryField(index)}>
+                                <Icon
+                                  fontSize='1.125rem'
+                                  icon='tabler:trash'
+                                  color='text.primary'
+                                  sx={{ color: 'text.primary' }}
+                                />
+                              </Box> */}
+                            </Box>
+                          )}
+                        />
+                        <Box sx={{height:'0.5em'}} />
                         <Controller
                           name={`topping.${index}.value`}
                           control={control}

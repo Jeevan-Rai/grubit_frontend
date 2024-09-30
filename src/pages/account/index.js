@@ -78,7 +78,7 @@ const AccountPage = () => {
         `Account activation link sent to your email address: ${data.email} Please follow the link inside to continue.`
       )
       setOpen(true)
-      toast.success('Profile updates sucessfully')
+      toast.success('Your profile is updated successfully')
     } catch (error) {
       setType('error')
       setTitle('Oops!')

@@ -4,7 +4,34 @@ import { useKeenSlider } from 'keen-slider/react'
 import 'keen-slider/keen-slider.min.css'
 import { Box, Button } from '@mui/material'
 import Link from 'next/link'
+import {useState , useEffect} from 'react'
+import { fetchMenuItems } from 'src/helpers/menuHelper'
+
+const colors = {
+      monday:{
+        bg:"#FF9C70",
+        color:"#FF9C70"
+      },
+      tuesday:{
+        bg:"#FEAD71",
+        color:"#FF9C70"
+      },
+      wednesday:{
+        bg:"#78BFBE",
+        color:"#FF9C70"
+      },
+      thursday:{
+        bg:"#93E855",
+        color:"#FF9C70"
+      },
+      friday:{
+        bg:"#A0C982",
+        color:"#FF9C70"
+      },
+}
 export default function OurMenu() {
+
+  const [menu , setMenu] = useState({});
   const [sliderRef, instanceRef] = useKeenSlider({
     breakpoints: {
       '(min-width: 400px)': {
@@ -16,6 +43,12 @@ export default function OurMenu() {
     },
     slides: { perView: 1 }
   })
+
+  useEffect(()=>{
+     fetchMenuItems().then(response=>{      setMenu(response.data);
+      
+    })
+  },[])
   return (
     <>
       <Box
@@ -28,19 +61,18 @@ export default function OurMenu() {
         <SectionHeader title='Our Menu' />
         <Box sx={{ padding: '20px' }} />
         <div ref={sliderRef} className='keen-slider'>
-          <MenuCard
-            day={'MONDAY'}
-            options={[
-              'Pesto Chicken Tenders',
-              'Puddings',
-              'Pesto Chicken Tenders',
-              'Puddings',
-              'Pesto Chicken Tenders',
-              'Puddings'
-            ]}
-            color={'#FF9C70'}
+
+          {
+            Object.keys(menu).map(day=>{
+            return <MenuCard
+            day={day.toUpperCase()}
+            options={[...menu[day]]}
+            color={colors[day]}
           />
-          <MenuCard
+            })
+          }
+          
+          {/* <MenuCard
             day={'TUESDAY'}
             options={[
               'Pesto Chicken Tenders',
@@ -87,7 +119,7 @@ export default function OurMenu() {
               'Puddings'
             ]}
             color={'#A0C982'}
-          />
+          /> */}
         </div>
         <Box sx={{ padding: '20px' }} />
 

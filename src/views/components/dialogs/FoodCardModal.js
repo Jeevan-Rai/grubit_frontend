@@ -35,24 +35,25 @@ const FoodCardModal = ({ open, setOpen, item, addItem }) => {
   return (
     <div className='demo-space-x'>
       <Dialog
-        maxWidth='md'
+        maxWidth='lg'
+  
         open={open}
         scroll={'body'}
         onClose={handleClose}
         aria-labelledby='scroll-dialog-title'
         aria-describedby='scroll-dialog-description'
-        sx={{ padding: '0px', borderRadius: '50px !important' }}
+        sx={{ padding: '0px', borderRadius: '50px !important' , '& .MuiDialog-paper': { minWidth: '60vw' } }}
       >
         <DialogContent dividers={scroll === 'paper'} sx={{ padding: '0px !important', overflowY: 'hidden' }}>
           <Grid container>
-            <Grid item md={6}>
+            <Grid item md={4} >
               <Box
                 component={'img'}
                 sx={{ width: '100%', height: '100%', margin: '0px' }}
                 src={process.env.NEXT_PUBLIC_BACKEND_URL + '/uploads/' + item.image}
               />
             </Grid>
-            <Grid item md={6} sx={{ padding: '2em' }}>
+            <Grid item md={8} sx={{ padding: '2em' }}>
               <Typography
                 sx={{
                   fontFamily: 'DM Sans',
@@ -81,7 +82,7 @@ const FoodCardModal = ({ open, setOpen, item, addItem }) => {
 
                     <Box sx={{ display: 'flex', flexDirection: 'column' }}>
                       <Typography variant='h6'>Proteins</Typography>
-                      <Typography variant='body2'>{item.proteins}</Typography>
+                      <Typography variant='body2'>{item.protein}</Typography>
                     </Box>
                   </Box>
                 </Grid>

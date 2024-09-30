@@ -46,8 +46,8 @@ const MakeYourOwnForm = ({ open, setOpen, item, type, date, week }) => {
       >
         <DialogContent dividers={scroll === 'paper'} sx={{ padding: '0px !important', overflowY: 'hidden' }}>
           <Grid container>
-            <Grid item md={4}>
-              <Box component={'img'} sx={{ width: '100%', height: '100%', margin: '0px' }} src={'/images/Image.png'} />
+            <Grid item md={4} component={'img'} sx={{ width: '400px', height: '100%', margin: '0px' }} src={process.env.NEXT_PUBLIC_BACKEND_URL + '/uploads/' + item.image}>
+              {/* <Box component={'img'} sx={{ width: '400px', height: '100%', margin: '0px' }} src={process.env.NEXT_PUBLIC_BACKEND_URL + '/uploads/' + item.image} /> */}
             </Grid>
             <Grid item md={8} sx={{ padding: '2em' }}>
               <Typography

@@ -4,6 +4,7 @@ import Image from 'next/image'
 import SectionHeader from './SectionHeader'
 import { useForm, Controller, useFieldArray } from 'react-hook-form'
 import CustomTextField from 'src/@core/components/mui/text-field'
+import MessageDialog from './dialogs/MessageDialog'
 const Label = ({ name }) => {
   return (
     <>
@@ -20,6 +21,17 @@ export default function ContactUs() {
     register,
     watch
   } = useForm()
+  const [open , setOpen] = useState(false);
+
+  const onSubmit = async (data) =>{
+    setOpen(true)
+    reset({
+      name:"",
+      email:"",
+      phoneNumber:"",
+      message:""
+    })
+  }
   return (
     <>
       <Grid container sx={{ width: { xs: '90%', md: '75%' }, margin: '0px auto' }} id='contact'>
@@ -63,14 +75,14 @@ export default function ContactUs() {
                   Please feel free to reach out to us.
                 </Typography>
               </Box>
-              <form noValidate autoComplete='off'>
+              <form onSubmit={handleSubmit(onSubmit)} autoComplete='off'>
                 <Box sx={{ mb: 4 }}></Box>
                 <Grid container spacing={5}>
                   <Grid item xs={12} sm={12}>
                     <Controller
                       name='name'
                       control={control}
-                      rules={{ required: false }}
+                      rules={{ required: true }}
                       render={({ field: { value, onChange } }) => (
                         <CustomTextField
                           fullWidth
@@ -87,9 +99,15 @@ export default function ContactUs() {
                   </Grid>
                   <Grid item xs={12} sm={12}>
                     <Controller
-                      name='name'
+                      name='email'
                       control={control}
-                      rules={{ required: false }}
+                      rules={{
+                        required: 'This field is required',
+                        pattern: {
+                          value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                          message: 'Invalid email address'
+                        }
+                      }}
                       render={({ field: { value, onChange } }) => (
                         <CustomTextField
                           fullWidth
@@ -97,35 +115,41 @@ export default function ContactUs() {
                           label={<Label name={'Email'} />}
                           onChange={onChange}
                           placeholder='Enter your email'
-                          error={Boolean(errors.name)}
-                          aria-describedby='validation-basic-first-name'
-                          {...(errors.name && { helperText: 'This field is required' })}
+                          error={Boolean(errors.email)}
+                          aria-describedby='validation-basic-first-email'
+                          {...(errors.email && { helperText: errors.email.message })}
                         />
                       )}
                     />
                   </Grid>
                   <Grid item xs={12} sm={12}>
                     <Controller
-                      name='name'
+                      name='phoneNumber'
                       control={control}
-                      rules={{ required: false }}
+                      rules={{
+                        required: 'Phone number is required',
+                        pattern: {
+                          value: /^[0-9]{10}$/, // Example for a 10-digit phone number
+                          message: 'Invalid phone number. Must be 10 digits.'
+                        }
+                      }}
                       render={({ field: { value, onChange } }) => (
                         <CustomTextField
                           fullWidth
                           value={value}
-                          label={<Label name={'Phone Number'} />}
+                          label={<Label phone={'Phone Number'} />}
                           onChange={onChange}
                           placeholder='Enter phone number'
-                          error={Boolean(errors.name)}
-                          aria-describedby='validation-basic-first-name'
-                          {...(errors.name && { helperText: 'This field is required' })}
+                          error={Boolean(errors.phoneNumber)}
+                          aria-describedby='validation-basic-first-phone'
+                          {...(errors.phoneNumber && { helperText: errors.phoneNumber.message })}
                         />
                       )}
                     />
                   </Grid>
                   <Grid item xs={12} sm={12}>
                     <Controller
-                      name='details'
+                      name='message'
                       control={control}
                       rules={{ required: false }}
                       render={({ field: { value, onChange } }) => (
@@ -136,10 +160,10 @@ export default function ContactUs() {
                           value={value}
                           label={<Label name={'Message'} />}
                           onChange={onChange}
-                          placeholder='Enter Details'
-                          error={Boolean(errors.fat)}
+                          placeholder='Enter message'
+                          error={Boolean(errors.message)}
                           aria-describedby='validation-basic-first-name'
-                          {...(errors.fat && { helperText: 'This field is required' })}
+                          {...(errors.message && { helperText: 'This field is required' })}
                         />
                       )}
                     />
@@ -155,6 +179,7 @@ export default function ContactUs() {
           </Box>
         </Grid>
       </Grid>
+      <MessageDialog type={"success"} title={'Contact Us'}  message={'Your information has been saved successfully , Our team wil reach out to you soon!'} open={open} setOpen={setOpen} />
     </>
   )
 }
