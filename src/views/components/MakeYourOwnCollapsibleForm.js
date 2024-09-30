@@ -214,7 +214,7 @@ const MakeYourOwnCollapsibleForm = ({ item, type, date, week, setOpen }) => {
                             color: orderDetails?.dish?.name === primary.name ? "#ffffff" : '#000000'
                           }}
                         >
-                          {primary.name} 
+                          {primary.name} ({primary.type == 'veg' ? "Veg" : primary.type == 'vegan' ? "Vegan" : "Non Veg"})
                         </Typography>
                       </Box>
                     </Box>
@@ -396,7 +396,7 @@ const MakeYourOwnCollapsibleForm = ({ item, type, date, week, setOpen }) => {
                 <Grid item xs={6}>
                   <Grid container>
                     <Grid item md={6}>
-                      <Typography sx={{ fontSize: '15px', fontFamily: 'DM Sans', fontWeight: '700' }}>Dish</Typography>
+                      <Typography sx={{ fontSize: '15px', fontFamily: 'DM Sans', fontWeight: '700' }}>Preference</Typography>
                     </Grid>
                     <Grid item md={6} color={'#FD5B29'}>
                       {orderDetails?.dish?.name}
