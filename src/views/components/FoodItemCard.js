@@ -129,11 +129,7 @@ export default function FoodItemCard({ type = 'weekly', week, date, item }) {
                     }
                   }}
                   onClick={() => {
-                    type !== 'weekly'
-                      ? productQuantity > 0
-                        ? handleDecrease(type, week, date, item.id)
-                        : setOpenMakeYourOwnForm(true)
-                      : handleDecrease(type, week, date, item.id)
+                     handleDecrease(type, week, date, item.id)
                   }}
                 >
                   -
@@ -157,11 +153,7 @@ export default function FoodItemCard({ type = 'weekly', week, date, item }) {
                     }
                   }}
                   onClick={() => {
-                    type !== 'weekly'
-                      ? productQuantity > 0
-                        ? handleIncrease(type, week, date, item)
-                        : setOpenMakeYourOwnForm(true)
-                      : handleIncrease(type, week, date, item)
+                    handleIncrease(type, week, date, item)
                   }}
                 >
                   +

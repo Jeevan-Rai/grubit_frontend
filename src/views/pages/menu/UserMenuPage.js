@@ -3,7 +3,7 @@ import { useKeenSlider } from 'keen-slider/react'
 import 'keen-slider/keen-slider.min.css'
 import { useEffect, useState } from 'react'
 import FoodItemCard from 'src/views/components/FoodItemCard'
-import { fetchFoodItems, formatDate, generateWeeksForMonth, getCurrentWeekNumber } from 'src/helpers/menuHelper'
+import { fetchFoodItems, formatDate, formatDateToLocalDatString, generateWeeksForMonth, getCurrentWeekNumber } from 'src/helpers/menuHelper'
 
 import { styled } from '@mui/material/styles'
 import UserFooterLight from 'src/views/components/UserFooterLight'
@@ -186,8 +186,6 @@ export default function UserMenuPage() {
   let month = new Date().getMonth() + 1 // Use current month
 
   let lastDayOfCurrentMonth = isLastDayOfMonth(new Date())
-
-  console.log(lastDayOfCurrentMonth);
   if(lastDayOfCurrentMonth) month = month + 1
   
 
@@ -201,11 +199,7 @@ export default function UserMenuPage() {
   const [loaded, setLoaded] = useState(false)
   const [orderCategory, setOrderCategory] = useState('weekly')
   const [selectedWeek, setSelectedWeek] = useState(currentWeekNumber)
-  const [selectedDate, setSelectedDate] = useState(weeks[currentWeekNumber - 1]?.dates[0]?.date.toLocaleDateString('en-GB', {
-    day: '2-digit',
-    month: '2-digit',
-    year: 'numeric',
-  }))
+  const [selectedDate, setSelectedDate] = useState(formatDateToLocalDatString(weeks[currentWeekNumber - 1]?.dates[0]?.date))
   const { orders } = useOrder()
   const today = new Date()
   const tomorrow = new Date(today)
@@ -219,10 +213,12 @@ export default function UserMenuPage() {
 
     setSelectedWeek(newValue)
     const date1 = new Date(selectedDate)
-    const date2 = new Date(weeks[newValue - 1]?.dates[0].date.toLocaleDateString())
-    setSelectedDate(new Date().toLocaleDateString())
+    const date2 = new Date(formatDateToLocalDatString(weeks[newValue - 1]?.dates[0]?.date))
+    setSelectedDate(formatDateToLocalDatString(new Date()))
     if (date2.getTime() > date1.getTime()) {
-      setSelectedDate(weeks[newValue - 1]?.dates[0].date.toLocaleDateString())
+      setSelectedDate(formatDateToLocalDatString(weeks[newValue - 1]?.dates[0]?.date))
+      console.log(formatDateToLocalDatString(weeks[newValue - 1]?.dates[0]?.date));
+      
     }
   }
 
@@ -320,7 +316,7 @@ export default function UserMenuPage() {
                 </Grid>
               </Grid>
             </Grid>
-            <Grid item xs={12} md={3}>
+            <Grid item xs={12} md={3} minHeight={'20rem'}>
               <Typography sx={{ fontFamily: 'DM Sans', fontWeight: '700', color: '#5D586C', fontSize: '18px' }}>
                 Days of the Week
               </Typography>
@@ -332,19 +328,11 @@ export default function UserMenuPage() {
                     //   {day.dayName}: {day.date.toLocaleDateString()}
                     // </Typography>
                     <DayButton
-                      day={formatDate(day.date.toLocaleDateString('en-GB', {
-  day: '2-digit',
-  month: '2-digit',
-  year: 'numeric',
-}))}
-                      active={selectedDate === day.date.toLocaleDateString('en-GB', {
-  day: '2-digit',
-  month: '2-digit',
-  year: 'numeric',
-})}
+                      day={formatDate(formatDateToLocalDatString(day.date))}
+                      active={selectedDate === formatDateToLocalDatString(day.date)}
                       key={index}
                       onClick={() => {
-                        setSelectedDate(day.date.toLocaleDateString()), setSelectedDay(day.dayName)
+                        setSelectedDate(formatDateToLocalDatString(day.date)), setSelectedDay(day.dayName)
                       }}
                     />
                   ))}
@@ -395,6 +383,8 @@ export default function UserMenuPage() {
                     </Grid>
                   )
                 })}
+
+                {menuItems.length == 0 && <> No Items available for selected date</>}
               </Grid>
             </Grid>
           </Grid>

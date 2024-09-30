@@ -46,6 +46,8 @@ const FoodCardModal = ({ open, setOpen, item, addItem }) => {
       >
         <DialogContent dividers={scroll === 'paper'} sx={{ padding: '0px !important', overflowY: 'hidden' }}>
           <Grid container>
+            {
+              item.image && (
             <Grid item md={4} >
               <Box
                 component={'img'}
@@ -53,6 +55,9 @@ const FoodCardModal = ({ open, setOpen, item, addItem }) => {
                 src={process.env.NEXT_PUBLIC_BACKEND_URL + '/uploads/' + item.image}
               />
             </Grid>
+              )
+            }
+            
             <Grid item md={8} sx={{ padding: '2em' }}>
               <Typography
                 sx={{
@@ -82,7 +87,7 @@ const FoodCardModal = ({ open, setOpen, item, addItem }) => {
 
                     <Box sx={{ display: 'flex', flexDirection: 'column' }}>
                       <Typography variant='h6'>Proteins</Typography>
-                      <Typography variant='body2'>{item.protein}</Typography>
+                      <Typography variant='body2'>{item.proteins}</Typography>
                     </Box>
                   </Box>
                 </Grid>

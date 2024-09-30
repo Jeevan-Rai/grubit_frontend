@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 import FoodItemCard from 'src/views/components/FoodItemCard'
 import UserFooterLight from 'src/views/components/UserFooterLight'
 import Usernavbar from 'src/views/components/UserNavbar'
-import { fetchFoodItems, formatDate, generateWeeksForMonth, getCurrentWeekNumber } from 'src/helpers/menuHelper'
+import { fetchFoodItems, formatDate, formatDateToLocalDatString, generateWeeksForMonth, getCurrentWeekNumber } from 'src/helpers/menuHelper'
 import Link from 'next/link'
 import { useOrder } from 'src/context/OrderContext'
 import toast from 'react-hot-toast'
@@ -173,13 +173,13 @@ const ItemTypeButton = ({ type, active = false, Icon, onClick }) => {
   )
 }
 
+
+
 export default function GuestMenu() {
   const year = new Date().getFullYear() // Use current year
   let month = new Date().getMonth() + 1 // Use current month
 
   let lastDayOfCurrentMonth = isLastDayOfMonth(new Date())
-
-  console.log(lastDayOfCurrentMonth);
   if(lastDayOfCurrentMonth) month = month + 1
   
 
@@ -193,11 +193,7 @@ export default function GuestMenu() {
   const [loaded, setLoaded] = useState(false)
   const [orderCategory, setOrderCategory] = useState('weekly')
   const [selectedWeek, setSelectedWeek] = useState(currentWeekNumber)
-  const [selectedDate, setSelectedDate] = useState(weeks[currentWeekNumber - 1]?.dates[0]?.date.toLocaleDateString('en-GB', {
-    day: '2-digit',
-    month: '2-digit',
-    year: 'numeric',
-  }))
+  const [selectedDate, setSelectedDate] = useState(formatDateToLocalDatString(weeks[currentWeekNumber - 1]?.dates[0]?.date))
   const { orders } = useOrder()
   const today = new Date()
   const tomorrow = new Date(today)
@@ -211,10 +207,12 @@ export default function GuestMenu() {
 
     setSelectedWeek(newValue)
     const date1 = new Date(selectedDate)
-    const date2 = new Date(weeks[newValue - 1]?.dates[0]?.date.toLocaleDateString())
-    setSelectedDate(new Date().toLocaleDateString())
+    const date2 = new Date(formatDateToLocalDatString(weeks[newValue - 1]?.dates[0]?.date))
+    setSelectedDate(formatDateToLocalDatString(new Date()))
     if (date2.getTime() > date1.getTime()) {
-      setSelectedDate(weeks[newValue - 1]?.dates[0]?.date.toLocaleDateString())
+      setSelectedDate(formatDateToLocalDatString(weeks[newValue - 1]?.dates[0]?.date))
+      console.log(formatDateToLocalDatString(weeks[newValue - 1]?.dates[0]?.date));
+      
     }
   }
 
@@ -339,19 +337,11 @@ export default function GuestMenu() {
                     //   {day.dayName}: {day.date.toLocaleDateString()}
                     // </Typography>
                     <DayButton
-                      day={formatDate(day.date.toLocaleDateString('en-GB', {
-  day: '2-digit',
-  month: '2-digit',
-  year: 'numeric',
-}))}
-                      active={selectedDate === day.date.toLocaleDateString('en-GB', {
-  day: '2-digit',
-  month: '2-digit',
-  year: 'numeric',
-})}
+                      day={formatDate(formatDateToLocalDatString(day.date))}
+                      active={selectedDate === formatDateToLocalDatString(day.date)}
                       key={index}
                       onClick={() => {
-                        setSelectedDate(day.date.toLocaleDateString()), setSelectedDay(day.dayName)
+                        setSelectedDate(formatDateToLocalDatString(day.date)), setSelectedDay(day.dayName)
                       }}
                     />
                   ))}

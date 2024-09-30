@@ -212,7 +212,7 @@ export const OrderProvider = ({ children }) => {
       for (const entry of weekData) {
         if (entry.date === date) {
           for (const item of entry.Items) {
-            if (item.id === itemId || (item.dish && item.dish.id === itemId)) {
+            if (item.id === itemId) {
               return item.quantity || 0
             }
           }

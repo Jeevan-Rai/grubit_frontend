@@ -71,6 +71,8 @@ const getDatesOfWeekInMonth = (weekNumber, month, year) => {
         return getHours(new Date()) < 16
       }
 
+      return date.getDay() != 0;
+      
       // Include future dates only
       return isAfter(date, todaysDate) && isBefore(date, lastDayOfMonth)
     })
@@ -181,4 +183,14 @@ export const combineWeeklyAndMakeYourOwn = (weekly, makeYourOwn ,removeItemFromO
   mergeItems(makeYourOwn, 'make-your-own')
 
   return result
+}
+
+
+
+export const formatDateToLocalDatString = (date) => {
+  return date.toLocaleDateString('en-GB', {
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric',
+  })
 }
