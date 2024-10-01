@@ -58,7 +58,7 @@ const MakeYourOwnForm = ({ open, setOpen, item, type, date, week }) => {
               </Grid>
             )}
 
-            <Grid item md={8} sx={{ padding: '2em' }}>
+            <Grid item md={item.image ? 8 : 12} sx={{ padding: '2em' }}>
               <Typography
                 sx={{
                   fontFamily: 'DM Sans',

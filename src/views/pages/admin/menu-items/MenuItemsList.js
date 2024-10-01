@@ -70,7 +70,7 @@ const MenuItemsList = ({ search }) => {
             <TableCell align='left'>Category</TableCell>
             <TableCell align='left'>Calories</TableCell>
             <TableCell align='left'>Price</TableCell>
-            <TableCell align='left'>Sales</TableCell>
+            {/* <TableCell align='left'>Sales</TableCell> */}
             <TableCell align='left'>Status</TableCell>
             <TableCell align='center'>ACTIONS</TableCell>
           </TableRow>
@@ -91,7 +91,7 @@ const MenuItemsList = ({ search }) => {
               <TableCell align='left'>{row.categoryType}</TableCell>
               <TableCell align='left'>{row.calories}</TableCell>
               <TableCell align='left'>{row.price}</TableCell>
-              <TableCell align='left'>0</TableCell>
+              {/* <TableCell align='left'>0</TableCell> */}
               <TableCell align='left'>
                 <Chip
                   rounded

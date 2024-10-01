@@ -36,29 +36,26 @@ const FoodCardModal = ({ open, setOpen, item, addItem }) => {
     <div className='demo-space-x'>
       <Dialog
         maxWidth='lg'
-  
         open={open}
         scroll={'body'}
         onClose={handleClose}
         aria-labelledby='scroll-dialog-title'
         aria-describedby='scroll-dialog-description'
-        sx={{ padding: '0px', borderRadius: '50px !important' , '& .MuiDialog-paper': { minWidth: '60vw' } }}
+        sx={{ padding: '0px', borderRadius: '50px !important', '& .MuiDialog-paper': { minWidth: '60vw' } }}
       >
         <DialogContent dividers={scroll === 'paper'} sx={{ padding: '0px !important', overflowY: 'hidden' }}>
           <Grid container>
-            {
-              item.image && (
-            <Grid item md={4} >
-              <Box
-                component={'img'}
-                sx={{ width: '100%', height: '100%', margin: '0px' }}
-                src={process.env.NEXT_PUBLIC_BACKEND_URL + '/uploads/' + item.image}
-              />
-            </Grid>
-              )
-            }
-            
-            <Grid item md={8} sx={{ padding: '2em' }}>
+            {item.image && (
+              <Grid item md={4}>
+                <Box
+                  component={'img'}
+                  sx={{ width: '100%', height: '100%', margin: '0px' }}
+                  src={process.env.NEXT_PUBLIC_BACKEND_URL + '/uploads/' + item.image}
+                />
+              </Grid>
+            )}
+
+            <Grid item md={item.image ? 8 : 12} sx={{ padding: '2em' }}>
               <Typography
                 sx={{
                   fontFamily: 'DM Sans',

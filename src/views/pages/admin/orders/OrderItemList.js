@@ -291,12 +291,12 @@ const OrderItemList = ({ orders, handleChange, fetchOrders, date }) => {
           <TableRow>
             <TableCell>ID</TableCell>
             <TableCell>Customer Name</TableCell>
-            <TableCell>Food Item</TableCell>
-            <TableCell align="left">Pickup Location</TableCell>
+            {/* <TableCell>Food Item</TableCell> */}
+            <TableCell align="left">Pickup Station</TableCell>
             <TableCell align="left">Pickup Date</TableCell>
-            <TableCell align="left">Type</TableCell>
-            <TableCell align="left">Primary Option</TableCell>
-            <TableCell align="left">Toppings</TableCell>
+            <TableCell align="left">Meal Ordered</TableCell>
+            {/* <TableCell align="left">Primary Option</TableCell> */}
+            {/* <TableCell align="left">Toppings</TableCell> */}
             <TableCell align="left">Qty</TableCell>
             <TableCell align="left">Total</TableCell>
             <TableCell align="left">Status</TableCell>
@@ -323,32 +323,43 @@ const OrderItemList = ({ orders, handleChange, fetchOrders, date }) => {
                   <TableCell align="left">
                     {item?.order?.user?.firstName} {item?.order?.user?.lastName}
                   </TableCell>
-                  <TableCell align="left">{item?.name}</TableCell>
+                  {/* <TableCell align="left">{item?.name}</TableCell> */}
                   <TableCell align="left">
                     {item?.order?.station?.name}
                   </TableCell>
                   <TableCell align="left">
                     {new Date(item.date).toLocaleDateString()}
                   </TableCell>
-                  <TableCell align="left">{item.type}</TableCell>
+                  {/* <TableCell align="left">{item.type}</TableCell> */}
                   <TableCell align="left">
-                    {item?.primaryOption?.primaryOption?.name || "N/A"}
-                  </TableCell>
-                  <TableCell align="left">
+                    {item?.name} <br />
+                    {
+                      <Typography
+                        component={ListItem}
+                        sx={{ fontSize: "12px", color: "primary" }}
+                      >
+                        {item?.primaryOption?.primaryOption?.name || ""}
+                      </Typography>
+                    }
                     {item?.toppings.length > 0
                       ? item?.toppings?.map((topping) => {
                           return (
                             <Typography
                               key={"toping" + topping.id}
                               component={ListItem}
-                              sx={{ fontSize: "12px", color: "primary" }}
+                              sx={{
+                                fontSize: "12px",
+                                lineHeight: "10px",
+                                color: "primary",
+                              }}
                             >
                               {topping?.topping?.name}
                             </Typography>
                           );
                         })
-                      : "N/A"}
+                      : ""}
                   </TableCell>
+                  {/* <TableCell align="left"></TableCell> */}
                   <TableCell align="left">{item.quantity}</TableCell>
                   <TableCell align="left">
                     {(Number(item.price) * Number(item.quantity)).toFixed(2)}
