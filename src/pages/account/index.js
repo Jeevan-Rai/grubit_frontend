@@ -195,8 +195,6 @@ const AccountPage = () => {
                         disabled
                       />
                     )}
-
-                    
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
@@ -288,7 +286,13 @@ const AccountPage = () => {
                   <Controller
                     name='postCode'
                     control={control}
-                    rules={{ required: false }}
+                    rules={{
+                      required: 'Phone number is required',
+                      pattern: {
+                        value: /^[0-9]{6}$/, // Example for a 10-digit phone number
+                        message: 'Invalid phone number. Must be 10 digits.'
+                      }
+                    }}
                     render={({ field: { value, onChange } }) => (
                       <CustomTextField
                         fullWidth
@@ -313,7 +317,6 @@ const AccountPage = () => {
               <Button type='submit' sx={{ mr: 2, backgroundColor: '#FD5B29' }} variant='contained'>
                 Update
               </Button>
-  
             </CardActions>
           </form>
         </Card>
@@ -372,7 +375,6 @@ const AccountPage = () => {
               <Button type='submit' sx={{ mr: 2, backgroundColor: '#FD5B29' }} variant='contained'>
                 Update Password
               </Button>
- 
             </CardActions>
           </form>
         </Card>

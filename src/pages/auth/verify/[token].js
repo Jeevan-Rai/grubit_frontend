@@ -169,7 +169,7 @@ const TwoStepsV2 = ({}) => {
       let otp = data.val1 + data.val2 + data.val3 + data.val4 + data.val5 + data.val6
       let response = await axiosInstance.post('/auth/verify', { token, otp })
       if (response.status === 200) {
-        toast.success('User verification successfull')
+        toast.success('User verification successful')
         router.replace('/login')
       } else {
         toast.error('Invalid OTP entered')
@@ -179,9 +179,9 @@ const TwoStepsV2 = ({}) => {
     }
   }
 
-  const handleResendOTP = async () =>{
+  const handleResendOTP = async () => {
     try {
-      let response = await axiosInstance.post('/auth/register/'+token)
+      let response = await axiosInstance.post('/auth/register/' + token)
       if (response.status === 200) {
         toast.success('OTP resent successfully')
       } else {
@@ -333,7 +333,7 @@ const TwoStepsV2 = ({}) => {
             </form>
             <Box sx={{ mt: 4, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <Typography sx={{ color: 'text.secondary' }}>Didn't get the code?</Typography>
-              <Typography  onClick={handleResendOTP} sx={{ ml: 1 }}>
+              <Typography onClick={handleResendOTP} sx={{ ml: 1 }}>
                 Resend
               </Typography>
             </Box>

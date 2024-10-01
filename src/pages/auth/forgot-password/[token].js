@@ -272,7 +272,18 @@ const VerifyResetPasswordToken = () => {
                 <Controller
                   name='password'
                   control={control}
-                  rules={{ required: true }}
+                  rules={{
+                    required: "Password is required",
+                    minLength: {
+                      value: 8,
+                      message: "Password must be at least 8 characters",
+                    },
+                    pattern: {
+                      value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+                      message:
+                        "Password must include at least one uppercase letter, one lowercase letter, one number, and one special character",
+                    },
+                  }}
                   render={({ field: { value, onChange, onBlur } }) => (
                     <CustomTextField
                       fullWidth
@@ -306,7 +317,16 @@ const VerifyResetPasswordToken = () => {
                   name='confirmPassword'
                   control={control}
                   rules={{
-                    required: 'This field is required',
+                    required: "Password is required",
+                    minLength: {
+                      value: 8,
+                      message: "Password must be at least 8 characters",
+                    },
+                    pattern: {
+                      value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+                      message:
+                        "Password must include at least one uppercase letter, one lowercase letter, one number, and one special character",
+                    },
                     validate: value => value === password || 'Passwords do not match'
                   }}
                   render={({ field: { value, onChange } }) => (

@@ -25,6 +25,7 @@ import { useRouter } from 'next/router'
 import { getOrderPaymentDetails } from 'src/helpers/orderHelper'
 import toast from 'react-hot-toast'
 import { useOrder } from 'src/context/OrderContext'
+import FallbackSpinner from 'src/@core/components/spinner'
 
 const StyledList = styled(List)(({ theme }) => ({
   padding: 0,
@@ -87,6 +88,7 @@ const OrderSuccessPage = () => {
   const router = useRouter()
   let { session_id } = router.query
   const [order, setOrder] = useState(null)
+  const [loading, setLoading] = useState(true)
   const { clearCart } = useOrder()
 
   const fetchPaymentDetails = async () => {
@@ -102,13 +104,17 @@ const OrderSuccessPage = () => {
         toast.success('Order places successfully')
       }
     }
+
+    setLoading(false)
   }
 
   useEffect(() => {
     if (session_id != undefined) fetchPaymentDetails()
   }, [router])
 
-  return (
+  return loading ? (
+    <FallbackSpinner />
+  ) : (
     <>
       <Usernavbar />
       <Box sx={{ padding: { xs: '10px', md: '30px' } }} />

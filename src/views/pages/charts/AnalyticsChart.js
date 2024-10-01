@@ -126,7 +126,7 @@ const AnalyticsChart = props => {
           color: borderColor
         },
         ticks: {
-          stepSize: 100,
+          stepSize: category == "revenue" ?  100 : 1,
           color: labelColor
         }
       }
@@ -141,7 +141,7 @@ const AnalyticsChart = props => {
     datasets: [
       {
         maxBarThickness: 15,
-        backgroundColor: yellow,
+        backgroundColor: category === "revenue" ? "#FFA266" : category == "order" ? "#64D7C8": "#EA5455",
         borderColor: 'transparent',
         borderRadius: { topRight: 15, topLeft: 15 },
         data: dataSet
@@ -184,7 +184,8 @@ const AnalyticsChart = props => {
   return (
     <Card>
       <CardHeader
-        title='Latest Statistics'
+        title={category === "revenue" ? "Total Revenue " : category == "order" ? "Total Orders ": "Total Customers "} 
+        subheader={category === "revenue" ? "Total Revenue trend over time" : category == "order" ? "Total Orders trend over time": "Total Customers trend over time"}
         sx={{
           flexDirection: ['column', 'row'],
           alignItems: ['flex-start', 'center'],

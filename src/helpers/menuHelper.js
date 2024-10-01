@@ -71,10 +71,10 @@ const getDatesOfWeekInMonth = (weekNumber, month, year) => {
         return getHours(new Date()) < 16
       }
 
-      return date.getDay() != 0;
+      
       
       // Include future dates only
-      return isAfter(date, todaysDate) && isBefore(date, lastDayOfMonth)
+      return isAfter(date, todaysDate) && isBefore(date, lastDayOfMonth) && date.getDay() != 0;
     })
     .map(date => ({
       date,

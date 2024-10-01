@@ -6,7 +6,7 @@ const navigation = () => {
       icon: 'tabler:chart-bar'
     },
     {
-      title: 'Customer',
+      title: 'Customers',
       path: '/admin/customers',
       icon: 'tabler:users'
     },

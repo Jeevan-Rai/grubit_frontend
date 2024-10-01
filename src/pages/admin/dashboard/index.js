@@ -86,7 +86,7 @@ const Analytics = () => {
         </Grid>
 
         <Grid item md={12} >
-          <AnalyticsChart chartData={data} yellow={'#F56700'} labelColor={'text.warning'} borderColor={'gray'} />
+          <AnalyticsChart chartData={data} yellow={'#FFA266'} labelColor={'#4B465C'} borderColor={'#DBDADE'} />
         </Grid>
       </Grid>
     </Grid>

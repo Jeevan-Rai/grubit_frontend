@@ -25,7 +25,7 @@ import themeOptions from 'src/@core/theme/ThemeOptions'
 import { hexToRGBA } from 'src/@core/utils/hex-to-rgba'
 import { useAuth } from 'src/hooks/useAuth'
 import { Icon } from '@mui/material'
-
+import { useOrder } from 'src/context/OrderContext'
 const StyledBoxForShadow = styled(Box)(({ theme }) => ({
   top: 60,
   left: -8,
@@ -66,7 +66,7 @@ const Navigation = props => {
   // ** Ref
   const shadowRef = useRef(null)
   const { logout } = useAuth()
-
+  const { clearCart } = useOrder()
   // ** Var
   const { afterVerticalNavMenuContentPosition, beforeVerticalNavMenuContentPosition } = themeConfig
 
@@ -189,7 +189,10 @@ const Navigation = props => {
         <ListItem
           disablePadding
           className='nav-link fixed bottom'
-          onClick={() => logout()}
+          onClick={() => {
+            clearCart()
+            logout()
+          }}
           sx={{
             position: 'fixed',
             bottom: 50,

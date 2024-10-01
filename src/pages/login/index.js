@@ -89,15 +89,15 @@ const schema = yup.object().shape({
 })
 
 const defaultValues = {
-  password: 'admin',
-  email: 'admin@grubit.com'
+  password: '',
+  email: ''
 }
 
 const LoginPage = () => {
   const [rememberMe, setRememberMe] = useState(true)
   const [showPassword, setShowPassword] = useState(false)
-  const router= useRouter();
-  const {returnUrl} = router.query;
+  const router = useRouter()
+  const { returnUrl } = router.query
   // ** Hooks
   const auth = useAuth()
   const theme = useTheme()

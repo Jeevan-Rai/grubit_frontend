@@ -10,8 +10,8 @@ import Button from '@mui/material/Button'
 import { useForm, Controller } from 'react-hook-form'
 import { Box } from '@mui/material'
 
-export default function ImageUpload({ register, reset }) {
-  const [imgSrc, setImgSrc] = useState('/images/avatars/15.png')
+export default function ImageUpload({ register, reset, image = null }) {
+  const [imgSrc, setImgSrc] = useState(image ? image : '/images/Background.png')
   const hiddenInputRef = useRef()
   const { ref: registerRef, ...rest } = register('file')
   const ImgStyled = styled('img')(({ theme }) => ({
@@ -48,7 +48,7 @@ export default function ImageUpload({ register, reset }) {
 
   const handleInputImageReset = () => {
     reset({ file: null })
-    setImgSrc('/images/avatars/15.png')
+    setImgSrc('/images/Background.png')
   }
   return (
     <>

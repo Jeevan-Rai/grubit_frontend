@@ -25,29 +25,28 @@ const LinkStyled = styled(Link)(({ theme }) => ({
 }))
 
 function categorizeByOrderID(orders) {
-    const categorizedOrders = {};
-  
-      orders?.forEach(order => {
-          // Extract the date from the createdAt property
-          const orderId = order.orderId;
-          
-          // Initialize the date entry if it doesn't exist
-          if (!categorizedOrders[orderId]) {
-              categorizedOrders[orderId] = [];
-          }
-  
-          categorizedOrders[orderId] = [...categorizedOrders[orderId] , order];
-          
-      });
-  
-      // Convert the object into an array of objects
-      return Object.keys(categorizedOrders).map(element=> categorizedOrders[element])
-  }
+  const categorizedOrders = {}
+
+  orders?.forEach(order => {
+    // Extract the date from the createdAt property
+    const orderId = order.orderId
+
+    // Initialize the date entry if it doesn't exist
+    if (!categorizedOrders[orderId]) {
+      categorizedOrders[orderId] = []
+    }
+
+    categorizedOrders[orderId] = [...categorizedOrders[orderId], order]
+  })
+
+  // Convert the object into an array of objects
+  return Object.keys(categorizedOrders).map(element => categorizedOrders[element])
+}
 
 const Orders = () => {
   const [page, setPage] = useState(1)
   const [search, setSearch] = useState('')
-  const [date, setDate] = useState(null)
+  const [date, setDate] = useState(new Date())
 
   const [limit, setLimit] = useState(10)
   const [loading, setLoading] = useState(10)
@@ -94,6 +93,7 @@ const Orders = () => {
             fetchOrders={fetchOrders}
             setPage={setPage}
             page={page}
+            date={date}
           />
         </Card>
       </Grid>

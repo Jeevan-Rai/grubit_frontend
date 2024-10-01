@@ -97,7 +97,7 @@ const MenuItemsList = ({ search }) => {
                   rounded
                   size='small'
                   skin='light'
-                  color={row.status ? 'primary' : 'warning'}
+                  color={row.status ? 'primary' : 'error'}
                   label={row.status ? 'Active' : 'Inactive'}
                   sx={{ '& .MuiChip-label': { textTransform: 'capitalize' } }}
                 />

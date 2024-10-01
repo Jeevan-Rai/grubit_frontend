@@ -93,7 +93,7 @@ const CartOrderDetails = () => {
                 {itemIndex === 0 && <TableCell rowSpan={day.items.length}>Week 1</TableCell>}
                 {itemIndex === 0 && <TableCell rowSpan={day.items.length}>{day.date}</TableCell>}
                 <TableCell>{item.name || item.dish?.name}</TableCell>
-                <TableCell>{item.category}</TableCell>
+                <TableCell>{item.category === "weekly" ? "Weekly" : "Make Your Own"}</TableCell>
                 <TableCell>{item.quantity || '-'}</TableCell>
                 <TableCell>{'£'+ Number(item.price).toFixed(2) || '-'}</TableCell>
                 <TableCell

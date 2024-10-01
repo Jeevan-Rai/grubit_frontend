@@ -71,6 +71,7 @@ const Customers = () => {
       <Grid item xs={12}>
         <Card>
           <OrderTableHeader title='Search Filter' setSearch={setSearch} date={date} setDate={setDate} />
+
           <OrderHistoryList
             orders={orders}
             handleChange={handleChange}

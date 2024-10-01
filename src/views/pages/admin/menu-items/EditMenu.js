@@ -105,8 +105,7 @@ const EditMenu = () => {
     try {
       const formData = new FormData()
 
-      console.log(data);
-      
+      console.log(data)
 
       formData.append('itemName', data.itemName)
       formData.append('category', data.category)
@@ -127,17 +126,16 @@ const EditMenu = () => {
       console.log(data)
       if (data.primary) {
         data.primary.forEach((item, index) => {
-          if(item.id != undefined) formData.append(`primary[${index}][id]`, item.id)          
+          if (item.id != undefined) formData.append(`primary[${index}][id]`, item.id)
           formData.append(`primary[${index}][value]`, item.value)
           formData.append(`primary[${index}][type]`, item.type)
         })
       }
       if (data.topping) {
         data.topping.forEach((item, index) => {
-          if(item.id != undefined) formData.append(`topping[${index}][id]`, item.id)
+          if (item.id != undefined) formData.append(`topping[${index}][id]`, item.id)
           formData.append(`topping[${index}][value]`, item.value)
           formData.append(`topping[${index}][type]`, item.type)
-
         })
       }
       console.log(data.file && data.file.length > 0)
@@ -178,21 +176,19 @@ const EditMenu = () => {
     })
     console.log(menuItem?.options)
 
-    console.log(OptionValue);
-    
+    console.log(OptionValue)
 
     setValue('category', menuItem?.categoryType)
     setValue('primary', OptionValue)
     setValue('topping', ToppingValue)
   }, [menuItem, setValue])
 
-
-  console.log(errors);
+  console.log(errors)
   return (
     <Card>
       <CardHeader title='Item Details' />
       <form onSubmit={handleSubmit(onSubmit)} encType='multipart/form-data'>
-        <ImageUpload register={register} />
+        <ImageUpload register={register} image={process.env.NEXT_PUBLIC_BACKEND_URL + '/uploads/' + menuItem?.image} />
         <CardContent>
           <Grid container spacing={5}>
             <Grid item xs={12} sm={6}>
@@ -497,11 +493,8 @@ const EditMenu = () => {
                   />
                   {errors.monday && <span>This field is required</span>}
                 </Grid>
-                
               </>
             )}
-
-            
 
             {categoryType === 'make-your-own' && (
               <>
@@ -509,15 +502,14 @@ const EditMenu = () => {
                   return (
                     <>
                       <Grid item xs={12} sm={6} key={field.id}>
-                      <Controller
-
+                        <Controller
                           name={`primary.${index}.id`}
                           control={control}
                           rules={{ required: false }}
                           render={({ field: { value, onChange } }) => (
                             <Box sx={{ display: 'flex', alignItems: 'center', gap: '1em' }}>
                               <CustomTextField
-                              sx={{display:"none"}}
+                                sx={{ display: 'none' }}
                                 fullWidth
                                 value={value}
                                 label={`Option ${index + 1}`}
@@ -528,7 +520,6 @@ const EditMenu = () => {
                                 {...(errors.primary && { helperText: 'This field is required' })}
                                 defaultValues={value}
                               />
-                              
                             </Box>
                           )}
                         />
@@ -536,9 +527,8 @@ const EditMenu = () => {
                           name={`primary.${index}.type`}
                           control={control}
                           rules={{ required: false }}
-                          
                           render={({ field: { value, onChange } }) => (
-                            <Box sx={{ display: 'flex', alignItems: 'center', gap: '1em'  }}>
+                            <Box sx={{ display: 'flex', alignItems: 'center', gap: '1em' }}>
                               <CustomTextField
                                 select
                                 fullWidth
@@ -551,11 +541,9 @@ const EditMenu = () => {
                                 defaultValue={value}
                                 {...(errors.primary && { helperText: 'This field is required' })}
                               >
-
-                                <MenuItem value={"veg"}>Veg</MenuItem>
-                                <MenuItem value={"non-veg"}>Non Veg</MenuItem>
-                                <MenuItem value={"vegan"}>Vegan</MenuItem>
-
+                                <MenuItem value={'veg'}>Veg</MenuItem>
+                                <MenuItem value={'non-veg'}>Non Veg</MenuItem>
+                                <MenuItem value={'vegan'}>Vegan</MenuItem>
                               </CustomTextField>
                               {/* <Box sx={{ marginTop: '1.5em' }} onClick={() => removePrimaryField(index)}>
                                 <Icon
@@ -568,7 +556,7 @@ const EditMenu = () => {
                             </Box>
                           )}
                         />
-                        <Box sx={{height:'0.5em'}} />
+                        <Box sx={{ height: '0.5em' }} />
                         <Controller
                           name={`primary.${index}.value`}
                           control={control}
@@ -633,36 +621,33 @@ const EditMenu = () => {
                   return (
                     <>
                       <Grid item xs={12} sm={6} key={field.id}>
-                      <Controller
-
-name={`topping.${index}.id`}
-control={control}
-rules={{ required: false }}
-render={({ field: { value, onChange } }) => (
-  <Box sx={{ display: 'flex', alignItems: 'center', gap: '1em' }}>
-    <CustomTextField
-    sx={{display:"none"}}
-      fullWidth
-      value={value}
-      label={`Option ${index + 1}`}
-      onChange={onChange}
-      placeholder='Enter option name'
-      error={Boolean(errors.topping)}
-      aria-describedby='validation-basic-first-name'
-      {...(errors.topping && { helperText: 'This field is required' })}
-      defaultValues={value}
-    />
-  
-  </Box>
-)}
-/>
-<Controller
+                        <Controller
+                          name={`topping.${index}.id`}
+                          control={control}
+                          rules={{ required: false }}
+                          render={({ field: { value, onChange } }) => (
+                            <Box sx={{ display: 'flex', alignItems: 'center', gap: '1em' }}>
+                              <CustomTextField
+                                sx={{ display: 'none' }}
+                                fullWidth
+                                value={value}
+                                label={`Option ${index + 1}`}
+                                onChange={onChange}
+                                placeholder='Enter option name'
+                                error={Boolean(errors.topping)}
+                                aria-describedby='validation-basic-first-name'
+                                {...(errors.topping && { helperText: 'This field is required' })}
+                                defaultValues={value}
+                              />
+                            </Box>
+                          )}
+                        />
+                        <Controller
                           name={`topping.${index}.type`}
                           control={control}
                           rules={{ required: false }}
-                          
                           render={({ field: { value, onChange } }) => (
-                            <Box sx={{ display: 'flex', alignItems: 'center', gap: '1em'  }}>
+                            <Box sx={{ display: 'flex', alignItems: 'center', gap: '1em' }}>
                               <CustomTextField
                                 select
                                 fullWidth
@@ -675,11 +660,9 @@ render={({ field: { value, onChange } }) => (
                                 aria-describedby='validation-basic-first-name'
                                 {...(errors.primary && { helperText: 'This field is required' })}
                               >
-
-                                <MenuItem value={"veg"}>Veg</MenuItem>
-                                <MenuItem value={"non-veg"}>Non Veg</MenuItem>
-                                <MenuItem value={"vegan"}>Vegan</MenuItem>
-
+                                <MenuItem value={'veg'}>Veg</MenuItem>
+                                <MenuItem value={'non-veg'}>Non Veg</MenuItem>
+                                <MenuItem value={'vegan'}>Vegan</MenuItem>
                               </CustomTextField>
                               {/* <Box sx={{ marginTop: '1.5em' }} onClick={() => removePrimaryField(index)}>
                                 <Icon
@@ -692,7 +675,7 @@ render={({ field: { value, onChange } }) => (
                             </Box>
                           )}
                         />
-                        <Box sx={{height:'0.5em'}} />
+                        <Box sx={{ height: '0.5em' }} />
                         <Controller
                           name={`topping.${index}.value`}
                           control={control}
@@ -749,28 +732,28 @@ render={({ field: { value, onChange } }) => (
               </>
             )}
 
-<Grid item xs={12} sx={{ fontWeight: '800', fontSize: '18px' }}>
-                  <Controller
-                    name='status'
-                    control={control}
-                    rules={{ required: false }}
-                    render={({ field }) => (
-                      <Box>
-                        Is the Item Available Now?
-                        <Switch
-                          {...field}
-                          aria-describedby='validation-basic-first-name'
-                          sx={errors.status ? { color: 'error.main' } : null}
-                          checked={field?.value}
-                        />{' '}
-                        <br />
-                        <small style={{ fontWeight: '400' }}>
-                          (Turning this off will automatically turn off the item respectively for all days)
-                        </small>
-                      </Box>
-                    )}
-                  />
-                </Grid>
+            <Grid item xs={12} sx={{ fontWeight: '800', fontSize: '18px' }}>
+              <Controller
+                name='status'
+                control={control}
+                rules={{ required: false }}
+                render={({ field }) => (
+                  <Box>
+                    Is the Item Available Now?
+                    <Switch
+                      {...field}
+                      aria-describedby='validation-basic-first-name'
+                      sx={errors.status ? { color: 'error.main' } : null}
+                      checked={field?.value}
+                    />{' '}
+                    <br />
+                    <small style={{ fontWeight: '400' }}>
+                      (Turning this off will automatically turn off the item respectively for all days)
+                    </small>
+                  </Box>
+                )}
+              />
+            </Grid>
           </Grid>
         </CardContent>
         <CardActions>

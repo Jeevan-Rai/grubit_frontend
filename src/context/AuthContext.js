@@ -10,6 +10,7 @@ import axios from 'axios'
 // ** Config
 import authConfig from 'src/configs/auth'
 import axiosInstance from 'src/helpers/axiosInstance'
+import { useOrder } from './OrderContext'
 
 // ** Defaults
 const defaultProvider = {
@@ -75,7 +76,11 @@ const AuthProvider = ({ children }) => {
         params.rememberMe ? window.localStorage.setItem('userData', JSON.stringify(response.data.userData)) : null
 
         const redirectURL =
-          returnUrl && returnUrl !== '/' ? returnUrl : response.data.userData.role == 'admin' ? '/admin/dashboard' : '/account'
+          returnUrl && returnUrl !== '/'
+            ? returnUrl
+            : response.data.userData.role == 'admin'
+            ? '/admin/dashboard'
+            : '/account'
 
         router.replace(redirectURL)
       })

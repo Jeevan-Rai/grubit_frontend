@@ -30,7 +30,7 @@ const RedeemerTableHeader = props => {
         <CustomTextField
           fullWidth
           sx={{ mr: 4 }}
-          placeholder='Search product'
+          placeholder='Search redeemers'
           onChange={e => setSearch(e.target.value)}
         />
       </Grid>

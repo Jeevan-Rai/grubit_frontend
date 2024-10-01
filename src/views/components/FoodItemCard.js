@@ -90,12 +90,13 @@ export default function FoodItemCard({ type = 'weekly', week, date, item }) {
                   fontFamily: 'DM Sans',
                   fontWeight: '500',
                   color: '#5D586C',
-                  fontSize: '18px',
+                  fontSize: '13px',
                   border: '1px solid #FD5B2980',
 
                   color: '#FFFFFF',
                   background: '#FD5B29',
                   margin: '0.25em',
+                  marginBottom: '0.75em',
                   '&:hover': {
                     color: '#FFFFFF',
                     backgroundColor: '#FD5B29'
@@ -129,7 +130,7 @@ export default function FoodItemCard({ type = 'weekly', week, date, item }) {
                     }
                   }}
                   onClick={() => {
-                     handleDecrease(type, week, date, item.id)
+                    handleDecrease(type, week, date, item.id)
                   }}
                 >
                   -
@@ -170,7 +171,8 @@ export default function FoodItemCard({ type = 'weekly', week, date, item }) {
                 borderBottom: '2px solid #FD5B29',
                 width: 'max-content',
                 fontSize: '14px',
-                textAlign: 'center'
+                textAlign: 'center',
+                cursor: 'Pointer'
               }}
               onClick={() => setOpen(true)}
             >

@@ -70,29 +70,37 @@ const CouponRedeemers = ({ setPage, customers }) => {
       <Table sx={{ minWidth: 650 }} aria-label='simple table'>
         <TableHead>
           <TableRow>
+            <TableCell>Custtomer Name</TableCell>
             <TableCell>Email</TableCell>
-            <TableCell align='right'>Cart Value</TableCell>
-            <TableCell align='right'>Total Discount</TableCell>
-            <TableCell align='right'>Redemption On</TableCell>
+            <TableCell>Coupon Code</TableCell>
+            <TableCell align='left'>Cart Value</TableCell>
+            <TableCell align='left'>Total Discount</TableCell>
+            <TableCell align='left'>Redemption On</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {customers?.customers?.map(row => {
-            return <TableRow
-            key={row.id}
-            sx={{
-              '&:last-of-type td, &:last-of-type th': {
-                border: 0
-              }
-            }}
-          >
-            <TableCell component='th' scope='row'>
-              {row.user.email}
-            </TableCell>
-            <TableCell align='right'>{row.totalPrice}</TableCell>
-            <TableCell align='right'>{row.discountAmount}</TableCell>
-            <TableCell align='right'>{new Date(row.createdAt).toLocaleDateString()}</TableCell>
-          </TableRow>
+            return (
+              <TableRow
+                key={row.id}
+                sx={{
+                  '&:last-of-type td, &:last-of-type th': {
+                    border: 0
+                  }
+                }}
+              >
+                <TableCell component='th' scope='row'>
+                  {row.user.firstName} {row.user.lastName}
+                </TableCell>
+                <TableCell component='th' scope='row'>
+                  {row.user.email}
+                </TableCell>
+                <TableCell align='left'>{row.coupon}</TableCell>
+                <TableCell align='left'>{row.totalPrice}</TableCell>
+                <TableCell align='left'>{row.discountAmount}</TableCell>
+                <TableCell align='left'>{new Date(row.createdAt).toLocaleDateString()}</TableCell>
+              </TableRow>
+            )
           })}
         </TableBody>
       </Table>
