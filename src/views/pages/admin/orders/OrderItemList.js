@@ -87,7 +87,82 @@ const OrderItemList = ({ orders, handleChange, fetchOrders, date }) => {
       date
     )}</p></div></div></div></div>
 
-      ${printContents}
+     <table style="width: 100%; border-collapse: collapse; font-family: Arial, sans-serif;">
+        <thead>
+        <tr>
+        <th style="border: 1px solid #dddddd; padding: 8px; background-color: #f2f2f2;">        <strong>Order ID</strong></th>
+                <th style="border: 1px solid #dddddd; padding: 8px; background-color: #f2f2f2;"> <strong>Customer Name </strong></th>
+                <th style="border: 1px solid #dddddd; padding: 8px; background-color: #f2f2f2;"><strong>Pickup Station</strong></th>
+                <th style="border: 1px solid #dddddd; padding: 8px; background-color: #f2f2f2;"><strong>Pickup Date</strong></th>
+                <th style="border: 1px solid #dddddd; padding: 8px; background-color: #f2f2f2;"><strong>Meal Ordered</strong></th>
+                <th style="border: 1px solid #dddddd; padding: 8px; background-color: #f2f2f2;"><strong>QTY</strong></th>
+                <th style="border: 1px solid #dddddd; padding: 8px; background-color: #f2f2f2;"><strong>Total</strong></th>
+                <th style="border: 1px solid #dddddd; padding: 8px; background-color: #f2f2f2;"><strong>Status</strong></th>
+            </tr>
+      </thead>
+        <tbody>
+            
+            ${orders?.orders
+              .map((row, idx) => {
+                return row
+                  .map((item, idx) => {
+                    return `<tr
+                    key={row.name}                   
+                  >
+                    ${
+                      idx === 0
+                        ? `<td style="border: 1px solid #dddddd; padding: 8px;" rowspan=${row.length}>#${item.orderId}</td>`
+                        : ""
+                    }
+                    <td style="border: 1px solid #dddddd; padding: 8px;" align="left">
+                      ${item?.order?.user?.firstName}
+                      ${item?.order?.user?.lastName}
+                    </td>
+                   
+                    <td style="border: 1px solid #dddddd; padding: 8px;" align="left">${
+                      item?.order?.station?.name
+                    }</td>
+                    <td style="border: 1px solid #dddddd; padding: 8px;" align="left">
+                      ${new Date(item.date).toLocaleDateString()}
+                    </td>
+                    
+                    <td style="border: 1px solid #dddddd; padding: 8px;" align="left">
+                      ${item?.name} ${
+                      item?.type === "make-your-own" ? "with" : ""
+                    } <br />
+                    
+                      ${item?.primaryOption?.primaryOption?.name || ""} <br />
+                       
+                      ${
+                        item?.toppings.length > 0
+                          ? item?.toppings
+                              ?.map((topping) => {
+                                return `${topping?.topping?.name}<br>`;
+                              })
+                              .join("")
+                          : ""
+                      }
+                    </td>
+                   
+                    <td style="border: 1px solid #dddddd; padding: 8px;" align="left">${
+                      item.quantity
+                    }</td>
+                    <td style="border: 1px solid #dddddd; padding: 8px;" align="left">
+                      ${(Number(item.price) * Number(item.quantity)).toFixed(2)}
+                    </td>
+
+                    <td style="border: 1px solid #dddddd; padding: 8px;" align="left">${
+                      item.order.deliveryStatus
+                    }</td>
+                  </tr>`;
+                  })
+                  .join("");
+              })
+              .join("")}
+            
+            
+        </tbody>
+    </table>
        </div>
        
        `;
