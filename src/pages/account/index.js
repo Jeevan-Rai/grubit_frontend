@@ -286,13 +286,7 @@ const AccountPage = () => {
                   <Controller
                     name='postCode'
                     control={control}
-                    rules={{
-                      required: 'Phone number is required',
-                      pattern: {
-                        value: /^[0-9]{6}$/, // Example for a 10-digit phone number
-                        message: 'Invalid phone number. Must be 10 digits.'
-                      }
-                    }}
+                    rules={{ required: false }}
                     render={({ field: { value, onChange } }) => (
                       <CustomTextField
                         fullWidth

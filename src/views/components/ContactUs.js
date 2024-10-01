@@ -5,6 +5,7 @@ import SectionHeader from './SectionHeader'
 import { useForm, Controller, useFieldArray } from 'react-hook-form'
 import CustomTextField from 'src/@core/components/mui/text-field'
 import MessageDialog from './dialogs/MessageDialog'
+import axiosInstance from 'src/helpers/axiosInstance'
 const Label = ({ name }) => {
   return (
     <>
@@ -21,15 +22,16 @@ export default function ContactUs() {
     register,
     watch
   } = useForm()
-  const [open , setOpen] = useState(false);
+  const [open, setOpen] = useState(false)
 
-  const onSubmit = async (data) =>{
+  const onSubmit = async data => {
+    axiosInstance.post('/contact-us', data).then(res => {})
     setOpen(true)
     reset({
-      name:"",
-      email:"",
-      phoneNumber:"",
-      message:""
+      name: '',
+      email: '',
+      phoneNumber: '',
+      message: ''
     })
   }
   return (
@@ -151,7 +153,7 @@ export default function ContactUs() {
                     <Controller
                       name='message'
                       control={control}
-                      rules={{ required: false }}
+                      rules={{ required: true }}
                       render={({ field: { value, onChange } }) => (
                         <CustomTextField
                           multiline
@@ -179,7 +181,13 @@ export default function ContactUs() {
           </Box>
         </Grid>
       </Grid>
-      <MessageDialog type={"success"} title={'Contact Us'}  message={'Your information has been saved successfully , Our team wil reach out to you soon!'} open={open} setOpen={setOpen} />
+      <MessageDialog
+        type={'success'}
+        title={'Contact Us'}
+        message={'Your information has been saved successfully , Our team wil reach out to you soon!'}
+        open={open}
+        setOpen={setOpen}
+      />
     </>
   )
 }
