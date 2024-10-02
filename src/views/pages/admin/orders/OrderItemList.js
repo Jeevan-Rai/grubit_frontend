@@ -291,16 +291,16 @@ const OrderItemList = ({ orders, handleChange, fetchOrders, date }) => {
       {/* <Table  sx={{ minWidth: 650 }} aria-label='simple table'>
         <TableHead>
           <TableRow>
-            <TableCell>ID</TableCell>
-            <TableCell>Name</TableCell>
-            <TableCell align='left'>Pickup Location</TableCell>
-            <TableCell align='left'>Pickup Date</TableCell>
-            <TableCell align='left'>Type</TableCell>
-            <TableCell align='left'>Primary Option</TableCell>
-            <TableCell align='left'>Toppings</TableCell>
-            <TableCell align='left'>Quantity</TableCell>
-            <TableCell align='left'>Total</TableCell>
-            <TableCell align='left'>Status</TableCell>
+            <TableCell sx={{paddingLeft:"0.5em"}}>ID</TableCell>
+            <TableCell sx={{paddingLeft:"0.5em"}}>Name</TableCell>
+            <TableCell sx={{paddingLeft:"0.5em"}} align='left'>Pickup Location</TableCell>
+            <TableCell sx={{paddingLeft:"0.5em"}} align='left'>Pickup Date</TableCell>
+            <TableCell sx={{paddingLeft:"0.5em"}} align='left'>Type</TableCell>
+            <TableCell sx={{paddingLeft:"0.5em"}} align='left'>Primary Option</TableCell>
+            <TableCell sx={{paddingLeft:"0.5em"}} align='left'>Toppings</TableCell>
+            <TableCell sx={{paddingLeft:"0.5em"}} align='left'>Quantity</TableCell>
+            <TableCell sx={{paddingLeft:"0.5em"}} align='left'>Total</TableCell>
+            <TableCell sx={{paddingLeft:"0.5em"}} align='left'>Status</TableCell>
 
           </TableRow>
         </TableHead>
@@ -317,22 +317,22 @@ const OrderItemList = ({ orders, handleChange, fetchOrders, date }) => {
                 }
               }}
             >
-              {idx === 0 && <TableCell rowSpan={row.length}>#{item.orderId}</TableCell>}
-              <TableCell align='left'>{item?.name}</TableCell>
-              <TableCell align='left'>{item?.order?.station?.name}</TableCell>
-              <TableCell align='left'>{new Date(item.date).toLocaleDateString()}</TableCell>
-              <TableCell align='left'>{item.type}</TableCell>
-              <TableCell align='left'>{item?.primaryOption?.primaryOption?.name || 'N/A'}</TableCell>
-              <TableCell align='left'>{item?.toppings.length > 0 ? item?.toppings?.map(topping=>{
+              {idx === 0 && <TableCell sx={{paddingLeft:"0.5em"}} rowSpan={row.length}>#{item.orderId}</TableCell>}
+              <TableCell sx={{paddingLeft:"0.5em"}} align='left'>{item?.name}</TableCell>
+              <TableCell sx={{paddingLeft:"0.5em"}} align='left'>{item?.order?.station?.name}</TableCell>
+              <TableCell sx={{paddingLeft:"0.5em"}} align='left'>{new Date(item.date).toLocaleDateString()}</TableCell>
+              <TableCell sx={{paddingLeft:"0.5em"}} align='left'>{item.type}</TableCell>
+              <TableCell sx={{paddingLeft:"0.5em"}} align='left'>{item?.primaryOption?.primaryOption?.name || 'N/A'}</TableCell>
+              <TableCell sx={{paddingLeft:"0.5em"}} align='left'>{item?.toppings.length > 0 ? item?.toppings?.map(topping=>{
                 return <Typography>
                   {topping.name}
                 </Typography>
               }) : 'N/A'}</TableCell>
-              <TableCell align='left'>{item.quantity}</TableCell>
-              <TableCell align='left'>{(Number(item.price) * Number(item.quantity)).toFixed(2)}</TableCell>
+              <TableCell sx={{paddingLeft:"0.5em"}} align='left'>{item.quantity}</TableCell>
+              <TableCell sx={{paddingLeft:"0.5em"}} align='left'>{(Number(item.price) * Number(item.quantity)).toFixed(2)}</TableCell>
     
 
-              <TableCell align='left'>
+              <TableCell sx={{paddingLeft:"0.5em"}} align='left'>
                 <Chip
                   rounded
                   size='small'
@@ -361,21 +361,37 @@ const OrderItemList = ({ orders, handleChange, fetchOrders, date }) => {
         </TableBody>
       </Table> */}
 
-      <Table ref={tableRef} aria-label="simple table">
+      <Table
+        ref={tableRef}
+        sx={{ borderCollapse: "collapse" }}
+        aria-label="simple table"
+      >
         <TableHead>
           <TableRow>
-            <TableCell>ID</TableCell>
-            <TableCell>Customer Name</TableCell>
-            {/* <TableCell>Food Item</TableCell> */}
-            <TableCell align="left">Pickup Station</TableCell>
-            <TableCell align="left">Pickup Date</TableCell>
-            <TableCell align="left">Meal Ordered</TableCell>
-            {/* <TableCell align="left">Primary Option</TableCell> */}
-            {/* <TableCell align="left">Toppings</TableCell> */}
-            <TableCell align="left">Qty</TableCell>
-            <TableCell align="left">Total</TableCell>
-            <TableCell align="left">Status</TableCell>
-            {/* <TableCell align='center'>ACTIONS</TableCell> */}
+            <TableCell sx={{ paddingLeft: "0.5em" }}>ID</TableCell>
+            <TableCell sx={{ paddingLeft: "0.5em" }}>Customer Name</TableCell>
+            {/* <TableCell sx={{paddingLeft:"0.5em"}}>Food Item</TableCell> */}
+            <TableCell sx={{ paddingLeft: "0.5em" }} align="left">
+              Pickup Station
+            </TableCell>
+            <TableCell sx={{ paddingLeft: "0.5em" }} align="left">
+              Pickup Date
+            </TableCell>
+            <TableCell sx={{ paddingLeft: "0.5em" }} align="left">
+              Meal Ordered
+            </TableCell>
+            {/* <TableCell sx={{paddingLeft:"0.5em"}} align="left">Primary Option</TableCell> */}
+            {/* <TableCell sx={{paddingLeft:"0.5em"}} align="left">Toppings</TableCell> */}
+            <TableCell sx={{ paddingLeft: "0.5em" }} align="left">
+              Qty
+            </TableCell>
+            <TableCell sx={{ paddingLeft: "0.5em" }} align="left">
+              Total
+            </TableCell>
+            <TableCell sx={{ paddingLeft: "0.5em" }} align="left">
+              Status
+            </TableCell>
+            {/* <TableCell sx={{paddingLeft:"0.5em"}} align='center'>ACTIONS</TableCell> */}
           </TableRow>
         </TableHead>
         <TableBody>
@@ -393,20 +409,25 @@ const OrderItemList = ({ orders, handleChange, fetchOrders, date }) => {
                   }}
                 >
                   {idx === 0 && (
-                    <TableCell rowSpan={row.length}>#{item.orderId}</TableCell>
+                    <TableCell
+                      sx={{ paddingLeft: "0.5em" }}
+                      rowSpan={row.length}
+                    >
+                      #{item.orderId}
+                    </TableCell>
                   )}
-                  <TableCell align="left">
+                  <TableCell sx={{ paddingLeft: "0.5em" }} align="left">
                     {item?.order?.user?.firstName} {item?.order?.user?.lastName}
                   </TableCell>
-                  {/* <TableCell align="left">{item?.name}</TableCell> */}
-                  <TableCell align="left">
+                  {/* <TableCell sx={{paddingLeft:"0.5em"}} align="left">{item?.name}</TableCell> */}
+                  <TableCell sx={{ paddingLeft: "0.5em" }} align="left">
                     {item?.order?.station?.name}
                   </TableCell>
-                  <TableCell align="left">
+                  <TableCell sx={{ paddingLeft: "0.5em" }} align="left">
                     {new Date(item.date).toLocaleDateString()}
                   </TableCell>
-                  {/* <TableCell align="left">{item.type}</TableCell> */}
-                  <TableCell align="left">
+                  {/* <TableCell sx={{paddingLeft:"0.5em"}} align="left">{item.type}</TableCell> */}
+                  <TableCell sx={{ paddingLeft: "0.5em" }} align="left">
                     {item?.name} <br />
                     {
                       <Typography
@@ -434,13 +455,15 @@ const OrderItemList = ({ orders, handleChange, fetchOrders, date }) => {
                         })
                       : ""}
                   </TableCell>
-                  {/* <TableCell align="left"></TableCell> */}
-                  <TableCell align="left">{item.quantity}</TableCell>
-                  <TableCell align="left">
+                  {/* <TableCell sx={{paddingLeft:"0.5em"}} align="left"></TableCell> */}
+                  <TableCell sx={{ paddingLeft: "0.5em" }} align="left">
+                    {item.quantity}
+                  </TableCell>
+                  <TableCell sx={{ paddingLeft: "0.5em" }} align="left">
                     {(Number(item.price) * Number(item.quantity)).toFixed(2)}
                   </TableCell>
 
-                  <TableCell align="left">
+                  <TableCell sx={{ paddingLeft: "0.5em" }} align="left">
                     <Chip
                       rounded
                       size="small"
@@ -463,7 +486,7 @@ const OrderItemList = ({ orders, handleChange, fetchOrders, date }) => {
                       }}
                     />
                   </TableCell>
-                  {/* <TableCell sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%' }}>
+                  {/* <TableCell sx={{paddingLeft:"0.5em"}} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%' }}>
                 <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%' }}>
                   <Tooltip title='Print'>
                     <IconButton size='small' component={Link} href={`/admin/orders/${row.id}/print`}>

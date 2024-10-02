@@ -291,7 +291,7 @@ const CreateMenu = () => {
             </Grid>
             <Grid item xs={12}>
               <Typography variant='body2' sx={{ fontWeight: 600, fontSize: '18px' }}>
-                {categoryType === 'weekly' ? 'Will this item be available on: ' : 'Primary Options'}
+                {categoryType === 'weekly' ? 'Will this item be available on: ' : 'Food Style'}
               </Typography>
             </Grid>
 
@@ -432,7 +432,6 @@ const CreateMenu = () => {
                   />
                   {errors.monday && <span>This field is required</span>}
                 </Grid>
-                
               </>
             )}
 
@@ -442,7 +441,7 @@ const CreateMenu = () => {
                   return (
                     <>
                       <Grid item xs={12} sm={6} key={field.id}>
-                      <Controller
+                        {/* <Controller
                           name={`primary.${index}.type`}
                           control={control}
                           rules={{ required: false }}
@@ -466,18 +465,11 @@ const CreateMenu = () => {
                                 <MenuItem value={"vegan"}>Vegan</MenuItem>
 
                               </CustomTextField>
-                              {/* <Box sx={{ marginTop: '1.5em' }} onClick={() => removePrimaryField(index)}>
-                                <Icon
-                                  fontSize='1.125rem'
-                                  icon='tabler:trash'
-                                  color='text.primary'
-                                  sx={{ color: 'text.primary' }}
-                                />
-                              </Box> */}
+                              
                             </Box>
                           )}
                         />
-                        <Box sx={{height:'0.5em'}} />
+                        <Box sx={{height:'0.5em'}} /> */}
                         <Controller
                           name={`primary.${index}.value`}
                           control={control}
@@ -541,13 +533,12 @@ const CreateMenu = () => {
                   return (
                     <>
                       <Grid item xs={12} sm={6} key={field.id}>
-                      <Controller
+                        {/* <Controller
                           name={`topping.${index}.type`}
                           control={control}
                           rules={{ required: false }}
-                          
                           render={({ field: { value, onChange } }) => (
-                            <Box sx={{ display: 'flex', alignItems: 'center', gap: '1em'  }}>
+                            <Box sx={{ display: 'flex', alignItems: 'center', gap: '1em' }}>
                               <CustomTextField
                                 select
                                 fullWidth
@@ -559,24 +550,15 @@ const CreateMenu = () => {
                                 aria-describedby='validation-basic-first-name'
                                 {...(errors.primary && { helperText: 'This field is required' })}
                               >
-
-                                <MenuItem value={"veg"}>Veg</MenuItem>
-                                <MenuItem value={"non-veg"}>Non Veg</MenuItem>
-                                <MenuItem value={"vegan"}>Vegan</MenuItem>
-
+                                <MenuItem value={'veg'}>Veg</MenuItem>
+                                <MenuItem value={'non-veg'}>Non Veg</MenuItem>
+                                <MenuItem value={'vegan'}>Vegan</MenuItem>
                               </CustomTextField>
-                              {/* <Box sx={{ marginTop: '1.5em' }} onClick={() => removePrimaryField(index)}>
-                                <Icon
-                                  fontSize='1.125rem'
-                                  icon='tabler:trash'
-                                  color='text.primary'
-                                  sx={{ color: 'text.primary' }}
-                                />
-                              </Box> */}
+                              
                             </Box>
                           )}
-                        />
-                        <Box sx={{height:'0.5em'}} />
+                        /> */}
+                        <Box sx={{ height: '0.5em' }} />
                         <Controller
                           name={`topping.${index}.value`}
                           control={control}
@@ -633,29 +615,29 @@ const CreateMenu = () => {
               </>
             )}
 
-<Grid item xs={12} sx={{ fontWeight: '800', fontSize: '18px' }}>
-                  <Controller
-                    name='status'
-                    control={control}
-                    rules={{ required: false }}
-                    defaultValue={false}
-                    render={({ field }) => (
-                      <Box>
-                        Is the Item Available Now?
-                        <Switch
-                          {...field}
-                          aria-describedby='validation-basic-first-name'
-                          sx={errors.status ? { color: 'error.main' } : null}
-                          checked={field?.value}
-                        />{' '}
-                        <br />
-                        <small style={{ fontWeight: '400' }}>
-                          (Turning this off will automatically turn off the item respectively for all days)
-                        </small>
-                      </Box>
-                    )}
-                  />
-                </Grid>
+            <Grid item xs={12} sx={{ fontWeight: '800', fontSize: '18px' }}>
+              <Controller
+                name='status'
+                control={control}
+                rules={{ required: false }}
+                defaultValue={false}
+                render={({ field }) => (
+                  <Box>
+                    Is the Item Available Now?
+                    <Switch
+                      {...field}
+                      aria-describedby='validation-basic-first-name'
+                      sx={errors.status ? { color: 'error.main' } : null}
+                      checked={field?.value}
+                    />{' '}
+                    <br />
+                    <small style={{ fontWeight: '400' }}>
+                      (Turning this off will automatically turn off the item respectively for all days)
+                    </small>
+                  </Box>
+                )}
+              />
+            </Grid>
           </Grid>
         </CardContent>
         <CardActions>

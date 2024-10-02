@@ -84,7 +84,6 @@ const AccountPage = () => {
       setTitle('Oops!')
       setMessage(errors.message)
       setOpen(true)
-      reset({})
     }
   }
 
@@ -107,7 +106,6 @@ const AccountPage = () => {
       setTitle('Oops!')
       setMessage(errors.message)
       setOpen(true)
-      reset({})
     }
   }
 

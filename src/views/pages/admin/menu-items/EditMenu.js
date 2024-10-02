@@ -523,7 +523,7 @@ const EditMenu = () => {
                             </Box>
                           )}
                         />
-                        <Controller
+                        {/* <Controller
                           name={`primary.${index}.type`}
                           control={control}
                           rules={{ required: false }}
@@ -545,17 +545,10 @@ const EditMenu = () => {
                                 <MenuItem value={'non-veg'}>Non Veg</MenuItem>
                                 <MenuItem value={'vegan'}>Vegan</MenuItem>
                               </CustomTextField>
-                              {/* <Box sx={{ marginTop: '1.5em' }} onClick={() => removePrimaryField(index)}>
-                                <Icon
-                                  fontSize='1.125rem'
-                                  icon='tabler:trash'
-                                  color='text.primary'
-                                  sx={{ color: 'text.primary' }}
-                                />
-                              </Box> */}
+                             
                             </Box>
                           )}
-                        />
+                        /> */}
                         <Box sx={{ height: '0.5em' }} />
                         <Controller
                           name={`primary.${index}.value`}
@@ -642,7 +635,7 @@ const EditMenu = () => {
                             </Box>
                           )}
                         />
-                        <Controller
+                        {/* <Controller
                           name={`topping.${index}.type`}
                           control={control}
                           rules={{ required: false }}
@@ -664,17 +657,10 @@ const EditMenu = () => {
                                 <MenuItem value={'non-veg'}>Non Veg</MenuItem>
                                 <MenuItem value={'vegan'}>Vegan</MenuItem>
                               </CustomTextField>
-                              {/* <Box sx={{ marginTop: '1.5em' }} onClick={() => removePrimaryField(index)}>
-                                <Icon
-                                  fontSize='1.125rem'
-                                  icon='tabler:trash'
-                                  color='text.primary'
-                                  sx={{ color: 'text.primary' }}
-                                />
-                              </Box> */}
+                           
                             </Box>
                           )}
-                        />
+                        /> */}
                         <Box sx={{ height: '0.5em' }} />
                         <Controller
                           name={`topping.${index}.value`}
