@@ -4,37 +4,36 @@ import { useKeenSlider } from 'keen-slider/react'
 import 'keen-slider/keen-slider.min.css'
 import { Box, Button } from '@mui/material'
 import Link from 'next/link'
-import {useState , useEffect} from 'react'
+import { useState, useEffect } from 'react'
 import { fetchMenuItems } from 'src/helpers/menuHelper'
 
 const colors = {
-      monday:{
-        bg:"#FF9C70",
-        color:"#FF9C70"
-      },
-      tuesday:{
-        bg:"#FEAD71",
-        color:"#FF9C70"
-      },
-      wednesday:{
-        bg:"#78BFBE",
-        color:"#FF9C70"
-      },
-      thursday:{
-        bg:"#93E855",
-        color:"#FF9C70"
-      },
-      friday:{
-        bg:"#A0C982",
-        color:"#FF9C70"
-      },
+  monday: {
+    bg: '#FF9C70',
+    color: '#FF9C70'
+  },
+  tuesday: {
+    bg: '#FEAD71',
+    color: '#FF9C70'
+  },
+  wednesday: {
+    bg: '#78BFBE',
+    color: '#FF9C70'
+  },
+  thursday: {
+    bg: '#93E855',
+    color: '#FF9C70'
+  },
+  friday: {
+    bg: '#A0C982',
+    color: '#FF9C70'
+  }
 }
 export default function OurMenu() {
-
-  const [menu , setMenu] = useState({});
+  const [menu, setMenu] = useState({})
   const [sliderRef, instanceRef] = useKeenSlider({
     breakpoints: {
-      '(min-width: 400px)': {
+      '(min-width: 300px)': {
         slides: { perView: 2, spacing: 5 }
       },
       '(min-width: 1000px)': {
@@ -44,11 +43,11 @@ export default function OurMenu() {
     slides: { perView: 1 }
   })
 
-  useEffect(()=>{
-     fetchMenuItems().then(response=>{      setMenu(response.data);
-      
+  useEffect(() => {
+    fetchMenuItems().then(response => {
+      setMenu(response.data)
     })
-  },[])
+  }, [])
   return (
     <>
       <Box
@@ -61,18 +60,10 @@ export default function OurMenu() {
         <SectionHeader title='Our Menu' />
         <Box sx={{ padding: '20px' }} />
         <div ref={sliderRef} className='keen-slider'>
+          {Object.keys(menu).map(day => {
+            return <MenuCard key={day} day={day.toUpperCase()} options={[...menu[day]]} color={colors[day]} />
+          })}
 
-          {
-            Object.keys(menu).map(day=>{
-            return <MenuCard
-            key={day}
-            day={day.toUpperCase()}
-            options={[...menu[day]]}
-            color={colors[day]}
-          />
-            })
-          }
-          
           {/* <MenuCard
             day={'TUESDAY'}
             options={[

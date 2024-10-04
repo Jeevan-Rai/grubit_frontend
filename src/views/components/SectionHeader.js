@@ -5,7 +5,12 @@ export default function SectionHeader({ title, align = 'center' }) {
     <>
       <Typography
         variant='h1'
-        sx={{ fontSize: '50px', fontFamily: 'Anton', color: '#78B34E', textAlign: { xs: 'center', md: align } }}
+        sx={{
+          fontSize: { xs: '30px', md: '50px' },
+          fontFamily: 'Anton',
+          color: '#78B34E',
+          textAlign: { xs: 'center', md: align }
+        }}
       >
         {title}
       </Typography>

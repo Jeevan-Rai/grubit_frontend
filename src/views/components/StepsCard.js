@@ -3,11 +3,11 @@ export default function StepCard({ step, title, description, Icon }) {
   return (
     <>
       <Grid item xs={6} sm={6} md={3}>
-        <CardContent sx={{ padding: { xs: '0.5em' } }}>
+        <CardContent sx={{ padding: { xs: '0.5em', display: 'flex', alignItems: 'center' } }}>
           <Card
             sx={{
               display: 'flex',
-              justifyContent: 'center',
+              justifyContent: 'flex-start',
               flexDirection: 'column',
               gap: '2em',
               minHeight: '20rem',
@@ -15,7 +15,7 @@ export default function StepCard({ step, title, description, Icon }) {
               borderTop: '2px solid #78B34E',
               borderRadius: '35px',
               alignItems: 'center',
-              padding: '1em'
+              padding: '3em 1em'
             }}
           >
             <Icon />

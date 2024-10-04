@@ -93,7 +93,7 @@ export default function TestimonialCard() {
               sx={{
                 color: '#0A5247',
                 fontWeight: 'DM Sans',
-                fontSize: '20px',
+                fontSize: { xs: '15px', md: '20px' },
                 lineHeight: '35px',
                 textAlign: 'justify'
               }}
@@ -102,12 +102,26 @@ export default function TestimonialCard() {
               away! The sauce was rich and flavorful, with just the right amount of spice. The convenience and taste
               have made me a repeat customer. Highly recommend!
             </Typography>
-            <Box sx={{ display: 'flex', flexDirection: { xs: 'column' }, gap: '1em', marginTop: '2em' }}>
-              <Typography sx={{ fontFamily: 'DM Sans', fontWeight: '700', fontSize: '24px', color: '#0A5247' }}>
+            <Box sx={{ display: 'flex', gap: '0.5em', marginTop: '1em', flexDirection: { xs: 'column' } }}>
+              <Typography
+                sx={{
+                  fontFamily: 'DM Sans',
+                  fontWeight: '700',
+                  fontSize: { xs: '18px', md: '24px' },
+                  color: '#0A5247'
+                }}
+              >
                 Sharlene Rose
               </Typography>
 
-              <Typography sx={{ fontFamily: 'DM Sans', fontWeight: '400', fontSize: '24px', color: '#0A5247' }}>
+              <Typography
+                sx={{
+                  fontFamily: 'DM Sans',
+                  fontWeight: '400',
+                  fontSize: { xs: '18px', md: '24px' },
+                  color: '#0A5247'
+                }}
+              >
                 Loyal Customer
               </Typography>
             </Box>
@@ -174,7 +188,7 @@ export default function TestimonialCard() {
               sx={{
                 color: '#0A5247',
                 fontWeight: 'DM Sans',
-                fontSize: '20px',
+                fontSize: { xs: '15px', md: '20px' },
                 lineHeight: '35px',
                 textAlign: 'justify'
               }}
@@ -183,12 +197,26 @@ export default function TestimonialCard() {
               away! The sauce was rich and flavorful, with just the right amount of spice. The convenience and taste
               have made me a repeat customer. Highly recommend!
             </Typography>
-            <Box sx={{ display: 'flex', gap: '1em', marginTop: '2em', flexDirection: { xs: 'column' } }}>
-              <Typography sx={{ fontFamily: 'DM Sans', fontWeight: '700', fontSize: '24px', color: '#0A5247' }}>
+            <Box sx={{ display: 'flex', gap: '0.5em', marginTop: '1em', flexDirection: { xs: 'column' } }}>
+              <Typography
+                sx={{
+                  fontFamily: 'DM Sans',
+                  fontWeight: '700',
+                  fontSize: { xs: '18px', md: '24px' },
+                  color: '#0A5247'
+                }}
+              >
                 Sharlene Rose
               </Typography>
 
-              <Typography sx={{ fontFamily: 'DM Sans', fontWeight: '400', fontSize: '24px', color: '#0A5247' }}>
+              <Typography
+                sx={{
+                  fontFamily: 'DM Sans',
+                  fontWeight: '400',
+                  fontSize: { xs: '18px', md: '24px' },
+                  color: '#0A5247'
+                }}
+              >
                 Loyal Customer
               </Typography>
             </Box>
@@ -222,7 +250,7 @@ function Arrow(props) {
           fill='none'
           xmlns='http://www.w3.org/2000/svg'
         >
-          <rect y='50' width='50' height='50' rx='25' transform='rotate(-90 0 50)' fill='#F56700' fill-opacity='0.3' />
+          <rect y='50' width='50' height='50' rx='25' transform='rotate(-90 0 50)' fill='#F56700' />
           <path
             d='M29 33L21 24.5L29 16'
             stroke='#C8F8F1'

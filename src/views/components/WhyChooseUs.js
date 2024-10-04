@@ -12,17 +12,17 @@ export default function WhyChooseUs() {
             <Card
               sx={{
                 display: 'flex',
-                justifyContent: 'center',
+                justifyContent: 'flex-start',
                 flexDirection: 'column',
                 gap: '0.5em',
-                minHeight: { xs: '15rem', md: '20rem' },
+                minHeight: { xs: '20rem', md: '15rem' },
                 borderRadius: '35px',
                 alignItems: 'center',
-                padding: { xs: '0.5em', md: '1em' }
+                padding: { xs: '2em 0.5em', md: '1em' }
               }}
             >
               <Box sx={{ width: '100%' }}>
-                <svg width='100%' viewBox='0 0 233 205' fill='none' xmlns='http://www.w3.org/2000/svg'>
+                <svg width='100%' height='160px' viewBox='0 0 233 205' fill='none' xmlns='http://www.w3.org/2000/svg'>
                   <path
                     d='M37.9802 77.4073C37.9769 77.3745 37.9769 77.3416 37.9802 77.3089V77.0383C37.9802 76.7923 37.9802 76.4438 37.9802 76.001C37.9802 75.0908 37.9802 73.7788 37.9429 72.1306L38.0128 72.1921L15.3464 72.229L15.4582 72.1306V77.4073L15.3464 77.3048L31.4994 77.3499L36.2657 77.3786H37.5562H37.8917H38.0128H37.9057H37.5842H36.3169L31.5786 77.4073L15.3137 77.4893H15.1973V72.1593L15.3137 72.0568L37.9802 72.0937H38.0501V72.1593C38.0501 73.8239 38.0175 75.1482 38.0128 76.0666C38.0128 76.5053 38.0128 76.8456 38.0128 77.0916V77.3499C38.003 77.3694 37.9921 77.3886 37.9802 77.4073Z'
                     fill='#E0E0E0'
@@ -913,17 +913,17 @@ export default function WhyChooseUs() {
             <Card
               sx={{
                 display: 'flex',
-                justifyContent: 'center',
+                justifyContent: 'flex-start',
                 flexDirection: 'column',
                 gap: '0.5em',
-                minHeight: { xs: '15rem', md: '20rem' },
+                minHeight: { xs: '20rem', md: '15rem' },
                 borderRadius: '35px',
                 alignItems: 'center',
-                padding: { xs: '0.5em', md: '1em' }
+                padding: { xs: '2em 0.5em', md: '1em' }
               }}
             >
               <Box sx={{ width: '100%' }}>
-                <svg width='100%' viewBox='0 0 205 205' fill='none' xmlns='http://www.w3.org/2000/svg'>
+                <svg width='100%' height='160px' viewBox='0 0 205 205' fill='none' xmlns='http://www.w3.org/2000/svg'>
                   <path d='M80.1821 169.561H64.1602V173.973H80.1821V169.561Z' fill='#EBEBEB' />
                   <path
                     d='M73.4063 178.265C73.4047 178.263 73.403 178.237 73.4014 178.188C73.4002 178.131 73.3981 178.059 73.3961 177.97C73.3932 177.771 73.3891 177.493 73.3842 177.136C73.3776 176.404 73.3686 175.352 73.3567 174.026L73.4063 174.076C69.7479 174.083 63.93 174.094 57.3851 174.108C57.4212 174.071 57.3027 174.189 57.4659 174.026V174.027V174.029V174.033V174.042V174.059V174.093V174.161V174.297V174.569C57.4659 174.75 57.4659 174.93 57.4659 175.11C57.4659 175.469 57.4655 175.826 57.4655 176.18C57.4651 176.887 57.4647 177.583 57.4643 178.265L57.3843 178.185C61.9468 178.199 65.9386 178.212 68.802 178.221C70.2284 178.231 71.3727 178.238 72.1722 178.244C72.5609 178.249 72.8655 178.252 73.0836 178.255C73.1816 178.257 73.2603 178.258 73.3218 178.26C73.3764 178.261 73.4047 178.263 73.4063 178.265C73.4079 178.266 73.3829 178.268 73.3321 178.27C73.2731 178.271 73.1976 178.273 73.1037 178.275C72.8901 178.278 72.5912 178.281 72.2095 178.286C71.4145 178.291 70.2764 178.299 68.8578 178.309C65.9804 178.318 61.9689 178.331 57.3843 178.345L57.3044 178.345V178.265C57.304 177.584 57.3036 176.888 57.3031 176.181C57.3031 175.827 57.3031 175.47 57.3027 175.111C57.3027 174.931 57.3027 174.751 57.3027 174.57V174.298V174.162V174.094V174.06V174.043V174.034V174.03V174.028V174.027C57.4659 173.863 57.3487 173.982 57.3851 173.945C63.93 173.958 69.7479 173.97 73.4063 173.977H73.4563L73.4559 174.027C73.444 175.366 73.435 176.428 73.4284 177.166C73.4231 177.518 73.4194 177.792 73.4166 177.989C73.4145 178.075 73.4129 178.143 73.4112 178.198C73.41 178.243 73.4084 178.266 73.4063 178.265Z'
@@ -1544,17 +1544,17 @@ export default function WhyChooseUs() {
             <Card
               sx={{
                 display: 'flex',
-                justifyContent: 'center',
+                justifyContent: 'flex-start',
                 flexDirection: 'column',
                 gap: '0.5em',
-                minHeight: { xs: '15rem', md: '20rem' },
+                minHeight: { xs: '20rem', md: '15rem' },
                 borderRadius: '35px',
                 alignItems: 'center',
-                padding: { xs: '0.5em', md: '1em' }
+                padding: { xs: '2em 0.5em', md: '1em' }
               }}
             >
               <Box sx={{ width: '100%' }}>
-                <svg width='100%' viewBox='0 0 205 205' fill='none' xmlns='http://www.w3.org/2000/svg'>
+                <svg width='100%' height='160px' viewBox='0 0 205 205' fill='none' xmlns='http://www.w3.org/2000/svg'>
                   <path
                     d='M170.408 130.879C170.408 130.879 163.1 93.0203 163.084 85.2328C163.061 74.4551 171.311 70.1641 171.311 70.1641L168.106 61.0215H185.739L182.955 70.1001C182.955 70.1001 192.24 75.0222 190.945 86.2012C188.524 107.101 184.666 130.879 184.666 130.879H170.408Z'
                     fill='#F5F5F5'
@@ -2368,17 +2368,17 @@ export default function WhyChooseUs() {
             <Card
               sx={{
                 display: 'flex',
-                justifyContent: 'center',
+                justifyContent: 'flex-start',
                 flexDirection: 'column',
                 gap: '0.5em',
-                minHeight: { xs: '15rem', md: '20rem' },
+                minHeight: { xs: '20rem', md: '15rem' },
                 borderRadius: '35px',
                 alignItems: 'center',
-                padding: { xs: '0.5em', md: '1em' }
+                padding: { xs: '2em 0.5em', md: '1em' }
               }}
             >
               <Box sx={{ width: '100%' }}>
-                <svg width='100%' viewBox='0 0 205 205' fill='none' xmlns='http://www.w3.org/2000/svg'>
+                <svg width='100%' height='160px' viewBox='0 0 205 205' fill='none' xmlns='http://www.w3.org/2000/svg'>
                   <g clipPath='url(#clip0_273_8370)'>
                     <path
                       d='M180.657 66.985V53.6604H176.965V66.985H169.925V96.562H157.488V53.6604H154.614V42.6035L140.678 49.5665V53.6604H102.901V70.9718L70.2436 61.0658V88.6789L20.2909 99.2147V61.0658H-4.09961V162.371H20.2909H70.2436H71.9857H102.901H105.816H147.73H157.488H169.925H173.174H200.9V66.985H180.657Z'

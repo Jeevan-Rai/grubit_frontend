@@ -42,7 +42,7 @@ export default function ContactUs() {
           <Typography
             sx={{
               color: '#0A5247',
-              fontSize: '24px',
+              fontSize: { xs: '15', md: '24px' },
               lineHeight: '40px',
               fontFamily: 'DM Sans',
               textAlign: 'justify',

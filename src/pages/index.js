@@ -16,23 +16,23 @@ const Home = () => {
     <>
       <Usernavbar />
       <HomeBanner />
-      <Box sx={{ padding: '30px' }} />
+      <Box sx={{ padding: { xs: '20px', md: '30px' } }} />
       <OurMenu />
-      <Box sx={{ padding: '30px' }} />
+      <Box sx={{ padding: { xs: '20px', md: '30px' } }} />
       <HowItWorks />
-      <Box sx={{ padding: '30px' }} />
+      <Box sx={{ padding: { xs: '20px', md: '30px' } }} />
       <Testimonials />
-      <Box sx={{ padding: '30px' }} id='about' />
+      <Box sx={{ padding: { xs: '20px', md: '30px' } }} id='about' />
       <AboutUs />
-      <Box sx={{ padding: '30px' }} />
+      <Box sx={{ padding: { xs: '20px', md: '30px' } }} />
       <WhyChooseUs />
-      <Box sx={{ padding: '30px' }} />
+      <Box sx={{ padding: { xs: '20px', md: '30px' } }} />
       <OurPhilosophy />
-      <Box sx={{ padding: '30px' }} />
+      <Box sx={{ padding: { xs: '20px', md: '30px' } }} />
       <TrainStation />
-      <Box sx={{ padding: '30px' }} id='contact' />
+      <Box sx={{ padding: { xs: '20px', md: '30px' } }} id='contact' />
       <ContactUs />
-      <Box sx={{ padding: '30px' }} />
+      <Box sx={{ padding: { xs: '20px', md: '30px' } }} />
       <UserFooter />
     </>
   )

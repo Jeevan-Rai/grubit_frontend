@@ -73,38 +73,38 @@ const FoodCardModal = ({ open, setOpen, item, addItem }) => {
                     <Box component={'img'} src='/images/icon/fire.png' />
 
                     <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-                      <Typography variant='h6'>Calories</Typography>
-                      <Typography variant='body2'>{item.calories}</Typography>
+                      <Typography variant='h6'>{item.calories}</Typography>
+                      <Typography variant='body2'>Calories</Typography>
                     </Box>
                   </Box>
                 </Grid>
                 <Grid item xs={6} md={3}>
                   <Box sx={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
-                    <Box component={'img'} src='/images/icon/fire.png' />
+                    <Box component={'img'} src='/images/icon/protein.png' />
 
                     <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-                      <Typography variant='h6'>Proteins</Typography>
-                      <Typography variant='body2'>{item.proteins}</Typography>
+                      <Typography variant='h6'>{item.proteins}g</Typography>
+                      <Typography variant='body2'>Proteins</Typography>
                     </Box>
                   </Box>
                 </Grid>
                 <Grid item xs={6} md={3}>
                   <Box sx={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
-                    <Box component={'img'} src='/images/icon/fire.png' />
+                    <Box component={'img'} src='/images/icon/carb.png' />
 
                     <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-                      <Typography variant='h6'>Carbs</Typography>
-                      <Typography variant='body2'>{item.carbs}</Typography>
+                      <Typography variant='h6'>{item.carbs}g</Typography>
+                      <Typography variant='body2'>Carbs</Typography>
                     </Box>
                   </Box>
                 </Grid>
                 <Grid item xs={6} md={3}>
                   <Box sx={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
-                    <Box component={'img'} src='/images/icon/fire.png' />
+                    <Box component={'img'} src='/images/icon/fat.png' />
 
                     <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-                      <Typography variant='h6'>Fat</Typography>
-                      <Typography variant='body2'>{item.fat}</Typography>
+                      <Typography variant='h6'>{item.fat}g</Typography>
+                      <Typography variant='body2'>Fat</Typography>
                     </Box>
                   </Box>
                 </Grid>
@@ -119,7 +119,7 @@ const FoodCardModal = ({ open, setOpen, item, addItem }) => {
                   margin: '1em 0px'
                 }}
               >
-                Details
+                Details:
               </Typography>
 
               <Typography

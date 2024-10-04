@@ -21,7 +21,7 @@ export default function AboutUs() {
           <Typography
             sx={{
               color: '#0A5247',
-              fontSize: '24px',
+              fontSize: { xs: '16px', md: '24px' },
               lineHeight: '40px',
               fontFamily: 'DM Sans',
               textAlign: 'justify'

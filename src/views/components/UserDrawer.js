@@ -9,6 +9,7 @@ import ListItemButton from '@mui/material/ListItemButton'
 import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemText from '@mui/material/ListItemText'
 import Link from 'next/link'
+import { Typography } from '@mui/material'
 
 export default function UserDrawer({ open, setOpen, pages }) {
   const toggleDrawer = newOpen => () => {
@@ -22,13 +23,20 @@ export default function UserDrawer({ open, setOpen, pages }) {
           <ListItem key={text} disablePadding>
             <ListItemButton>
               {/* <ListItemIcon>{index % 2 === 0 ? 'inbox' : 'mail'}</ListItemIcon> */}
-              <Link
+              <Typography
                 component={Link}
                 href={text.path}
-                sx={{ fontFamily: 'Dm Sans', textDecoration: 'none !important', color: '#000000' }}
+                sx={{
+                  marginBottom: '1em',
+                  color: '#F56700 !important',
+                  textDecoration: 'none',
+                  borderRadius: '25px',
+                  width: '100%',
+                  textAlign: 'center'
+                }}
               >
                 {text.name}
-              </Link>
+              </Typography>
             </ListItemButton>
           </ListItem>
         ))}
@@ -38,7 +46,7 @@ export default function UserDrawer({ open, setOpen, pages }) {
 
   return (
     <div>
-      <Drawer open={open} onClose={toggleDrawer(false)}>
+      <Drawer anchor={'right'} open={open} sx={{ padding: '1em', paddingBottom: '0px' }} onClose={toggleDrawer(false)}>
         <Box sx={{ padding: '1em', paddingBottom: '0px' }}>
           <svg width='100' height='32' viewBox='0 0 201 32' fill='none' xmlns='http://www.w3.org/2000/svg'>
             <mask
@@ -64,6 +72,46 @@ export default function UserDrawer({ open, setOpen, pages }) {
             />
           </svg>
         </Box>
+        <Box sx={{ padding: '1em', paddingBottom: '0px' }}>
+          <Button
+            fullwidth
+            sx={{
+              border: '1px solid #F56700 !important',
+              marginBottom: '1em',
+              color: '#F56700',
+              borderRadius: '25px',
+              width: '100%'
+            }}
+            variant='outlined'
+          >
+            Get Started
+          </Button>
+          <Button
+            fullwidth
+            component={Link}
+            href='/login'
+            sx={{
+              border: '1px solid #F56700 !important',
+              color: '#FFFFFF',
+              backgroundColor: '#F56700',
+              borderRadius: '25px',
+              width: '100%'
+            }}
+            variant='outlined'
+          >
+            Login
+          </Button>
+        </Box>
+        <Divider
+          sx={{
+            color: '#FFFFFF',
+            backgroundColor: '#F56700',
+            borderRadius: '25px',
+            width: '80%',
+            margin: '0px auto',
+            marginTop: '1em'
+          }}
+        />
         {DrawerList}
       </Drawer>
     </div>

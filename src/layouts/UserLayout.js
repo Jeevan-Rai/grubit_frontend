@@ -51,6 +51,16 @@ const UserLayout = ({ children, contentHeightFixed }) => {
 
           // Uncomment the below line when using server-side menu in vertical layout and comment the above line
           // navItems: verticalMenuItems
+        },
+        appBar: {
+          content: props => (
+            <VerticalAppBarContent
+              hidden={hidden}
+              settings={settings}
+              saveSettings={saveSettings}
+              toggleNavVisibility={props.toggleNavVisibility}
+            />
+          )
         }
       }}
       {...(settings.layout === 'horizontal' && {

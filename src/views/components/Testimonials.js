@@ -16,10 +16,16 @@ export default function Testimonials() {
           alignItems: 'center'
         }}
       >
-        <Box sx={{ height: '80%', width: { xs: '90%', md: '85%' }, padding: { xs: '5rem 0px', md: '0' } }}>
+        <Box sx={{ height: '80%', width: { xs: '90%', md: '85%' }, padding: { xs: '1rem 0px', md: '0' } }}>
           <Typography
             variant='h1'
-            sx={{ fontSize: '50px', fontFamily: 'Anton', color: '#FFFFFF', textAlign: 'left', marginTop: '2em ' }}
+            sx={{
+              fontSize: { xs: '30', md: '50px' },
+              fontFamily: 'Anton',
+              color: '#FFFFFF',
+              textAlign: 'left',
+              marginTop: '0.5em '
+            }}
           >
             What our <br></br> customers say?
           </Typography>

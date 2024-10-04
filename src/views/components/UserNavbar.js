@@ -133,8 +133,18 @@ function Usernavbar() {
               </svg>
             </Typography>
 
-            <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' }, marginRight: '15px', color: '#000000' }}>
-              <Icon onClick={() => setOpen(true)} icon='tabler:menu-2' fontSize={30} />
+            <Box
+            // sx={{
+            //   flexGrow: 1,
+            //   display: { xs: 'flex', md: 'none' },
+            //   marginRight: '15px',
+            //   color: appBarColor === '#FFFFFF' || router.pathname != '/' ? '#000000' : '#FFFFFF',
+            //   padding: '0.25em',
+            //   border: `1px solid ${appBarColor === '#FFFFFF' || router.pathname ? '#000000' : '#FFFFFF'}`,
+            //   borderRadius: '50%'
+            // }}
+            >
+              {/* <Icon onClick={() => setOpen(true)} icon='tabler:menu-2' fontSize={20} />
 
               <Menu
                 id='menu-appbar'
@@ -159,7 +169,7 @@ function Usernavbar() {
                     </Typography>
                   </MenuItem>
                 ))}
-              </Menu>
+              </Menu> */}
             </Box>
             {/* <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} /> */}
             <Typography
@@ -258,27 +268,73 @@ function Usernavbar() {
               )}
 
               {!user && (
-                <Button
-                  component={Link}
-                  href={'/login'}
-                  variant='oulined'
-                  color='white'
-                  sx={{
-                    background: appBarStatus || router.pathname != '/' ? '#F56700' : '#ffffff',
-                    color: appBarStatus || router.pathname != '/' ? '#FFFFFF' : '#000000',
-                    borderRadius: '37px',
-                    p: '10px 20px',
-                    '&:hover': {
-                      //   backgroundColor: '#ffffff', // Change the background color on hover
-                      //   transform: 'scale(1.05)' // Scale the button on hover
+                <>
+                  <Box
+                    sx={{
+                      flexGrow: 1,
+                      display: { xs: 'flex', md: 'none' },
+                      marginRight: '15px',
+                      color: appBarColor === '#FFFFFF' || router.pathname != '/' ? '#F56700' : '#FFFFFF',
+                      padding: '0.25em',
+                      border: `1px solid ${appBarColor === '#FFFFFF' || router.pathname ? '#F56700' : '#FFFFFF'}`,
+                      borderRadius: '50%'
+                    }}
+                  >
+                    <Icon onClick={() => setOpen(true)} icon='tabler:menu-2' fontSize={20} />
 
-                      color: '#000000',
-                      border: '#000000'
-                    }
-                  }}
-                >
-                  Login / Sign Up
-                </Button>
+                    <Menu
+                      id='menu-appbar'
+                      anchorEl={anchorElNav}
+                      anchorOrigin={{
+                        vertical: 'bottom',
+                        horizontal: 'left'
+                      }}
+                      keepMounted
+                      transformOrigin={{
+                        vertical: 'top',
+                        horizontal: 'left'
+                      }}
+                      open={Boolean(anchorElNav)}
+                      onClose={handleCloseNavMenu}
+                      sx={{ display: { xs: 'block', md: 'none' } }}
+                    >
+                      {pages.map(page => (
+                        <MenuItem key={page} onClick={handleCloseNavMenu}>
+                          <Typography
+                            component={Link}
+                            href={page.path}
+                            sx={{ textAlign: 'center', fontFamily: 'DM sans' }}
+                          >
+                            {page.name}
+                          </Typography>
+                        </MenuItem>
+                      ))}
+                    </Menu>
+                  </Box>
+
+                  <Button
+                    component={Link}
+                    href={'/login'}
+                    variant='oulined'
+                    color='white'
+                    sx={{
+                      display: { xs: 'none', md: 'block' },
+                      background: appBarStatus || router.pathname != '/' ? '#F56700' : '#ffffff',
+                      color: appBarStatus || router.pathname != '/' ? '#FFFFFF' : '#000000',
+                      borderRadius: '37px',
+                      p: '10px 20px',
+                      '&:hover': {
+                        //   backgroundColor: '#ffffff', // Change the background color on hover
+                        //   transform: 'scale(1.05)' // Scale the button on hover
+
+                        color: '#000000',
+                        border: '#000000'
+                      }
+                    }}
+                  >
+                    Login / Sign Up
+                  </Button>
+                </>
               )}
             </Box>
           </Toolbar>

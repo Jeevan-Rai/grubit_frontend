@@ -14,18 +14,18 @@ const AppBar = styled(MuiAppBar)(({ theme }) => ({
   color: theme.palette.text.primary,
   minHeight: theme.mixins.toolbar.minHeight,
   [theme.breakpoints.up('sm')]: {
-    paddingLeft: theme.spacing(6),
-    paddingRight: theme.spacing(6)
+    // paddingLeft: theme.spacing(6),
+    // paddingRight: theme.spacing(6)
   },
   [theme.breakpoints.down('sm')]: {
-    paddingLeft: theme.spacing(4),
-    paddingRight: theme.spacing(4)
+    // paddingLeft: theme.spacing(4),
+    // paddingRight: theme.spacing(4)
   }
 }))
 
 const Toolbar = styled(MuiToolbar)(({ theme }) => ({
   width: '100%',
-  marginTop: theme.spacing(4),
+  // marginTop: theme.spacing(4),
   borderRadius: theme.shape.borderRadius,
   padding: `${theme.spacing(0, 6)} !important`
 }))
