@@ -60,8 +60,8 @@ const RegisterPage = () => {
   const [type, setType] = useState(false)
   const [title, setTitle] = useState(false)
   const [message, setMessage] = useState(false)
-  const router= useRouter();
-  const {returnUrl} = router.query;
+  const router = useRouter()
+  const { returnUrl } = router.query
   // ** Hooks
   const auth = useAuth()
   const theme = useTheme()
@@ -86,7 +86,7 @@ const RegisterPage = () => {
 
       let user = await registerUser(data)
 
-      if(user.status === 201){
+      if (user.status === 201) {
         setType('success')
         setTitle('Verify your email ✉️')
         setMessage(
@@ -108,8 +108,6 @@ const RegisterPage = () => {
 
         router.replace(user?.data?.url)
       }
-
-     
     } catch (error) {
       setType('error')
       setTitle('Oops!')
@@ -129,8 +127,7 @@ const RegisterPage = () => {
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
-          width: '100%',
-          height: '100vh'
+          width: '100%'
         }}
       >
         <Box
@@ -144,7 +141,7 @@ const RegisterPage = () => {
             borderRadius: '10px'
           }}
         >
-          <Box sx={{ width: '100%', maxWidth: '50vw' }}>
+          <Box sx={{ width: '100%', maxWidth: { xs: '80vw ', md: '50vw' } }}>
             <Box sx={{ display: 'flex', justifyContent: 'center', padding: '1em' }}>
               <svg width={170} height={26} viewBox='0 0 170 26' fill='none' xmlns='http://www.w3.org/2000/svg'>
                 <mask
@@ -420,16 +417,16 @@ const RegisterPage = () => {
                       name='password'
                       control={control}
                       rules={{
-                        required: "Password is required",
+                        required: 'Password is required',
                         minLength: {
                           value: 8,
-                          message: "Password must be at least 8 characters",
+                          message: 'Password must be at least 8 characters'
                         },
                         pattern: {
                           value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
                           message:
-                            "Password must include at least one uppercase letter, one lowercase letter, one number, and one special character",
-                        },
+                            'Password must include at least one uppercase letter, one lowercase letter, one number, and one special character'
+                        }
                       }}
                       render={({ field: { value, onChange, onBlur } }) => (
                         <CustomTextField
@@ -465,15 +462,15 @@ const RegisterPage = () => {
                       name='confirmPassword'
                       control={control}
                       rules={{
-                        required: "Password is required",
+                        required: 'Password is required',
                         minLength: {
                           value: 8,
-                          message: "Password must be at least 8 characters",
+                          message: 'Password must be at least 8 characters'
                         },
                         pattern: {
                           value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
                           message:
-                            "Password must include at least one uppercase letter, one lowercase letter, one number, and one special character",
+                            'Password must include at least one uppercase letter, one lowercase letter, one number, and one special character'
                         },
                         validate: value => value === password || 'Passwords do not match'
                       }}
@@ -515,7 +512,7 @@ const RegisterPage = () => {
                 </Grid>
               </CardContent>
               <CardActions sx={{ display: 'flex', justifyContent: 'space-between' }}>
-               {/* <Button type='reset' color='secondary' variant='tonal'>
+                {/* <Button type='reset' color='secondary' variant='tonal'>
                   Reset
                 </Button> */}
                 <Button type='submit' sx={{ mr: 2 }} variant='contained'>
