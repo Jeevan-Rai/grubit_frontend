@@ -127,7 +127,8 @@ const RegisterPage = () => {
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
-          width: '100%'
+          width: '100%',
+          minHeight: '100vh'
         }}
       >
         <Box
