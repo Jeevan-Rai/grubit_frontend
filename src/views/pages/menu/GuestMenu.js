@@ -153,7 +153,8 @@ export default function GuestMenu() {
     setSelectedWeek(newValue)
     const date1 = new Date(selectedDate)
     const date2 = new Date(formatDateToLocalDatString(weeks[newValue - 1]?.dates[0]?.date))
-    setSelectedDate(formatDateToLocalDatString(new Date()))
+    setSelectedDate(formatDateToLocalDatString(weeks[newValue - 1]?.dates[0]?.date))
+    setSelectedDay(weeks[newValue - 1]?.dates[0]?.dayName)
     if (date2.getTime() > date1.getTime()) {
       setSelectedDate(formatDateToLocalDatString(weeks[newValue - 1]?.dates[0]?.date))
       console.log(formatDateToLocalDatString(weeks[newValue - 1]?.dates[0]?.date))
@@ -194,7 +195,7 @@ export default function GuestMenu() {
 
   useEffect(() => {
     fetchMenuItems(selectedDay, orderCategory)
-  }, [selectedDay, orderCategory])
+  }, [selectedDay, orderCategory, selectedDate])
 
   useEffect(() => {
     if (instanceRef.current) {
