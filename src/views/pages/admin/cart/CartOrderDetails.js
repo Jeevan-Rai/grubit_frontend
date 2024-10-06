@@ -45,7 +45,7 @@ const CartOrderDetails = () => {
   const [itemToDelete, setItemToDelete] = useState({})
 
   useEffect(() => {
-    let combined = combineWeeklyAndMakeYourOwn(orders?.weekly, orders['make-your-own'] , removeItemFromOrder)
+    let combined = combineWeeklyAndMakeYourOwn(orders?.weekly, orders['make-your-own'], removeItemFromOrder)
     setCartItems(combined)
     console.log(combined)
   }, [orders])
@@ -91,11 +91,13 @@ const CartOrderDetails = () => {
                 }}
               >
                 {itemIndex === 0 && <TableCell rowSpan={day.items.length}>Week 1</TableCell>}
-                {itemIndex === 0 && <TableCell rowSpan={day.items.length}>{day.date}</TableCell>}
+                {itemIndex === 0 && (
+                  <TableCell rowSpan={day.items.length}>{new Date(day.date).toLocaleDateString()}</TableCell>
+                )}
                 <TableCell>{item.name || item.dish?.name}</TableCell>
-                <TableCell>{item.category === "weekly" ? "Weekly" : "Make Your Own"}</TableCell>
+                <TableCell>{item.category === 'weekly' ? 'Weekly' : 'Make Your Own'}</TableCell>
                 <TableCell>{item.quantity || '-'}</TableCell>
-                <TableCell>{'£'+ Number(item.price).toFixed(2) || '-'}</TableCell>
+                <TableCell>{'£' + Number(item.price).toFixed(2) || '-'}</TableCell>
                 <TableCell
                   align='left'
                   onClick={() => {
@@ -120,11 +122,13 @@ const CartOrderDetails = () => {
                 }}
               >
                 {itemIndex === 0 && <TableCell rowSpan={day.items.length}>Week 2</TableCell>}
-                {itemIndex === 0 && <TableCell rowSpan={day.items.length}>{day.date}</TableCell>}
+                {itemIndex === 0 && (
+                  <TableCell rowSpan={day.items.length}>{new Date(day.date).toLocaleDateString()}</TableCell>
+                )}
                 <TableCell>{item.name || item.dish?.name}</TableCell>
                 <TableCell>{item.category}</TableCell>
                 <TableCell>{item.quantity || '-'}</TableCell>
-                <TableCell>{'£'+ Number(item.price).toFixed(2) || '-'}</TableCell>
+                <TableCell>{'£' + Number(item.price).toFixed(2) || '-'}</TableCell>
                 <TableCell
                   align='left'
                   onClick={() => {
@@ -149,11 +153,13 @@ const CartOrderDetails = () => {
                 }}
               >
                 {itemIndex === 0 && <TableCell rowSpan={day.items.length}>Week 3</TableCell>}
-                {itemIndex === 0 && <TableCell rowSpan={day.items.length}>{day.date}</TableCell>}
+                {itemIndex === 0 && (
+                  <TableCell rowSpan={day.items.length}>{new Date(day.date).toLocaleDateString()}</TableCell>
+                )}
                 <TableCell>{item.name || item.dish?.name}</TableCell>
                 <TableCell>{item.category}</TableCell>
                 <TableCell>{item.quantity || '-'}</TableCell>
-                <TableCell>{'£'+ Number(item.price).toFixed(2) || '-'}</TableCell>
+                <TableCell>{'£' + Number(item.price).toFixed(2) || '-'}</TableCell>
                 <TableCell
                   align='left'
                   onClick={() => {
@@ -178,11 +184,13 @@ const CartOrderDetails = () => {
                 }}
               >
                 {itemIndex === 0 && <TableCell rowSpan={day.items.length}>Week 4</TableCell>}
-                {itemIndex === 0 && <TableCell rowSpan={day.items.length}>{day.date}</TableCell>}
+                {itemIndex === 0 && (
+                  <TableCell rowSpan={day.items.length}>{new Date(day.date).toLocaleDateString()}</TableCell>
+                )}
                 <TableCell>{item.name || item.dish?.name}</TableCell>
                 <TableCell>{item.category}</TableCell>
                 <TableCell>{item.quantity || '-'}</TableCell>
-                <TableCell>{'£'+ Number(item.price).toFixed(2) || '-'}</TableCell>
+                <TableCell>{'£' + Number(item.price).toFixed(2) || '-'}</TableCell>
                 <TableCell
                   align='left'
                   onClick={() => {
@@ -207,11 +215,13 @@ const CartOrderDetails = () => {
                 }}
               >
                 {itemIndex === 0 && <TableCell rowSpan={day.items.length}>Week 5</TableCell>}
-                {itemIndex === 0 && <TableCell rowSpan={day.items.length}>{day.date}</TableCell>}
+                {itemIndex === 0 && (
+                  <TableCell rowSpan={day.items.length}>{new Date(day.date).toLocaleDateString()}</TableCell>
+                )}
                 <TableCell>{item.name || item.dish?.name}</TableCell>
                 <TableCell>{item.category}</TableCell>
                 <TableCell>{item.quantity || '-'}</TableCell>
-                <TableCell>{'£'+ Number(item.price).toFixed(2) || '-'}</TableCell>
+                <TableCell>{'£' + Number(item.price).toFixed(2) || '-'}</TableCell>
                 <TableCell
                   align='left'
                   onClick={() => {

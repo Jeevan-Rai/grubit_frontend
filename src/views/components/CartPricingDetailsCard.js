@@ -38,7 +38,7 @@ export default function CartPricingDetailsCard() {
       return
     }
 
-    if(orders.totalPrice <= 0){
+    if (orders.totalPrice <= 0) {
       toast.error('Cart is epty, please add some item to proceed')
       return
     }
@@ -146,7 +146,9 @@ export default function CartPricingDetailsCard() {
                 }}
               >
                 <Typography>Order Total</Typography>
-                <Typography sx={{ color: 'text.secondary' }}>£{orders?.discountedPrice || orders.totalPrice}</Typography>
+                <Typography sx={{ color: 'text.secondary' }}>
+                  £{orders?.discountedPrice || orders.totalPrice}
+                </Typography>
               </Box>
             </Box>
           </CardContent>
@@ -168,7 +170,12 @@ export default function CartPricingDetailsCard() {
         </Box>
       </Box>
       <Box sx={{ display: 'flex', ...(breakpointMD ? { justifyContent: 'flex-end' } : {}) }}>
-        <Button fullWidth={!breakpointMD} onClick={proceedToPayment} variant='contained' disabled={orders.totalPrice <= 0}>
+        <Button
+          fullWidth={!breakpointMD}
+          onClick={proceedToPayment}
+          variant='contained'
+          disabled={orders.totalPrice <= 0}
+        >
           Proceed to payment
         </Button>
       </Box>

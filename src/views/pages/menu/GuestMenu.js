@@ -18,6 +18,8 @@ import { useOrder } from 'src/context/OrderContext'
 import toast from 'react-hot-toast'
 import { useRouter } from 'next/router'
 import { getWeekOfMonth, isLastDayOfMonth } from 'date-fns'
+import axiosInstance from 'src/helpers/axiosInstance'
+import FallbackSpinner from 'src/@core/components/spinner'
 
 const WeekButton = ({ week, active = false, onClick, currentWeekNumber }) => {
   return (
@@ -126,39 +128,28 @@ export default function GuestMenu() {
   let lastDayOfCurrentMonth = isLastDayOfMonth(new Date())
   if (lastDayOfCurrentMonth) month = month + 1
 
-  const weeks = generateWeeksForMonth(month, year)
-  let currentWeekNumber = getWeekOfMonth(new Date())
-  if (lastDayOfCurrentMonth) currentWeekNumber = 1
-  console.log(weeks)
-
   const router = useRouter()
   const [currentSlide, setCurrentSlide] = useState(0)
   const [loaded, setLoaded] = useState(false)
+  const [weeks, setWeeks] = useState([])
+  const [currentWeekNumber, setCurrentWeekNumber] = useState([])
   const [orderCategory, setOrderCategory] = useState('weekly')
-  const [selectedWeek, setSelectedWeek] = useState(currentWeekNumber)
-  const [selectedDate, setSelectedDate] = useState(
-    formatDateToLocalDatString(weeks[currentWeekNumber - 1]?.dates[0]?.date)
-  )
+  const [selectedWeek, setSelectedWeek] = useState(null)
+  const [selectedDate, setSelectedDate] = useState(null)
   const { orders } = useOrder()
   const today = new Date()
   const tomorrow = new Date(today)
   tomorrow.setDate(today.getDate() + 1)
 
-  const [selectedDay, setSelectedDay] = useState(tomorrow.toLocaleString('en-US', { weekday: 'long' }))
+  const [selectedDay, setSelectedDay] = useState(null)
   const [menuItems, setMenuItems] = useState([])
 
   const handleTabChange = (event, newValue) => {
     console.log(newValue)
 
     setSelectedWeek(newValue)
-    const date1 = new Date(selectedDate)
-    const date2 = new Date(formatDateToLocalDatString(weeks[newValue - 1]?.dates[0]?.date))
-    setSelectedDate(formatDateToLocalDatString(weeks[newValue - 1]?.dates[0]?.date))
+    setSelectedDate(weeks[newValue - 1]?.dates[0]?.date)
     setSelectedDay(weeks[newValue - 1]?.dates[0]?.dayName)
-    if (date2.getTime() > date1.getTime()) {
-      setSelectedDate(formatDateToLocalDatString(weeks[newValue - 1]?.dates[0]?.date))
-      console.log(formatDateToLocalDatString(weeks[newValue - 1]?.dates[0]?.date))
-    }
   }
 
   const [sliderRef, instanceRef] = useKeenSlider({
@@ -203,8 +194,31 @@ export default function GuestMenu() {
     }
   }, [selectedWeek])
 
+  useEffect(() => {
+    axiosInstance
+      .get('/api/v1/weeks')
+      .then(result => {
+        console.log(result.data)
+
+        setWeeks(result.data.weeks)
+        setSelectedDate(result.data.weeks[result.data.currentWeekNumber - 1]?.dates[0]?.date)
+        setSelectedDay(result.data.weeks[result.data.currentWeekNumber - 1]?.dates[0]?.dayName)
+        setCurrentWeekNumber(result.data.currentWeekNumber)
+        setSelectedWeek(result.data.currentWeekNumber)
+      })
+      .catch(error => {
+        console.log(error)
+
+        toast.error('SOmething went wrong while fetching weeks')
+      })
+  }, [])
+
   console.log(selectedDate)
-  return (
+  return weeks.length == 0 ? (
+    <>
+      <FallbackSpinner />
+    </>
+  ) : (
     <>
       <Usernavbar />
       <Box sx={{ padding: '45px' }} />
@@ -309,11 +323,11 @@ export default function GuestMenu() {
                       //   {day.dayName}: {day.date.toLocaleDateString()}
                       // </Typography>
                       <DayButton
-                        day={formatDate(formatDateToLocalDatString(day.date))}
-                        active={selectedDate === formatDateToLocalDatString(day.date)}
+                        day={formatDate(formatDateToLocalDatString(new Date(day.date)))}
+                        active={selectedDate == day.date}
                         key={index}
                         onClick={() => {
-                          setSelectedDate(formatDateToLocalDatString(day.date)), setSelectedDay(day.dayName)
+                          setSelectedDate(day.date), setSelectedDay(day.dayName)
                         }}
                       />
                     ))}
@@ -329,7 +343,7 @@ export default function GuestMenu() {
                   <Box
                     sx={{ display: { md: 'none' } }}
                     onClick={e => e.stopPropagation() || instanceRef.current?.next()}
-                    disabled={currentSlide === instanceRef.current.track.details.slides.length - 1}
+                    disabled={currentSlide === instanceRef.current?.track?.details?.slides?.length - 1}
                   >
                     <Icon icon='tabler:chevron-right' />
                   </Box>

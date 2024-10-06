@@ -23,6 +23,8 @@ import { useRouter } from 'next/router'
 import { useOrder } from 'src/context/OrderContext'
 import { getWeekOfMonth, isLastDayOfMonth } from 'date-fns'
 import toast from 'react-hot-toast'
+import FallbackSpinner from 'src/@core/components/spinner'
+import axiosInstance from 'src/helpers/axiosInstance'
 const LinkStyled = styled(Link)(({ theme }) => ({
   textDecoration: 'none',
   color: theme.palette.primary.main
@@ -135,39 +137,28 @@ export default function UserMenuPage() {
   let lastDayOfCurrentMonth = isLastDayOfMonth(new Date())
   if (lastDayOfCurrentMonth) month = month + 1
 
-  const weeks = generateWeeksForMonth(month, year)
-  let currentWeekNumber = getWeekOfMonth(new Date())
-  if (lastDayOfCurrentMonth) currentWeekNumber = 1
-  console.log(weeks)
-
   const router = useRouter()
   const [currentSlide, setCurrentSlide] = useState(0)
   const [loaded, setLoaded] = useState(false)
+  const [weeks, setWeeks] = useState([])
+  const [currentWeekNumber, setCurrentWeekNumber] = useState([])
   const [orderCategory, setOrderCategory] = useState('weekly')
-  const [selectedWeek, setSelectedWeek] = useState(currentWeekNumber)
-  const [selectedDate, setSelectedDate] = useState(
-    formatDateToLocalDatString(weeks[currentWeekNumber - 1]?.dates[0]?.date)
-  )
+  const [selectedWeek, setSelectedWeek] = useState(null)
+  const [selectedDate, setSelectedDate] = useState(null)
   const { orders } = useOrder()
   const today = new Date()
   const tomorrow = new Date(today)
   tomorrow.setDate(today.getDate() + 1)
 
-  const [selectedDay, setSelectedDay] = useState(tomorrow.toLocaleString('en-US', { weekday: 'long' }))
+  const [selectedDay, setSelectedDay] = useState(null)
   const [menuItems, setMenuItems] = useState([])
 
   const handleTabChange = (event, newValue) => {
     console.log(newValue)
 
     setSelectedWeek(newValue)
-    const date1 = new Date(selectedDate)
-    const date2 = new Date(formatDateToLocalDatString(weeks[newValue - 1]?.dates[0]?.date))
-    setSelectedDate(formatDateToLocalDatString(weeks[newValue - 1]?.dates[0]?.date))
+    setSelectedDate(weeks[newValue - 1]?.dates[0]?.date)
     setSelectedDay(weeks[newValue - 1]?.dates[0]?.dayName)
-    if (date2.getTime() > date1.getTime()) {
-      setSelectedDate(formatDateToLocalDatString(weeks[newValue - 1]?.dates[0]?.date))
-      console.log(formatDateToLocalDatString(weeks[newValue - 1]?.dates[0]?.date))
-    }
   }
 
   const [sliderRef, instanceRef] = useKeenSlider({
@@ -204,7 +195,7 @@ export default function UserMenuPage() {
 
   useEffect(() => {
     fetchMenuItems(selectedDay, orderCategory)
-  }, [selectedDay, orderCategory])
+  }, [selectedDay, orderCategory, selectedDate])
 
   useEffect(() => {
     if (instanceRef.current) {
@@ -212,7 +203,30 @@ export default function UserMenuPage() {
     }
   }, [selectedWeek])
 
-  return (
+  useEffect(() => {
+    axiosInstance
+      .get('/api/v1/weeks')
+      .then(result => {
+        console.log(result.data)
+
+        setWeeks(result.data.weeks)
+        setSelectedDate(result.data.weeks[result.data.currentWeekNumber - 1]?.dates[0]?.date)
+        setSelectedDay(result.data.weeks[result.data.currentWeekNumber - 1]?.dates[0]?.dayName)
+        setCurrentWeekNumber(result.data.currentWeekNumber)
+        setSelectedWeek(result.data.currentWeekNumber)
+      })
+      .catch(error => {
+        console.log(error)
+
+        toast.error('SOmething went wrong while fetching weeks')
+      })
+  }, [])
+
+  return weeks.length == 0 ? (
+    <>
+      <FallbackSpinner />
+    </>
+  ) : (
     <>
       <Box sx={{ padding: { xs: '20px 0px', md: '20px 0px' } }}>
         <Box sx={{ margin: '0px auto' }}>
@@ -299,11 +313,11 @@ export default function UserMenuPage() {
                       //   {day.dayName}: {day.date.toLocaleDateString()}
                       // </Typography>
                       <DayButton
-                        day={formatDate(formatDateToLocalDatString(day.date))}
-                        active={selectedDate === formatDateToLocalDatString(day.date)}
+                        day={formatDate(formatDateToLocalDatString(new Date(day.date)))}
+                        active={selectedDate == day.date}
                         key={index}
                         onClick={() => {
-                          setSelectedDate(formatDateToLocalDatString(day.date)), setSelectedDay(day.dayName)
+                          setSelectedDate(day.date), setSelectedDay(day.dayName)
                         }}
                       />
                     ))}
