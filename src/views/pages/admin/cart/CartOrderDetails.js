@@ -126,7 +126,7 @@ const CartOrderDetails = () => {
                 {itemIndex === 0 && <TableCell rowSpan={day.items.length}>Week 2</TableCell>}
                 {itemIndex === 0 && <TableCell rowSpan={day.items.length}>{formatToUKDate(day.date)}</TableCell>}
                 <TableCell>{item.name || item.dish?.name}</TableCell>
-                <TableCell>{item.category}</TableCell>
+                <TableCell>{item.category === 'weekly' ? 'Weekly' : 'Make Your Own'}</TableCell>
                 <TableCell>{item.quantity || '-'}</TableCell>
                 <TableCell>{'£' + Number(item.price).toFixed(2) || '-'}</TableCell>
                 <TableCell
@@ -155,7 +155,7 @@ const CartOrderDetails = () => {
                 {itemIndex === 0 && <TableCell rowSpan={day.items.length}>Week 3</TableCell>}
                 {itemIndex === 0 && <TableCell rowSpan={day.items.length}>{formatToUKDate(day.date)}</TableCell>}
                 <TableCell>{item.name || item.dish?.name}</TableCell>
-                <TableCell>{item.category}</TableCell>
+                <TableCell>{item.category === 'weekly' ? 'Weekly' : 'Make Your Own'}</TableCell>
                 <TableCell>{item.quantity || '-'}</TableCell>
                 <TableCell>{'£' + Number(item.price).toFixed(2) || '-'}</TableCell>
                 <TableCell
@@ -184,7 +184,7 @@ const CartOrderDetails = () => {
                 {itemIndex === 0 && <TableCell rowSpan={day.items.length}>Week 4</TableCell>}
                 {itemIndex === 0 && <TableCell rowSpan={day.items.length}>{formatToUKDate(day.date)}</TableCell>}
                 <TableCell>{item.name || item.dish?.name}</TableCell>
-                <TableCell>{item.category}</TableCell>
+                <TableCell>{item.category === 'weekly' ? 'Weekly' : 'Make Your Own'}</TableCell>
                 <TableCell>{item.quantity || '-'}</TableCell>
                 <TableCell>{'£' + Number(item.price).toFixed(2) || '-'}</TableCell>
                 <TableCell
@@ -213,7 +213,7 @@ const CartOrderDetails = () => {
                 {itemIndex === 0 && <TableCell rowSpan={day.items.length}>Week 5</TableCell>}
                 {itemIndex === 0 && <TableCell rowSpan={day.items.length}>{formatToUKDate(day.date)}</TableCell>}
                 <TableCell>{item.name || item.dish?.name}</TableCell>
-                <TableCell>{item.category}</TableCell>
+                <TableCell>{item.category === 'weekly' ? 'Weekly' : 'Make Your Own'}</TableCell>
                 <TableCell>{item.quantity || '-'}</TableCell>
                 <TableCell>{'£' + Number(item.price).toFixed(2) || '-'}</TableCell>
                 <TableCell

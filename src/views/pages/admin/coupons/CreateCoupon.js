@@ -43,7 +43,7 @@ const CreateCoupon = () => {
     }
   })
 
-  console.log(errors)
+  let validFrom = watch('validFrom')
 
   // Handle Password
   const onSubmit = async data => {
@@ -64,6 +64,7 @@ const CreateCoupon = () => {
       router.replace('/admin/coupons')
     } catch (error) {
       console.log(error)
+      toast.error(error.response.data.error)
     }
   }
   return (
@@ -167,7 +168,7 @@ const CreateCoupon = () => {
                   <CustomTextField
                     fullWidth
                     value={value}
-                    label='Discount value'
+                    label='Discount value (%)'
                     onChange={onChange}
                     placeholder='Enter  Discount value'
                     error={Boolean(errors.discount)}
@@ -192,6 +193,7 @@ const CreateCoupon = () => {
                         defaultValue={value}
                         onChange={onChange}
                         dateFormat='dd/MM/yyyy'
+                        minDate={new Date()}
                         customInput={
                           <CustomInput
                             label='Valid From'
@@ -219,6 +221,7 @@ const CreateCoupon = () => {
                         value={value}
                         onChange={onChange}
                         dateFormat='dd/MM/yyyy'
+                        minDate={new Date(validFrom)}
                         customInput={
                           <CustomInput
                             label='Valid Till'

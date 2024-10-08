@@ -90,6 +90,7 @@ const EditCoupon = () => {
   useEffect(() => {
     if (id) fetchCoupon()
   }, [id])
+  let validFrom = watch('validFrom')
   return (
     <Card>
       <CardHeader title='Coupon Details' />
@@ -171,7 +172,7 @@ const EditCoupon = () => {
                   <CustomTextField
                     fullWidth
                     value={value}
-                    label='Discount value'
+                    label='Discount value (%)'
                     onChange={onChange}
                     placeholder='Enter  Discount value'
                     error={Boolean(errors.discount)}
@@ -196,6 +197,7 @@ const EditCoupon = () => {
                         placeholderText='Click to select a date'
                         defaultValue={value}
                         onChange={onChange}
+                        minDate={new Date(validFrom)}
                         customInput={
                           <CustomInput
                             label='Valid From'
@@ -222,6 +224,7 @@ const EditCoupon = () => {
                         dateFormat='dd/MM/yyyy'
                         placeholderText='Click to select a date'
                         value={value}
+                        minDate={new Date(validFrom)}
                         onChange={onChange}
                         customInput={
                           <CustomInput

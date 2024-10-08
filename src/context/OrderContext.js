@@ -128,7 +128,7 @@ export const OrderProvider = ({ children }) => {
             ...prevOrders,
             couponCode: couponCode,
             couponDiscount: response?.data?.discountAmount.toFixed(2),
-            totalPrice: prevOrders.totalPrice.toFixed(2),
+            totalPrice: prevOrders.totalPrice,
             discountedPrice: (prevOrders.totalPrice - response?.data?.discountAmount).toFixed(2)
           }
           // return { ...prevOrders, couponDiscount: discount, totalPrice: prevOrders.totalPrice - discount }

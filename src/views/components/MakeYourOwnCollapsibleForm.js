@@ -433,8 +433,8 @@ const MakeYourOwnCollapsibleForm = ({ item, type, date, week, setOpen }) => {
           >
             Add Item
           </Button>
-          <Button type='reset' variant='tonal' color='secondary'>
-            Reset
+          <Button onClick={() => setOpen(false)} type='reset' variant='tonal' color='secondary'>
+            Cancel
           </Button>
         </AccordionDetails>
       </Accordion>
