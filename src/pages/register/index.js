@@ -315,7 +315,7 @@ const RegisterPage = () => {
                       rules={{
                         required: 'Phone number is required',
                         pattern: {
-                          value: /^[0-9]{10}$/, // Example for a 10-digit phone number
+                          value: /^[0-9]{11}$/, // Example for a 10-digit phone number
                           message: 'Invalid phone number. Must be 10 digits.'
                         }
                       }}
@@ -424,7 +424,7 @@ const RegisterPage = () => {
                           message: 'Password must be at least 8 characters'
                         },
                         pattern: {
-                          value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+                          value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?#&])[A-Za-z\d@$!%*?#&]{8,}$/,
                           message:
                             'Password must include at least one uppercase letter, one lowercase letter, one number, and one special character'
                         }
@@ -438,7 +438,7 @@ const RegisterPage = () => {
                           placeholder='Enter Password'
                           error={Boolean(errors.password)}
                           aria-describedby='validation-basic-first-name'
-                          {...(errors.password && { helperText: 'This field is required' })}
+                          {...(errors.password && { helperText: errors.password.message })}
                           type={showPassword ? 'text' : 'password'}
                           InputProps={{
                             endAdornment: (
@@ -469,7 +469,7 @@ const RegisterPage = () => {
                           message: 'Password must be at least 8 characters'
                         },
                         pattern: {
-                          value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+                          value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?#&])[A-Za-z\d@$!%*?#&]{8,}$/,
                           message:
                             'Password must include at least one uppercase letter, one lowercase letter, one number, and one special character'
                         },

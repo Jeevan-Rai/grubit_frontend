@@ -31,7 +31,6 @@ export const OrderProvider = ({ children }) => {
   useEffect(() => {
     if (Object.keys(orders).length > 0) {
       localStorage.setItem(ORDER_STORAGE_KEY, JSON.stringify(orders))
-  
     }
   }, [orders])
 
@@ -112,7 +111,7 @@ export const OrderProvider = ({ children }) => {
         })
       })
     })
-    return total
+    return total.toFixed(2)
   }
 
   // Function to apply coupon discount
@@ -128,9 +127,9 @@ export const OrderProvider = ({ children }) => {
           return {
             ...prevOrders,
             couponCode: couponCode,
-            couponDiscount: response?.data?.discountAmount,
-            totalPrice: prevOrders.totalPrice,
-            discountedPrice: prevOrders.totalPrice - response?.data?.discountAmount
+            couponDiscount: response?.data?.discountAmount.toFixed(2),
+            totalPrice: prevOrders.totalPrice.toFixed(2),
+            discountedPrice: (prevOrders.totalPrice - response?.data?.discountAmount).toFixed(2)
           }
           // return { ...prevOrders, couponDiscount: discount, totalPrice: prevOrders.totalPrice - discount }
         })
@@ -222,8 +221,7 @@ export const OrderProvider = ({ children }) => {
     return null
   }
 
-  const removeItemFromOrder = async(category, week, date, itemId) => {
-    
+  const removeItemFromOrder = async (category, week, date, itemId) => {
     setOrders(prevOrders => {
       const categoryOrders = prevOrders[category]
       const weekOrders = categoryOrders[week] || []
@@ -240,7 +238,6 @@ export const OrderProvider = ({ children }) => {
           return order
         })
         .filter(order => order.Items.length > 0) // Remove empty dates
-        
 
       const updatedOrders = {
         ...prevOrders,

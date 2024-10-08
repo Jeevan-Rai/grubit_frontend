@@ -38,8 +38,8 @@ const CreateCoupon = () => {
     register,
     watch
   } = useForm({
-    defaultValues:{
-      couponStatus:false
+    defaultValues: {
+      couponStatus: false
     }
   })
 
@@ -50,8 +50,8 @@ const CreateCoupon = () => {
     // Create a FormData object to send files
     console.log('submitted')
     try {
-      console.log(data);
-      
+      console.log(data)
+
       const formData = {}
       for (const key in data) {
         if (data.hasOwnProperty(key)) {
@@ -191,6 +191,7 @@ const CreateCoupon = () => {
                         placeholderText='Click to select a date'
                         defaultValue={value}
                         onChange={onChange}
+                        dateFormat='dd/MM/yyyy'
                         customInput={
                           <CustomInput
                             label='Valid From'
@@ -217,6 +218,7 @@ const CreateCoupon = () => {
                         placeholderText='Click to select a date'
                         value={value}
                         onChange={onChange}
+                        dateFormat='dd/MM/yyyy'
                         customInput={
                           <CustomInput
                             label='Valid Till'

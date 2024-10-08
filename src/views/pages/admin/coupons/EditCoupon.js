@@ -137,7 +137,7 @@ const EditCoupon = () => {
                 )}
               />
             </Grid>
-      
+
             <Grid item xs={12} sm={6}>
               <Controller
                 name='category'
@@ -192,6 +192,7 @@ const EditCoupon = () => {
                       <ReactDatePicker
                         selected={value}
                         id='basic-input'
+                        dateFormat='dd/MM/yyyy'
                         placeholderText='Click to select a date'
                         defaultValue={value}
                         onChange={onChange}
@@ -218,6 +219,7 @@ const EditCoupon = () => {
                       <ReactDatePicker
                         selected={value}
                         id='basic-input'
+                        dateFormat='dd/MM/yyyy'
                         placeholderText='Click to select a date'
                         value={value}
                         onChange={onChange}

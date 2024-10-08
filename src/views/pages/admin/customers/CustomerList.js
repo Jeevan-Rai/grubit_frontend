@@ -21,6 +21,7 @@ import { useEffect, useState } from 'react'
 import Pagination from '@mui/material/Pagination'
 import Stack from '@mui/material/Stack'
 import { getCustomers } from 'src/helpers/authHelpers'
+import { formatToUKDate } from 'src/helpers/menuHelper'
 
 const createData = (name, calories, fat, carbs, protein, status) => {
   return { name, calories, fat, carbs, protein, status }
@@ -65,8 +66,8 @@ const CustomerList = ({ customers, handleChange, setOpen }) => {
               </TableCell>
               <TableCell align='left'>{row.email}</TableCell>
               <TableCell align='left'>{row.phoneNumber}</TableCell>
-              <TableCell align='left'>{new Date(row.createdAt).toLocaleString()}</TableCell>
-              <TableCell align='left'>{new Date(row.createdAt).toLocaleString()}</TableCell>
+              <TableCell align='left'>{formatToUKDate(row.createdAt)}</TableCell>
+              <TableCell align='left'>{formatToUKDate(row.createdAt)}</TableCell>
               <TableCell align='left'>
                 <Chip
                   rounded

@@ -131,7 +131,7 @@ export default function ContactUs() {
                       rules={{
                         required: 'Phone number is required',
                         pattern: {
-                          value: /^[0-9]{10}$/, // Example for a 10-digit phone number
+                          value: /^[0-9]{11}$/, // Example for a 10-digit phone number
                           message: 'Invalid phone number. Must be 10 digits.'
                         }
                       }}

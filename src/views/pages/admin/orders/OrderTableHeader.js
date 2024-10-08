@@ -56,6 +56,7 @@ const OrderTableHeader = ({ setSearch, setDate, date }) => {
               <ReactDatePicker
                 selected={date != null ? new Date(date) : false}
                 id="basic-input"
+                dateFormat="dd/MM/yyyy"
                 onChange={(date) => setDate(date)}
                 placeholderText="Filter by order date"
                 customInput={<CustomInput label="" />}

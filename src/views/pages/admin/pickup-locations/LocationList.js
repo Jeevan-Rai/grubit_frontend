@@ -20,6 +20,7 @@ import { useEffect, useState } from 'react'
 import Pagination from '@mui/material/Pagination'
 import Stack from '@mui/material/Stack'
 import { deleteStation, getStations } from 'src/helpers/stationHelper'
+import { formatToUKDate } from 'src/helpers/menuHelper'
 
 const createData = (name, calories, fat, carbs, protein) => {
   return { name, calories, fat, carbs, protein }
@@ -54,7 +55,7 @@ const LocationList = ({ stations, onDelete, handleChange, setItemId, open, setOp
                 {row.name}
               </TableCell>
               <TableCell align='left'>{row.details}</TableCell>
-              <TableCell align='left'>{new Date(row.createdAt).toDateString()}</TableCell>
+              <TableCell align='left'>{formatToUKDate(row.createdAt)}</TableCell>
 
               <TableCell align='left'>
                 <Chip

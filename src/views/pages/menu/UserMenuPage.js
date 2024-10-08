@@ -145,6 +145,7 @@ export default function UserMenuPage() {
   const [orderCategory, setOrderCategory] = useState('weekly')
   const [selectedWeek, setSelectedWeek] = useState(null)
   const [selectedDate, setSelectedDate] = useState(null)
+  const [dateIndex, setDateIndex] = useState(0)
   const { orders } = useOrder()
   const today = new Date()
   const tomorrow = new Date(today)
@@ -300,7 +301,14 @@ export default function UserMenuPage() {
                 {loaded && instanceRef.current && (
                   <Box
                     sx={{ display: { md: 'none' } }}
-                    onClick={e => e.stopPropagation() || instanceRef.current?.prev()}
+                    onClick={e => {
+                      e.stopPropagation() || instanceRef.current?.prev()
+                      if (dateIndex > 0) {
+                        setSelectedDate(weeks[currentWeekNumber - 1]?.dates[dateIndex - 1]?.date)
+                        setSelectedDay(weeks[currentWeekNumber - 1]?.dates[dateIndex - 1]?.dayName)
+                        setDateIndex(dateIndex - 1)
+                      }
+                    }}
                     disabled={currentSlide === 0}
                   >
                     <Icon icon='tabler:chevron-left' />
@@ -332,7 +340,14 @@ export default function UserMenuPage() {
                 {loaded && instanceRef.current && (
                   <Box
                     sx={{ display: { md: 'none' } }}
-                    onClick={e => e.stopPropagation() || instanceRef.current?.next()}
+                    onClick={e => {
+                      e.stopPropagation() || instanceRef.current?.next()
+                      if (dateIndex < weeks[currentWeekNumber - 1]?.dates.length - 1) {
+                        setSelectedDate(weeks[currentWeekNumber - 1]?.dates[dateIndex + 1]?.date)
+                        setSelectedDay(weeks[currentWeekNumber - 1]?.dates[dateIndex + 1]?.dayName)
+                        setDateIndex(dateIndex + 1)
+                      }
+                    }}
                     disabled={currentSlide === instanceRef.current.track.details.slides.length - 1}
                   >
                     <Icon icon='tabler:chevron-right' />
@@ -396,7 +411,9 @@ export default function UserMenuPage() {
                     fontFamily: 'DM Sans'
                   }}
                   onClick={() => {
-                    orders.totalPrice > 0 ? router.replace('/cart') : toast.error('Please add aleast one item to cart')
+                    orders.totalPrice > 0
+                      ? router.replace('/user/cart')
+                      : toast.error('Please add aleast one item to cart')
                   }}
                 >
                   Continue <Icon icon='tabler:chevron-right' />

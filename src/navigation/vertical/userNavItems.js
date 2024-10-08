@@ -17,7 +17,7 @@ const userNavItems = () => {
     },
     {
       title: 'Cart',
-      path: '/cart',
+      path: '/user/cart',
       icon: 'tabler:shopping-cart'
     }
   ]

@@ -22,6 +22,7 @@ import Pagination from '@mui/material/Pagination'
 import Stack from '@mui/material/Stack'
 import Iconify from '@iconify/iconify'
 import MessageDialog from 'src/views/components/dialogs/MessageDialog'
+import { formatToUKDate } from 'src/helpers/menuHelper'
 
 const createData = (name, calories, fat, carbs, protein) => {
   return { name, calories, fat, carbs, protein }
@@ -98,7 +99,7 @@ const CouponRedeemers = ({ setPage, customers }) => {
                 <TableCell align='left'>{row.coupon}</TableCell>
                 <TableCell align='left'>{row.totalPrice}</TableCell>
                 <TableCell align='left'>{row.discountAmount}</TableCell>
-                <TableCell align='left'>{new Date(row.createdAt).toLocaleDateString()}</TableCell>
+                <TableCell align='left'>{formatToUKDate(row.createdAt)}</TableCell>
               </TableRow>
             )
           })}

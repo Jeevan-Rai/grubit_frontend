@@ -16,6 +16,7 @@ import TableContainer from '@mui/material/TableContainer'
 
 // ** Icon Imports
 import Icon from 'src/@core/components/icon'
+import { formatToUKDate } from 'src/helpers/menuHelper'
 
 const createData = (name, calories, fat, carbs, protein, price) => {
   return {
@@ -83,7 +84,7 @@ const Row = props => {
                   {row.history.map(historyRow => (
                     <TableRow key={historyRow.date}>
                       <TableCell component='th' scope='row'>
-                        {historyRow.date}
+                        {formatToUKDate(historyRow.date)}
                       </TableCell>
                       <TableCell>{historyRow.customerId}</TableCell>
                       <TableCell align='right'>{historyRow.amount}</TableCell>

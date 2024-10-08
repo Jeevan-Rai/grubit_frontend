@@ -48,6 +48,7 @@ const LocationTableHeader = ({ setSearch, setDate, date, setStatus }) => {
               <ReactDatePicker
                 selected={date != null ? new Date(date) : false}
                 id='basic-input'
+                dateFormat='dd/MM/yyyy'
                 onChange={date => setDate(date)}
                 placeholderText='Filter by order date'
                 customInput={<CustomInput label='' />}
@@ -72,12 +73,12 @@ const LocationTableHeader = ({ setSearch, setDate, date, setStatus }) => {
           </CustomTextField>
         </Grid>
         <Grid item xs={12} sm={3}>
-        <Link href={'/admin/pickup-locations/create'}>
-          <Button fullWidth variant='contained' sx={{ '& svg': { mr: 2 } }}>
-            <Icon fontSize='1.125rem' icon='tabler:plus' />
-            Add Location
-          </Button>
-        </Link>
+          <Link href={'/admin/pickup-locations/create'}>
+            <Button fullWidth variant='contained' sx={{ '& svg': { mr: 2 } }}>
+              <Icon fontSize='1.125rem' icon='tabler:plus' />
+              Add Location
+            </Button>
+          </Link>
         </Grid>
       </Grid>
     </Box>

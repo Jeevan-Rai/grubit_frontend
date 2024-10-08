@@ -257,7 +257,7 @@ function Usernavbar() {
                     <MenuItem component={Link} href='/account'>
                       <Typography sx={{ textAlign: 'center' }}>Account</Typography>
                     </MenuItem>
-                    <MenuItem component={Link} href='/cart'>
+                    <MenuItem component={Link} href='/user/cart'>
                       <Typography sx={{ textAlign: 'center' }}>Cart</Typography>
                     </MenuItem>
                     <MenuItem onClick={() => logout()}>

@@ -21,6 +21,7 @@ import { useEffect, useState } from 'react'
 import Pagination from '@mui/material/Pagination'
 import Stack from '@mui/material/Stack'
 import { CardHeader } from '@mui/material'
+import { formatToUKDate } from 'src/helpers/menuHelper'
 
 const createData = (name, calories, fat, carbs, protein) => {
   return { name, calories, fat, carbs, protein }
@@ -68,8 +69,8 @@ const OrderHistory = ({ userDetails, page, setPage }) => {
               <TableCell component='th' scope='row'>
                 # {row.id}
               </TableCell>
-              <TableCell align='left'>{row?.station.name}</TableCell>
-              <TableCell align='left'>{new Date(row.createdAt).toLocaleString()}</TableCell>
+              <TableCell align='left'>{row?.station?.name}</TableCell>
+              <TableCell align='left'>{formatToUKDate(row.createdAt)}</TableCell>
               <TableCell align='left'>
                 <Chip
                   rounded

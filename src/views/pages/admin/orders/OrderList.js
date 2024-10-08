@@ -24,6 +24,7 @@ import Iconify from "@iconify/iconify";
 import MessageDialog from "src/views/components/dialogs/MessageDialog";
 import { changeOrder, getOrders } from "src/helpers/orderHelper";
 import toast from "react-hot-toast";
+import { formatToUKDate } from "src/helpers/menuHelper";
 
 const createData = (name, calories, fat, carbs, protein, status) => {
   return { name, calories, fat, carbs, protein, status };
@@ -120,7 +121,7 @@ const OrderList = ({ orders, handleChange, fetchOrders }) => {
               </TableCell>
               <TableCell align="left">{row?.station?.name}</TableCell>
               <TableCell align="left">
-                {new Date(row.createdAt).toLocaleDateString()}
+                {formatToUKDate(row.createdAt)}
               </TableCell>
               <TableCell align="left">{row.totalPrice}</TableCell>
 

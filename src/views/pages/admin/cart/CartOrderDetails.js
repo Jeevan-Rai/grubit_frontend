@@ -22,7 +22,7 @@ import Pagination from '@mui/material/Pagination'
 import Stack from '@mui/material/Stack'
 import { CardHeader, Typography } from '@mui/material'
 import { useOrder } from 'src/context/OrderContext'
-import { combineWeeklyAndMakeYourOwn } from 'src/helpers/menuHelper'
+import { combineWeeklyAndMakeYourOwn, formatToUKDate } from 'src/helpers/menuHelper'
 
 const createData = (name, calories, fat, carbs, protein) => {
   return { name, calories, fat, carbs, protein }
@@ -60,7 +60,11 @@ const CartOrderDetails = () => {
     removeItemFromOrder(category, week, date, itemId)
     setOpen(false)
   }
-  return (
+  return orders?.totalPrice <= 0 ? (
+    <>
+      <Typography sx={{ textAlign: 'center', fontWeight: 'BOLD' }}>No Items Added to Cart</Typography>
+    </>
+  ) : (
     <TableContainer component={Paper}>
       <CardHeader
         title='Before you proceed for payment'
@@ -91,9 +95,7 @@ const CartOrderDetails = () => {
                 }}
               >
                 {itemIndex === 0 && <TableCell rowSpan={day.items.length}>Week 1</TableCell>}
-                {itemIndex === 0 && (
-                  <TableCell rowSpan={day.items.length}>{new Date(day.date).toLocaleDateString()}</TableCell>
-                )}
+                {itemIndex === 0 && <TableCell rowSpan={day.items.length}>{formatToUKDate(day.date)}</TableCell>}
                 <TableCell>{item.name || item.dish?.name}</TableCell>
                 <TableCell>{item.category === 'weekly' ? 'Weekly' : 'Make Your Own'}</TableCell>
                 <TableCell>{item.quantity || '-'}</TableCell>
@@ -122,9 +124,7 @@ const CartOrderDetails = () => {
                 }}
               >
                 {itemIndex === 0 && <TableCell rowSpan={day.items.length}>Week 2</TableCell>}
-                {itemIndex === 0 && (
-                  <TableCell rowSpan={day.items.length}>{new Date(day.date).toLocaleDateString()}</TableCell>
-                )}
+                {itemIndex === 0 && <TableCell rowSpan={day.items.length}>{formatToUKDate(day.date)}</TableCell>}
                 <TableCell>{item.name || item.dish?.name}</TableCell>
                 <TableCell>{item.category}</TableCell>
                 <TableCell>{item.quantity || '-'}</TableCell>
@@ -153,9 +153,7 @@ const CartOrderDetails = () => {
                 }}
               >
                 {itemIndex === 0 && <TableCell rowSpan={day.items.length}>Week 3</TableCell>}
-                {itemIndex === 0 && (
-                  <TableCell rowSpan={day.items.length}>{new Date(day.date).toLocaleDateString()}</TableCell>
-                )}
+                {itemIndex === 0 && <TableCell rowSpan={day.items.length}>{formatToUKDate(day.date)}</TableCell>}
                 <TableCell>{item.name || item.dish?.name}</TableCell>
                 <TableCell>{item.category}</TableCell>
                 <TableCell>{item.quantity || '-'}</TableCell>
@@ -184,9 +182,7 @@ const CartOrderDetails = () => {
                 }}
               >
                 {itemIndex === 0 && <TableCell rowSpan={day.items.length}>Week 4</TableCell>}
-                {itemIndex === 0 && (
-                  <TableCell rowSpan={day.items.length}>{new Date(day.date).toLocaleDateString()}</TableCell>
-                )}
+                {itemIndex === 0 && <TableCell rowSpan={day.items.length}>{formatToUKDate(day.date)}</TableCell>}
                 <TableCell>{item.name || item.dish?.name}</TableCell>
                 <TableCell>{item.category}</TableCell>
                 <TableCell>{item.quantity || '-'}</TableCell>
@@ -215,9 +211,7 @@ const CartOrderDetails = () => {
                 }}
               >
                 {itemIndex === 0 && <TableCell rowSpan={day.items.length}>Week 5</TableCell>}
-                {itemIndex === 0 && (
-                  <TableCell rowSpan={day.items.length}>{new Date(day.date).toLocaleDateString()}</TableCell>
-                )}
+                {itemIndex === 0 && <TableCell rowSpan={day.items.length}>{formatToUKDate(day.date)}</TableCell>}
                 <TableCell>{item.name || item.dish?.name}</TableCell>
                 <TableCell>{item.category}</TableCell>
                 <TableCell>{item.quantity || '-'}</TableCell>

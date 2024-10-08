@@ -388,7 +388,7 @@ export default function GuestMenu() {
           <Box sx={{ display: 'flex', justifyContent: 'center' }}>
             <Button
               onClick={() => {
-                orders?.totalPrice > 0 ? router.replace('/cart') : toast.error('Please add atleast one 1 to cart')
+                orders?.totalPrice > 0 ? router.replace('/user/cart') : toast.error('Please add atleast one 1 to cart')
               }}
               variant='contained'
               sx={{

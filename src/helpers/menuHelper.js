@@ -21,9 +21,6 @@ import {
   parse
 } from 'date-fns'
 
-
-
-
 export const createMenu = async data => {
   return await axiosInstance.post('/menu', data)
 }
@@ -71,10 +68,8 @@ const getDatesOfWeekInMonth = (weekNumber, month, year) => {
         return getHours(new Date()) < 16
       }
 
-      
-      
       // Include future dates only
-      return isAfter(date, todaysDate) && isBefore(date, lastDayOfMonth) && date.getDay() != 0;
+      return isAfter(date, todaysDate) && isBefore(date, lastDayOfMonth) && date.getDay() != 0
     })
     .map(date => ({
       date,
@@ -110,6 +105,15 @@ export const formatDate = dateString => {
   return `${dayName} (${dayOfMonth} ${monthName})`
 }
 
+export const formatToUKDate = date => {
+  const d = new Date(date)
+  const day = String(d.getDate()).padStart(2, '0') // Get day and pad with leading zero if necessary
+  const month = String(d.getMonth() + 1).padStart(2, '0') // Get month (0-based, so +1) and pad with leading zero
+  const year = d.getFullYear()
+
+  return `${day}/${month}/${year}`
+}
+
 // export const combineWeeklyAndMakeYourOwn = (weekly, makeYourOwn) => {
 //   const combined = {}
 
@@ -134,47 +138,47 @@ export const formatDate = dateString => {
 //   return combined
 // }
 
-export const combineWeeklyAndMakeYourOwn = (weekly, makeYourOwn ,removeItemFromOrder = null ) => {
+export const combineWeeklyAndMakeYourOwn = (weekly, makeYourOwn, removeItemFromOrder = null) => {
   const result = {}
 
   // Helper function to merge items by week and date
   const mergeItems = (source, category) => {
     for (const week in source) {
       if (!result[week]) result[week] = []
-      source[week].forEach(entry => {
-        const todaysDate = new Date();
-       let date =  parse(entry.date, 'dd/MM/yyyy', new Date())
-       console.log(entry);
-       
-       if (isSameDay(date, todaysDate)) {
-        // Only include today's date if it's before 4 PM
-       if(getHours(new Date()) > 16){
-        
+      source[week]
+        .sort((a, b) => new Date(a.date) - new Date(b.date))
+        .forEach(entry => {
+          const todaysDate = new Date()
+          let date = parse(entry.date, 'dd/MM/yyyy', new Date())
+          console.log(entry)
 
-        entry.Items.map(item=>{
-          removeItemFromOrder(category,week,entry.date,item.id);
+          if (isSameDay(date, todaysDate)) {
+            // Only include today's date if it's before 4 PM
+            if (getHours(new Date()) > 16) {
+              entry.Items.map(item => {
+                removeItemFromOrder(category, week, entry.date, item.id)
+              })
+            }
+          }
+
+          const existingDateEntry = result[week].find(e => e.date === entry.date)
+          const formattedItems = entry.Items.map(item => ({
+            ...item,
+            category: category
+          }))
+          console.log(formattedItems)
+
+          if (existingDateEntry) {
+            // Merge items for the same date
+            existingDateEntry.items.push(...formattedItems)
+          } else {
+            // Add new date and items entry
+            result[week].push({
+              date: entry.date,
+              items: formattedItems
+            })
+          }
         })
-        
-       }
-      }
-
-        const existingDateEntry = result[week].find(e => e.date === entry.date)
-        const formattedItems = entry.Items.map(item => ({
-          ...item,
-          category: category
-        }))
-
-        if (existingDateEntry) {
-          // Merge items for the same date
-          existingDateEntry.items.push(...formattedItems)
-        } else {
-          // Add new date and items entry
-          result[week].push({
-            date: entry.date,
-            items: formattedItems
-          })
-        }
-      })
     }
   }
 
@@ -185,12 +189,10 @@ export const combineWeeklyAndMakeYourOwn = (weekly, makeYourOwn ,removeItemFromO
   return result
 }
 
-
-
-export const formatDateToLocalDatString = (date) => {
+export const formatDateToLocalDatString = date => {
   return date.toLocaleDateString('en-GB', {
     day: '2-digit',
     month: '2-digit',
-    year: 'numeric',
+    year: 'numeric'
   })
 }
