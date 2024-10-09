@@ -28,16 +28,12 @@ const createData = (name, calories, fat, carbs, protein, toDate) => {
 
 const rows = [createData('FLASH25', 'FLASH25OFF', 'General', 24, '07/08/2024', '07/09/2024')]
 
-const CouponList = ({coupons , setOpen, open , fetchCoupons , setPage}) => {
-  
-
+const CouponList = ({ coupons, setOpen, open, fetchCoupons, setPage }) => {
   const [itemId, setItemId] = useState('')
 
   const handleChange = (event, value) => {
     setPage(value)
   }
-
-  
 
   const onDelete = async () => {
     try {
@@ -100,7 +96,7 @@ const CouponList = ({coupons , setOpen, open , fetchCoupons , setPage}) => {
                       <Icon icon='tabler:edit' />
                     </IconButton>
                   </Tooltip>
-                  <Tooltip title='Delete Coupon'>
+                  {/* <Tooltip title='Delete Coupon'>
                     <IconButton
                       size='small'
                       onClick={() => {
@@ -109,7 +105,7 @@ const CouponList = ({coupons , setOpen, open , fetchCoupons , setPage}) => {
                     >
                       <Icon icon='tabler:trash' />
                     </IconButton>
-                  </Tooltip>
+                  </Tooltip> */}
                 </Box>
               </TableCell>
             </TableRow>

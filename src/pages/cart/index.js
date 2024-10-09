@@ -22,7 +22,7 @@ const CartView = ({ tab, invoiceData }) => {
     <>
       <Usernavbar />
       <Box sx={{ padding: '45px' }} />
-      <SectionHeader title='Cart' />
+      <SectionHeader title='Order Overview' />
       <Box sx={{ padding: { xs: '10px', md: '30px' } }} />
 
       <Grid container sx={{ width: { xs: '90%', md: '75%' }, margin: '0px auto' }}>
