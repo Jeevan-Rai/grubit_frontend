@@ -19,7 +19,7 @@ const CustomInput = forwardRef((props, ref, label) => {
 
 const CouponTableHeader = props => {
   // ** Props
-  const { setStart , setEnd , setSearch , start , end } = props
+  const { setStart, setEnd, setSearch, start, end } = props
 
   return (
     <Box
@@ -37,15 +37,14 @@ const CouponTableHeader = props => {
       <Grid container spacing={2} alignItems='center'>
         <Grid item xs={12} sm={3}>
           <CustomTextField
-
             fullWidth
             sx={{ mr: 4 }}
-            placeholder='Search couon'
+            placeholder='Search coupon'
             onChange={e => setSearch(e.target.value)}
           />
         </Grid>
         <Grid item xs={12} sm={3}>
-        {/* <>
+          {/* <>
             <DatePickerWrapper>
               <ReactDatePicker
                 selected={start != null ? new Date(start) : false}
@@ -58,7 +57,7 @@ const CouponTableHeader = props => {
           </> */}
         </Grid>
         <Grid item xs={12} sm={3}>
-        {/* <>
+          {/* <>
             <DatePickerWrapper>
               <ReactDatePicker
                 selected={end != null ? new Date(end) : false}

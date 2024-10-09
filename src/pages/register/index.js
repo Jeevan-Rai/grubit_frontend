@@ -39,6 +39,7 @@ import Icon from 'src/@core/components/icon'
 import { registerUser } from 'src/helpers/authHelpers'
 import MessageDialog from 'src/views/components/dialogs/MessageDialog'
 import { useRouter } from 'next/router'
+import Usernavbar from 'src/views/components/UserNavbar'
 
 // ** Styled Components
 
@@ -119,6 +120,7 @@ const RegisterPage = () => {
 
   return (
     <>
+      <Usernavbar />
       <Box
         className=''
         sx={{
@@ -316,7 +318,7 @@ const RegisterPage = () => {
                         required: 'Phone number is required',
                         pattern: {
                           value: /^[0-9]{11}$/, // Example for a 10-digit phone number
-                          message: 'Invalid phone number. Must be 10 digits.'
+                          message: 'Invalid phone number. Must be 11 digits.'
                         }
                       }}
                       render={({ field: { value, onChange } }) => (

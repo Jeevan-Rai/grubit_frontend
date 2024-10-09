@@ -413,7 +413,7 @@ export default function GuestMenu() {
           </Grid>
           <Box sx={{ padding: { xs: '10px', md: '30px' } }} />
 
-          <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+          <Box sx={{ display: 'flex', justifyContent: 'center', gap: '1em' }}>
             <Button
               variant='contained'
               sx={{
@@ -429,6 +429,22 @@ export default function GuestMenu() {
               }}
             >
               ORDER NOW
+            </Button>
+            <Button
+              variant='contained'
+              sx={{
+                backgroundColor: '#FFFFFF',
+                color: '#000000',
+                borderRadius: '80px',
+                p: { xs: '10px 15px', md: '15px 50px' },
+                fontWeight: 'bold',
+                fontFamily: 'DM Sans'
+              }}
+              onClick={() => {
+                orders.totalPrice > 0 ? router.replace('/cart') : toast.error('Please add aleast one item to cart')
+              }}
+            >
+              CART
             </Button>
           </Box>
         </Box>

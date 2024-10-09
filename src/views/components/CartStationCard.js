@@ -52,6 +52,10 @@ export default function CartStationCard() {
     fetchStations()
   }, [])
 
+  useEffect(() => {
+    if (orders?.pickupLocation) setSelectedStation(orders?.pickupLocation)
+  }, [orders])
+
   return (
     <>
       <Box sx={{ mb: 4, borderRadius: 1, border: theme => `1px solid ${theme.palette.divider}` }}>
@@ -84,7 +88,7 @@ export default function CartStationCard() {
             fullWidth
             label={'Address'}
             disabled
-            defaultValue={orders?.pickupLocation?.details || ''}
+            defaultValue={selectedStation?.details || ''}
           />
           <Divider sx={{ my: '2em !important' }} />
         </CardContent>

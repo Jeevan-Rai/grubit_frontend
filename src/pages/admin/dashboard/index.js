@@ -17,9 +17,9 @@ import { CardContent } from '@mui/material'
 
 import AnalyticsChart from '../../../views/pages/charts/AnalyticsChart'
 
-import {useState , useEffect} from 'react'
+import { useState, useEffect } from 'react'
 
-import 'chart.js/auto'  
+import 'chart.js/auto'
 import axiosInstance from 'src/helpers/axiosInstance'
 
 const LinkStyled = styled(Link)(({ theme }) => ({
@@ -28,22 +28,17 @@ const LinkStyled = styled(Link)(({ theme }) => ({
 }))
 
 const Analytics = () => {
+  const [data, setData] = useState(null)
+  const [start, setStart] = useState({})
+  const [end, setEnd] = useState({})
 
-
-
-  const [data , setData] = useState(null);
-  const [start , setStart] = useState({});
-  const [end , setEnd] = useState({});
-
-  const fetchData = async () =>{
-    let response = await axiosInstance.post('/analytics',{start,end})
+  const fetchData = async () => {
+    let response = await axiosInstance.post('/analytics', { start, end })
     setData(response.data)
   }
-  useEffect(()=>{
+  useEffect(() => {
     fetchData()
-  },[start,end])
-
-
+  }, [start, end])
 
   return (
     <Grid container spacing={6}>
@@ -63,7 +58,7 @@ const Analytics = () => {
           <CardContent>
             <CardStatsHorizontal
               icon={'tabler:currency-euro'}
-              stats={data?.revenue?.sum}
+              stats={data?.revenue?.sum.toFixed(2)}
               title={'Total Revenue'}
               avatarColor={'info'}
             />
@@ -81,11 +76,16 @@ const Analytics = () => {
         </Grid>
         <Grid item xs={12} sm={6} md={4}>
           <CardContent>
-            <CardStatsHorizontal stats={data?.users?.length} title={'Total Users'} icon={'tabler:users'} avatarColor={'warning'} />
+            <CardStatsHorizontal
+              stats={data?.users?.length}
+              title={'Total Users'}
+              icon={'tabler:users'}
+              avatarColor={'warning'}
+            />
           </CardContent>
         </Grid>
 
-        <Grid item md={12} >
+        <Grid item md={12}>
           <AnalyticsChart chartData={data} yellow={'#FFA266'} labelColor={'#4B465C'} borderColor={'#DBDADE'} />
         </Grid>
       </Grid>

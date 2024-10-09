@@ -25,6 +25,7 @@ import MessageDialog from "src/views/components/dialogs/MessageDialog";
 import { changeOrder, getOrders } from "src/helpers/orderHelper";
 import toast from "react-hot-toast";
 import { formatToUKDate } from "src/helpers/menuHelper";
+import { Typography } from "@mui/material";
 
 const createData = (name, calories, fat, carbs, protein, status) => {
   return { name, calories, fat, carbs, protein, status };
@@ -104,6 +105,28 @@ const OrderList = ({ orders, handleChange, fetchOrders }) => {
           </TableRow>
         </TableHead>
         <TableBody>
+          {orders?.orders?.length <= 0 && (
+            <>
+              <TableRow
+                sx={{
+                  "&:last-of-type td, &:last-of-type th": {
+                    border: 0,
+                  },
+                }}
+              >
+                <TableCell colSpan={7} component="th" scope="row">
+                  <Typography
+                    sx={{
+                      padding: "1em",
+                      textAlign: "center",
+                    }}
+                  >
+                    No orders available
+                  </Typography>
+                </TableCell>
+              </TableRow>
+            </>
+          )}
           {orders?.orders?.map((row) => (
             <TableRow
               key={row.name}
@@ -123,7 +146,9 @@ const OrderList = ({ orders, handleChange, fetchOrders }) => {
               <TableCell align="left">
                 {formatToUKDate(row.createdAt)}
               </TableCell>
-              <TableCell align="left">{row.totalPrice}</TableCell>
+              <TableCell align="left">
+                {Number(row.totalPrice).toFixed(2)}
+              </TableCell>
 
               <TableCell align="left">
                 <Chip
