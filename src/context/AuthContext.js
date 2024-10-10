@@ -77,7 +77,11 @@ const AuthProvider = ({ children }) => {
 
         const redirectURL =
           returnUrl && returnUrl !== '/'
-            ? returnUrl
+            ? response.data.userData.role == 'user' && returnUrl.includes('/admin')
+              ? '/account'
+              : response.data.userData.role == 'admin' && returnUrl.includes('/user')
+              ? '/admin/dashboard'
+              : returnUrl
             : response.data.userData.role == 'admin'
             ? '/admin/dashboard'
             : '/account'
@@ -93,7 +97,7 @@ const AuthProvider = ({ children }) => {
     setUser(null)
     window.localStorage.removeItem('userData')
     window.localStorage.removeItem(authConfig.storageTokenKeyName)
-    router.push('/')
+    // router.push('/login')
   }
 
   const values = {

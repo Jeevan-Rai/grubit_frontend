@@ -25,14 +25,14 @@ export default function ContactUs() {
   const [open, setOpen] = useState(false)
 
   const onSubmit = async data => {
-    axiosInstance.post('/contact-us', data).then(res => {})
-    setOpen(true)
-    reset({
-      name: '',
-      email: '',
-      phoneNumber: '',
-      message: ''
-    })
+    axiosInstance.post('/api/v1/contact-us', data).then(res => {})
+    // setOpen(true)
+    // reset({
+    //   name: '',
+    //   email: '',
+    //   phoneNumber: '',
+    //   message: ''
+    // })
   }
   return (
     <>

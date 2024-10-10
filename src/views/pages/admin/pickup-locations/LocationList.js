@@ -92,7 +92,7 @@ const LocationList = ({ stations, onDelete, handleChange, setItemId, open, setOp
       </Table>
       <Stack spacing={2} sx={{ padding: '2em' }}>
         <Pagination
-          count={stations?.totalItems}
+          count={stations?.totalPages}
           shape='rounded'
           onChange={handleChange}
           sx={{

@@ -40,7 +40,6 @@ const CartView = ({ tab, invoiceData }) => {
           </Grid>
           <Grid item xs={12} md={12} lg={12}>
             <Box sx={{ padding: '45px' }} />
-            <Box sx={{ padding: '45px' }} />
 
             <Box sx={{ display: 'flex', justifyContent: 'center' }}>
               <Button

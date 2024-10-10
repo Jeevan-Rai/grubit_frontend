@@ -93,6 +93,8 @@ const defaultValues = {
 const TwoStepsV2 = ({}) => {
   // ** State
   const [isBackspace, setIsBackspace] = useState(false)
+  const [isDisabled, setIsDisabled] = useState(false)
+  const [timeLeft, setTimeLeft] = useState(0)
   const router = useRouter()
   const { token } = router.query
   // ** Hooks
@@ -182,8 +184,23 @@ const TwoStepsV2 = ({}) => {
   const handleResendOTP = async () => {
     try {
       let response = await axiosInstance.post('/auth/register/' + token)
+
       if (response.status === 200) {
         toast.success('OTP resent successfully')
+        setIsDisabled(true)
+        setTimeLeft(60)
+
+        // Start the countdown
+        const countdown = setInterval(() => {
+          setTimeLeft(prevTime => {
+            if (prevTime === 1) {
+              clearInterval(countdown)
+              setIsDisabled(false)
+              return 0
+            }
+            return prevTime - 1
+          })
+        }, 1000)
       } else {
         toast.error('Unable to resent OTP')
       }
@@ -333,8 +350,8 @@ const TwoStepsV2 = ({}) => {
             </form>
             <Box sx={{ mt: 4, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <Typography sx={{ color: 'text.secondary' }}>Didn't get the code?</Typography>
-              <Typography onClick={handleResendOTP} sx={{ ml: 1 }}>
-                Resend
+              <Typography onClick={handleResendOTP} sx={{ ml: 1, cursor: 'pointer' }} disabled={isDisabled}>
+                {isDisabled ? `Wait ${timeLeft}s` : 'Resend'}
               </Typography>
             </Box>
           </Box>

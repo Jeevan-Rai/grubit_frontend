@@ -88,7 +88,10 @@ const MenuItemsList = ({ search }) => {
               <TableCell component='th' scope='row'>
                 {row.name}
               </TableCell>
-              <TableCell align='left'>{row.categoryType}</TableCell>
+              <TableCell align='left'>
+                {}
+                {row.categoryType === 'weekly' ? 'Weekly' : 'Make Your Own'}
+              </TableCell>
               <TableCell align='left'>{row.calories}</TableCell>
               <TableCell align='left'>{row.price}</TableCell>
               {/* <TableCell align='left'>0</TableCell> */}

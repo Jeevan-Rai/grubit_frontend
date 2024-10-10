@@ -13,7 +13,7 @@ const Guard = ({ children, allowedRoles }) => {
     console.log(user)
 
     if (!loading && !user) {
-      router.push('/login?returnUrl=' + router.pathname) // Redirect to login if not authenticated
+      router.push('/login?returnUrl=' + router.asPath) // Redirect to login if not authenticated
     } else if (!loading && allowedRoles && !allowedRoles.includes(user?.role)) {
       console.log(user)
 

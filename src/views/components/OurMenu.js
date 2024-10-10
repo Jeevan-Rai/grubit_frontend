@@ -27,6 +27,10 @@ const colors = {
   friday: {
     bg: '#A0C982',
     color: '#FF9C70'
+  },
+  saturday: {
+    bg: '#FF9C70',
+    color: '#FF9C70'
   }
 }
 export default function OurMenu() {

@@ -69,7 +69,7 @@ const Analytics = () => {
             <CardStatsHorizontal
               icon={'tabler:shopping-cart'}
               stats={data?.orders?.length}
-              title={'Total Order'}
+              title={'Total Orders'}
               avatarColor={'primary'}
             />
           </CardContent>
