@@ -33,7 +33,7 @@ const Customers = () => {
   const [customers, setCustomers] = useState([])
 
   const handleChange = (event, value) => {
-    console.log(event, value)
+    setPage(value)
   }
 
   let fetchCustomers = async () => {
