@@ -102,7 +102,7 @@ const OrderHistoryList = ({ orders, handleChange, fetchOrders }) => {
               <TableCell align="left">
                 {formatToUKDate(row.createdAt)}
               </TableCell>
-              <TableCell align="left">{row.totalPrice}</TableCell>
+              <TableCell align="left">{row.totalPrice.toFixed(2)}</TableCell>
 
               <TableCell align="left">
                 <Chip
