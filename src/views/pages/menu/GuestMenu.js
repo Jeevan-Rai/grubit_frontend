@@ -394,7 +394,7 @@ export default function GuestMenu() {
               <Grid
                 container
                 sx={{
-                  height: { xs: '90vh', md: 'initial' },
+                  height: { xs: 'initial', md: 'initial' },
                   overflowY: { xs: 'scroll', md: 'none' },
                   '&::-webkit-scrollbar': {
                     display: 'none' // Chrome, Safari, and Opera

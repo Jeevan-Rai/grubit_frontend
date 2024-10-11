@@ -72,9 +72,24 @@ export default function UserDrawer({ open, setOpen, pages }) {
             />
           </svg>
         </Box>
+
+        {DrawerList}
+
+        <Divider
+          sx={{
+            color: '#FFFFFF',
+            backgroundColor: '#F56700',
+            borderRadius: '25px',
+            width: '80%',
+            margin: '0px auto',
+            marginTop: '1em'
+          }}
+        />
         <Box sx={{ padding: '1em', paddingBottom: '0px' }}>
           <Button
             fullwidth
+            component={Link}
+            href='/menu'
             sx={{
               border: '1px solid #F56700 !important',
               marginBottom: '1em',
@@ -102,17 +117,6 @@ export default function UserDrawer({ open, setOpen, pages }) {
             Login
           </Button>
         </Box>
-        <Divider
-          sx={{
-            color: '#FFFFFF',
-            backgroundColor: '#F56700',
-            borderRadius: '25px',
-            width: '80%',
-            margin: '0px auto',
-            marginTop: '1em'
-          }}
-        />
-        {DrawerList}
       </Drawer>
     </div>
   )
