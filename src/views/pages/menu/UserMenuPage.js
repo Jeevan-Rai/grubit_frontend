@@ -156,7 +156,7 @@ export default function UserMenuPage() {
 
   const handleTabChange = (event, newValue) => {
     console.log(newValue)
-
+    setDateIndex(0)
     setSelectedWeek(newValue)
     setSelectedDate(weeks[newValue - 1]?.dates[0]?.date)
     setSelectedDay(weeks[newValue - 1]?.dates[0]?.dayName)
