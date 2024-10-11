@@ -146,7 +146,7 @@ const EditCoupon = () => {
                 rules={{ required: true }}
                 render={({ field: { value, onChange } }) => (
                   <CustomTextField
-                    select
+                    select={value != null && value != undefined}
                     fullWidth
                     value={value}
                     label='Coupon category'

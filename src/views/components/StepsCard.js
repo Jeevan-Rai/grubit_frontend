@@ -15,7 +15,8 @@ export default function StepCard({ step, title, description, Icon }) {
               borderTop: '2px solid #78B34E',
               borderRadius: '35px',
               alignItems: 'center',
-              padding: '3em 1em'
+              padding: '3em 1em',
+              width: '100%'
             }}
           >
             <Icon />

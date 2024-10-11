@@ -218,7 +218,7 @@ const EditMenu = () => {
                 rules={{ required: false }}
                 render={({ field: { value, onChange } }) => (
                   <CustomTextField
-                    select
+                    select={value != null && value != undefined}
                     fullWidth
                     value={value}
                     label='Category'
