@@ -193,6 +193,7 @@ export default function GuestMenu() {
   useEffect(() => {
     if (instanceRef.current) {
       instanceRef.current.update()
+      instanceRef.current.moveToIdx(0)
     }
   }, [selectedWeek])
 
@@ -315,8 +316,8 @@ export default function GuestMenu() {
                     onClick={e => {
                       e.stopPropagation() || instanceRef.current?.prev()
                       if (dateIndex > 0) {
-                        setSelectedDate(weeks[currentWeekNumber - 1]?.dates[dateIndex - 1]?.date)
-                        setSelectedDay(weeks[currentWeekNumber - 1]?.dates[dateIndex - 1]?.dayName)
+                        setSelectedDate(weeks[selectedWeek - 1]?.dates[dateIndex - 1]?.date)
+                        setSelectedDay(weeks[selectedWeek - 1]?.dates[dateIndex - 1]?.dayName)
                         setDateIndex(dateIndex - 1)
                       }
                     }}
@@ -353,10 +354,11 @@ export default function GuestMenu() {
                     sx={{ display: { md: 'none' } }}
                     onClick={e => {
                       e.stopPropagation() || instanceRef.current?.next()
-                      if (dateIndex < weeks[currentWeekNumber - 1]?.dates.length - 1) {
-                        setSelectedDate(weeks[currentWeekNumber - 1]?.dates[dateIndex + 1]?.date)
-                        setSelectedDay(weeks[currentWeekNumber - 1]?.dates[dateIndex + 1]?.dayName)
+                      if (dateIndex < weeks[selectedWeek - 1]?.dates.length - 1) {
+                        setSelectedDate(weeks[selectedWeek - 1]?.dates[dateIndex + 1]?.date)
+                        setSelectedDay(weeks[selectedWeek - 1]?.dates[dateIndex + 1]?.dayName)
                         setDateIndex(dateIndex + 1)
+                        console.log(dateIndex + 1)
                       }
                     }}
                     disabled={currentSlide === instanceRef.current?.track?.details?.slides?.length - 1}
