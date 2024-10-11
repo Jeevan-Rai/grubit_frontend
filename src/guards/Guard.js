@@ -5,6 +5,7 @@ import FallbackSpinner from 'src/@core/components/spinner'
 import { useAuth } from 'src/hooks/useAuth'
 // import { useAuth } from '../context/AuthContext'
 import Spinner from 'src/@core/components/spinner'
+import Error401 from 'src/pages/401'
 const Guard = ({ children, allowedRoles }) => {
   const { user, loading } = useAuth() // Get user and loading from useAuth()
   const router = useRouter()
@@ -30,7 +31,7 @@ const Guard = ({ children, allowedRoles }) => {
   if (!user || (allowedRoles && !allowedRoles.includes(user?.role))) {
     return (
       <>
-        <Spinner />
+        <Error401 />
       </>
     )
   }
