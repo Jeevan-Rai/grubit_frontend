@@ -10,12 +10,13 @@ import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemText from '@mui/material/ListItemText'
 import Link from 'next/link'
 import { Typography } from '@mui/material'
-
+import { useAuth } from 'src/hooks/useAuth'
 export default function UserDrawer({ open, setOpen, pages }) {
   const toggleDrawer = newOpen => () => {
     setOpen(newOpen)
   }
 
+  let { user, logout } = useAuth()
   const DrawerList = (
     <Box sx={{ width: 250 }} role='presentation'>
       <List>
@@ -101,21 +102,41 @@ export default function UserDrawer({ open, setOpen, pages }) {
           >
             Get Started
           </Button>
-          <Button
-            fullwidth
-            component={Link}
-            href='/login'
-            sx={{
-              border: '1px solid #F56700 !important',
-              color: '#FFFFFF',
-              backgroundColor: '#F56700',
-              borderRadius: '25px',
-              width: '100%'
-            }}
-            variant='outlined'
-          >
-            Login
-          </Button>
+          {!user && (
+            <Button
+              fullwidth
+              component={Link}
+              href='/login'
+              sx={{
+                border: '1px solid #F56700 !important',
+                color: '#FFFFFF',
+                backgroundColor: '#F56700',
+                borderRadius: '25px',
+                width: '100%'
+              }}
+              variant='outlined'
+            >
+              Login
+            </Button>
+          )}
+
+          {user && (
+            <Button
+              fullwidth
+              onClick={() => logout()}
+              sx={{
+                border: '1px solid #F56700 !important',
+                color: '#FFFFFF',
+                backgroundColor: '#F56700',
+                borderRadius: '25px',
+                width: '100%'
+              }}
+              variant='outlined'
+            >
+              Logout
+            </Button>
+          )}
+          {/* onClick={() => logout()} */}
         </Box>
       </Drawer>
     </div>

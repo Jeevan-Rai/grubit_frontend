@@ -7,7 +7,7 @@ export default function HomeBanner() {
       <Box
         sx={{
           width: '100%',
-          height: { xs: '50vh', md: '100vh' },
+          height: { xs: '50vh', md: '70vh' },
           backgroundImage: 'url("images/banner.png")',
           backgroundSize: 'cover',
           display: 'flex',

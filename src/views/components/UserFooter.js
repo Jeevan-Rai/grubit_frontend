@@ -18,7 +18,7 @@ export default function UserFooter() {
       <Box
         sx={{
           width: '100%',
-          minHeight: '100vh',
+          // minHeight: '100vh',
           backgroundColor: '',
           background: "url('/images/Rectangle 8.svg')",
           backgroundSize: { xs: 'cover', md: 'cover' },

@@ -15,6 +15,7 @@ const Home = () => {
   return (
     <>
       <Usernavbar />
+      <Box sx={{ padding: '40px' }} />
       <HomeBanner />
       <Box sx={{ padding: { xs: '20px', md: '30px' } }} />
       <OurMenu />

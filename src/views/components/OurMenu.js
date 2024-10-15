@@ -52,6 +52,11 @@ export default function OurMenu() {
       setMenu(response.data)
     })
   }, [])
+  useEffect(() => {
+    if (instanceRef.current) {
+      instanceRef.current.update()
+    }
+  }, [menu])
   return (
     <>
       <Box

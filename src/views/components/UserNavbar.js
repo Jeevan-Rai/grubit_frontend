@@ -28,8 +28,8 @@ const settings = ['Profile', 'Account', 'Dashboard', 'Logout']
 function Usernavbar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null)
   const [anchorElUser, setAnchorElUser] = React.useState(null)
-  const [appBarColor, setAppBarColor] = React.useState('transparent')
-  const [appBarStatus, setAppBarStatus] = React.useState(false)
+  const [appBarColor, setAppBarColor] = React.useState('#FFFFFF')
+  const [appBarStatus, setAppBarStatus] = React.useState(true)
   const [open, setOpen] = React.useState(false)
   let { user, logout } = useAuth()
   let router = useRouter()
@@ -58,28 +58,28 @@ function Usernavbar() {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null)
   }
-  React.useEffect(() => {
-    const handleScroll = () => {
-      const scrollY = window.scrollY
-      if (scrollY > 50) {
-        setAppBarColor('#FFFFFF')
-        setAppBarStatus(true) // Change to primary color when scrolling
-      } else {
-        setAppBarColor(router.pathname == '/' ? 'transparent' : 'white')
-        setAppBarStatus(false) // Change to primary color when scrolling
-        // Transparent when at the top
-      }
-    }
-    setAppBarColor(router.pathname == '/' ? 'transparent' : 'white')
+  // React.useEffect(() => {
+  //   const handleScroll = () => {
+  //     const scrollY = window.scrollY
+  //     if (scrollY > 50) {
+  //       setAppBarColor('#FFFFFF')
+  //       setAppBarStatus(true) // Change to primary color when scrolling
+  //     } else {
+  //       setAppBarColor('white')
+  //       setAppBarStatus(false) // Change to primary color when scrolling
+  //       // Transparent when at the top
+  //     }
+  //   }
+  //   setAppBarColor('white')
 
-    // Add event listener for scroll
-    window.addEventListener('scroll', handleScroll)
+  //   // Add event listener for scroll
+  //   window.addEventListener('scroll', handleScroll)
 
-    // Clean up the event listener on component unmount
-    return () => {
-      window.removeEventListener('scroll', handleScroll)
-    }
-  }, [])
+  //   // Clean up the event listener on component unmount
+  //   return () => {
+  //     window.removeEventListener('scroll', handleScroll)
+  //   }
+  // }, [])
   return (
     <>
       <AppBar position='fixed' sx={{ background: appBarColor, boxShadow: 'none' }}>
@@ -116,7 +116,7 @@ function Usernavbar() {
             //   flexGrow: 1,
             //   display: { xs: 'flex', md: 'none' },
             //   marginRight: '15px',
-            //   color: appBarColor === '#FFFFFF' || router.pathname != '/' ? '#000000' : '#FFFFFF',
+            //   color: appBarColor === '#FFFFFF'  ? '#000000' : '#FFFFFF',
             //   padding: '0.25em',
             //   border: `1px solid ${appBarColor === '#FFFFFF' || router.pathname ? '#000000' : '#FFFFFF'}`,
             //   borderRadius: '50%'
@@ -199,7 +199,7 @@ function Usernavbar() {
                   onClick={() => page.type == 'scroll' && scrollToSection(page.path)}
                   sx={{
                     my: 2,
-                    color: appBarStatus || router.pathname != '/' ? '#F56700' : '#FFFFFF',
+                    color: '#F56700',
                     display: 'block',
                     fontFamily: 'DM sans'
                   }}
@@ -211,88 +211,47 @@ function Usernavbar() {
             <Box sx={{ flexGrow: 0 }}>
               {user && (
                 <>
-                  <Tooltip title='Open settings'>
-                    <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                      <Avatar alt={user?.firstName} src='/static/images/avatar/2.jpg' />
-                    </IconButton>
-                  </Tooltip>
-                  <Menu
-                    sx={{ mt: '45px' }}
-                    id='menu-appbar'
-                    anchorEl={anchorElUser}
-                    anchorOrigin={{
-                      vertical: 'top',
-                      horizontal: 'right'
-                    }}
-                    keepMounted
-                    transformOrigin={{
-                      vertical: 'top',
-                      horizontal: 'right'
-                    }}
-                    open={Boolean(anchorElUser)}
-                    onClose={handleCloseUserMenu}
-                  >
-                    <MenuItem component={Link} href={user?.role == 'user' ? '/account' : '/admin/dashboard'}>
-                      <Typography sx={{ textAlign: 'center' }}>Account</Typography>
-                    </MenuItem>
-                    {user?.role == 'user' && (
-                      <MenuItem component={Link} href='/user/cart'>
-                        <Typography sx={{ textAlign: 'center' }}>Cart</Typography>
+                  <Box sx={{ display: { xs: 'none', md: 'block' } }}>
+                    <Tooltip title='Open settings'>
+                      <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                        <Avatar alt={user?.firstName} src='/static/images/avatar/2.jpg' />
+                      </IconButton>
+                    </Tooltip>
+                    <Menu
+                      sx={{ mt: '45px' }}
+                      id='menu-appbar'
+                      anchorEl={anchorElUser}
+                      anchorOrigin={{
+                        vertical: 'top',
+                        horizontal: 'right'
+                      }}
+                      keepMounted
+                      transformOrigin={{
+                        vertical: 'top',
+                        horizontal: 'right'
+                      }}
+                      open={Boolean(anchorElUser)}
+                      onClose={handleCloseUserMenu}
+                    >
+                      <MenuItem component={Link} href={user?.role == 'user' ? '/account' : '/admin/dashboard'}>
+                        <Typography sx={{ textAlign: 'center' }}>Account</Typography>
                       </MenuItem>
-                    )}
+                      {user?.role == 'user' && (
+                        <MenuItem component={Link} href='/user/cart'>
+                          <Typography sx={{ textAlign: 'center' }}>Cart</Typography>
+                        </MenuItem>
+                      )}
 
-                    <MenuItem onClick={() => logout()}>
-                      <Typography sx={{ textAlign: 'center' }}>Logout</Typography>
-                    </MenuItem>
-                  </Menu>
+                      <MenuItem onClick={() => logout()}>
+                        <Typography sx={{ textAlign: 'center' }}>Logout</Typography>
+                      </MenuItem>
+                    </Menu>
+                  </Box>
                 </>
               )}
 
               {!user && (
                 <>
-                  <Box
-                    sx={{
-                      flexGrow: 1,
-                      display: { xs: 'flex', md: 'none' },
-                      marginRight: '15px',
-                      color: appBarColor === '#FFFFFF' || router.pathname != '/' ? '#F56700' : '#FFFFFF',
-                      padding: '0.25em',
-                      border: `1px solid ${appBarColor === '#FFFFFF' || router.pathname ? '#F56700' : '#FFFFFF'}`,
-                      borderRadius: '50%'
-                    }}
-                  >
-                    <Icon onClick={() => setOpen(true)} icon='tabler:menu-2' fontSize={20} />
-
-                    <Menu
-                      id='menu-appbar'
-                      anchorEl={anchorElNav}
-                      anchorOrigin={{
-                        vertical: 'bottom',
-                        horizontal: 'left'
-                      }}
-                      keepMounted
-                      transformOrigin={{
-                        vertical: 'top',
-                        horizontal: 'left'
-                      }}
-                      open={Boolean(anchorElNav)}
-                      onClose={handleCloseNavMenu}
-                      sx={{ display: { xs: 'block', md: 'none' } }}
-                    >
-                      {pages.map(page => (
-                        <MenuItem key={page} onClick={handleCloseNavMenu}>
-                          <Typography
-                            component={Link}
-                            href={page.path}
-                            sx={{ textAlign: 'center', fontFamily: 'DM sans' }}
-                          >
-                            {page.name}
-                          </Typography>
-                        </MenuItem>
-                      ))}
-                    </Menu>
-                  </Box>
-
                   <Button
                     component={Link}
                     href={'/login'}
@@ -300,8 +259,8 @@ function Usernavbar() {
                     color='white'
                     sx={{
                       display: { xs: 'none', md: 'block' },
-                      background: appBarStatus || router.pathname != '/' ? '#F56700' : '#ffffff',
-                      color: appBarStatus || router.pathname != '/' ? '#FFFFFF' : '#000000',
+                      background: appBarStatus ? '#F56700' : '#ffffff',
+                      color: appBarStatus ? '#FFFFFF' : '#000000',
                       borderRadius: '37px',
                       p: '10px 20px',
                       '&:hover': {
@@ -317,6 +276,45 @@ function Usernavbar() {
                   </Button>
                 </>
               )}
+
+              <Box
+                sx={{
+                  flexGrow: 1,
+                  display: { xs: 'flex', md: 'none' },
+                  marginRight: '15px',
+                  color: appBarColor === '#FFFFFF' ? '#F56700' : '#FFFFFF',
+                  padding: '0.25em',
+                  border: `1px solid ${appBarColor === '#FFFFFF' || router.pathname ? '#F56700' : '#FFFFFF'}`,
+                  borderRadius: '50%'
+                }}
+              >
+                <Icon onClick={() => setOpen(true)} icon='tabler:menu-2' fontSize={20} />
+
+                <Menu
+                  id='menu-appbar'
+                  anchorEl={anchorElNav}
+                  anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'left'
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'left'
+                  }}
+                  open={Boolean(anchorElNav)}
+                  onClose={handleCloseNavMenu}
+                  sx={{ display: { xs: 'block', md: 'none' } }}
+                >
+                  {pages.map(page => (
+                    <MenuItem key={page} onClick={handleCloseNavMenu}>
+                      <Typography component={Link} href={page.path} sx={{ textAlign: 'center', fontFamily: 'DM sans' }}>
+                        {page.name}
+                      </Typography>
+                    </MenuItem>
+                  ))}
+                </Menu>
+              </Box>
             </Box>
           </Toolbar>
         </Container>
