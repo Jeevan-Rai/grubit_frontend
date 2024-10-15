@@ -84,7 +84,7 @@ export default function CartStationCard() {
 
           <CustomTextField
             multiline
-            rows={6}
+            rows={10}
             fullWidth
             label={'Address'}
             disabled
