@@ -107,7 +107,7 @@ const RegisterPage = () => {
           confirmPassword: ''
         })
 
-        router.replace(user?.data?.url)
+        router.replace(user?.data?.url + '?returnUrl=' + returnUrl)
       }
     } catch (error) {
       setType('error')
@@ -121,6 +121,7 @@ const RegisterPage = () => {
   return (
     <>
       <Usernavbar />
+      <Box sx={{ padding: '40px' }} />
       <Box
         className=''
         sx={{

@@ -172,7 +172,7 @@ const TwoStepsV2 = ({}) => {
       let response = await axiosInstance.post('/auth/verify', { token, otp })
       if (response.status === 200) {
         toast.success('User verification successful')
-        router.replace('/login')
+        router.replace('/login' + '?returnUrl=' + router.query.returnUrl)
       } else {
         toast.error('Invalid OTP entered')
       }
