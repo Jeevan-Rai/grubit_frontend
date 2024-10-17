@@ -43,7 +43,6 @@ const EditMenu = () => {
   } = useForm({
     defaultValues: {
       itemName: menuItem?.name,
-      file: menuItem?.image,
       category: menuItem?.categoryType,
       price: menuItem?.price,
       calories: menuItem?.calories,
@@ -66,7 +65,6 @@ const EditMenu = () => {
     },
     values: {
       itemName: menuItem?.name,
-      file: menuItem?.image,
       category: menuItem?.categoryType,
       price: menuItem?.price,
       calories: menuItem?.calories,
@@ -203,7 +201,12 @@ const EditMenu = () => {
     <Card>
       <CardHeader title='Item Details' />
       <form onSubmit={handleSubmit(onSubmit)} encType='multipart/form-data'>
-        <ImageUpload register={register} image={process.env.NEXT_PUBLIC_BACKEND_URL + '/uploads/' + image} />
+        <ImageUpload
+          register={register}
+          image={
+            menuItem?.image != undefined ? process.env.NEXT_PUBLIC_BACKEND_URL + '/uploads/' + menuItem?.image : null
+          }
+        />
         <CardContent>
           <Grid container spacing={5}>
             <Grid item xs={12} sm={6}>
