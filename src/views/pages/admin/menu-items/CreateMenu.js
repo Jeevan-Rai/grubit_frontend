@@ -19,9 +19,11 @@ import toast from 'react-hot-toast'
 import { Box } from '@mui/system'
 import Icon from 'src/@core/components/icon'
 import { useRouter } from 'next/router'
+import ReactDatePicker from 'react-datepicker'
+import DatePickerWrapper from 'src/@core/styles/libs/react-datepicker'
 import { createMenu } from 'src/helpers/menuHelper'
-const CustomInput = forwardRef((props, ref) => {
-  return <CustomTextField fullWidth {...props} inputRef={ref} label='Birth Date' autoComplete='off' />
+const CustomInput = forwardRef((props, ref, label) => {
+  return <CustomTextField fullWidth {...props} inputRef={ref} label={props.label} autoComplete='off' />
 })
 
 const CreateMenu = () => {
@@ -66,7 +68,7 @@ const CreateMenu = () => {
   })
 
   let categoryType = watch('category')
-
+  let validFrom = watch('availableFrom')
   const onSubmit = async data => {
     try {
       const formData = new FormData()
@@ -79,6 +81,8 @@ const CreateMenu = () => {
       formData.append('carb', data.carb)
       formData.append('fat', data.fat)
       formData.append('details', data.details)
+      formData.append('availableFrom', data.availableFrom)
+      formData.append('availableTill', data.availableTill)
       formData.append('monday', data.monday)
       formData.append('tuesday', data.tuesday)
       formData.append('wednesday', data.wednesday)
@@ -170,6 +174,78 @@ const CreateMenu = () => {
                     <MenuItem value='weekly'>Weekly</MenuItem>
                     <MenuItem value='make-your-own'>Make Your Own</MenuItem>
                   </CustomTextField>
+                )}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <Controller
+                name='availableFrom'
+                control={control}
+                rules={{ required: true }}
+                render={({ field: { value, onChange } }) => (
+                  <>
+                    <DatePickerWrapper>
+                      <ReactDatePicker
+                        selected={value}
+                        id='basic-input'
+                        placeholderText='Click to select a date'
+                        defaultValue={value}
+                        onChange={onChange}
+                        dateFormat='dd/MM/yyyy'
+                        minDate={new Date()}
+                        customInput={
+                          <CustomTextField
+                            fullWidth
+                            value={value}
+                            label='Available From'
+                            onChange={onChange}
+                            placeholder='Click to select a date'
+                            error={Boolean(errors.availableFrom)}
+                            aria-describedby='validation-basic-first-name'
+                            {...(errors.availableFrom && { helperText: 'This field is required' })}
+                          />
+                        }
+                      />
+                    </DatePickerWrapper>
+                  </>
+                )}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <Controller
+                name='availableTill'
+                control={control}
+                rules={{ required: true }}
+                render={({ field: { value, onChange } }) => (
+                  <>
+                    <DatePickerWrapper>
+                      <ReactDatePicker
+                        selected={value}
+                        id='basic-input'
+                        placeholderText='Click to select a date'
+                        value={value}
+                        onChange={onChange}
+                        dateFormat='dd/MM/yyyy'
+                        minDate={new Date(validFrom)}
+                        customInput={
+                          // <CustomInput
+                          //   label='Available Till'
+                          //   {...(errors.availableTill && { helperText: 'This field is required' })}
+                          // />
+                          <CustomTextField
+                            fullWidth
+                            value={value}
+                            label='Available Till'
+                            onChange={onChange}
+                            placeholder='Click to select a date'
+                            error={Boolean(errors.availableTill)}
+                            aria-describedby='validation-basic-first-name'
+                            {...(errors.availableTill && { helperText: 'This field is required' })}
+                          />
+                        }
+                      />
+                    </DatePickerWrapper>
+                  </>
                 )}
               />
             </Grid>

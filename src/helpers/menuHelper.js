@@ -41,8 +41,8 @@ export const deleteMenu = async id => {
   return await axiosInstance.delete(`/menu/${id}`)
 }
 
-export const fetchFoodItems = async (day, category) => {
-  return await axiosInstance.post(`/menu/getByDay`, { day, category })
+export const fetchFoodItems = async (day, category, selectedDate) => {
+  return await axiosInstance.post(`/menu/getByDay`, { day, category, selectedDate })
 }
 
 export const fetchMenuItems = async () => {

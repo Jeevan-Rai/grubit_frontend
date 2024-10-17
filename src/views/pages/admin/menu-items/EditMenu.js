@@ -20,6 +20,8 @@ import { Box } from '@mui/system'
 import Icon from 'src/@core/components/icon'
 import { useRouter } from 'next/router'
 import { getMenuItem, updateMenu } from 'src/helpers/menuHelper'
+import ReactDatePicker from 'react-datepicker'
+import DatePickerWrapper from 'src/@core/styles/libs/react-datepicker'
 const CustomInput = forwardRef((props, ref) => {
   return <CustomTextField fullWidth {...props} inputRef={ref} label='Birth Date' autoComplete='off' />
 })
@@ -41,6 +43,7 @@ const EditMenu = () => {
   } = useForm({
     defaultValues: {
       itemName: menuItem?.name,
+      file: menuItem?.image,
       category: menuItem?.categoryType,
       price: menuItem?.price,
       calories: menuItem?.calories,
@@ -48,6 +51,8 @@ const EditMenu = () => {
       carb: menuItem?.carbs,
       fat: menuItem?.fat,
       details: menuItem?.details,
+      availableFrom: menuItem?.availableFrom ? new Date(menuItem?.availableFrom) : new Date(),
+      availableTill: menuItem?.availableTill ? new Date(menuItem?.availableTill) : new Date(),
       monday: menuItem?.monday,
       tuesday: menuItem?.tuesday,
       wednesday: menuItem?.wednesday,
@@ -61,6 +66,7 @@ const EditMenu = () => {
     },
     values: {
       itemName: menuItem?.name,
+      file: menuItem?.image,
       category: menuItem?.categoryType,
       price: menuItem?.price,
       calories: menuItem?.calories,
@@ -68,6 +74,8 @@ const EditMenu = () => {
       carb: menuItem?.carbs,
       fat: menuItem?.fat,
       details: menuItem?.details,
+      availableFrom: menuItem?.availableFrom ? new Date(menuItem?.availableFrom) : new Date(),
+      availableTill: menuItem?.availableTill ? new Date(menuItem?.availableTill) : new Date(),
       monday: menuItem?.monday,
       tuesday: menuItem?.tuesday,
       wednesday: menuItem?.wednesday,
@@ -115,6 +123,8 @@ const EditMenu = () => {
       formData.append('carb', data.carb)
       formData.append('fat', data.fat)
       formData.append('details', data.details)
+      formData.append('availableFrom', data.availableFrom)
+      formData.append('availableTill', data.availableTill)
       formData.append('monday', data.monday)
       formData.append('tuesday', data.tuesday)
       formData.append('wednesday', data.wednesday)
@@ -159,6 +169,8 @@ const EditMenu = () => {
     const response = await getMenuItem({ id })
     setMenuItem(response.data)
     setValue('category', response.data.categoryType)
+    setValue('availableFrom', new Date(response.data.availableFrom))
+    setValue('availableTill', new Date(response.data.availableTill))
   }
 
   useEffect(() => {
@@ -181,14 +193,17 @@ const EditMenu = () => {
     setValue('category', menuItem?.categoryType)
     setValue('primary', OptionValue)
     setValue('topping', ToppingValue)
+    setValue('file', menuItem?.image)
   }, [menuItem, setValue])
 
   console.log(errors)
+  let availableFrom = watch('availableFrom')
+  let image = watch('file')
   return (
     <Card>
       <CardHeader title='Item Details' />
       <form onSubmit={handleSubmit(onSubmit)} encType='multipart/form-data'>
-        <ImageUpload register={register} image={process.env.NEXT_PUBLIC_BACKEND_URL + '/uploads/' + menuItem?.image} />
+        <ImageUpload register={register} image={process.env.NEXT_PUBLIC_BACKEND_URL + '/uploads/' + image} />
         <CardContent>
           <Grid container spacing={5}>
             <Grid item xs={12} sm={6}>
@@ -206,7 +221,6 @@ const EditMenu = () => {
                     error={Boolean(errors.itemName)}
                     aria-describedby='validation-basic-first-name'
                     {...(errors.itemName && { helperText: 'This field is required' })}
-                    de
                   />
                 )}
               />
@@ -232,6 +246,62 @@ const EditMenu = () => {
                     <MenuItem value='weekly'>Weekly</MenuItem>
                     <MenuItem value='make-your-own'>Make Your Own</MenuItem>
                   </CustomTextField>
+                )}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <Controller
+                name='availableFrom'
+                control={control}
+                rules={{ required: true }}
+                render={({ field: { value, onChange } }) => (
+                  <>
+                    <DatePickerWrapper>
+                      <ReactDatePicker
+                        selected={value}
+                        id='basic-input'
+                        dateFormat='dd/MM/yyyy'
+                        placeholderText='Click to select a date'
+                        defaultValue={value}
+                        onChange={onChange}
+                        minDate={new Date(availableFrom)}
+                        customInput={
+                          <CustomInput
+                            label='Valid From'
+                            {...(errors.availableFrom && { helperText: 'This field is required' })}
+                          />
+                        }
+                      />
+                    </DatePickerWrapper>
+                  </>
+                )}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <Controller
+                name='availableTill'
+                control={control}
+                rules={{ required: true }}
+                render={({ field: { value, onChange } }) => (
+                  <>
+                    <DatePickerWrapper>
+                      <ReactDatePicker
+                        selected={value}
+                        id='basic-input'
+                        dateFormat='dd/MM/yyyy'
+                        placeholderText='Click to select a date'
+                        value={value}
+                        minDate={new Date(availableFrom)}
+                        onChange={onChange}
+                        customInput={
+                          <CustomInput
+                            label='Valid Till'
+                            {...(errors.availableTill && { helperText: 'This field is required' })}
+                          />
+                        }
+                      />
+                    </DatePickerWrapper>
+                  </>
                 )}
               />
             </Grid>

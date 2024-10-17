@@ -140,6 +140,7 @@ export default function UserMenuPage() {
   const router = useRouter()
   const [currentSlide, setCurrentSlide] = useState(0)
   const [loaded, setLoaded] = useState(false)
+  const [loading, setLoading] = useState(false)
   const [weeks, setWeeks] = useState([])
   const [currentWeekNumber, setCurrentWeekNumber] = useState([])
   const [orderCategory, setOrderCategory] = useState('weekly')
@@ -186,16 +187,18 @@ export default function UserMenuPage() {
     slides: { perView: 1 }
   })
 
-  let fetchMenuItems = async (day, category) => {
+  let fetchMenuItems = async (day, category, selectedDate) => {
     try {
-      const response = await fetchFoodItems(day, category)
+      setLoading(true)
+      const response = await fetchFoodItems(day, category, selectedDate)
       setMenuItems(response.data)
       console.log(response)
+      setLoading(false)
     } catch (error) {}
   }
 
   useEffect(() => {
-    fetchMenuItems(selectedDay, orderCategory)
+    fetchMenuItems(selectedDay, orderCategory, selectedDate)
   }, [selectedDay, orderCategory, selectedDate])
 
   useEffect(() => {
@@ -387,13 +390,27 @@ export default function UserMenuPage() {
                   }
                 }}
               >
-                {menuItems?.map((item, index) => {
-                  return (
-                    <Grid item xs={12} md={3} key={index}>
-                      <FoodItemCard week={selectedWeek} date={selectedDate} item={item} type={orderCategory} />
-                    </Grid>
-                  )
-                })}
+                {loading ? (
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      flexDirection: 'column',
+                      justifyContent: 'center',
+                      width: '100%'
+                    }}
+                  >
+                    <CircularProgress disableShrink sx={{ mt: 6 }} />
+                  </Box>
+                ) : (
+                  menuItems?.map((item, index) => {
+                    return (
+                      <Grid item xs={12} md={3} key={index}>
+                        <FoodItemCard week={selectedWeek} date={selectedDate} item={item} type={orderCategory} />
+                      </Grid>
+                    )
+                  })
+                )}
 
                 {menuItems.length == 0 && <> No Items available for selected date</>}
               </Grid>
