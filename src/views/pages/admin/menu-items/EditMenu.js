@@ -146,8 +146,6 @@ const EditMenu = () => {
           formData.append(`topping[${index}][type]`, item.type)
         })
       }
-      console.log(data.file && data.file.length > 0)
-      console.log(data.file.length)
 
       if (data.file && data.file.length > 0) {
         console.log('inside file')
@@ -267,7 +265,7 @@ const EditMenu = () => {
                         placeholderText='Click to select a date'
                         defaultValue={value}
                         onChange={onChange}
-                        minDate={new Date(availableFrom)}
+                        minDate={new Date()}
                         customInput={
                           <CustomInput
                             label='Valid From'
