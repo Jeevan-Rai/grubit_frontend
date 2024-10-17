@@ -23,7 +23,7 @@ import { getMenuItem, updateMenu } from 'src/helpers/menuHelper'
 import ReactDatePicker from 'react-datepicker'
 import DatePickerWrapper from 'src/@core/styles/libs/react-datepicker'
 const CustomInput = forwardRef((props, ref) => {
-  return <CustomTextField fullWidth {...props} inputRef={ref} label='Birth Date' autoComplete='off' />
+  return <CustomTextField fullWidth {...props} inputRef={ref} label={props.label} autoComplete='off' />
 })
 
 const EditMenu = () => {
