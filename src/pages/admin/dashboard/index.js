@@ -58,7 +58,7 @@ const Analytics = () => {
           <CardContent>
             <CardStatsHorizontal
               icon={'tabler:currency-euro'}
-              stats={data?.revenue?.sum.toFixed(2)}
+              stats={data?.revenue?.sum?.toFixed(2)}
               title={'Total Revenue'}
               avatarColor={'info'}
             />
