@@ -107,7 +107,7 @@ const RegisterPage = () => {
           confirmPassword: ''
         })
 
-        router.replace(user?.data?.url + '?returnUrl=' + returnUrl)
+        router.replace(returnUrl ? user?.data?.url + '?returnUrl=' + returnUrl : user?.data?.url)
       }
     } catch (error) {
       setType('error')
