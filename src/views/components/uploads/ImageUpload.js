@@ -1,5 +1,5 @@
 // ** React Imports
-import { useRef, useState } from 'react'
+import { useRef, useState, useEffect } from 'react'
 
 // ** MUI Imports
 
@@ -10,7 +10,7 @@ import Button from '@mui/material/Button'
 import { useForm, Controller } from 'react-hook-form'
 import { Box } from '@mui/material'
 
-export default function ImageUpload({ register, reset, image = null }) {
+export default function ImageUpload({ register, reset, setValue, image = null }) {
   const [imgSrc, setImgSrc] = useState(image ? image : '/images/Background.png')
   const hiddenInputRef = useRef()
   const { ref: registerRef, ...rest } = register('file')
@@ -39,10 +39,13 @@ export default function ImageUpload({ register, reset, image = null }) {
   }))
 
   const handleInputImageChange = event => {
-    reset({ file: event.target.files[0] })
+    // reset({ file: event.target.files[0] })
+    // setValue('file', event.target.files[0])
+
+    console.log(event.target.files[0])
     const file = event.target.files[0]
     const urlImage = URL.createObjectURL(file)
-
+    setValue('file', file)
     setImgSrc(urlImage)
   }
 
@@ -50,6 +53,12 @@ export default function ImageUpload({ register, reset, image = null }) {
     reset({ file: null })
     setImgSrc('/images/Background.png')
   }
+
+  console.log(image)
+
+  useEffect(() => {
+    image ? setImgSrc(image) : setImgSrc('/images/Background.png')
+  }, [image])
   return (
     <>
       <CardContent sx={{ pt: 0 }}>

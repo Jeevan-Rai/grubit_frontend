@@ -146,11 +146,10 @@ const EditMenu = () => {
           formData.append(`topping[${index}][type]`, item.type)
         })
       }
-
-      if (data.file && data.file.length > 0) {
-        console.log('inside file')
-
-        formData.append('file', data.file[0])
+      console.log(data.file)
+      if (data.file) {
+        console.log(data.file instanceof File)
+        formData.append('image', data.file)
       }
       let response = await updateMenu(formData, id)
       toast.success('Item updated successfully')
@@ -194,16 +193,16 @@ const EditMenu = () => {
 
   console.log(errors)
   let availableFrom = watch('availableFrom')
-  let image = watch('file')
+
   return (
     <Card>
       <CardHeader title='Item Details' />
       <form onSubmit={handleSubmit(onSubmit)} encType='multipart/form-data'>
         <ImageUpload
           register={register}
-          image={
-            menuItem?.image != undefined ? process.env.NEXT_PUBLIC_BACKEND_URL + '/uploads/' + menuItem?.image : null
-          }
+          reset={reset}
+          setValue={setValue}
+          image={process.env.NEXT_PUBLIC_BACKEND_URL + '/uploads/' + menuItem?.image}
         />
         <CardContent>
           <Grid container spacing={5}>

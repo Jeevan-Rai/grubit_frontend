@@ -36,7 +36,8 @@ const CreateMenu = () => {
     formState: { errors },
     reset,
     register,
-    watch
+    watch,
+    setValue
   } = useForm({
     defaultValues: {
       monday: false,
@@ -106,7 +107,7 @@ const CreateMenu = () => {
           formData.append(`topping[${index}][type]`, item.type)
         })
       }
-
+      console.log(data.file)
       if (data.file) {
         formData.append('image', data.file)
       }
@@ -130,7 +131,7 @@ const CreateMenu = () => {
     <Card>
       <CardHeader title='Item Details' />
       <form onSubmit={handleSubmit(onSubmit)} encType='multipart/form-data'>
-        <ImageUpload register={register} reset={reset} />
+        <ImageUpload register={register} reset={reset} setValue={setValue} />
         <CardContent>
           <Grid container spacing={5}>
             <Grid item xs={12} sm={6}>
