@@ -35,7 +35,7 @@ const AccountPage = () => {
   const [type, setType] = useState(false)
   const [title, setTitle] = useState(false)
   const [message, setMessage] = useState(false)
-  const { user } = useAuth()
+  const { user, setUser } = useAuth()
   console.log(user)
 
   const {
@@ -71,7 +71,7 @@ const AccountPage = () => {
       console.log(data)
 
       let user = await updateUser(data)
-
+      setUser(user.data.user)
       setType('success')
       setTitle('Verify your email ✉️')
       setMessage(
