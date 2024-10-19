@@ -345,12 +345,14 @@ const InvoicePrint = () => {
           <Grid item xs={4} sm={5} lg={3}>
             <CalcWrapper>
               <Typography sx={{ color: 'text.secondary' }}>Subtotal:</Typography>
-              <Typography sx={{ fontWeight: 500, color: 'text.secondary' }}>{data?.totalPrice.toFixed(2)}</Typography>
+              <Typography sx={{ fontWeight: 500, color: 'text.secondary' }}>
+                {Number(data?.totalPrice).toFixed(2)}
+              </Typography>
             </CalcWrapper>
             <CalcWrapper>
               <Typography sx={{ color: 'text.secondary' }}>Discount:</Typography>
               <Typography sx={{ fontWeight: 500, color: 'text.secondary' }}>
-                {data?.discountAmount.toFixed(2)}
+                {Number(data?.discountAmount).toFixed(2)}
               </Typography>
             </CalcWrapper>
             {/* <CalcWrapper>
@@ -361,7 +363,7 @@ const InvoicePrint = () => {
             <CalcWrapper>
               <Typography sx={{ color: 'text.secondary' }}>Total:</Typography>
               <Typography sx={{ fontWeight: 500, color: 'text.secondary' }}>
-                {(data?.totalPrice - data?.discountAmount).toFixed(2)}
+                {Number(data?.totalPrice - data?.discountAmount).toFixed(2)}
               </Typography>
             </CalcWrapper>
           </Grid>
