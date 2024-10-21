@@ -359,9 +359,9 @@ const CreateMenu = () => {
                     label='Details'
                     onChange={onChange}
                     placeholder='Enter Details'
-                    error={Boolean(errors.fat)}
+                    error={Boolean(errors.details)}
                     aria-describedby='validation-basic-first-name'
-                    {...(errors.fat && { helperText: 'This field is required' })}
+                    {...(errors.details && { helperText: 'This field is required' })}
                   />
                 )}
               />
