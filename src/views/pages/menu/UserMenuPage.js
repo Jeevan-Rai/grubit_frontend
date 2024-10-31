@@ -353,7 +353,7 @@ export default function UserMenuPage() {
                         setDateIndex(dateIndex + 1)
                       }
                     }}
-                    disabled={currentSlide === instanceRef.current.track.details.slides.length - 1}
+                    disabled={currentSlide === instanceRef?.current?.track?.details?.slides?.length - 1}
                   >
                     <Icon icon='tabler:chevron-right' />
                   </Box>

@@ -257,50 +257,7 @@ const OrderList = ({ orders, handleChange, fetchOrders }) => {
                     </IconButton>
                   </Tooltip>
 
-                  {row?.deliveryStatus == "Processing" && (
-                    <Tooltip title="Mark Successful">
-                      <IconButton
-                        size="small"
-                        onClick={() => {
-                          handleStatus(row.id);
-                        }}
-                      >
-                        <svg
-                          width={17}
-                          height={12}
-                          viewBox="0 0 17 12"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M1.58301 5.99984L6.16634 10.5832L15.333 1.4165"
-                            stroke="#6F6B7D"
-                            strokeWidth={2}
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          />
-                        </svg>
-                      </IconButton>
-                    </Tooltip>
-                  )}
-
-                  {row?.deliveryStatus == "Successful" && (
-                    <Tooltip title="Mark Processing">
-                      <IconButton
-                        color="text.error !important"
-                        onClick={() => {
-                          handleStatus(row.id);
-                        }}
-                        size="small"
-                      >
-                        <Icon
-                          icon={"tabler:x"}
-                          color="warning !important"
-                          fontSize={20}
-                        />
-                      </IconButton>
-                    </Tooltip>
-                  )}
+                  
 
                   <Tooltip title="View">
                     <IconButton

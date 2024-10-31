@@ -92,7 +92,9 @@ export default function OrderHistoryCustomerDetails({ order }) {
             sx={{ gap: 2, display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between' }}
           >
             <Typography sx={{ fontWeight: 500 }}>Total</Typography>
-            <Typography sx={{ fontWeight: 500 }}>{Math.round(order?.payment?.amountSubtotal)}</Typography>
+            <Typography sx={{ fontWeight: 500 }}>{order?.payment?.amountTotal}</Typography>
+            {/* <Typography sx={{ fontWeight: 500 }}>{order?.totalPrice - order?.discountAmount}</Typography> */}
+
           </Box>
         </CardContent>
       </Box>

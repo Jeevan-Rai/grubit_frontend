@@ -164,7 +164,7 @@ export default function CartPricingDetailsCard() {
               }}
             >
               <Typography sx={{ fontWeight: 500 }}>Total</Typography>
-              <Typography sx={{ fontWeight: 500 }}>£{orders?.discountedPrice || orders.totalPrice}</Typography>
+              <Typography sx={{ fontWeight: 500 }}>£{orders?.discountedPrice > 0 ? orders?.discountedPrice : orders.totalPrice}</Typography>
             </Box>
           </CardContent>
         </Box>

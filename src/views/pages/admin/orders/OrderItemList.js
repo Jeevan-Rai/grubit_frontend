@@ -198,6 +198,7 @@ const OrderItemList = ({ orders, handleChange, fetchOrders, date }) => {
                       ${item?.order?.user?.lastName}</p>
         <p><strong>Mobile Number:</strong> ${item?.order?.user?.phoneNumber}</p>
         <p><strong>Pickup Location:</strong> ${item?.order?.station?.name}</p>
+        <p><strong>QTY:</strong> ${item?.quantity}</p>
         <p><strong>Ordered Food:</strong></p>
         <p>
            ${item?.name} ${item?.type === "make-your-own" ? "with" : ""} <br />
@@ -535,16 +536,16 @@ const OrderItemList = ({ orders, handleChange, fetchOrders, date }) => {
                       size="small"
                       skin="light"
                       color={
-                        item.order.deliveryStatus === "Processing"
+                        item.status === "Processing" || item.status == null
                           ? "warning"
-                          : item.order.deliveryStatus === "Successful"
+                          : item.status === "Successful"
                           ? "primary"
                           : "error"
                       }
                       label={
-                        item.order.deliveryStatus === "Processing" ||
-                        item.order.deliveryStatus === "Successful"
-                          ? item.order.deliveryStatus
+                        item.status === "Processing" || item.status == null ||
+                        item.status === "Successful"
+                          ? item.status
                           : "Payment Pending"
                       }
                       sx={{
@@ -552,8 +553,14 @@ const OrderItemList = ({ orders, handleChange, fetchOrders, date }) => {
                       }}
                     />
                   </TableCell>
-                  <TableCell>
-                    <svg
+                  <TableCell >
+                    <Box sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  width: "100%",
+                }}>
+<svg
                       onClick={() => handleSinglePrint(row)}
                       width={22}
                       height={22}
@@ -616,6 +623,53 @@ const OrderItemList = ({ orders, handleChange, fetchOrders, date }) => {
                         strokeLinejoin="round"
                       />
                     </svg>
+
+                    {(item?.status == "Processing" || item?.status == null) && (
+                    <Tooltip title="Mark Successful">
+                      <IconButton
+                        size="small"
+                        onClick={() => {
+                          handleStatus(item.id);
+                        }}
+                      >
+                        <svg
+                          width={17}
+                          height={12}
+                          viewBox="0 0 17 12"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M1.58301 5.99984L6.16634 10.5832L15.333 1.4165"
+                            stroke="#6F6B7D"
+                            strokeWidth={2}
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
+                        </svg>
+                      </IconButton>
+                    </Tooltip>
+                  )}
+
+                  {item?.status == "Successful" && (
+                    <Tooltip title="Mark Processing">
+                      <IconButton
+                        color="text.error !important"
+                        onClick={() => {
+                          handleStatus(item.id);
+                        }}
+                        size="small"
+                      >
+                        <Icon
+                          icon={"tabler:x"}
+                          color="warning !important"
+                          fontSize={20}
+                        />
+                      </IconButton>
+                    </Tooltip>
+                  )}
+                    </Box>
+                    
                   </TableCell>
                   {/* <TableCell sx={{paddingLeft:"0.5em"}} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%' }}>
                 <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%' }}>
