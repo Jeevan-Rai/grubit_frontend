@@ -119,10 +119,8 @@ const OrderHistoryList = ({ orders, handleChange, fetchOrders }) => {
                       : "error"
                   }
                   label={
-                    row.deliveryStatus === "Processing" ||
-                    row.deliveryStatus === "Successful"
-                      ? row.deliveryStatus
-                      : "Payment Pending"
+                    (row?.payment.status == null || row?.payment.status == "pending" || row?.payment.status == "expired")  ? "Payment Failed" : row.deliveryStatus
+                      
                   }
                   sx={{ "& .MuiChip-label": { textTransform: "capitalize" } }}
                 />
