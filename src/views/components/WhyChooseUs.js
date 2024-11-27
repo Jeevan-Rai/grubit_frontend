@@ -2905,7 +2905,7 @@ export default function WhyChooseUs() {
                     color: '#000000'
                   }}
                 >
-                  freshly cooked and prepared only after order is received (No. of orders = No. of meals for the next
+                  freshly cooked and prepared only after order is received 
                 </Typography>
                 <Typography
                   sx={{
