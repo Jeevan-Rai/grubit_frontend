@@ -15,6 +15,7 @@ class CustomDocument extends Document {
     return (
       <Html lang='en'>
         <Head>
+        <meta property="og:image" content="/images/logo.png" />
           <link rel='preconnect' href='https://fonts.googleapis.com' />
           <link rel='preconnect' href='https://fonts.gstatic.com' />
           <link
