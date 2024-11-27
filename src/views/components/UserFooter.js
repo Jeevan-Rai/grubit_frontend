@@ -27,7 +27,7 @@ export default function UserFooter() {
       >
         <Box sx={{ width: { xs: '90%', md: '75%' }, margin: '0px auto' }}>
           <Grid container>
-            <Grid xs={12} md={6} sx={{ marginTop: { xs: '18rem', md: '13rem' } }}>
+            {/* <Grid xs={12} md={6} sx={{ marginTop: { xs: '18rem', md: '13rem' } }}>
               <Typography
                 sx={{
                   fontSize: { xs: '20px', md: '50px' },
@@ -37,7 +37,7 @@ export default function UserFooter() {
                   textAlign: 'left'
                 }}
               >
-                ENJOY HEALTHY FOOD <br />
+                <br />
               </Typography>
               <Typography
                 sx={{
@@ -64,8 +64,8 @@ export default function UserFooter() {
                 </span>
                 YOUR CONVENIENCE
               </Typography>
-            </Grid>
-            <Grid xs={12} md={6} sx={{ marginTop: { xs: '0', md: '16rem' } }}>
+            </Grid> */}
+            <Grid xs={12} md={12} sx={{ marginTop: { xs: '0', md: '16rem' } }}>
               <Box sx={{ display: 'flex', justifyContent: { xs: 'center', md: 'end' } }}>
                 <Button
                   component={Link}
@@ -116,7 +116,7 @@ export default function UserFooter() {
                 </svg>
               </Typography>
               <Typography sx={{ fontSize: '20px', color: '#0A5247', fontFamily: 'DM Sans', marginTop: '20px' }}>
-                Quick, Fresh, Economical
+              Grab Grub Go
               </Typography>
               <Box sx={{ display: 'flex', gap: '1em', marginTop: '10px' }}>
                 <svg width={46} height={46} viewBox='0 0 46 46' fill='none' xmlns='http://www.w3.org/2000/svg'>
@@ -170,7 +170,7 @@ export default function UserFooter() {
                 Office Hours
               </Typography>
 
-              <Box sx={{ marginTop: '1.5em' }}>
+              <Box sx={{ marginTop: '0.5em' }}>
                 <Typography
                   sx={{
                     color: '#0A5247',
@@ -180,8 +180,27 @@ export default function UserFooter() {
                     fontSize: '18px'
                   }}
                 >
-                  Monday: 8am – 7pm
+                  Monday to Friday   <br/>
+                  09:00 – 17:00 
                 </Typography>
+               
+              </Box>
+                 
+            </Grid>
+            <Grid xs={12} md={3}>
+             
+              <Typography
+                sx={{
+                  color: '#0A5247',
+                  fontWeight: '700',
+                  marginTop: { xs: '1em', md: '0px' },
+                  fontFamily: 'DM Sans',
+                  fontSize: '20px'
+                }}
+              >
+               Customer Service
+              </Typography>
+              <Box sx={{ marginTop: '0.5em' }}>
                 <Typography
                   sx={{
                     color: '#0A5247',
@@ -191,44 +210,75 @@ export default function UserFooter() {
                     fontSize: '18px'
                   }}
                 >
-                  Tuesday: 8am – 5pm
+                  Monday to Friday   <br/>
+                  09:00 – 17:00 
                 </Typography>
                 <Typography
-                  sx={{
-                    color: '#0A5247',
-                    padding: '0.25em',
-                    fontWeight: '400',
-                    fontFamily: 'DM Sans',
-                    fontSize: '18px'
-                  }}
-                >
-                  Wednesday: 8am – 5pm
-                </Typography>
-                <Typography
-                  sx={{
-                    color: '#0A5247',
-                    padding: '0.25em',
-                    fontWeight: '400',
-                    fontFamily: 'DM Sans',
-                    fontSize: '18px'
-                  }}
-                >
-                  Thursday: 8am – 7pm
-                </Typography>
-                <Typography
-                  sx={{
-                    color: '#0A5247',
-                    padding: '0.25em',
-                    fontWeight: '400',
-                    fontFamily: 'DM Sans',
-                    fontSize: '18px'
-                  }}
-                >
-                  Friday: 8am – 5pm
-                </Typography>
+                sx={{
+                  color: '#0A5247',
+                  padding: '0.25em',
+                  fontWeight: '400',
+                  fontFamily: 'DM Sans',
+                  fontSize: '18px'
+                }}
+              >
+                Call us: 0208 000 0000  
+
+
+              </Typography>
+           
+              <Typography
+                sx={{
+                  color: '#0A5247',
+                  padding: '0.25em',
+                  fontWeight: '400',
+                  fontFamily: 'DM Sans',
+                  fontSize: '18px'
+                }}
+              >
+              Email: hello@grubit.uk 
+              </Typography>
+               
               </Box>
             </Grid>
             <Grid xs={12} md={3}>
+            <Typography
+                sx={{
+                  color: '#0A5247',
+                  fontWeight: '700',
+                  marginTop: { xs: '1em', md: '0px' },
+                  fontFamily: 'DM Sans',
+                  fontSize: '20px'
+                }}
+              >
+               Registered office
+              </Typography> 
+              <Typography
+                sx={{
+                  color: '#0A5247',
+                  padding: '0.25em',
+                  fontWeight: '400',
+                  fontFamily: 'DM Sans',
+                  fontSize: '18px',
+                  marginTop: { xs: '1em', md: '0px' }
+                }}
+              >
+                7 Bell Yard 
+
+
+              </Typography>
+              <Typography
+                sx={{
+                  color: '#0A5247',
+                  padding: '0.25em',
+                  fontWeight: '400',
+                  fontFamily: 'DM Sans',
+                  fontSize: '18px'
+                }}
+              >
+               London WC2A 2JR 
+              </Typography>
+              <br/>
               <Typography
                 sx={{
                   color: '#0A5247',
@@ -241,22 +291,8 @@ export default function UserFooter() {
                 Quick Links
               </Typography>
 
-              <Box sx={{ marginTop: '1.5em' }}>
-                <Typography
-                  component={Link}
-                  href={'/menu'}
-                  sx={{
-                    display: 'block',
-                    color: '#0A5247',
-                    padding: '0.25em',
-                    fontWeight: '400',
-                    fontFamily: 'DM Sans',
-                    fontSize: '18px',
-                    textDecoration: 'none'
-                  }}
-                >
-                  Order Now
-                </Typography>
+              <Box sx={{ marginTop: '0.5em' }}>
+               
                 <Typography
                   component={Link}
                   href={'#testimonials'}
@@ -275,7 +311,7 @@ export default function UserFooter() {
 
                 <Typography
                   component={Link}
-                  href={'/#about'}
+                  href={'#'}
                   sx={{
                     display: 'block',
                     color: '#0A5247',
@@ -286,90 +322,13 @@ export default function UserFooter() {
                     textDecoration: 'none'
                   }}
                 >
-                  About us
+Terms & Privacy 
                 </Typography>
               </Box>
+              
+              
             </Grid>
-            <Grid xs={12} md={3}>
-              <Typography
-                sx={{
-                  color: '#0A5247',
-                  padding: '0.25em',
-                  fontWeight: '400',
-                  fontFamily: 'DM Sans',
-                  fontSize: '18px',
-                  marginTop: { xs: '1em', md: '0px' }
-                }}
-              >
-                Brixton street
-              </Typography>
-              <Typography
-                sx={{
-                  color: '#0A5247',
-                  padding: '0.25em',
-                  fontWeight: '400',
-                  fontFamily: 'DM Sans',
-                  fontSize: '18px'
-                }}
-              >
-                London
-              </Typography>
-              <Typography
-                sx={{
-                  color: '#0A5247',
-                  padding: '0.25em',
-                  fontWeight: '400',
-                  fontFamily: 'DM Sans',
-                  fontSize: '18px'
-                }}
-              >
-                E1 6AN
-              </Typography>
-              <Typography
-                sx={{
-                  color: '#0A5247',
-                  padding: '0.25em',
-                  fontWeight: '400',
-                  fontFamily: 'DM Sans',
-                  fontSize: '18px'
-                }}
-              >
-                United Kingdom
-              </Typography>
-              <Typography
-                sx={{
-                  color: '#0A5247',
-                  padding: '0.25em',
-                  fontWeight: '400',
-                  fontFamily: 'DM Sans',
-                  fontSize: '18px'
-                }}
-              >
-                Telephone: (+44) 779-7246
-              </Typography>
-              <Typography
-                sx={{
-                  color: '#0A5247',
-                  padding: '0.25em',
-                  fontWeight: '400',
-                  fontFamily: 'DM Sans',
-                  fontSize: '18px'
-                }}
-              >
-                Mobile: (+44) 779-8360
-              </Typography>
-              <Typography
-                sx={{
-                  color: '#0A5247',
-                  padding: '0.25em',
-                  fontWeight: '400',
-                  fontFamily: 'DM Sans',
-                  fontSize: '18px'
-                }}
-              >
-                Support@grubit.com
-              </Typography>
-            </Grid>
+            
           </Grid>
         </Box>
         <Box sx={{ padding: '30px' }} />

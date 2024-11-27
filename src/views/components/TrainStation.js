@@ -7,7 +7,7 @@ export default function TrainStation() {
         sx={{
           width: { xs: '90%', md: '75%' },
           margin: '0px auto',
-          background: 'url("/images/Grubit at train station background.png")',
+          background: 'url("/images/Train station image 2.jpg")',
           backgroundSize: 'cover',
           padding: { xs: '2em', md: '5em 2em' },
           borderRadius: '46px'
@@ -17,8 +17,8 @@ export default function TrainStation() {
           <Typography
             sx={{ fontSize: { xs: '22px', md: '40px' }, fontFamily: 'Anton', color: '#78B34E', textAlign: 'right' }}
           >
-            GRUBIT <span style={{ color: '#F56700' }}>@</span> <br />
-            YOUR PREFERRED TRAIN STATION
+            Grab Grubit  <span style={{ color: '#F56700' }}>@</span> <br />
+            Your Preferred Train Station
           </Typography>
           <Typography
             sx={{
@@ -31,9 +31,11 @@ export default function TrainStation() {
               marginTop: '30px'
             }}
           >
-            Enjoy the best meals on the go! Grub It services are available at nearly every Tube station in London,
-            offering you convenient access to delicious, quality food while you commute. Satisfy your cravings with ease
-            and make your journey tastier than ever!
+            Grab Grubit and Go at your preferred Train Station, when you arrive in the morning on your way to work from a convenient location.  
+
+            <br/>
+
+No need to stand in queue during lunch time, looking around what to have for lunch and settling for either low quality or costly tasteless food. 
           </Typography>
         </Box>
       </Box>

@@ -12,7 +12,7 @@ export default function WhyChooseUs() {
             <Card
               sx={{
                 display: 'flex',
-                justifyContent: 'flex-start',
+                justifyContent: 'center',
                 flexDirection: 'column',
                 gap: '0.5em',
                 minHeight: { xs: '20rem', md: '15rem' },
@@ -21,7 +21,7 @@ export default function WhyChooseUs() {
                 padding: { xs: '2em 0.5em', md: '1em' }
               }}
             >
-              <Box sx={{ width: '100%' }}>
+              {/* <Box sx={{ width: '100%' }}>
                 <svg width='100%' height='160px' viewBox='0 0 233 205' fill='none' xmlns='http://www.w3.org/2000/svg'>
                   <path
                     d='M37.9802 77.4073C37.9769 77.3745 37.9769 77.3416 37.9802 77.3089V77.0383C37.9802 76.7923 37.9802 76.4438 37.9802 76.001C37.9802 75.0908 37.9802 73.7788 37.9429 72.1306L38.0128 72.1921L15.3464 72.229L15.4582 72.1306V77.4073L15.3464 77.3048L31.4994 77.3499L36.2657 77.3786H37.5562H37.8917H38.0128H37.9057H37.5842H36.3169L31.5786 77.4073L15.3137 77.4893H15.1973V72.1593L15.3137 72.0568L37.9802 72.0937H38.0501V72.1593C38.0501 73.8239 38.0175 75.1482 38.0128 76.0666C38.0128 76.5053 38.0128 76.8456 38.0128 77.0916V77.3499C38.003 77.3694 37.9921 77.3886 37.9802 77.4073Z'
@@ -879,7 +879,7 @@ export default function WhyChooseUs() {
                     fill='#FF9A6C'
                   />
                 </svg>
-              </Box>
+              </Box> */}
               <Box>
                 <Typography
                   sx={{
@@ -890,7 +890,7 @@ export default function WhyChooseUs() {
                     color: '#000000'
                   }}
                 >
-                  Easy To Order
+                  Food made with health diet and taste in mind
                 </Typography>
                 <Typography
                   sx={{
@@ -901,7 +901,7 @@ export default function WhyChooseUs() {
                     fontWeight: '500'
                   }}
                 >
-                  Save X minutes daily
+                 
                 </Typography>
               </Box>
             </Card>
@@ -913,7 +913,7 @@ export default function WhyChooseUs() {
             <Card
               sx={{
                 display: 'flex',
-                justifyContent: 'flex-start',
+                justifyContent: 'center',
                 flexDirection: 'column',
                 gap: '0.5em',
                 minHeight: { xs: '20rem', md: '15rem' },
@@ -922,7 +922,7 @@ export default function WhyChooseUs() {
                 padding: { xs: '2em 0.5em', md: '1em' }
               }}
             >
-              <Box sx={{ width: '100%' }}>
+              {/* <Box sx={{ width: '100%' }}>
                 <svg width='100%' height='160px' viewBox='0 0 205 205' fill='none' xmlns='http://www.w3.org/2000/svg'>
                   <path d='M80.1821 169.561H64.1602V173.973H80.1821V169.561Z' fill='#EBEBEB' />
                   <path
@@ -1510,7 +1510,7 @@ export default function WhyChooseUs() {
                     fill='#455A64'
                   />
                 </svg>
-              </Box>
+              </Box> */}
               <Box>
                 <Typography
                   sx={{
@@ -1521,7 +1521,7 @@ export default function WhyChooseUs() {
                     color: '#000000'
                   }}
                 >
-                  Fastest Prep
+                 Wholesome meal with a Starter, Main and a yummy Dessert
                 </Typography>
                 <Typography
                   sx={{
@@ -1532,7 +1532,7 @@ export default function WhyChooseUs() {
                     fontWeight: '500'
                   }}
                 >
-                  Fastest Prep
+                
                 </Typography>
               </Box>
             </Card>
@@ -1544,7 +1544,7 @@ export default function WhyChooseUs() {
             <Card
               sx={{
                 display: 'flex',
-                justifyContent: 'flex-start',
+                justifyContent: 'center',
                 flexDirection: 'column',
                 gap: '0.5em',
                 minHeight: { xs: '20rem', md: '15rem' },
@@ -1553,7 +1553,7 @@ export default function WhyChooseUs() {
                 padding: { xs: '2em 0.5em', md: '1em' }
               }}
             >
-              <Box sx={{ width: '100%' }}>
+              {/* <Box sx={{ width: '100%' }}>
                 <svg width='100%' height='160px' viewBox='0 0 205 205' fill='none' xmlns='http://www.w3.org/2000/svg'>
                   <path
                     d='M170.408 130.879C170.408 130.879 163.1 93.0203 163.084 85.2328C163.061 74.4551 171.311 70.1641 171.311 70.1641L168.106 61.0215H185.739L182.955 70.1001C182.955 70.1001 192.24 75.0222 190.945 86.2012C188.524 107.101 184.666 130.879 184.666 130.879H170.408Z'
@@ -2334,7 +2334,7 @@ export default function WhyChooseUs() {
                     fill='#455A64'
                   />
                 </svg>
-              </Box>
+              </Box> */}
               <Box>
                 <Typography
                   sx={{
@@ -2345,7 +2345,7 @@ export default function WhyChooseUs() {
                     color: '#000000'
                   }}
                 >
-                  Healthy Food
+                 Variety of Cuisine each day, different menu each week
                 </Typography>
                 <Typography
                   sx={{
@@ -2356,7 +2356,7 @@ export default function WhyChooseUs() {
                     fontWeight: '500'
                   }}
                 >
-                  Upto XXX calories per meal
+              
                 </Typography>
               </Box>
             </Card>
@@ -2368,7 +2368,7 @@ export default function WhyChooseUs() {
             <Card
               sx={{
                 display: 'flex',
-                justifyContent: 'flex-start',
+                justifyContent: 'center',
                 flexDirection: 'column',
                 gap: '0.5em',
                 minHeight: { xs: '20rem', md: '15rem' },
@@ -2377,7 +2377,7 @@ export default function WhyChooseUs() {
                 padding: { xs: '2em 0.5em', md: '1em' }
               }}
             >
-              <Box sx={{ width: '100%' }}>
+              {/* <Box sx={{ width: '100%' }}>
                 <svg width='100%' height='160px' viewBox='0 0 205 205' fill='none' xmlns='http://www.w3.org/2000/svg'>
                   <g clipPath='url(#clip0_273_8370)'>
                     <path
@@ -2894,7 +2894,7 @@ export default function WhyChooseUs() {
                     </clipPath>
                   </defs>
                 </svg>
-              </Box>
+              </Box> */}
               <Box>
                 <Typography
                   sx={{
@@ -2905,7 +2905,7 @@ export default function WhyChooseUs() {
                     color: '#000000'
                   }}
                 >
-                  Affordable
+                  freshly cooked and prepared only after order is received (No. of orders = No. of meals for the next
                 </Typography>
                 <Typography
                   sx={{
@@ -2916,7 +2916,7 @@ export default function WhyChooseUs() {
                     fontWeight: '500'
                   }}
                 >
-                  Only for £Y
+                  
                 </Typography>
               </Box>
             </Card>

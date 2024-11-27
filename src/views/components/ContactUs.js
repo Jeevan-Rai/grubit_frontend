@@ -49,9 +49,11 @@ export default function ContactUs() {
               width: { xs: '100%', md: '80%' }
             }}
           >
-            Got a question, feedback, or need assistance? Our team at Grub It is just a message away! Whether it’s about
-            your order, our services, or anything else, we’d love to hear from you. Reach out to us, and we’ll get back
-            to you as soon as possible to ensure your experience with Grub It is nothing short of amazing!
+            Got a question, feedback, or need assistance?  We at GRUBIT love to hear from you. 
+
+ <br/>
+
+Reach out to us, and we’ll get back to you as soon as possible. Thank you.  
           </Typography>
         </Grid>
         <Grid item xs={12} sm={6} md={6}>

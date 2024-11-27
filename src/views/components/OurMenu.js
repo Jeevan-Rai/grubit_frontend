@@ -41,7 +41,7 @@ export default function OurMenu() {
         slides: { perView: 2, spacing: 5 }
       },
       '(min-width: 1000px)': {
-        slides: { perView: 6, spacing: 10 }
+        slides: { perView: 6, spacing: 5 }
       }
     },
     slides: { perView: 1 }

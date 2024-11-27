@@ -8,14 +8,32 @@ export default function HomeBanner() {
         sx={{
           width: '100%',
           height: { xs: '50vh', md: '70vh' },
-          backgroundImage: 'url("images/banner.png")',
+          backgroundImage: 'url("/images/videos/5866259-sd_960_540_25fps.mp4")',
           backgroundSize: 'cover',
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
-          overflow: 'hidden'
+          overflow: 'hidden',
+          position:"relative"
         }}
       >
+        <Box
+        component="video"
+        sx={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%',
+          objectFit: 'cover',
+          zIndex: -1,
+        }}
+        autoPlay
+        loop
+        muted
+        >
+  <source src="/images/videos/5866259-sd_960_540_25fps.mp4" type="video/mp4" />
+        </Box>
         <Box
           sx={{
             width: '85%'
@@ -31,7 +49,7 @@ export default function HomeBanner() {
               fontFamily: 'Anton'
             }}
           >
-            Elevate Your Lifestyle with Healthy, Convenient Dining.
+            Healthy Fresh and Affordable 3 Course Lunch…Everyday! 
           </Typography>
           <Typography
             sx={{
@@ -42,7 +60,7 @@ export default function HomeBanner() {
               fontFamily: 'DM Sans'
             }}
           >
-            Say goodbye to compromise and hello to fresh, wholesome, and delicious meals that cater to your busy life.
+           Innovative way to order and conveniently collect your lunch from a variety of cuisines. No more supermarket cold meal or costly London market food. 
           </Typography>
           <Button
             variant='contained'

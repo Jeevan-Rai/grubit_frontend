@@ -9,15 +9,17 @@ export default function AboutUs() {
         <Grid item xs={12} sm={6} md={5} sx={{ display: { xs: 'none', md: 'block' } }}>
           <Box
             component={'img'}
-            src={'/images/Rectangle 7.png'}
+            src={'/images/About us img 1.jpg'}
             sx={{
               width: '80%',
-              marginTop: '5rem'
+              height:"90%",
+              marginTop: '5rem',
+              borderRadius:"15px"
             }}
           />
         </Grid>
         <Grid item xs={12} sm={6} md={7} sx={{}}>
-          <SectionHeader title='About Us' align='left' />
+          <SectionHeader title='About us' align='left' />
           <Typography
             sx={{
               color: '#0A5247',
@@ -27,15 +29,25 @@ export default function AboutUs() {
               textAlign: 'justify'
             }}
           >
-            Welcome to GrubIt – your go-to destination for fresh, wholesome, and organic food platters conveniently
-            delivered to your nearest tube station. We understand the hustle of daily life, and that's why we've
-            designed a service that ensures you start your day with a nutritious and delicious lunch. At GrubIt, we've
-            simplified the process for you. Simply pre-order your lunch with us, and we'll make sure it's waiting for
-            you at the tube station that suits your commute best. Our mission is to provide you with a healthier,
-            tastier, and more fulfilling alternative than what's currently available in the market. Make the choice to
-            be healthy without spending a fortune. GrubIt is here to redefine your lunchtime experience – delivering
-            goodness, taste, and value right to your daily commute. Join us on a journey towards a healthier and happier
-            you!
+            Welcome to Grubit 
+
+            <br/>
+
+Grubit was started with only one mission – to provide you with healthy, quality and affordable packed lunch. 
+
+<br/>
+
+We found Grubit to solve the challenge of you not having time to prepare home cooked packed lunches along with cooking dinner after a tiring and exhaustive day of work.  
+
+And when you do, it will either be some kind of sandwich put together in a hurry or cold Pasta.  
+
+ 
+<br/>
+We know that you would like to avoid supermarket or market bought lunch if you could, as we founders did when working across Central London. And that is the sole reason we founded GRUBIT as a disruptive idea.  
+
+<br/>
+
+Your meal as packed lunch ready for you to be collected at your preferred station on you way to work, cooked only once you ordered as you would do at your home……Healthy, 3 course as standard and at affordable cost. 
           </Typography>
         </Grid>
       </Grid>

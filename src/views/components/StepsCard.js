@@ -10,7 +10,7 @@ export default function StepCard({ step, title, description, Icon }) {
               justifyContent: 'flex-start',
               flexDirection: 'column',
               gap: '2em',
-              minHeight: '20rem',
+              minHeight: '15rem',
               border: '1px solid #78B34E',
               borderTop: '2px solid #78B34E',
               borderRadius: '35px',
@@ -19,11 +19,11 @@ export default function StepCard({ step, title, description, Icon }) {
               width: '100%'
             }}
           >
-            <Icon />
+            {/* <Icon /> */}
             <Box>
-              <Typography sx={{ fontFamily: 'DM sans', fontSize: '15px', fontWeight: '700', textAlign: 'center' }}>
+              {/* <Typography sx={{ fontFamily: 'DM sans', fontSize: '15px', fontWeight: '700', textAlign: 'center' }}>
                 {step}
-              </Typography>
+              </Typography> */}
               <Typography
                 sx={{
                   fontFamily: 'DM sans',
@@ -42,7 +42,9 @@ export default function StepCard({ step, title, description, Icon }) {
                   fontSize: '13px',
                   textAlign: 'center',
                   color: '#000000',
-                  fontWeight: '500'
+                  fontWeight: '500',
+                  width:{md:"50%"},
+                  margin:"0px auto"
                 }}
               >
                 {description}

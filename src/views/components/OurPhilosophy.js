@@ -82,7 +82,7 @@ export default function OurPhilosophy() {
                       color: '#FFFFFF'
                     }}
                   >
-                    HEALTH REVOLUTION
+               Quality & Freshness 
                   </Typography>
                   <Typography
                     sx={{
@@ -95,8 +95,7 @@ export default function OurPhilosophy() {
                       textAlign: 'center'
                     }}
                   >
-                    Our vision is to provide convenient, nutritious meals, making it easy for everyone to access
-                    flavorful and healthy options.
+                   Your food is prepared only with Quality Ingredients and gets made only once you have ordered it. 
                   </Typography>
                 </Box>
               </Card>
@@ -163,7 +162,7 @@ export default function OurPhilosophy() {
                       color: '#FFFFFF'
                     }}
                   >
-                    HEALTH REVOLUTION
+                   Wholesome Food 
                   </Typography>
                   <Typography
                     sx={{
@@ -176,8 +175,7 @@ export default function OurPhilosophy() {
                       textAlign: 'center'
                     }}
                   >
-                    Our vision is to provide convenient, nutritious meals, making it easy for everyone to access
-                    flavorful and healthy options.
+                   Keeping in mind the nutrition for a healthy diet, no processed ingredients, only difference is your meal is cooked in our Kitchen instead of your's.  
                   </Typography>
                 </Box>
               </Card>
@@ -244,7 +242,7 @@ export default function OurPhilosophy() {
                       color: '#FFFFFF'
                     }}
                   >
-                    HEALTH REVOLUTION
+                   Value for Money 
                   </Typography>
                   <Typography
                     sx={{
@@ -257,8 +255,7 @@ export default function OurPhilosophy() {
                       textAlign: 'center'
                     }}
                   >
-                    Our vision is to provide convenient, nutritious meals, making it easy for everyone to access
-                    flavorful and healthy options.
+                    Provide meals which are value for money, and all meals come with minimum 3 course as standard. 
                   </Typography>
                 </Box>
               </Card>
