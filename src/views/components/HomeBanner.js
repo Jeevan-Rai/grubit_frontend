@@ -19,6 +19,7 @@ export default function HomeBanner() {
       >
         <Box
         component="video"
+        
         sx={{
           position: 'absolute',
           top: 0,
@@ -27,12 +28,13 @@ export default function HomeBanner() {
           height: '100%',
           objectFit: 'cover',
           zIndex: -1,
+          filter: "blur(4px)",
         }}
         autoPlay
         loop
         muted
         >
-  <source src="/images/videos/5866259-sd_960_540_25fps.mp4" type="video/mp4" />
+  <source src="/images/videos/1408847_Weekly Meal Planning_Meal Prep_1920x1080 (1).mp4" type="video/mp4" />
         </Box>
         <Box
           sx={{

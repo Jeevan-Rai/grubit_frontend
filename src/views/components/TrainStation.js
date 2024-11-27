@@ -7,7 +7,7 @@ export default function TrainStation() {
         sx={{
           width: { xs: '90%', md: '75%' },
           margin: '0px auto',
-          background: 'url("/images/Train station image 2.jpg")',
+          background: 'url("/images/Train station image 5.png")',
           backgroundSize: 'cover',
           padding: { xs: '2em', md: '5em 2em' },
           borderRadius: '46px'
