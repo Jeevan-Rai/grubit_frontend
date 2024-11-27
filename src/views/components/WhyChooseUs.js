@@ -890,7 +890,7 @@ export default function WhyChooseUs() {
                     color: '#000000'
                   }}
                 >
-                  Food made with health diet and taste in mind
+                  Food made with health diet and taste in mind.
                 </Typography>
                 <Typography
                   sx={{
@@ -1521,7 +1521,7 @@ export default function WhyChooseUs() {
                     color: '#000000'
                   }}
                 >
-                 Wholesome meal with a Starter, Main and a yummy Dessert
+                Wholesome meal with a Starter, Main and a yummy Dessert.
                 </Typography>
                 <Typography
                   sx={{
@@ -2345,7 +2345,7 @@ export default function WhyChooseUs() {
                     color: '#000000'
                   }}
                 >
-                 Variety of Cuisine each day, different menu each week
+                Variety of Cuisine each day, different menu each week.
                 </Typography>
                 <Typography
                   sx={{
@@ -2905,7 +2905,7 @@ export default function WhyChooseUs() {
                     color: '#000000'
                   }}
                 >
-                  freshly cooked and prepared only after order is received 
+                 Freshly cooked and prepared only after order is received.
                 </Typography>
                 <Typography
                   sx={{
