@@ -22,7 +22,7 @@ export default function TrainStation() {
           </Typography>
           <Typography
             sx={{
-              fontSize: { xs: '15px', md: '20px' },
+              fontSize: { xs: '15px', md: '18px' },
               fontFamily: 'DM Sans',
               color: '#FFFFFF',
               textAlign: 'right',

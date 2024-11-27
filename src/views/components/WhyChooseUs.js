@@ -15,7 +15,7 @@ export default function WhyChooseUs() {
                 justifyContent: 'center',
                 flexDirection: 'column',
                 gap: '0.5em',
-                minHeight: { xs: '20rem', md: '15rem' },
+                minHeight: { xs: '20rem', md: '10rem' },
                 borderRadius: '35px',
                 alignItems: 'center',
                 padding: { xs: '2em 0.5em', md: '1em' }
@@ -884,8 +884,8 @@ export default function WhyChooseUs() {
                 <Typography
                   sx={{
                     fontFamily: 'DM sans',
-                    fontSize: { xs: '18px', md: '20px' },
-                    fontWeight: '700',
+                    fontSize: { xs: '18px', md: '18px' },
+                    fontWeight: '500',
                     textAlign: 'center',
                     color: '#000000'
                   }}
@@ -916,7 +916,7 @@ export default function WhyChooseUs() {
                 justifyContent: 'center',
                 flexDirection: 'column',
                 gap: '0.5em',
-                minHeight: { xs: '20rem', md: '15rem' },
+                minHeight: { xs: '20rem', md: '10rem' },
                 borderRadius: '35px',
                 alignItems: 'center',
                 padding: { xs: '2em 0.5em', md: '1em' }
@@ -1515,8 +1515,8 @@ export default function WhyChooseUs() {
                 <Typography
                   sx={{
                     fontFamily: 'DM sans',
-                    fontSize: '20px',
-                    fontWeight: '700',
+                    fontSize: '18px',
+                    fontWeight: '500',
                     textAlign: 'center',
                     color: '#000000'
                   }}
@@ -1547,7 +1547,7 @@ export default function WhyChooseUs() {
                 justifyContent: 'center',
                 flexDirection: 'column',
                 gap: '0.5em',
-                minHeight: { xs: '20rem', md: '15rem' },
+                minHeight: { xs: '20rem', md: '10rem' },
                 borderRadius: '35px',
                 alignItems: 'center',
                 padding: { xs: '2em 0.5em', md: '1em' }
@@ -2339,8 +2339,8 @@ export default function WhyChooseUs() {
                 <Typography
                   sx={{
                     fontFamily: 'DM sans',
-                    fontSize: '20px',
-                    fontWeight: '700',
+                    fontSize: '18px',
+                    fontWeight: '500',
                     textAlign: 'center',
                     color: '#000000'
                   }}
@@ -2371,7 +2371,7 @@ export default function WhyChooseUs() {
                 justifyContent: 'center',
                 flexDirection: 'column',
                 gap: '0.5em',
-                minHeight: { xs: '20rem', md: '15rem' },
+                minHeight: { xs: '20rem', md: '10rem' },
                 borderRadius: '35px',
                 alignItems: 'center',
                 padding: { xs: '2em 0.5em', md: '1em' }
@@ -2899,8 +2899,8 @@ export default function WhyChooseUs() {
                 <Typography
                   sx={{
                     fontFamily: 'DM sans',
-                    fontSize: '20px',
-                    fontWeight: '700',
+                    fontSize: '18px',
+                    fontWeight: '500',
                     textAlign: 'center',
                     color: '#000000'
                   }}

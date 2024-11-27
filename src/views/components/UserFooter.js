@@ -65,7 +65,7 @@ export default function UserFooter() {
                 YOUR CONVENIENCE
               </Typography>
             </Grid> */}
-            <Grid xs={12} md={12} sx={{ marginTop: { xs: '0', md: '16rem' } }}>
+            <Grid xs={12} md={12} sx={{ marginTop: { xs: '18rem', md: '16rem' } }}>
               <Box sx={{ display: 'flex', justifyContent: { xs: 'center', md: 'end' } }}>
                 <Button
                   component={Link}

@@ -93,7 +93,7 @@ export default function TestimonialCard() {
               sx={{
                 color: '#0A5247',
                 fontWeight: 'DM Sans',
-                fontSize: { xs: '15px', md: '20px' },
+                fontSize: { xs: '15px', md: '18px' },
                 lineHeight: '35px',
                 textAlign: 'justify'
               }}
@@ -188,7 +188,7 @@ export default function TestimonialCard() {
               sx={{
                 color: '#0A5247',
                 fontWeight: 'DM Sans',
-                fontSize: { xs: '15px', md: '20px' },
+                fontSize: { xs: '15px', md: '18px' },
                 lineHeight: '35px',
                 textAlign: 'justify'
               }}

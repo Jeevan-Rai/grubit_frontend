@@ -39,11 +39,11 @@ export default function StepCard({ step, title, description, Icon }) {
               <Typography
                 sx={{
                   fontFamily: 'DM sans',
-                  fontSize: '13px',
+                  fontSize: '18px',
                   textAlign: 'center',
                   color: '#000000',
                   fontWeight: '500',
-                  width:{md:"50%"},
+                  width:{md:"90%"},
                   margin:"0px auto"
                 }}
               >
