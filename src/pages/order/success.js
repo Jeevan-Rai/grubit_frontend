@@ -127,7 +127,7 @@ const OrderSuccessPage = () => {
             Grab Grub Go 😇
             </Typography>
             <Typography sx={{ mb: 4, color: 'text.secondary' }}>
-            Your order #72  {' '}
+            Your order   {' '}
               <Box
                 href='#'
                 component={Link}
@@ -139,7 +139,7 @@ const OrderSuccessPage = () => {
               has been placed! Thank You.
             </Typography>
             <Typography sx={{ color: 'text.secondary' }}>
-            We have sent an email to
+            We have sent an email to 
               <Box
                 href='/'
                 component={Link}

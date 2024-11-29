@@ -105,10 +105,10 @@ const ItemTypeButton = ({ type, active = false, Icon, onClick, id = 'weekly-btn-
         }}
         onClick={onClick}
       >
-        {type === 'Weekly Items' && active ? (
+        {type === 'Weekly Menu' && active ? (
           <img src='/images/icon/Mask group (2).png' />
         ) : (
-          type === 'Weekly Items' && <img src='/images/icon/Mask group (1).png' />
+          type === 'Weekly Menu' && <img src='/images/icon/Mask group (1).png' />
         )}
 
         {type === 'Create Your Own' && active ? (
