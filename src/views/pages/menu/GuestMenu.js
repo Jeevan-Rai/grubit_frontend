@@ -233,13 +233,44 @@ export default function GuestMenu() {
           <Typography
             variant='h1'
             sx={{
-              fontSize: { xs: '30px', md: '50px' },
+              fontSize: { xs: '30px', md: '30px' },
               fontFamily: 'Anton',
               color: '#FFFFFF',
               textAlign: { xs: 'center', md: 'left' }
             }}
           >
-            Nutrition Catered to Your Needs
+            Select Week <svg
+  xmlns="http://www.w3.org/2000/svg"
+  xmlnsXlink="http://www.w3.org/1999/xlink"
+  fill="#FFFFFF"
+  height="20px"
+  width="40px"
+  version="1.1"
+  id="Layer_1"
+  viewBox="0 0 330 330"
+  xmlSpace="preserve"
+>
+  <path
+    id="XMLID_27_"
+    d="M15,180h263.787l-49.394,49.394c-5.858,5.857-5.858,15.355,0,21.213C232.322,253.535,236.161,255,240,255  s7.678-1.465,10.606-4.394l75-75c5.858-5.857,5.858-15.355,0-21.213l-75-75c-5.857-5.857-15.355-5.857-21.213,0  c-5.858,5.857-5.858,15.355,0,21.213L278.787,150H15c-8.284,0-15,6.716-15,15S6.716,180,15,180z"
+  />
+</svg>
+ Weekly Menu or Create your own <svg
+  xmlns="http://www.w3.org/2000/svg"
+  xmlnsXlink="http://www.w3.org/1999/xlink"
+  fill="#FFFFFF"
+  height="20px"
+  width="40px"
+  version="1.1"
+  id="Layer_1"
+  viewBox="0 0 330 330"
+  xmlSpace="preserve"
+>
+  <path
+    id="XMLID_27_"
+    d="M15,180h263.787l-49.394,49.394c-5.858,5.857-5.858,15.355,0,21.213C232.322,253.535,236.161,255,240,255  s7.678-1.465,10.606-4.394l75-75c5.858-5.857,5.858-15.355,0-21.213l-75-75c-5.857-5.857-15.355-5.857-21.213,0  c-5.858,5.857-5.858,15.355,0,21.213L278.787,150H15c-8.284,0-15,6.716-15,15S6.716,180,15,180z"
+  />
+</svg>  Days of the Week 
           </Typography>
           <Grid container>
             <Grid item xs={12} md={6} sx={{ display: 'flex', alignItems: 'center' }}>
@@ -252,9 +283,10 @@ export default function GuestMenu() {
                   padding: { xs: '1em 0px', md: '0px' }
                 }}
               >
-                Explore among our wide range of healthy choices
+                {/* Explore among our wide range of healthy choices */}
               </Typography>
             </Grid>
+            <br/>
             <Grid item xs={12} md={6} sx={{ display: 'flex', justifyContent: 'end' }}>
               <ButtonGroup sx={{ background: '#FFFFFF', border: 'none', color: '#FF833D' }}>
                 {weeks.map((week, index) => (
@@ -289,7 +321,7 @@ export default function GuestMenu() {
               <Grid container>
                 <Grid item xs={6} md={3}>
                   <ItemTypeButton
-                    type={'Weekly Items'}
+                    type={'Weekly Menu'}
                     id='weekly-btn-one'
                     Icon={''}
                     active={orderCategory === 'weekly'}
@@ -371,11 +403,12 @@ export default function GuestMenu() {
                 )}
               </Box>
             </Grid>
+            
             <Grid item xs={12} md={9}>
               <Grid container sx={{ display: { xs: 'none', md: 'flex' } }}>
                 <Grid item xs={6} md={3}>
                   <ItemTypeButton
-                    type={'Weekly Items'}
+                    type={'Weekly Menu'}
                     id='weekly-btn-three'
                     Icon={''}
                     active={orderCategory === 'weekly'}

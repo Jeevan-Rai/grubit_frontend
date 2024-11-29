@@ -145,49 +145,7 @@ const OrderCancelPage = () => {
             </Box>
           </Box>
         </Grid>
-        <Grid item xs={12}>
-          <HorizontalList>
-            <ListItem sx={{ flexDirection: 'column', alignItems: 'flex-start' }}>
-              <Box sx={{ mb: 4, display: 'flex', alignItems: 'center' }}>
-                <Box sx={{ mr: 1.5, display: 'flex' }}>
-                  <Icon icon='tabler:map-pin' fontSize={20} />
-                </Box>
-                <Typography variant='h6'>Pickup Location</Typography>
-              </Box>
-              <Typography>{order?.station?.name}</Typography>
-              <Typography>{order?.station?.details}</Typography>
-              {/* <Typography>Los Angeles, CA 90017,</Typography>
-              <Typography sx={{ mb: 4 }}>USA</Typography>
-              <Typography>+123456789</Typography> */}
-            </ListItem>
-            {/* <ListItem sx={{ flexDirection: 'column', alignItems: 'flex-start' }}>
-              <Box sx={{ mb: 4, display: 'flex', alignItems: 'center' }}>
-                <Box sx={{ mr: 1.5, display: 'flex' }}>
-                  <Icon icon='tabler:credit-card' fontSize={20} />
-                </Box>
-                <Typography variant='h6'>Order Details</Typography>
-              </Box>
-              <Typography>{}</Typography>
-              <Typography>4135 Parkway Street,</Typography>
-              <Typography>Los Angeles, CA 90017,</Typography>
-              <Typography sx={{ mb: 4 }}>USA</Typography>
-              <Typography>+123456789</Typography>
-            </ListItem> */}
-            <ListItem sx={{ flexDirection: 'column', alignItems: 'flex-start' }}>
-              <Box sx={{ mb: 4, display: 'flex', alignItems: 'center' }}>
-                <Box sx={{ mr: 1.5, display: 'flex' }}>
-                  <Icon icon='tabler:ship' fontSize={20} />
-                </Box>
-                <Typography variant='h6'>Payment Details</Typography>
-              </Box>
-              <Typography sx={{ mb: 4, fontWeight: 500 }}>Total Price: £{order?.totalPrice}</Typography>
-              <Typography sx={{ mb: 4, fontWeight: 500 }}>Discount Amount: £{order?.discountAmount}</Typography>
-              <Typography sx={{ mb: 4, fontWeight: 500 }}>Paid Amount: £{order?.payment?.amountTotal}</Typography>
-              {/* <Typography>Standard Delivery</Typography>
-              <Typography>(Normally 3-4 business days)</Typography> */}
-            </ListItem>
-          </HorizontalList>
-        </Grid>
+     
       </Grid>
       <Box sx={{ padding: { xs: '10px', md: '30px' } }} />
       <Box sx={{ padding: { xs: '10px', md: '30px' } }} />

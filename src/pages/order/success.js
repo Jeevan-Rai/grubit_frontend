@@ -124,22 +124,22 @@ const OrderSuccessPage = () => {
         <Grid item xs={12}>
           <Box sx={{ display: 'flex', textAlign: 'center', alignItems: 'center', flexDirection: 'column' }}>
             <Typography variant='h4' sx={{ mb: 4 }}>
-              Thank You! 😇
+            Grab Grub Go 😇
             </Typography>
             <Typography sx={{ mb: 4, color: 'text.secondary' }}>
-              Your order{' '}
+            Your order #72  {' '}
               <Box
-                href='/'
+                href='#'
                 component={Link}
                 onClick={e => e.preventDefault()}
                 sx={{ color: 'primary.main', textDecoration: 'none' }}
               >
                 #{order?.id}
               </Box>{' '}
-              has been placed!
+              has been placed! Thank You.
             </Typography>
             <Typography sx={{ color: 'text.secondary' }}>
-              We sent an email to{' '}
+            We have sent an email to
               <Box
                 href='/'
                 component={Link}
@@ -148,11 +148,14 @@ const OrderSuccessPage = () => {
               >
                 {order?.user?.email}
               </Box>{' '}
-              with your order confirmation and receipt.
+              with your order confirmation and receipt. 
             </Typography>
             <Typography sx={{ mb: 4, color: 'text.secondary' }}>
-              If the email hasn't arrived within two minutes, please check your spam folder to see if the email was
-              routed there.
+            If the email hasn't arrived within 10 minutes in your inbox, please check your spam folder.  
+
+            </Typography>
+            <Typography sx={{ mb: 4, color: 'text.secondary' }}>
+            If you have not received your confirmation email, please reach out to us at by emailing support@grubit.uk or calling on 0208 000 0000 
             </Typography>
             <Box sx={{ display: 'flex', alignItems: 'center', '& svg': { color: 'text.secondary' } }}>
               <Icon icon='tabler:clock' fontSize={20} />
@@ -160,12 +163,20 @@ const OrderSuccessPage = () => {
                 <Typography component='span' sx={{ fontWeight: 500, color: 'text.secondary' }}>
                   Time placed:
                 </Typography>{' '}
-                {new Date(order?.createdAt).toLocaleString()}
+                {new Date(order?.createdAt).toLocaleString('en-GB', {
+  day: '2-digit',
+  month: '2-digit',
+  year: 'numeric',
+  hour: '2-digit',
+  minute: '2-digit',
+  second: '2-digit',
+  hour12: false, // 24-hour format
+})}
               </Typography>
             </Box>
           </Box>
         </Grid>
-        <Grid item xs={12}>
+        {/* <Grid item xs={12}>
           <HorizontalList>
             <ListItem sx={{ flexDirection: 'column', alignItems: 'flex-start' }}>
               <Box sx={{ mb: 4, display: 'flex', alignItems: 'center' }}>
@@ -176,23 +187,9 @@ const OrderSuccessPage = () => {
               </Box>
               <Typography>{order?.station?.name}</Typography>
               <Typography>{order?.station?.details}</Typography>
-              {/* <Typography>Los Angeles, CA 90017,</Typography>
-              <Typography sx={{ mb: 4 }}>USA</Typography>
-              <Typography>+123456789</Typography> */}
+          
             </ListItem>
-            {/* <ListItem sx={{ flexDirection: 'column', alignItems: 'flex-start' }}>
-              <Box sx={{ mb: 4, display: 'flex', alignItems: 'center' }}>
-                <Box sx={{ mr: 1.5, display: 'flex' }}>
-                  <Icon icon='tabler:credit-card' fontSize={20} />
-                </Box>
-                <Typography variant='h6'>Order Details</Typography>
-              </Box>
-              <Typography>{}</Typography>
-              <Typography>4135 Parkway Street,</Typography>
-              <Typography>Los Angeles, CA 90017,</Typography>
-              <Typography sx={{ mb: 4 }}>USA</Typography>
-              <Typography>+123456789</Typography>
-            </ListItem> */}
+            
             <ListItem sx={{ flexDirection: 'column', alignItems: 'flex-start' }}>
               <Box sx={{ mb: 4, display: 'flex', alignItems: 'center' }}>
                 <Box sx={{ mr: 1.5, display: 'flex' }}>
@@ -203,11 +200,10 @@ const OrderSuccessPage = () => {
               <Typography sx={{ mb: 4, fontWeight: 500 }}>Total Price: £{order?.totalPrice}</Typography>
               <Typography sx={{ mb: 4, fontWeight: 500 }}>Discount Amount: £{order?.discountAmount}</Typography>
               <Typography sx={{ mb: 4, fontWeight: 500 }}>Paid Amount: £{order?.payment?.amountTotal}</Typography>
-              {/* <Typography>Standard Delivery</Typography>
-              <Typography>(Normally 3-4 business days)</Typography> */}
+              
             </ListItem>
           </HorizontalList>
-        </Grid>
+        </Grid> */}
       </Grid>
       <Box sx={{ padding: { xs: '10px', md: '30px' } }} />
       <Box sx={{ padding: { xs: '10px', md: '30px' } }} />

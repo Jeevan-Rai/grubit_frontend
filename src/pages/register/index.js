@@ -229,15 +229,15 @@ const RegisterPage = () => {
             </Box>
             <Box sx={{ my: 2 }}>
               <Typography variant='h3' sx={{ mb: 1.5 }}>
-                {`Welcome to ${themeConfig.templateName}! 👋🏻`}
+                {`Welcome to GRUBIT 👋🏻`}
               </Typography>
               <Typography sx={{ color: 'text.secondary' }}>
-                Please sign in to your account and start the nourishing journey
+                Please sign in to your account and start your nourishing journey
               </Typography>
             </Box>
             {/* <Alert icon={false} sx={{ py: 3, mb: 6, ...bgColors.primaryLight, '& .MuiAlert-message': { p: 0 } }}>
               <Typography variant='body2' sx={{ mb: 2, color: 'primary.main' }}>
-                Admin: <strong>admin@vuexy.com</strong> / Pass: <strong>admin</strong>
+                Admin: <strong> </strong> / Pass: <strong>admin</strong>
               </Typography>
               <Typography variant='body2' sx={{ color: 'primary.main' }}>
                 Client: <strong>client@vuexy.com</strong> / Pass: <strong>client</strong>
@@ -385,7 +385,7 @@ const RegisterPage = () => {
                         <CustomTextField
                           fullWidth
                           value={value}
-                          label='City Name'
+                          label='State/Country'
                           onChange={onChange}
                           placeholder='Enter City Name'
                           error={Boolean(errors.cityName)}
@@ -400,7 +400,7 @@ const RegisterPage = () => {
                     <Controller
                       name='postCode'
                       control={control}
-                      rules={{ required: false }}
+                      rules={{ required: true }}
                       render={({ field: { value, onChange } }) => (
                         <CustomTextField
                           fullWidth
