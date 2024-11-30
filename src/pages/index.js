@@ -24,14 +24,16 @@ const Home = () => {
       <Box sx={{ padding: { xs: '20px', md: '30px' } }} />
       <WhyChooseUs />
       <Box sx={{ padding: { xs: '20px', md: '30px' } }} />
-      <Testimonials />
+      <OurPhilosophy />
+      
       <Box sx={{ padding: { xs: '20px', md: '30px' } }} id='about' />
+      <TrainStation />
+      <Box sx={{ padding: { xs: '20px', md: '30px' } }} />
       <AboutUs />
       
       <Box sx={{ padding: { xs: '20px', md: '30px' } }} />
-      <OurPhilosophy />
-      <Box sx={{ padding: { xs: '20px', md: '30px' } }} />
-      <TrainStation />
+      <Testimonials />
+      
       <Box sx={{ padding: { xs: '20px', md: '30px' } }} id='contact' />
       <ContactUs />
       <Box sx={{ padding: { xs: '20px', md: '30px' } }} />
