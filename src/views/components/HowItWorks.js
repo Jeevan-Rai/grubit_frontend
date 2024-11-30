@@ -92,25 +92,25 @@ export default function HowItWorks() {
         <StepCard
           step={'STEP 1'}
           title={'Select'}
-          description={'Select/Choose your meal from our carefully crafted 3 Course menu from a variety of Cuisines. '}
+          description={'Select/Choose your meal from our carefully crafted 3 Course menu from a variety of Cuisines.'}
           Icon={stepOneIcon}
         />
         <StepCard
           step={'STEP 2'}
           title={'Order'}
-          description={'Order for a Day, Week or for an entire Month before 4:00 pm for the next day lunch.'}
+          description={'Order for a Day Week or for an entire Month before 4:00 pm for the next day lunch.'}
           Icon={stepTwoIcon}
         />
         <StepCard
           step={'STEP 3'}
           title={'Collect'}
-          description={'Station anytime between 7:00 AM to 10:30 AM.'}
+          description={'Collect your lunch every day from your chosen Train station anytime between 7:00 AM to 10:30 AM.'}
           Icon={stepThreeIcon}
         />
         <StepCard
           step={'STEP 4'}
           title={'Repeat'}
-          description={'Menu so you never get bored, That’s a promise.'}
+          description={'Every Month we create different Menu so you never get bored, That’s a promise.'}
           Icon={stepFourIcon}
         />
       </Grid>

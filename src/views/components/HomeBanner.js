@@ -45,7 +45,19 @@ export default function HomeBanner() {
             variant='h1'
             sx={{
               width: { xs: '100%', md: '70%' },
-              fontSize: { xs: '30px', md: '64px' },
+              fontSize: { xs: '30px', md: '44px' },
+              color: 'white',
+              marginBottom: '2rem',
+              fontFamily: 'Anton'
+            }}
+          >
+          Grab Grub and Go … a disruptive idea 
+          </Typography>
+          <Typography
+            variant='h1'
+            sx={{
+              width: { xs: '100%', md: '70%' },
+              fontSize: { xs: '30px', md: '44px' },
               color: 'white',
               marginBottom: '2rem',
               fontFamily: 'Anton'
