@@ -16,7 +16,7 @@ export default function WhyChooseUs() {
   },[])
   return (
     <>
-      <SectionHeader title={'Why Choose us?'} />
+      <SectionHeader title={'Why Choose GRUBIT?'} />
       <Box sx={{ padding: '5px' }} />
       <Grid container sx={{ width: { xs: '90%', md: '75%' }, margin: '0px auto' }}>
         <Grid item xs={6} sm={6} md={3}>

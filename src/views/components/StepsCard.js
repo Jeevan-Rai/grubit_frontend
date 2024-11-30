@@ -2,7 +2,7 @@ import { Box, Card, CardContent, Grid, Typography } from '@mui/material'
 export default function StepCard({ step, title, description, Icon }) {
   return (
     <>
-      <Grid item xs={6} sm={6} md={3}>
+      <Grid item xs={6} sm={6} md={3} >
         <CardContent sx={{ padding: { xs: '0.5em', display: 'flex', alignItems: 'center' } }}>
           <Card
             sx={{
@@ -10,7 +10,7 @@ export default function StepCard({ step, title, description, Icon }) {
               justifyContent: 'flex-start',
               flexDirection: 'column',
               gap: '2em',
-              minHeight: '15rem',
+              minHeight: {xs:"25rem" , md:'18rem'},
               border: '1px solid #78B34E',
               borderTop: '2px solid #78B34E',
               borderRadius: '35px',
