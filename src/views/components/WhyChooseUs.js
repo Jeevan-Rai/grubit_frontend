@@ -5,15 +5,7 @@ import axiosInstance from 'src/helpers/axiosInstance';
 
 export default function WhyChooseUs() {
 
-  const [orders , setOrders] = useState('0');
-
-
-  useEffect(()=>{
-    axiosInstance.get('/menu/next-day-orders').then(result=>{
-      console.log(result);
-      setOrders(result?.data?.count)
-    })
-  },[])
+  
   return (
     <>
       <SectionHeader title={'Why Choose GRUBIT?'} />
@@ -2917,7 +2909,7 @@ export default function WhyChooseUs() {
                     color: '#000000'
                   }}
                 >
-                 Your lunch is freshly cooked and prepared only after order is received. <br/> (No. of orders = {orders})
+                 Your lunch is freshly cooked and prepared only after order is received. 
                 </Typography>
                 <Typography
                   sx={{

@@ -92,7 +92,7 @@ export default function HowItWorks() {
         <StepCard
           step={'STEP 1'}
           title={'Select'}
-          description={'Select/Choose your meal from our carefully crafted 3 Course menu from a variety of Cuisines.'}
+          description={'Choose your meal from our carefully crafted 3 Course menu from a variety of Cuisines.'}
           Icon={stepOneIcon}
         />
         <StepCard
