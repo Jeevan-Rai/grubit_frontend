@@ -9,7 +9,7 @@ export default function AboutUs() {
         <Grid item xs={12} sm={6} md={5} sx={{ display: { xs: 'none', md: 'block' } }}>
           <Box
             component={'img'}
-            src={'/images/About us img 1.jpg'}
+            src={'/images/94871.webp'}
             sx={{
               width: '80%',
               height:"90%",
