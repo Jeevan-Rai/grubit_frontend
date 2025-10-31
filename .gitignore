@@ -33,3 +33,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 .env
+
+# Windows Zone.Identifier files
+*:Zone.Identifier
